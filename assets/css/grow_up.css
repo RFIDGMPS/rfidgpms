@@ -1,0 +1,267 @@
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Inter:wght@100;300;400;500;700;800;900&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,500&display=swap');
+
+/* SETUP */
+
+:root {
+
+    /* Color Styles */
+    --primary: #FBC257;
+    --primary-light: #FCCC73;
+    --dark-brown: #341413;
+    --gray-1: #798092;
+    --gray-2: #E6E6ED;
+    --white: #FFFFFF;
+
+    /* Font Size Desktop */
+    --header-1: 64px;
+    --header-2: 48px;
+    --header-3: 42px;
+    --header-4: 32px;
+
+    --text-medium: 18px;
+    --text-regular: 16px;
+    --text-light: 13px;
+
+    /* Font Weight */
+    --font-weight-bold: 700;
+    --font-weight-semi-bold: 600;
+    --font-weight-medium: 500;
+    --font-weight-regular: 400;
+    --font-weight-light: 300;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* BUTTON PRIMARY */
+
+.btn {
+    padding: 15px 25px;
+    border-radius: 6px;
+    font-size: var(--text-medium);
+    font-weight: var(--font-weight-medium);
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+}
+
+.btn-primary:focus {
+    background-color: var(--primary-light);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+}
+
+/* BUTTON SECONDARY */
+
+.btn-secondary {
+    background-color: var(--gray-2);
+    color: var(--gray-1);
+}
+
+.btn-secondary:focus {
+    background-color: var(--white);
+    box-shadow: 0px 4px 19px rgba(0, 0, 0, 0.05) !important;
+    color: var(--gray-1);
+}
+
+.btn-secondary:hover {
+    background-color: var(--white) !important;
+    box-shadow: 0px 4px 19px rgba(0, 0, 0, 0.05) !important;
+    color: var(--gray-1);
+}
+
+
+/* NAVBAR */
+
+.navbar-brand img {
+    padding-right: 16px;
+}
+
+.navbar-brand span {
+    font-size: var(--text-medium);
+    font-weight: var(--font-weight-medium);
+    color: var(--dark-brown);
+}
+
+.navbar {
+    padding: 48px 0;
+}
+
+a.nav-link {
+    margin-right: 39px;
+    font-size: var(--text-regular);
+    font-weight: var(--font-weight-regular);
+    color: var(--dark-brown) !important;
+}
+
+/* HERO */
+
+section.hero {
+    margin: 1rem 0;
+}
+
+.text-label,
+.text-hero-bold,
+.text-hero-regular {
+    margin: 24px 0;
+}
+
+.text-label {
+    color: var(--primary);
+    font-size: var(--text-regular);
+    font-weight: var(--font-weight-regular);
+    line-height: 31px;
+}
+
+.text-hero-bold {
+    color: var(--dark-brown);
+    font-size: var(--header-1);
+    font-weight: var(--font-weight-bold);
+    line-height: 74px;
+}
+
+.text-hero-regular {
+    color: var(--gray-1);
+    font-size: var(--text-regular);
+    font-weight: var(--font-weight-regular);
+    line-height: 31px;
+}
+
+/* TESTIMONI BRAND */
+
+.testimoni-brand {
+    padding: 24px 0;
+}
+
+
+/* DESKTOP VERSION ONLY */
+
+@media (min-width: 1399.98px) {
+
+    .container {
+        width: 84%;
+    }
+
+    /* TESTIMONI BRAND */
+    .testimoni-brand {
+        padding: 4rem 5rem;
+    }
+}
+
+/* MOBILE VERSION ONLY */
+
+@media (max-width: 576px) {
+
+    /* NAVBAR */
+
+    .navbar {
+        padding: 28px 0;
+    }
+
+    a.nav-link {
+        margin-right: 7px 0;
+    }
+
+    /* HERO */
+
+    section.hero {
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    .btn {
+        display: block;
+        margin: 1rem 0;
+    }
+
+    .ms-3 {
+        margin-left: 0 !important;
+    }
+
+    .text-label,
+    .text-hero-bold,
+    .text-hero-regular {
+        text-align: center;
+    }
+
+    .text-hero-bold {
+        font-weight: var(--font-weight-bold);
+        font-size: var(--header-3);
+        line-height: 64px;
+        z-index: -1;
+    }
+
+    section.hero img {
+        margin: 2rem 0;
+    }
+}
+
+
+/* TABLET SMALL VERSION ONLY */
+
+@media (max-width: 768px) {
+
+    /* NAVBAR */
+
+    .navbar {
+        padding: 28px 0;
+    }
+
+    a.nav-link {
+        margin-right: 7px 0;
+    }
+
+    /* HERO */
+
+    section.hero {
+        margin: 1rem 0;
+    }
+
+    .text-hero-bold {
+        font-weight: var(--font-weight-bold);
+        font-size: var(--header-3);
+        line-height: 64px;
+    }
+
+    section.hero img {
+        margin: 2rem 0;
+    }
+
+}
+
+
+/* TABLET MEDIUM & LARGE VERSION ONLY */
+
+@media (max-width: 992px) {
+    /* NAVBAR */
+
+    .navbar {
+        padding: 28px 0;
+    }
+
+    a.nav-link {
+        margin-right: 7px 0;
+    }
+
+    /* HERO */
+
+    section.hero {
+        margin: 1rem 0;
+    }
+
+    .text-hero-bold {
+        font-weight: var(--font-weight-bold);
+        font-size: var(--header-3);
+        line-height: 64px;
+    }
+
+    section.hero img {
+        margin: 2rem 0;
+    }
+}
