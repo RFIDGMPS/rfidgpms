@@ -28,7 +28,7 @@ switch ($_GET['edit'])
 			   $email_address=$_POST['email_address'];
 					  $department=$_POST['e_department'];
 					  $category=$_POST['ecategory'];
-			   $role=$_POST['role'];
+			   $role=$_POST['erole'];
 							$status=$_POST['status'];
 							$complete_address=$_POST['complete_address'];
 					
