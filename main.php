@@ -253,9 +253,11 @@ if ($user1) {
     // Insert new log entry with the correct time_in field
     if ($current_period === "AM") {
         $time_field = 'time_in_am';
+        $time_in_out = 'TIME IN';
         $voice = 'Good morning ' . $user['first_name'] . ' ' . $user['last_name'] . '!';
     } else {
         $time_field = 'time_in_pm';
+        $time_in_out = 'TIME IN';
         $voice = 'Good afternoon ' . $user['first_name'] . ' ' . $user['last_name'] . '!';
     }
 
@@ -521,38 +523,43 @@ if ($row) {
 
         // Combine and fetch data from both tables for the current date, ordering by the latest update
         $results = mysqli_query($db, "
-        
-       SELECT 
-    p.photo,
-    p.department,
-    p.role,
-    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-    pl.time_in,
-    pl.time_out,
-    pl.date_logged
-FROM personell_logs pl
-JOIN personell p ON pl.personnel_id = p.id
-WHERE pl.date_logged = CURRENT_DATE()
-
-UNION
-
-SELECT 
-    vl.photo,
-    vl.department,
-    'Visitor' AS role,
-    vl.name AS full_name,
-    vl.time_in,
-    vl.time_out,
-    vl.date_logged
-FROM visitor_logs vl
-WHERE vl.date_logged = CURRENT_DATE()
-
-ORDER BY 
-    CASE 
-        WHEN time_out IS NOT NULL THEN time_out 
-        ELSE time_in 
-    END DESC
-LIMIT 1;
+        SELECT 
+        p.photo,
+        p.department,
+        p.role,
+        CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+        CASE
+            WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_in_am
+            ELSE pl.time_in_pm
+        END AS time_in,
+        CASE
+            WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_out_am
+            ELSE pl.time_out_pm
+        END AS time_out,
+        pl.date_logged,
+        pl.id -- Assuming id is the primary key and auto-increments
+    FROM personell_logs pl
+    JOIN personell p ON pl.personnel_id = p.id
+    WHERE pl.date_logged = CURRENT_DATE()
+    
+    UNION
+    
+    SELECT 
+        vl.photo,
+        vl.department,
+        'Visitor' AS role,
+        vl.name AS full_name,
+        vl.time_in,
+        vl.time_out,
+        vl.date_logged,
+        vl.id -- Assuming id is the primary key in visitor_logs
+    FROM visitor_logs vl
+    WHERE vl.date_logged = CURRENT_DATE()
+    
+    ORDER BY 
+        id DESC -- Sorting by the most recent id
+    LIMIT 1;
+    
 
     ");
     
