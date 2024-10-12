@@ -27,7 +27,7 @@ switch ($_GET['edit'])
 					$contact_number=$_POST['contact_number'];
 			   $email_address=$_POST['email_address'];
 					  $department=$_POST['e_department'];
-					  
+					  $category=$_POST['ecategory'];
 			   $role=$_POST['role'];
 							$status=$_POST['status'];
 							$complete_address=$_POST['complete_address'];
@@ -46,6 +46,7 @@ switch ($_GET['edit'])
 						photo = '$photo',
 						 id_no = '$id_no', 
 						 rfid_number = '$rfid_number', 
+						 category = '$category', 
 						 last_name = '$last_name', 
 						 first_name = '$first_name', 
 						 middle_name = '$middle_name', 
