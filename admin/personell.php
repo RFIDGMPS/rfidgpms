@@ -516,7 +516,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function updateCategory() {
     var role = document.getElementById('role').value;
-    var categorySelect = document.getElementById('category');
+    var categorySelect = document.getElementById('ecategory');
     
     // Clear the existing options
     categorySelect.innerHTML = '';
