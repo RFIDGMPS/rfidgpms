@@ -8,17 +8,29 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self';");
 // Regenerate session ID to prevent session fixation attacks
 session_regenerate_id(true);
 
+// Function to check if input contains a script tag or other dangerous input
+function contains_script($input) {
+    return preg_match('/<script\b[^>]*>(.*?)<\/script>/is', $input) || 
+           preg_match('/(on\w+|javascript:|vbscript:|data:)/i', $input);
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize and validate input
-
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("CSRF token validation failed.");
     }
 
+    // Trim and sanitize inputs
     $location = htmlspecialchars(trim($_POST['location']), ENT_QUOTES, 'UTF-8');
     $password1 = htmlspecialchars(trim($_POST['Ppassword']), ENT_QUOTES, 'UTF-8');
     $Prfid_number = htmlspecialchars(trim($_POST['Prfid_number']), ENT_QUOTES, 'UTF-8');
-    
+
+    // Check for script content in inputs
+    if (contains_script($location) || contains_script($password1) || contains_script($Prfid_number)) {
+        die("Invalid input detected.");
+    }
+
+    // Check if fields are empty
     if (empty($location) || empty($password1) || empty($Prfid_number)) {
         echo "All fields are required.";
         exit();
@@ -34,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($location === "Gate") {
         if ($result1 && $result1->num_rows > 0) {
             $personell = $result1->fetch_assoc();
-            
+
             // Use a constant for the password and hash it properly in the database
             $hashedPassword = password_hash("gate123", PASSWORD_DEFAULT); // Replace with a stored hash in DB
 
