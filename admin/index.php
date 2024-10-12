@@ -1,45 +1,45 @@
 
 <?php
 // Include PHPMailer classes (adjust the path to your project structure)
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+// require 'PHPMailer/src/Exception.php';
+// require 'PHPMailer/src/PHPMailer.php';
+// require 'PHPMailer/src/SMTP.php';
 
-//echo $_SERVER['REMOTE_ADDR'];
-//echo $_SERVER['HTTP_USER_AGENT'];
-// Import PHPMailer classes into the global namespace
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// //echo $_SERVER['REMOTE_ADDR'];
+// //echo $_SERVER['HTTP_USER_AGENT'];
+// // Import PHPMailer classes into the global namespace
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
 
-// Create a new PHPMailer instance
-$mail = new PHPMailer(true);
+// // Create a new PHPMailer instance
+// $mail = new PHPMailer(true);
 
-// Set up PHPMailer (similar to the code I provided earlier)
-try {
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'kyebejeanu@gmail.com';
-    $mail->Password = 'krwr vqdj vzmq fiby';
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+// // Set up PHPMailer (similar to the code I provided earlier)
+// try {
+//     $mail->isSMTP();
+//     $mail->Host = 'smtp.gmail.com';
+//     $mail->SMTPAuth = true;
+//     $mail->Username = 'kyebejeanu@gmail.com';
+//     $mail->Password = 'krwr vqdj vzmq fiby';
+//     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+//     $mail->Port = 587;
 
-    // Sender and recipient settings
-    $mail->setFrom('kyebejeanu@gmail.com', 'RFID GPMS');
-    $mail->addAddress('$email', $admin);
+//     // Sender and recipient settings
+//     $mail->setFrom('kyebejeanu@gmail.com', 'RFID GPMS');
+//     $mail->addAddress('$email', $admin);
 
-    // Email content
-    $mail->isHTML(true);
-    $mail->Subject = 'Test email';
-    $mail->Body    = 'This is a test email sent using PHPMailer!';
-    $mail->AltBody = 'This is a plain text body for non-HTML clients';
+//     // Email content
+//     $mail->isHTML(true);
+//     $mail->Subject = 'Test email';
+//     $mail->Body    = 'This is a test email sent using PHPMailer!';
+//     $mail->AltBody = 'This is a plain text body for non-HTML clients';
 
-    // Send email
-    $mail->send();
-    echo 'Email sent successfully!';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
+//     // Send email
+//     $mail->send();
+//     echo 'Email sent successfully!';
+// } catch (Exception $e) {
+//     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+// }
 ?>
 
 <?php
@@ -153,7 +153,7 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
                         </div>
 
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h3 class="text-warning">ADMIN12322</h3>
+                            <h3 class="text-warning">ADMIN</h3>
                             <h3>Sign In</h3>
                         </div>
 
