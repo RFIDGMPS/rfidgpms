@@ -49,8 +49,8 @@ if ($results && mysqli_num_rows($results) > 0) {
         echo "<p><strong>Name:</strong> {$row['full_name']}</p>";
         echo "<p><strong>Department:</strong> {$row['id']}</p>";
         echo "<p><strong>Role:</strong> {$row['role']}</p>";
-        echo "<p><strong>Time In:</strong> {$row['time_in']}</p>";
-        echo "<p><strong>Time Out:</strong> {$row['time_out']}</p>";
+        echo "<p><strong>Time In:</strong> {$row['time_in_pm']}</p>";
+        echo "<p><strong>Time Out:</strong> {$row['time_out_pm']}</p>";
         echo "<p><strong>Date Logged:</strong> {$row['date_logged']}</p>";
         echo "</div>";
     }
