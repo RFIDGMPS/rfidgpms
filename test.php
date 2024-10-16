@@ -15,7 +15,8 @@ if ($current_time->format('A') === 'AM') {
     $time_in = 'time_in_pm';
     $time_out = 'time_out_pm';
 }
-
+echo $time_in;
+echo $time_out;
 // Prepare the SQL query
 $query = "SELECT 
             p.photo,
