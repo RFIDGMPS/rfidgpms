@@ -1089,7 +1089,7 @@ Webcam.snap(function(data_uri){
             left: 20px;      /* Adjust the distance from the left */
             border: none;    /* Remove default border */
             padding: 10px;   /* Add some padding */
-            border-radius: 5px; /* Rounded corners */
+            border-radius: 50%; /* Rounded corners */
             cursor: pointer;  /* Change cursor on hover */
             display: flex;    /* Flexbox for icon alignment */
             align-items: center; /* Center align items vertically */
