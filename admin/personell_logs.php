@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date2 = date('Y-m-d', strtotime($_POST['date2']));
 
     // SQL query to fetch filtered data
-    $sql = "SELECT * FROM personell_logs WHERE date_logged BETWEEN '$date1' AND '$date2'";
+    $sql = "SELECT * FROM room_logs WHERE date_logged BETWEEN '$date1' AND '$date2'";
     $result = mysqli_query($db, $sql);
 
     // Check if query was successful
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 else {
 // Fetch all records from the database if no filtering is applied
-$sql = "SELECT * FROM personell_logs";
+$sql = "SELECT * FROM room_logs";
 $result = mysqli_query($db, $sql);
 if ($result) {
     // Initialize array to store filtered data
@@ -133,10 +133,10 @@ mysqli_close($db);
         $date2 = date('Y-m-d', strtotime($_POST['date2']));
 
         // SQL query to fetch filtered data
-        $sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, pl.location, pl.time_in, pl.time_out, pl.date_logged 
+        $sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
         FROM personell AS p
-        JOIN personell_logs AS pl ON p.id = pl.personnel_id
-        WHERE pl.date_logged BETWEEN '$date1' AND '$date2'  ORDER BY CASE 
+        JOIN room_logs AS rl ON p.id = rl.personnel_id
+        WHERE rl.date_logged BETWEEN '$date1' AND '$date2'  ORDER BY CASE 
         WHEN time_out IS NOT NULL THEN time_out 
         ELSE time_in 
     END DESC";
@@ -172,9 +172,9 @@ mysqli_close($db);
         mysqli_close($db);
     } else {
         // If date1 and date2 are not set, fetch all records
-        $results = mysqli_query($db, "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, pl.location, pl.time_in, pl.time_out, pl.date_logged 
+        $results = mysqli_query($db, "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
         FROM personell AS p
-        JOIN personell_logs AS pl ON p.id = pl.personnel_id WHERE pl.date_logged = CURRENT_DATE() ORDER BY CASE 
+        JOIN room_logs AS rl ON p.id = rl.personnel_id WHERE rl.date_logged = CURRENT_DATE() ORDER BY CASE 
         WHEN time_out IS NOT NULL THEN time_out 
         ELSE time_in 
     END DESC");
