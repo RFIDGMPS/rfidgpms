@@ -451,29 +451,6 @@ if ($row) {
       }
   };
 
-  let isMuted = false; // Track the mute state
-
-const stopSpeech = () => {
-    const synth = window.speechSynthesis;
-    if (synth.speaking) {
-        synth.cancel(); // Stops any ongoing speech
-    }
-    toggleIcon(); // Change the icon when muting
-};
-
-const toggleIcon = () => {
-    const volumeUpIcon = document.querySelector('.fa-volume-up');
-    const volumeMuteIcon = document.querySelector('.fa-volume-mute');
-
-    if (isMuted) {
-        volumeUpIcon.style.display = 'inline';
-        volumeMuteIcon.style.display = 'none';
-    } else {
-        volumeUpIcon.style.display = 'none';
-        volumeMuteIcon.style.display = 'inline';
-    }
-    isMuted = !isMuted; // Toggle the mute state
-};
   // Trigger text-to-speech if there's submitted text
   if (text) {
       textToSpeech(text);
@@ -1092,6 +1069,31 @@ Webcam.snap(function(data_uri){
     <span class="material-symbols-rounded"><i class="fa fa-volume-up" aria-hidden="true"></i></span>
     <span class="material-symbols-rounded" style="display: none;"><i class="fa fa-volume-mute" aria-hidden="true"></i></span>
 </button>
+<script>
+    let isMuted = false; // Track the mute state
+
+    const stopSpeech = () => {
+        const synth = window.speechSynthesis;
+        if (synth.speaking) {
+            synth.cancel(); // Stops any ongoing speech
+        }
+        toggleIcon(); // Change the icon when muting
+    };
+
+    const toggleIcon = () => {
+        const volumeUpIcon = document.querySelector('.fa-volume-up');
+        const volumeMuteIcon = document.querySelector('.fa-volume-mute');
+
+        if (isMuted) {
+            volumeUpIcon.style.display = 'inline';
+            volumeMuteIcon.style.display = 'none';
+        } else {
+            volumeUpIcon.style.display = 'none';
+            volumeMuteIcon.style.display = 'inline';
+        }
+        isMuted = !isMuted; // Toggle the mute state
+    };
+</script>
          <?php
          if($department == 'Main') { ?>
         <button class="chatbot-toggler" style="background:#FBC257;">
