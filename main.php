@@ -347,7 +347,7 @@ $query1 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date
 $result1 = mysqli_query($db, $query1);
 $row = mysqli_fetch_assoc($result1);
 
-if ($row) {
+if ($row && $row['time_out']==null) {
     // Check if user's department matches the department
     // echo $user['department'];
     // echo $department;
