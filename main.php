@@ -604,7 +604,7 @@ if ($row) {
     ");
     }
     
-echo $results;
+//echo $results;
                            
         // Fetch and display the results
         while ($row = mysqli_fetch_array($results)) {
