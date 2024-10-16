@@ -593,9 +593,11 @@ else {
   
 if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){      
     
-  
-?>
-   
+    $time_in = date('h:i A', strtotime($row['time_in']));
+    $time_out = date('h:i A', strtotime($row['time_out']));
+    ?>
+    
+
            <script>
              // Store original values
         const originalTexts = {
@@ -612,8 +614,8 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
         document.getElementById('entrant_name').innerHTML = '<?php echo $row['full_name']; ?>';
         document.getElementById('department').innerHTML = '<?php echo $row['department']; ?>';
         document.getElementById('role').innerHTML = '<?php echo $row['role']; ?>';
-        document.getElementById('time_in').innerHTML = '<?php echo $row['time_in']; ?>';
-        document.getElementById('time_out').innerHTML = '<?php echo $row['time_out']; ?>';
+        document.getElementById('time_in').innerHTML = '<?php echo $time_in; ?>';
+        document.getElementById('time_out').innerHTML = '<?php echo $time_out; ?>';
         document.getElementById('entrant_name').style.color = 'black';
         document.getElementById('department').style.color = 'black';
             document.getElementById('role').style.color = 'black';
