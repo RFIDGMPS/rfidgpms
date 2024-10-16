@@ -246,14 +246,9 @@ if ($user1) {
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
 
-
-        $query2 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' AND location='Gate'";
-$result2 = mysqli_query($db, $query2);
-$user2 = mysqli_fetch_assoc($result2);
-if($user2){
-        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE id = '{$user2['id']}'";
+        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE personnel_id = '{$user1['id']}'";
         mysqli_query($db, $update_query1);
-}
+
      
     } else {
         $voice = 'Please wait for the appropriate time period.';
@@ -373,7 +368,7 @@ if ($row && $row['time_out']==null) {
         $result2 = mysqli_query($db, $query2);
         $row1 = mysqli_fetch_assoc($result2);
 
-        if (empty($row1['time_out'])) {
+        if (empty($row1['time_out']) && $row1['location'] == $location) {
             $time_in_out = 'TIME OUT';
           
                 $voice='Have a great day '.$user['first_name'].' ' . $user['last_name'].'!';
