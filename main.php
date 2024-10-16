@@ -1070,29 +1070,9 @@ Webcam.snap(function(data_uri){
             	readURL(this);
             });
          </script>
-         <style><style>
-  .mute {
-      position: fixed; /* Fixes the position relative to the viewport */
-      bottom: 20px;    /* Adjust the distance from the bottom */
-      left: 20px;      /* Adjust the distance from the left */
-      border: none;    /* Remove default border */
-      padding: 10px;   /* Add some padding */
-      border-radius: 5px; /* Rounded corners */
-      cursor: pointer;  /* Change cursor on hover */
-      display: flex;    /* Flexbox for icon alignment */
-      align-items: center; /* Center align items vertically */
-      color: white;     /* Change text/icon color */
-  }
-  
-  .mute i {
-      margin-right: 5px; /* Space between icons */
-  }
-
-  .mute:hover {
-      background: #FBAE37; /* Change background on hover */
-  }
-</style></style>
-<button class="mute" onclick="stopSpeech()" style="background:#FBC257;">
+<button class="chatbot-toggler" style="position: fixed; 
+            bottom: 20px;    
+            left: 20px;" onclick="stopSpeech()" style="background:#FBC257;">
     <span class="material-symbols-rounded"><i class="fa fa-volume-up" aria-hidden="true"></i></span>
     <span class="material-symbols-outlined"><i class="fa fa-volume-mute" aria-hidden="true"></i></span>
 </button>
