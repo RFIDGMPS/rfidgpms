@@ -605,8 +605,8 @@ if($time_in_out == "TIME IN" || $time_in_out == "TIME OUT" ){
         document.getElementById('entrant_name').innerHTML = '<?php echo $row['full_name']; ?>';
         document.getElementById('department').innerHTML = '<?php echo $row['department']; ?>';
         document.getElementById('role').innerHTML = '<?php echo $row['role']; ?>';
-        const timeIn = new Date("<?php echo date('Y-m-d H:i:s', strtotime($row['time_in'])); ?>").toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-    const timeOut = new Date("<?php echo date('Y-m-d H:i:s', strtotime($row['time_out'])); ?>").toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+        const timeIn = new Date("<?php echo date('Y-m-d H:i:s', strtotime($row['time_in_pm'])); ?>").toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    const timeOut = new Date("<?php echo date('Y-m-d H:i:s', strtotime($row['time_out_pm'])); ?>").toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
 
     document.getElementById('time_in').innerHTML = timeIn;
     document.getElementById('time_out').innerHTML = timeOut;
