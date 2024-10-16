@@ -3,33 +3,34 @@ include 'connection.php';  // Ensure this file contains the DB connection logic
 // Your existing query
 
 
-$query = "
-  SELECT 
-    p.photo,
-    p.department,
-    p.role,
-    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-   CASE
-        WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_in_am
-        ELSE pl.time_in_pm
-    END AS time_in1,
-    CASE
-        WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_out_am
-        ELSE pl.time_out_pm
-    END AS time_out1,
-    pl.date_logged,
-    pl.id
-FROM personell_logs pl
-JOIN personell p ON pl.personnel_id = p.id
-WHERE pl.date_logged = CURRENT_DATE()
 
+// Determine if it's AM or PM
+$current_time = new DateTime();
+$time_in = $time_out = '';
 
-ORDER BY 
-    id DESC
-LIMIT 1;
+if ($current_time->format('A') === 'AM') {
+    $time_in = 'time_in_am';
+    $time_out = 'time_out_am';
+} else {
+    $time_in = 'time_in_pm';
+    $time_out = 'time_out_pm';
+}
 
-
-";
+// Prepare the SQL query
+$query = "SELECT 
+            p.photo,
+            p.department,
+            p.role,
+            CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+            pl.$time_in AS time_in,
+            pl.$time_out AS time_out,
+            pl.date_logged,
+            pl.id
+        FROM personell_logs pl
+        JOIN personell p ON pl.personnel_id = p.id
+        WHERE pl.date_logged = CURRENT_DATE()
+        ORDER BY pl.id DESC
+        LIMIT 1";
 
 $results = mysqli_query($db, $query);
 
