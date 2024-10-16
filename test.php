@@ -2,7 +2,7 @@
 include 'connection.php';  // Ensure this file contains the DB connection logic
 // Your existing query
 $query = "
-    SELECT 
+  SELECT 
     p.photo,
     p.department,
     p.role,
@@ -21,8 +21,24 @@ FROM personell_logs pl
 JOIN personell p ON pl.personnel_id = p.id
 WHERE pl.date_logged = CURRENT_DATE()
 
+UNION ALL
+
+SELECT 
+    vl.photo,
+    vl.department,
+    'Visitor' AS role,
+    vl.name AS full_name,
+    vl.time_in,
+    vl.time_out,
+    vl.date_logged,
+    vl.id
+FROM visitor_logs vl
+WHERE vl.date_logged = CURRENT_DATE()
+
 ORDER BY 
-    id DESC;
+    id DESC
+LIMIT 1;
+
 
 ";
 
