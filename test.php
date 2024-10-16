@@ -1,7 +1,8 @@
 <?php
 include 'connection.php';  // Ensure this file contains the DB connection logic
 
-
+$current_time = new DateTime();
+$timein = $timeout = '';
     if ($current_time->format('A') === 'AM') {
         $timein = 'time_in_am';
         $timeout = 'time_out_am';
