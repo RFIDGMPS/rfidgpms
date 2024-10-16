@@ -22,8 +22,8 @@ $query = "SELECT
             p.department,
             p.role,
             CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-            pl.$time_in AS time_in,
-            pl.$time_out AS time_out,
+            pl.$time_in AS time_in1,
+            pl.$time_out AS time_out1,
             pl.date_logged,
             pl.id
         FROM personell_logs pl
@@ -51,8 +51,8 @@ if ($results && mysqli_num_rows($results) > 0) {
         echo "<p><strong>Name:</strong> {$row['full_name']}</p>";
         echo "<p><strong>Department:</strong> {$row['department']}</p>";
         echo "<p><strong>Role:</strong> {$row['role']}</p>";
-        echo "<p><strong>Time In:</strong> {$row['time_in']}</p>";
-        echo "<p><strong>Time Out:</strong> {$row['time_out']}</p>";
+        echo "<p><strong>Time In:</strong> {$row['time_in1']}</p>";
+        echo "<p><strong>Time Out:</strong> {$row['time_out1']}</p>";
         echo "<p><strong>Date Logged:</strong> {$row['date_logged']}</p>";
         echo "</div>";
     }
