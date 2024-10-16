@@ -1094,6 +1094,12 @@ Webcam.snap(function(data_uri){
             display: flex;    /* Flexbox for icon alignment */
             align-items: center; /* Center align items vertically */
             color: white;     /* Change text/icon color */
+    
+    
+    height: 50px;
+    width: 50px;
+    justify-content: center;
+    transition: all 0.2s ease;
         }
       
 
