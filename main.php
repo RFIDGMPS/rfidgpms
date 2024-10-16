@@ -622,7 +622,7 @@ else {
   
 if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'UNAUTHORIZE' || $time_in_out == ''){      
     
-    $row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out'] = '';
+    $row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out']=$row['time_in_am']=$row['time_out_am']=$row['time_in_pm']=$row['time_out_pm'] = '';
 }
 ?>
    
