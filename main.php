@@ -603,8 +603,12 @@ if ($row && $row['time_out']==null) {
                 FROM visitor_logs vl
                 WHERE vl.date_logged = CURRENT_DATE()
                 
-                ORDER BY id DESC
-                LIMIT 1;
+                ORDER BY 
+    CASE 
+        WHEN time_out IS NOT NULL THEN time_out 
+        ELSE time_in 
+    END DESC
+LIMIT 1;
             ");
         } else {
             // Fetch data from room_logs
@@ -622,8 +626,12 @@ if ($row && $row['time_out']==null) {
                 JOIN personell p ON rl.personnel_id = p.id
                 WHERE rl.date_logged = CURRENT_DATE()
         
-                ORDER BY id DESC
-                LIMIT 1;
+               ORDER BY 
+    CASE 
+        WHEN time_out IS NOT NULL THEN time_out 
+        ELSE time_in 
+    END DESC
+LIMIT 1;
             ");
         }
     
