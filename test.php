@@ -16,12 +16,8 @@ FROM room_logs rl
 JOIN personell p ON rl.personnel_id = p.id
 WHERE rl.date_logged = CURRENT_DATE()
 ORDER BY 
-    CASE 
-        WHEN rl.time_out IS NOT NULL THEN 1
-        ELSE 0
-    END, 
-    rl.date_logged DESC
-;
+    GREATEST(rl.time_in, rl.time_out) DESC;
+
 ";
 $result = $db->query($sql);
 
