@@ -591,10 +591,9 @@ else {
 }
 
   
-if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'UNAUTHORIZE'){      
+if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){      
     
-    $row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out'] = '';
-}
+  
 ?>
    
            <script>
@@ -642,7 +641,7 @@ if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'U
         }, 5000); // 3000 milliseconds = 3 seconds
     </script>
 <?php 
-
+}
  }
     }
         
