@@ -8,8 +8,8 @@ $results = mysqli_query($db, "
         p.department,
         p.role,
         CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-        pl.time_in_pm,
-        pl.time_out_pm,
+        pl.time_in_am,
+        pl.time_out_am,
         pl.date_logged,
         pl.id -- Assuming id is the primary key and auto-increments
     FROM personell_logs pl
@@ -43,8 +43,8 @@ if ($results && mysqli_num_rows($results) > 0) {
         echo "<p><strong>Name:</strong> {$row['full_name']}</p>";
         echo "<p><strong>Department:</strong> {$row['id']}</p>";
         echo "<p><strong>Role:</strong> {$row['role']}</p>";
-        echo "<p><strong>Time In:</strong> {$row['time_in_pm']}</p>";
-        echo "<p><strong>Time Out:</strong> {$row['time_out_pm']}</p>";
+        echo "<p><strong>Time In:</strong> {$row['time_in_am']}</p>";
+        echo "<p><strong>Time Out:</strong> {$row['time_out_am']}</p>";
         echo "<p><strong>Date Logged:</strong> {$row['date_logged']}</p>";
         echo "</div>";
     }
