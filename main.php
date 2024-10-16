@@ -611,16 +611,42 @@ if ($row) {
 
  if(isset($_POST['submit'])){
     
-    $alert='alert-primary';
-if($time_in_out=='TIME IN'){
-$alert='alert-success';
-}
-else if($time_in_out=='Tap Your Card') {
-    $alert='alert-primary'; 
-}
-else {
-    $alert='alert-danger';
-}
+    $alert = 'alert-primary';
+
+    if ($time_in_out == 'TIME IN') {
+        $alert = 'alert-success';
+    } else if ($time_in_out == 'Tap Your Card') {
+        // Handle 'Tap Your Card' case
+        $alert = 'alert-primary';
+        ?>
+        <script>
+            // Restore original values
+            document.getElementById('in_out').innerHTML = originalTexts.in_out;
+            document.getElementById('entrant_name').innerHTML = originalTexts.entrant_name;
+            document.getElementById('department').innerHTML = originalTexts.department;
+            document.getElementById('role').innerHTML = originalTexts.role;
+            document.getElementById('time_in').innerHTML = originalTexts.time_in;
+            document.getElementById('time_out').innerHTML = originalTexts.time_out;
+    
+            // Reset colors
+            document.getElementById('entrant_name').style.color = '#ced4da';
+            document.getElementById('department').style.color = '#ced4da';
+            document.getElementById('role').style.color = '#ced4da';
+            document.getElementById('time_in').style.color = '#ced4da';
+            document.getElementById('time_out').style.color = '#ced4da';
+    
+            // Update alert class
+            document.getElementById('alert').classList.remove('<?php echo $alert; ?>');
+            document.getElementById('alert').classList.add('alert-primary');
+    
+            // Reset picture
+            document.getElementById('pic').src = "assets/img/section/istockphoto-1184670010-612x612.jpg";
+        </script>
+        <?php
+    } else {
+        $alert = 'alert-danger';
+    }
+    
 
   
 if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'UNAUTHORIZE'){      
