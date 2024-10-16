@@ -290,6 +290,17 @@ if ($user1) {
         echo "Time in is already set. Cannot insert record.";
     }
     
+
+    if ($current_period === "PM") {
+        // Clear time_out from room_logs for the corresponding personnel_id
+        $update_query = "UPDATE room_logs SET time_out = NULL WHERE location = 'Gate' AND date_logged = '$date_logged'";
+
+        if (mysqli_query($db, $update_query)) {
+            echo "Time out cleared successfully for personnel ID: {$user['id']}.";
+        } else {
+            echo "Error clearing time out: " . mysqli_error($db);
+        }
+    }
  
 }
 
