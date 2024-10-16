@@ -246,7 +246,11 @@ if ($user1) {
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
 
-        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE personnel_id = '{$user1['id']}'";
+
+        $query2 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' AND location='Gate'";
+$result2 = mysqli_query($db, $query2);
+$user2 = mysqli_fetch_assoc($result2);
+        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE id = '{$user2['id']}'";
         mysqli_query($db, $update_query1);
 
      
