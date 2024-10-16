@@ -2,7 +2,7 @@
 include 'connection.php';  // Ensure this file contains the DB connection logic
 // Your existing query
 
-
+date_default_timezone_set('Asia/Manila');
 
 // Determine if it's AM or PM
 $current_time = new DateTime();
