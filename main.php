@@ -526,6 +526,7 @@ if ($row) {
      
         
         $results = mysqli_query($db, "
+
         SELECT 
         p.photo,
         p.department,
@@ -562,6 +563,7 @@ if ($row) {
     ORDER BY 
         id DESC -- Sorting by the most recent id
     LIMIT 1;
+    
     
 
     ");
