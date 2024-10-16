@@ -41,7 +41,7 @@ LIMIT 1;
 
 
 ";
-
+echo date('A');
 $results = mysqli_query($db, $query);
 
 // Debugging: Display the query
