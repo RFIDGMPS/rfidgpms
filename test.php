@@ -1,6 +1,11 @@
 <?php
 include 'connection.php';  // Ensure this file contains the DB connection logic
 // Your existing query
+
+date_default_timezone_set('Asia/Manila');
+
+// Now check the current time
+echo date('Y-m-d H:i:s A'); // Displays the full date and time with AM/PM
 $query = "
   SELECT 
     p.photo,
@@ -41,7 +46,7 @@ LIMIT 1;
 
 
 ";
-echo date('A');
+
 $results = mysqli_query($db, $query);
 
 // Debugging: Display the query
