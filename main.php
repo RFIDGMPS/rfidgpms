@@ -1,7 +1,7 @@
 
 <?php
 
-
+$time_in_out = 'UNAUTHORIZE';
 
 session_start();
 if (isset($_SESSION['location'])) {
