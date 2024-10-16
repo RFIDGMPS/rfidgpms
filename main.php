@@ -246,9 +246,7 @@ if ($user1) {
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
 
-        echo "<script>alert('".$update_field."');</script>";
-        echo "<script>alert('".$time."');</script>";
-        echo "<script>alert('".$user1['id']."');</script>";
+     
     } else {
         $voice = 'Please wait for the appropriate time period.';
     }
@@ -270,9 +268,7 @@ if ($user1) {
                      VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
     mysqli_query($db, $insert_query);
 
-    
-    echo "<script>alert('".$time_field."');</script>";
-    echo "<script>alert('".$time."');</script>";
+ 
 }
 
         
