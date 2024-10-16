@@ -1074,7 +1074,7 @@ Webcam.snap(function(data_uri){
             bottom: 20px;    
             left: 20px;" onclick="stopSpeech()" style="background:#FBC257;">
     <span class="material-symbols-rounded"><i class="fa fa-volume-up" aria-hidden="true"></i></span>
-    <span class="material-symbols-outlined"><i class="fa fa-volume-mute" aria-hidden="true"></i></span>
+    <span class="material-symbols-rounded"><i class="fa fa-volume-mute" aria-hidden="true"></i></span>
 </button>
          <?php
          if($department == 'Main') { ?>
