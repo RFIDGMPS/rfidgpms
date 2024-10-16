@@ -247,6 +247,7 @@ if ($user1) {
         mysqli_query($db, $update_query);
     } else {
         echo "<script>alert('Please wait for the appropriate time period.');</script>";
+        $time_in_out = 'UNAUTHORIZE';
     }
 
 } else {
@@ -409,6 +410,7 @@ if ($row) {
                     
                 } else {
                     echo "<script>alert('Please wait for the appropriate time period.');</script>";
+                    $time_in_out = 'UNAUTHORIZE';
                 }
             } else {
                 echo '<script>$(document).ready(function() {
