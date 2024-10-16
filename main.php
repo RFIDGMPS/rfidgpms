@@ -601,8 +601,11 @@ if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'U
         document.getElementById('entrant_name').innerHTML = '<?php echo $row['full_name']; ?>';
         document.getElementById('department').innerHTML = '<?php echo $row['department']; ?>';
         document.getElementById('role').innerHTML = '<?php echo $row['role']; ?>';
-        document.getElementById('time_in').innerHTML = '<?php echo $row['time_in']; ?>';
-        document.getElementById('time_out').innerHTML = '<?php echo $row['time_out']; ?>';
+        const timeIn = new Date("<?php echo date('Y-m-d H:i:s', strtotime($row['time_in'])); ?>").toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    const timeOut = new Date("<?php echo date('Y-m-d H:i:s', strtotime($row['time_out'])); ?>").toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+
+    document.getElementById('time_in').innerHTML = timeIn;
+    document.getElementById('time_out').innerHTML = timeOut;
         document.getElementById('entrant_name').style.color = 'black';
         document.getElementById('department').style.color = 'black';
             document.getElementById('role').style.color = 'black';
