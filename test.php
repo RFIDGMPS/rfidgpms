@@ -1,7 +1,7 @@
 <?php
 include 'connection.php';  // Ensure this file contains the DB connection logic
 
-if ($department == 'Main') {
+
     if ($current_time->format('A') === 'AM') {
         $timein = 'time_in_am';
         $timeout = 'time_out_am';
@@ -9,7 +9,7 @@ if ($department == 'Main') {
         $timein = 'time_in_pm';
         $timeout = 'time_out_pm';
     }
-}
+
 // SQL query to select all records from room_logs
 $sql = " SELECT 
     p.photo,
