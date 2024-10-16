@@ -1082,6 +1082,28 @@ Webcam.snap(function(data_uri){
     <span class="material-symbols-outlined"><i class="fa fa-times" aria-hidden="true"></i></span>
 </button>
 <style>
+      
+        .mute {
+            position: fixed; /* Fixes the position relative to the viewport */
+            bottom: 20px;    /* Adjust the distance from the bottom */
+            left: 20px;      /* Adjust the distance from the left */
+            border: none;    /* Remove default border */
+            padding: 10px;   /* Add some padding */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer;  /* Change cursor on hover */
+            display: flex;    /* Flexbox for icon alignment */
+            align-items: center; /* Center align items vertically */
+            color: white;     /* Change text/icon color */
+        }
+        
+        .mute i {
+            margin-right: 5px; /* Space between icons */
+        }
+
+        .mute:hover {
+            background: #FBAE37; /* Change background on hover */
+        }
+    
         .card {
             display: flex;
             align-items: center; /* Aligns items vertically center */
