@@ -364,11 +364,11 @@ if ($row && $row['time_out']==null) {
     // echo $department;
     if ($user['department'] == $department) {
         // Check if the last log has no 'time_out' and the location matches
-        $query2 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' AND location = '{$user['department']}' ORDER BY id DESC LIMIT 1";
+        $query2 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' AND location = '$location' ORDER BY id DESC LIMIT 1";
         $result2 = mysqli_query($db, $query2);
         $row1 = mysqli_fetch_assoc($result2);
 
-        if (empty($row1['time_out']) && $row1['location'] == $location) {
+        if (empty($row1['time_out'])) {
             $time_in_out = 'TIME OUT';
           
                 $voice='Have a great day '.$user['first_name'].' ' . $user['last_name'].'!';
