@@ -21,7 +21,7 @@ ORDER BY
         ELSE 0
     END, 
     rl.date_logged DESC
-LIMIT 1;
+;
 ";
 $result = $db->query($sql);
 
