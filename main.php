@@ -451,12 +451,29 @@ if ($row) {
       }
   };
 
-  const stopSpeech = () => {
-      const synth = window.speechSynthesis;
-      if (synth.speaking) {
-          synth.cancel(); // Stops any ongoing speech
-      }
-  };
+  let isMuted = false; // Track the mute state
+
+const stopSpeech = () => {
+    const synth = window.speechSynthesis;
+    if (synth.speaking) {
+        synth.cancel(); // Stops any ongoing speech
+    }
+    toggleIcon(); // Change the icon when muting
+};
+
+const toggleIcon = () => {
+    const volumeUpIcon = document.querySelector('.fa-volume-up');
+    const volumeMuteIcon = document.querySelector('.fa-volume-mute');
+
+    if (isMuted) {
+        volumeUpIcon.style.display = 'inline';
+        volumeMuteIcon.style.display = 'none';
+    } else {
+        volumeUpIcon.style.display = 'none';
+        volumeMuteIcon.style.display = 'inline';
+    }
+    isMuted = !isMuted; // Toggle the mute state
+};
   // Trigger text-to-speech if there's submitted text
   if (text) {
       textToSpeech(text);
@@ -1071,9 +1088,9 @@ Webcam.snap(function(data_uri){
             });
          </script>
 
-<button class="mute" onclick="stopSpeech()" style="background:#FBC257;">
+<button class="mute" onclick="stopSpeech()">
     <span class="material-symbols-rounded"><i class="fa fa-volume-up" aria-hidden="true"></i></span>
- 
+    <span class="material-symbols-rounded" style="display: none;"><i class="fa fa-volume-mute" aria-hidden="true"></i></span>
 </button>
          <?php
          if($department == 'Main') { ?>
@@ -1083,30 +1100,28 @@ Webcam.snap(function(data_uri){
 </button>
 <style>
       
-        .mute {
-            position: fixed; /* Fixes the position relative to the viewport */
-            bottom: 20px;    /* Adjust the distance from the bottom */
-            left: 20px;      /* Adjust the distance from the left */
-            border: none;    /* Remove default border */
-            padding: 10px;   /* Add some padding */
-            border-radius: 50%; /* Rounded corners */
-            cursor: pointer;  /* Change cursor on hover */
-            display: flex;    /* Flexbox for icon alignment */
-            align-items: center; /* Center align items vertically */
-            color: white;     /* Change text/icon color */
-    
-    
-    height: 50px;
-    width: 50px;
-    justify-content: center;
-    transition: all 0.2s ease;
+      .mute {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            height: 50px;
+            width: 50px;
+            background: #FBC257; /* Initial background color */
+            transition: all 0.2s ease;
         }
-      
 
         .mute:hover {
             background: #FBAE37; /* Change background on hover */
         }
-    
+     
         .card {
             display: flex;
             align-items: center; /* Aligns items vertically center */
