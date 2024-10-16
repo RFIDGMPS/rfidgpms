@@ -5,7 +5,7 @@ include 'connection.php';  // Ensure this file contains the DB connection logic
 date_default_timezone_set('Asia/Manila');
 
 // Now check the current time
-echo date('Y-m-d H:i:s A'); // Displays the full date and time with AM/PM
+echo date('A'); // Displays the full date and time with AM/PM
 $query = "
   SELECT 
     p.photo,
