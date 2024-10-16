@@ -617,7 +617,7 @@ if ($row) {
         $alert = 'alert-success';
     } else if ($time_in_out == 'Tap Your Card') {
         // Handle 'Tap Your Card' case
-        $alert = 'alert-primary';
+     
         ?>
         <script>
             // Restore original values
@@ -636,7 +636,7 @@ if ($row) {
             document.getElementById('time_out').style.color = '#ced4da';
     
             // Update alert class
-            //document.getElementById('alert').classList.remove('<?php echo $alert; ?>');
+            
             document.getElementById('alert').classList.add('alert-primary');
     
             // Reset picture
