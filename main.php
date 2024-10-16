@@ -550,48 +550,67 @@ if ($row) {
         $current_time = new DateTime();
         $timein = $timeout = '';
         
-        if ($current_time->format('A') === 'AM') {
-            $timein = 'time_in_am';
-            $timeout = 'time_out_am';
+        if ($department == 'Main') {
+            if ($current_time->format('A') === 'AM') {
+                $timein = 'time_in_am';
+                $timeout = 'time_out_am';
+            } else {
+                $timein = 'time_in_pm';
+                $timeout = 'time_out_pm';
+            }
+        
+            // Fetch data from personell_logs and visitor_logs
+            $results = mysqli_query($db, "
+                SELECT 
+                    p.photo,
+                    p.department,
+                    p.role,
+                    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+                    pl.$timein AS time_in,
+                    pl.$timeout AS time_out,
+                    pl.date_logged,
+                    pl.id
+                FROM personell_logs pl
+                JOIN personell p ON pl.personnel_id = p.id
+                WHERE pl.date_logged = CURRENT_DATE()
+        
+                UNION
+        
+                SELECT 
+                    vl.photo,
+                    vl.department,
+                    'Visitor' AS role,
+                    vl.name AS full_name,
+                    vl.time_in,
+                    vl.time_out,
+                    vl.date_logged,
+                    vl.id
+                FROM visitor_logs vl
+                WHERE vl.date_logged = CURRENT_DATE()
+                
+                ORDER BY id DESC
+                LIMIT 1;
+            ");
         } else {
-            $timein = 'time_in_pm';
-            $timeout = 'time_out_pm';
+            // Fetch data from room_logs
+            $results = mysqli_query($db, "
+                SELECT 
+                    p.photo,
+                    p.department,
+                    p.role,
+                    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+                    rl.time_in,
+                    rl.time_out,
+                    rl.date_logged,
+                    rl.id
+                FROM room_logs rl
+                JOIN personell p ON rl.personnel_id = p.id
+                WHERE rl.date_logged = CURRENT_DATE()
+        
+                ORDER BY id DESC
+                LIMIT 1;
+            ");
         }
-        // Combine and fetch data from both tables for the current date, ordering by the latest update
-        $results = mysqli_query($db, "
-       SELECT 
-            p.photo,
-            p.department,
-            p.role,
-            CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-            pl.$timein AS time_in,
-            pl.$timeout AS time_out,
-            pl.date_logged,
-            pl.id
-        FROM personell_logs pl
-        JOIN personell p ON pl.personnel_id = p.id
-        WHERE pl.date_logged = CURRENT_DATE()
-    
-    UNION
-    
-    SELECT 
-        vl.photo,
-        vl.department,
-        'Visitor' AS role,
-        vl.name AS full_name,
-        vl.time_in,
-        vl.time_out,
-        vl.date_logged,
-        vl.id -- Assuming id is the primary key in visitor_logs
-    FROM visitor_logs vl
-    WHERE vl.date_logged = CURRENT_DATE()
-    
-    ORDER BY 
-        id DESC -- Sorting by the most recent id
-    LIMIT 1;
-    
-
-    ");
     
 
                            
