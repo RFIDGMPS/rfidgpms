@@ -349,8 +349,8 @@ $row = mysqli_fetch_assoc($result1);
 
 if ($row) {
     // Check if user's department matches the department
-    echo $user['department'];
-    echo $department;
+    // echo $user['department'];
+    // echo $department;
     if ($user['department'] == $department) {
         // Check if the last log has no 'time_out' and the location matches
         if (empty($row['time_out']) && $row['location'] == $location) {
