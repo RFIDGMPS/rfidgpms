@@ -48,13 +48,13 @@ if (!$results) {
 // Check if results are returned and display them
 if ($results && mysqli_num_rows($results) > 0) {
 
+       
+    
+    while ($row = mysqli_fetch_assoc($results)) {
         $row['time_in'] = $row['time_in_pm'];
         echo $row['time_in'];
         $row['time_out'] = $row['time_out_pm'];
         echo $row['time_out'];
-    
-    while ($row = mysqli_fetch_assoc($results)) {
-     
         echo "<div style='border: 1px solid #ccc; padding: 10px; margin: 10px;'>";
         echo "<img src='admin/uploads/{$row['photo']}' alt='Photo' style='width: 100px; height: auto;'/>";
         echo "<p><strong>Name:</strong> {$row['full_name']}</p>";
