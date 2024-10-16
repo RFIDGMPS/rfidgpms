@@ -1,6 +1,6 @@
 
 <?php
-
+ date_default_timezone_set('Asia/Manila');
 
 
 session_start();
@@ -190,7 +190,7 @@ $status='';
 // Check if form is submitted
 if (isset($_POST['submit'])) {
     $rfid_number = $_POST['rfid_number'];
-    date_default_timezone_set('Asia/Manila');
+   
     $time = date('H:i:s');
     $date_logged = date('Y-m-d');
     $current_period = date('A'); // Get AM/PM period
@@ -245,6 +245,9 @@ if ($user1) {
         // Update the respective time_out column
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
+
+        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE id = '{$user1['id']}'";
+        mysqli_query($db, $update_query1);
 
      
     } else {
