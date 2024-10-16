@@ -451,6 +451,12 @@ if ($row) {
       }
   };
 
+  const stopSpeech = () => {
+      const synth = window.speechSynthesis;
+      if (synth.speaking) {
+          synth.cancel(); // Stops any ongoing speech
+      }
+  };
   // Trigger text-to-speech if there's submitted text
   if (text) {
       textToSpeech(text);
@@ -1064,7 +1070,10 @@ Webcam.snap(function(data_uri){
             	readURL(this);
             });
          </script>
-
+<button onclick="stopSpeech()" style="background:#FBC257;">
+    <span class="material-symbols-rounded"><i class="fa fa-volume-up" aria-hidden="true"></i></span>
+    <span class="material-symbols-outlined"><i class="fa fa-volume-mute" aria-hidden="true"></i></span>
+</button>
          <?php
          if($department == 'Main') { ?>
         <button class="chatbot-toggler" style="background:#FBC257;">
