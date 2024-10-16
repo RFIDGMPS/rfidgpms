@@ -9,8 +9,14 @@ $query = "
     p.department,
     p.role,
     CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-   pl.time_in_pm AS time_in,
-    pl.time_out_pm AS time_out,
+   CASE
+        WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_in_am
+        ELSE pl.time_in_pm
+    END AS time_in,
+    CASE
+        WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_out_am
+        ELSE pl.time_out_pm
+    END AS time_out,
     pl.date_logged,
     pl.id
 FROM personell_logs pl
