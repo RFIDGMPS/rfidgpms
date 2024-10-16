@@ -1,7 +1,7 @@
 
 <?php
 
-$time_in_out = '';
+
 
 session_start();
 if (isset($_SESSION['location'])) {
@@ -638,10 +638,7 @@ if($time_in_out == "TIME IN" || $time_in_out == "TIME OUT" ){
     </script>
 <?php 
 }
-else {
-     $row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out']=$row['time_in_am']=$row['time_out_am']=$row['time_in_pm']=$row['time_out_pm'] = '';
 
-}
  }
     }
         
