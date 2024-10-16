@@ -1095,10 +1095,7 @@ Webcam.snap(function(data_uri){
             align-items: center; /* Center align items vertically */
             color: white;     /* Change text/icon color */
         }
-        
-        .mute i {
-            margin-right: 5px; /* Space between icons */
-        }
+      
 
         .mute:hover {
             background: #FBAE37; /* Change background on hover */
