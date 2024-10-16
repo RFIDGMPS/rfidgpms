@@ -354,7 +354,7 @@ if ($user1) {
         } else {
         // Check if user is already logged today
 // Query to get the latest log for the user
-$query1 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND location = 'Gate' ORDER BY id DESC LIMIT 1";
+$query1 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' AND location='Gate' ORDER BY id DESC LIMIT 1";
 $result1 = mysqli_query($db, $query1);
 $row = mysqli_fetch_assoc($result1);
 
@@ -364,14 +364,18 @@ if ($row && $row['time_out']==null) {
     // echo $department;
     if ($user['department'] == $department) {
         // Check if the last log has no 'time_out' and the location matches
-        if (empty($row['time_out']) && $row['location'] == $location) {
+        $query2 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' ORDER BY id DESC LIMIT 1";
+        $result2 = mysqli_query($db, $query2);
+        $row1 = mysqli_fetch_assoc($result2);
+
+        if (empty($row1['time_out']) && $row1['location'] == $location) {
             $time_in_out = 'TIME OUT';
           
                 $voice='Have a great day '.$user['first_name'].' ' . $user['last_name'].'!';
                 
         
             // Update the log with 'time_out'
-            $update_query = "UPDATE room_logs SET time_out = '$time' WHERE id = '{$row['id']}'";
+            $update_query = "UPDATE room_logs SET time_out = '$time' WHERE id = '{$row1['id']}'";
             mysqli_query($db, $update_query);
         } else {
             // If the log is complete or location differs, insert a new log
