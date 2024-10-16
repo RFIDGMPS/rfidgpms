@@ -246,7 +246,8 @@ if ($user1) {
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
     } else {
-        echo "<script>alert('Please wait for the appropriate time period.');</script>";
+        $voice = 'Please wait for the appropriate time period.';
+                    $time_in_out = 'Tap Your Card';
     }
 
 } else {
@@ -406,7 +407,8 @@ if ($row) {
                    
                     
                 } else {
-                    echo "<script>alert('Please wait for the appropriate time period.');</script>";
+                    $voice = 'Please wait for the appropriate time period.';
+                    $time_in_out = 'Tap Your Card';
                 }
             } else {
                 echo '<script>$(document).ready(function() {
