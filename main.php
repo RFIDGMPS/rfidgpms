@@ -550,7 +550,6 @@ if ($row) {
         $current_time = new DateTime();
         $timein = $timeout = '';
         
-       if($department == 'Main'){
         if ($current_time->format('A') === 'AM') {
             $timein = 'time_in_am';
             $timeout = 'time_out_am';
@@ -558,7 +557,6 @@ if ($row) {
             $timein = 'time_in_pm';
             $timeout = 'time_out_pm';
         }
-    
         // Combine and fetch data from both tables for the current date, ordering by the latest update
         $results = mysqli_query($db, "
        SELECT 
@@ -595,29 +593,7 @@ if ($row) {
 
     ");
     
-    }else {
-        $results = mysqli_query($db, "
-       SELECT 
-            p.photo,
-            p.department,
-            p.role,
-            CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-            rl.time_in,
-            rl.time_out,
-            rl.date_logged,
-            rl.id
-        FROM room_logs rl
-        JOIN personell p ON rl.personnel_id = p.id
-        WHERE rl.date_logged = CURRENT_DATE()
 
-    
-    ORDER BY 
-        id DESC -- Sorting by the most recent id
-    LIMIT 1;
-    
-
-    ");
-    }
                            
         // Fetch and display the results
         while ($row = mysqli_fetch_array($results)) {
