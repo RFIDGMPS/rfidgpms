@@ -17,30 +17,16 @@ $sql = " SELECT
     p.department,
     p.role,
     CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-    pl.$timein AS time_in,
-    pl.$timeout AS time_out,
-    pl.date_logged,
-    pl.id
-FROM personell_logs pl
-JOIN personell p ON pl.personnel_id = p.id
-WHERE pl.date_logged = CURRENT_DATE()
-
-UNION ALL
-
-SELECT 
-    vl.photo,
-    vl.department,
-    'Visitor' AS role,
-    vl.name AS full_name,
-    vl.time_in,
-    vl.time_out,
-    vl.date_logged,
-    vl.id
-FROM visitor_logs vl
-WHERE vl.date_logged = CURRENT_DATE()
-
-ORDER BY GREATEST(time_in, time_out) DESC
-;
+    rl.time_in,
+    rl.time_out,
+    rl.date_logged,
+    rl.id
+FROM room_logs rl
+JOIN personell p ON rl.personnel_id = p.id
+WHERE rl.date_logged = CURRENT_DATE()
+ORDER BY 
+    GREATEST(rl.time_in, rl.time_out) DESC
+LIMIT 1;
 ";
 $result = $db->query($sql);
 
