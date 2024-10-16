@@ -611,48 +611,19 @@ if ($row) {
 
  if(isset($_POST['submit'])){
     
-    $alert = 'alert-primary';
-
-    if ($time_in_out == 'TIME IN') {
-        $alert = 'alert-success';
-    } else if ($time_in_out == 'Tap Your Card') {
-        // Handle 'Tap Your Card' case
-     
-        ?>
-        <script>
-            // Restore original values
-            document.getElementById('in_out').innerHTML = 'Tap Your Card';
-            document.getElementById('entrant_name').innerHTML = "Name";
-            document.getElementById('department').innerHTML = "Department";
-            document.getElementById('role').innerHTML = "Role";
-            document.getElementById('time_in').innerHTML = "Time in";
-            document.getElementById('time_out').innerHTML = "Time out";
-    
-            // Reset colors
-            document.getElementById('entrant_name').style.color = '#ced4da';
-            document.getElementById('department').style.color = '#ced4da';
-            document.getElementById('role').style.color = '#ced4da';
-            document.getElementById('time_in').style.color = '#ced4da';
-            document.getElementById('time_out').style.color = '#ced4da';
-    
-            // Update alert class
-            
-            document.getElementById('alert').classList.add('alert-primary');
-    
-            // Reset picture
-            document.getElementById('pic').src = "assets/img/section/istockphoto-1184670010-612x612.jpg";
-        </script>
-        <?php
-    } else {
-        $alert = 'alert-danger';
-    }
-    
+    $alert='alert-primary';
+if($time_in_out=='TIME IN'){
+$alert='alert-success';
+}
+else {
+    $alert='alert-danger'; 
+}
 
   
-if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'UNAUTHORIZE'){      
+if($time_in_out == "TIME IN" || $time_in_out == "TIME OUT" ){      
     
-    $row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out']=$row['time_in_am']=$row['time_out_am']=$row['time_in_pm']=$row['time_out_pm'] = '';
-}
+    //$row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out']=$row['time_in_am']=$row['time_out_am']=$row['time_in_pm']=$row['time_out_pm'] = '';
+
 ?>
    
            <script>
@@ -703,7 +674,7 @@ if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'U
         }, 5000); // 3000 milliseconds = 3 seconds
     </script>
 <?php 
-
+}
  }
     }
         
