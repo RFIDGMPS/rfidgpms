@@ -246,8 +246,7 @@ if ($user1) {
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
     } else {
-        $voice = 'Please wait for the appropriate time period.';
-                    $time_in_out = 'Tap Your Card';
+        echo "<script>alert('Please wait for the appropriate time period.');</script>";
     }
 
 } else {
@@ -407,8 +406,7 @@ if ($row) {
                    
                     
                 } else {
-                    $voice = 'Please wait for the appropriate time period.';
-                    $time_in_out = 'Tap Your Card';
+                    echo "<script>alert('Please wait for the appropriate time period.');</script>";
                 }
             } else {
                 echo '<script>$(document).ready(function() {
@@ -574,10 +572,10 @@ else {
 }
 
   
-if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){      
+if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'UNAUTHORIZE'){      
     
-    //$row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out'] = '';
-
+    $row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out'] = '';
+}
 ?>
    
            <script>
@@ -625,7 +623,7 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
         }, 5000); // 3000 milliseconds = 3 seconds
     </script>
 <?php 
-}
+
  }
     }
         
