@@ -354,7 +354,7 @@ if ($user1) {
         } else {
         // Check if user is already logged today
 // Query to get the latest log for the user
-$query1 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' AND location='Gate' ORDER BY id DESC LIMIT 1";
+$query1 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' AND location='Gate'";
 $result1 = mysqli_query($db, $query1);
 $row = mysqli_fetch_assoc($result1);
 
@@ -364,7 +364,7 @@ if ($row && $row['time_out']==null) {
     // echo $department;
     if ($user['department'] == $department) {
         // Check if the last log has no 'time_out' and the location matches
-        $query2 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' ORDER BY id DESC LIMIT 1";
+        $query2 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' AND location = '{$user['department']}' ORDER BY id DESC LIMIT 1";
         $result2 = mysqli_query($db, $query2);
         $row1 = mysqli_fetch_assoc($result2);
 
