@@ -621,12 +621,12 @@ if ($row) {
         ?>
         <script>
             // Restore original values
-            document.getElementById('in_out').innerHTML = originalTexts.in_out;
-            document.getElementById('entrant_name').innerHTML = originalTexts.entrant_name;
-            document.getElementById('department').innerHTML = originalTexts.department;
-            document.getElementById('role').innerHTML = originalTexts.role;
-            document.getElementById('time_in').innerHTML = originalTexts.time_in;
-            document.getElementById('time_out').innerHTML = originalTexts.time_out;
+            document.getElementById('in_out').innerHTML = 'Tap Your Card';
+            document.getElementById('entrant_name').innerHTML = "Name";
+            document.getElementById('department').innerHTML = "Department";
+            document.getElementById('role').innerHTML = "Role";
+            document.getElementById('time_in').innerHTML = "Time in";
+            document.getElementById('time_out').innerHTML = "Time out";
     
             // Reset colors
             document.getElementById('entrant_name').style.color = '#ced4da';
@@ -636,7 +636,7 @@ if ($row) {
             document.getElementById('time_out').style.color = '#ced4da';
     
             // Update alert class
-            document.getElementById('alert').classList.remove('<?php echo $alert; ?>');
+            //document.getElementById('alert').classList.remove('<?php echo $alert; ?>');
             document.getElementById('alert').classList.add('alert-primary');
     
             // Reset picture
