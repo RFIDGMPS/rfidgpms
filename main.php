@@ -250,7 +250,7 @@ if ($user1) {
         echo "<script>alert('".$time."');</script>";
         echo "<script>alert('".$user1['id']."');</script>";
     } else {
-        echo "<script>alert('Please wait for the appropriate time period.');</script>";
+        $voice = 'Please wait for the appropriate time period.';
     }
 
 } else {
@@ -416,7 +416,7 @@ if ($row) {
                    
                     
                 } else {
-                    echo "<script>alert('Please wait for the appropriate time period.');</script>";
+                    $voice = 'Please wait for the appropriate time period.';
                 }
             } else {
                 echo '<script>$(document).ready(function() {
