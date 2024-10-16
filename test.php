@@ -2,17 +2,6 @@
 include 'connection.php';  // Ensure this file contains the DB connection logic
 // Your existing query
 
-date_default_timezone_set('Asia/Manila');
-$current_time = new DateTime();
-$time_in = $time_out = '';
-
-if ($current_time->format('A') === 'AM') {
-    $time_in = 'time_in_am';
-    $time_out = 'time_out_am';
-} else {
-    $time_in = 'time_in_pm';
-    $time_out = 'time_out_pm';
-}
 
 // Prepare the SQL query
 $query = "SELECT 
@@ -20,8 +9,8 @@ $query = "SELECT
             p.department,
             p.role,
             CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-            pl.$time_in AS time_in,
-            pl.$time_out AS time_out,
+            pl.time_in_pm,
+            pl.time_out_pm,
             pl.date_logged,
             pl.id
         FROM personell_logs pl
@@ -48,8 +37,8 @@ if ($results && mysqli_num_rows($results) > 0) {
         echo "<p><strong>Name:</strong> {$row['full_name']}</p>";
         echo "<p><strong>Department:</strong> {$row['department']}</p>";
         echo "<p><strong>Role:</strong> {$row['role']}</p>";
-        echo "<p><strong>Time In:</strong> {$row['time_in']}</p>";
-        echo "<p><strong>Time Out:</strong> {$row['time_out']}</p>";
+        echo "<p><strong>Time In:</strong> {$row['time_in_pm']}</p>";
+        echo "<p><strong>Time Out:</strong> {$row['time_out_pm']}</p>";
         echo "<p><strong>Date Logged:</strong> {$row['date_logged']}</p>";
         echo "</div>";
     }
