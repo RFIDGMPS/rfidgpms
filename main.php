@@ -246,19 +246,16 @@ if ($user1) {
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
     } else {
-        $voice='Please wait for the appropriate time period.';
-                    $time_in_out = 'Tap Your Card';
+        echo "<script>alert('Please wait for the appropriate time period.');</script>";
     }
 
 } else {
     // Insert new log entry with the correct time_in field
     if ($current_period === "AM") {
         $time_field = 'time_in_am';
-        $time_in_out = 'TIME IN';
         $voice = 'Good morning ' . $user['first_name'] . ' ' . $user['last_name'] . '!';
     } else {
         $time_field = 'time_in_pm';
-        $time_in_out = 'TIME IN';
         $voice = 'Good afternoon ' . $user['first_name'] . ' ' . $user['last_name'] . '!';
     }
 
@@ -409,8 +406,7 @@ if ($row) {
                    
                     
                 } else {
-                    $voice='Please wait for the appropriate time period.';
-                    $time_in_out = 'Tap Your Card';
+                    echo "<script>alert('Please wait for the appropriate time period.');</script>";
                 }
             } else {
                 echo '<script>$(document).ready(function() {
@@ -522,52 +518,45 @@ if ($row) {
              
         <?php 
         include 'connection.php'; 
-      
-     
-        
-        $results = mysqli_query($db, "
 
-        SELECT 
-        p.photo,
-        p.department,
-        p.role,
-        CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-        CASE
-            WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_in_am
-            ELSE pl.time_in_pm
-        END AS time_in,
-        CASE
-            WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_out_am
-            ELSE pl.time_out_pm
-        END AS time_out,
-        pl.date_logged,
-        pl.id -- Assuming id is the primary key and auto-increments
-    FROM personell_logs pl
-    JOIN personell p ON pl.personnel_id = p.id
-    WHERE pl.date_logged = CURRENT_DATE()
-    
-    UNION
-    
-    SELECT 
-        vl.photo,
-        vl.department,
-        'Visitor' AS role,
-        vl.name AS full_name,
-        vl.time_in,
-        vl.time_out,
-        vl.date_logged,
-        vl.id -- Assuming id is the primary key in visitor_logs
-    FROM visitor_logs vl
-    WHERE vl.date_logged = CURRENT_DATE()
-    
-    ORDER BY 
-        id DESC -- Sorting by the most recent id
-    LIMIT 1;
-    
-    
+        // Combine and fetch data from both tables for the current date, ordering by the latest update
+        $results = mysqli_query($db, "
+        
+       SELECT 
+    p.photo,
+    p.department,
+    p.role,
+    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+    pl.time_in,
+    pl.time_out,
+    pl.date_logged
+FROM personell_logs pl
+JOIN personell p ON pl.personnel_id = p.id
+WHERE pl.date_logged = CURRENT_DATE()
+
+UNION
+
+SELECT 
+    vl.photo,
+    vl.department,
+    'Visitor' AS role,
+    vl.name AS full_name,
+    vl.time_in,
+    vl.time_out,
+    vl.date_logged
+FROM visitor_logs vl
+WHERE vl.date_logged = CURRENT_DATE()
+
+ORDER BY 
+    CASE 
+        WHEN time_out IS NOT NULL THEN time_out 
+        ELSE time_in 
+    END DESC
+LIMIT 1;
 
     ");
-   
+    
+
                            
         // Fetch and display the results
         while ($row = mysqli_fetch_array($results)) {
@@ -583,10 +572,10 @@ else {
 }
 
   
-if($time_in_out == "TIME IN" || $time_in_out == "TIME OUT" ){      
+if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'UNAUTHORIZE'){      
     
-    //$row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out']=$row['time_in_am']=$row['time_out_am']=$row['time_in_pm']=$row['time_out_pm'] = '';
-
+    $row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out'] = '';
+}
 ?>
    
            <script>
@@ -605,11 +594,8 @@ if($time_in_out == "TIME IN" || $time_in_out == "TIME OUT" ){
         document.getElementById('entrant_name').innerHTML = '<?php echo $row['full_name']; ?>';
         document.getElementById('department').innerHTML = '<?php echo $row['department']; ?>';
         document.getElementById('role').innerHTML = '<?php echo $row['role']; ?>';
-        const timeIn = new Date("<?php echo date('Y-m-d H:i:s', strtotime($row['time_in_pm'])); ?>").toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-    const timeOut = new Date("<?php echo date('Y-m-d H:i:s', strtotime($row['time_out_pm'])); ?>").toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-
-    document.getElementById('time_in').innerHTML = $row['time_in'];
-    document.getElementById('time_out').innerHTML = $row['time_out'];
+        document.getElementById('time_in').innerHTML = '<?php echo $row['time_in']; ?>';
+        document.getElementById('time_out').innerHTML = '<?php echo $row['time_out']; ?>';
         document.getElementById('entrant_name').style.color = 'black';
         document.getElementById('department').style.color = 'black';
             document.getElementById('role').style.color = 'black';
@@ -637,7 +623,6 @@ if($time_in_out == "TIME IN" || $time_in_out == "TIME OUT" ){
         }, 5000); // 3000 milliseconds = 3 seconds
     </script>
 <?php 
-}
 
  }
     }
@@ -1072,7 +1057,6 @@ Webcam.snap(function(data_uri){
             	readURL(this);
             });
          </script>
-  
 
          <?php
          if($department == 'Main') { ?>
@@ -1081,7 +1065,6 @@ Webcam.snap(function(data_uri){
     <span class="material-symbols-outlined"><i class="fa fa-times" aria-hidden="true"></i></span>
 </button>
 <style>
-
         .card {
             display: flex;
             align-items: center; /* Aligns items vertically center */
