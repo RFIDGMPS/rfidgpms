@@ -375,7 +375,7 @@ if ($row && $row['time_out']==null) {
                 
         
             // Update the log with 'time_out'
-            $update_query = "UPDATE room_logs SET time_out = '$time' WHERE personnel_id = '{$row1['id']}'";
+            $update_query = "UPDATE room_logs SET time_out = '$time' WHERE id = '{$row1['id']}' AND location ='{$row1['location']}'";
             mysqli_query($db, $update_query);
         } else {
             // If the log is complete or location differs, insert a new log
