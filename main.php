@@ -615,8 +615,11 @@ if ($row) {
 if($time_in_out=='TIME IN'){
 $alert='alert-success';
 }
+else if($time_in_out=='Tap Your Card') {
+    $alert='alert-primary'; 
+}
 else {
-    $alert='alert-danger'; 
+    $alert='alert-danger';
 }
 
   
