@@ -20,7 +20,8 @@ $sql = " SELECT
     rl.time_in,
     rl.time_out,
     rl.date_logged,
-    rl.id
+    rl.id,
+    rl.location
 FROM room_logs rl
 JOIN personell p ON rl.personnel_id = p.id
 WHERE rl.date_logged = CURRENT_DATE()
