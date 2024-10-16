@@ -1,7 +1,7 @@
 
 <?php
 
-$time_in_out = 'UNAUTHORIZE';
+$time_in_out = '';
 
 session_start();
 if (isset($_SESSION['location'])) {
@@ -246,8 +246,8 @@ if ($user1) {
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
     } else {
-        echo "<script>alert('Please wait for the appropriate time period.');</script>";
-        $time_in_out = 'UNAUTHORIZE';
+        $voice='Please wait for the appropriate time period.';
+                    $time_in_out = '';
     }
 
 } else {
@@ -409,8 +409,8 @@ if ($row) {
                    
                     
                 } else {
-                    echo "<script>alert('Please wait for the appropriate time period.');</script>";
-                    $time_in_out = 'UNAUTHORIZE';
+                    $voice='Please wait for the appropriate time period.';
+                    $time_in_out = '';
                 }
             } else {
                 echo '<script>$(document).ready(function() {
@@ -524,6 +524,9 @@ if ($row) {
         include 'connection.php'; 
 
         // Combine and fetch data from both tables for the current date, ordering by the latest update
+        if($department == 'Main') {
+
+        
         $results = mysqli_query($db, "
         SELECT 
         p.photo,
@@ -564,6 +567,42 @@ if ($row) {
     
 
     ");
+    } else {
+        $results = mysqli_query($db, "
+        SELECT 
+        p.photo,
+        p.department,
+        p.role,
+        CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+       pl.time_in,
+        pl.time_out,
+        pl.date_logged,
+        pl.id -- Assuming id is the primary key and auto-increments
+    FROM personell_logs pl
+    JOIN personell p ON pl.personnel_id = p.id
+    WHERE pl.date_logged = CURRENT_DATE()
+    
+    UNION
+    
+    SELECT 
+        vl.photo,
+        vl.department,
+        'Visitor' AS role,
+        vl.name AS full_name,
+        vl.time_in,
+        vl.time_out,
+        vl.date_logged,
+        vl.id -- Assuming id is the primary key in visitor_logs
+    FROM visitor_logs vl
+    WHERE vl.date_logged = CURRENT_DATE()
+    
+    ORDER BY 
+        id DESC -- Sorting by the most recent id
+    LIMIT 1;
+    
+
+    ");
+    }
     
 
                            
