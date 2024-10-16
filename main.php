@@ -526,14 +526,14 @@ if ($row) {
         include 'connection.php'; 
         date_default_timezone_set('Asia/Manila');
         $current_time = new DateTime();
-        $time_in = $time_out = '';
+        $timein = $timeout = '';
         
         if ($current_time->format('A') === 'AM') {
-            $time_in = 'time_in_am';
-            $time_out = 'time_out_am';
+            $timein = 'time_in_am';
+            $timeout = 'time_out_am';
         } else {
-            $time_in = 'time_in_pm';
-            $time_out = 'time_out_pm';
+            $timein = 'time_in_pm';
+            $timeout = 'time_out_pm';
         }
         // Combine and fetch data from both tables for the current date, ordering by the latest update
         $results = mysqli_query($db, "
@@ -542,8 +542,8 @@ if ($row) {
             p.department,
             p.role,
             CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-            pl.$time_in AS time_in,
-            pl.$time_out AS time_out,
+            pl.$timein AS time_in,
+            pl.$timeout AS time_out,
             pl.date_logged,
             pl.id
         FROM personell_logs pl
