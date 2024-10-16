@@ -581,8 +581,8 @@ if ($row && $row['time_out']==null) {
     p.department,
     p.role,
     CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-    pl.time_in,
-    pl.time_out,
+    pl.$timein AS time_in,
+    pl.$timeout AS time_out,
     pl.date_logged,
     pl.id
 FROM personell_logs pl
