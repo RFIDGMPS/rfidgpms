@@ -608,8 +608,8 @@ if($time_in_out == "TIME IN" || $time_in_out == "TIME OUT" ){
         const timeIn = new Date("<?php echo date('Y-m-d H:i:s', strtotime($row['time_in_pm'])); ?>").toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     const timeOut = new Date("<?php echo date('Y-m-d H:i:s', strtotime($row['time_out_pm'])); ?>").toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
 
-    document.getElementById('time_in').innerHTML = timeIn;
-    document.getElementById('time_out').innerHTML = timeOut;
+    document.getElementById('time_in').innerHTML = $row['time_in'];
+    document.getElementById('time_out').innerHTML = $row['time_out'];
         document.getElementById('entrant_name').style.color = 'black';
         document.getElementById('department').style.color = 'black';
             document.getElementById('role').style.color = 'black';
