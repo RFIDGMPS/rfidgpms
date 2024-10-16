@@ -576,35 +576,36 @@ if ($row && $row['time_out']==null) {
         
             // Fetch data from personell_logs and visitor_logs
             $results = mysqli_query($db, "
-                SELECT 
-                    p.photo,
-                    p.department,
-                    p.role,
-                    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-                    pl.$timein AS time_in,
-                    pl.$timeout AS time_out,
-                    pl.date_logged,
-                    pl.id
-                FROM personell_logs pl
-                JOIN personell p ON pl.personnel_id = p.id
-                WHERE pl.date_logged = CURRENT_DATE()
-        
-                UNION
-        
-                SELECT 
-                    vl.photo,
-                    vl.department,
-                    'Visitor' AS role,
-                    vl.name AS full_name,
-                    vl.time_in,
-                    vl.time_out,
-                    vl.date_logged,
-                    vl.id
-                FROM visitor_logs vl
-                WHERE vl.date_logged = CURRENT_DATE()
-                
-                ORDER BY id DESC
-                LIMIT 1;
+               SELECT 
+    p.photo,
+    p.department,
+    p.role,
+    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+    pl.time_in,
+    pl.time_out,
+    pl.date_logged,
+    pl.id
+FROM personell_logs pl
+JOIN personell p ON pl.personnel_id = p.id
+WHERE pl.date_logged = CURRENT_DATE()
+
+UNION ALL
+
+SELECT 
+    vl.photo,
+    vl.department,
+    'Visitor' AS role,
+    vl.name AS full_name,
+    vl.time_in,
+    vl.time_out,
+    vl.date_logged,
+    vl.id
+FROM visitor_logs vl
+WHERE vl.date_logged = CURRENT_DATE()
+
+ORDER BY GREATEST(time_in, time_out) DESC
+LIMIT 1;
+
             ");
         } else {
             // Fetch data from room_logs
@@ -622,12 +623,9 @@ FROM room_logs rl
 JOIN personell p ON rl.personnel_id = p.id
 WHERE rl.date_logged = CURRENT_DATE()
 ORDER BY 
-    CASE 
-        WHEN rl.time_out IS NOT NULL THEN 1
-        ELSE 0
-    END, 
-    rl.date_logged DESC
+    GREATEST(rl.time_in, rl.time_out) DESC
 LIMIT 1;
+
 
             ");
         }
