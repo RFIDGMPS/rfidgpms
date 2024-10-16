@@ -528,27 +528,31 @@ if ($row) {
              
         <?php 
         include 'connection.php'; 
-
+        date_default_timezone_set('Asia/Manila');
+        $current_time = new DateTime();
+        $time_in = $time_out = '';
+        
+        if ($current_time->format('A') === 'AM') {
+            $time_in = 'time_in_am';
+            $time_out = 'time_out_am';
+        } else {
+            $time_in = 'time_in_pm';
+            $time_out = 'time_out_pm';
+        }
         // Combine and fetch data from both tables for the current date, ordering by the latest update
         $results = mysqli_query($db, "
-        SELECT 
-        p.photo,
-        p.department,
-        p.role,
-        CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-        CASE
-            WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_in_am
-            ELSE pl.time_in_pm
-        END AS time_in,
-        CASE
-            WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_out_am
-            ELSE pl.time_out_pm
-        END AS time_out,
-        pl.date_logged,
-        pl.id -- Assuming id is the primary key and auto-increments
-    FROM personell_logs pl
-    JOIN personell p ON pl.personnel_id = p.id
-    WHERE pl.date_logged = CURRENT_DATE()
+       SELECT 
+            p.photo,
+            p.department,
+            p.role,
+            CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+            pl.$time_in AS time_in,
+            pl.$time_out AS time_out,
+            pl.date_logged,
+            pl.id
+        FROM personell_logs pl
+        JOIN personell p ON pl.personnel_id = p.id
+        WHERE pl.date_logged = CURRENT_DATE()
     
     UNION
     
