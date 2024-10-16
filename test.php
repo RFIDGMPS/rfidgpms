@@ -12,6 +12,7 @@ $sql = "SELECT
     rl.time_out,
     rl.date_logged,
     rl.id
+    rl.location
 FROM room_logs rl
 JOIN personell p ON rl.personnel_id = p.id
 WHERE rl.date_logged = CURRENT_DATE()
@@ -38,7 +39,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>" . htmlspecialchars($row['id']) . "</td>
-                <td>" . htmlspecialchars($row['personnel_id']) . "</td>
+                <td>" . htmlspecialchars($row['full_name']) . "</td>
                 <td>" . htmlspecialchars($row['time_in']) . "</td>
                    <td>" . htmlspecialchars($row['time_out']) . "</td>
                 <td>" . htmlspecialchars($row['date_logged']) . "</td>
