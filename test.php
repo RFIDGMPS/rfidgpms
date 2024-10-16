@@ -45,9 +45,9 @@ $results = mysqli_query($db, "
 if ($results && mysqli_num_rows($results) > 0) {
     while ($row = mysqli_fetch_assoc($results)) {
         echo "<div style='border: 1px solid #ccc; padding: 10px; margin: 10px;'>";
-        echo "<img src='admin/uploads/{$row['id']}' alt='Photo' style='width: 100px; height: auto;'/>";
+        echo "<img src='admin/uploads/{$row['photo']}' alt='Photo' style='width: 100px; height: auto;'/>";
         echo "<p><strong>Name:</strong> {$row['full_name']}</p>";
-        echo "<p><strong>Department:</strong> {$row['department']}</p>";
+        echo "<p><strong>Department:</strong> {$row['id']}</p>";
         echo "<p><strong>Role:</strong> {$row['role']}</p>";
         echo "<p><strong>Time In:</strong> {$row['time_in']}</p>";
         echo "<p><strong>Time Out:</strong> {$row['time_out']}</p>";
