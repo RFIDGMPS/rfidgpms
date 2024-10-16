@@ -1,15 +1,23 @@
 <?php
 include 'connection.php';  // Ensure this file contains the DB connection logic
 
-
+if ($department == 'Main') {
+    if ($current_time->format('A') === 'AM') {
+        $timein = 'time_in_am';
+        $timeout = 'time_out_am';
+    } else {
+        $timein = 'time_in_pm';
+        $timeout = 'time_out_pm';
+    }
+}
 // SQL query to select all records from room_logs
 $sql = " SELECT 
     p.photo,
     p.department,
     p.role,
     CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-    pl.time_in,
-    pl.time_out,
+    pl.$timein AS time_in,
+    pl.$timeout AS time_out,
     pl.date_logged,
     pl.id
 FROM personell_logs pl
