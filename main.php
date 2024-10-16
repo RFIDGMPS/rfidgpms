@@ -588,9 +588,12 @@ else {
 
   
 if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){      
-    
+   
     $time_in = date('h:i A', strtotime($row['time_in']));
     $time_out = date('h:i A', strtotime($row['time_out']));
+    if($row['time_out'] == null){
+        $time_out = '';
+    }
     ?>
     
 
