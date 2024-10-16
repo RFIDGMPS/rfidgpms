@@ -14,6 +14,7 @@ if ($result->num_rows > 0) {
                 <th>ID</th>
                 <th>Personnel ID</th>
                 <th>Time In</th>
+                <th>Time Out</th>
                 <th>Date Logged</th>
                 <th>Location</th>
             </tr>";
