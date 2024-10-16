@@ -246,7 +246,7 @@ if ($user1) {
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
 
-        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE id = '{$user1['id']}'";
+        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged'";
         mysqli_query($db, $update_query1);
 
      
@@ -271,6 +271,25 @@ if ($user1) {
                      VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
     mysqli_query($db, $insert_query);
 
+    $check_query = "SELECT time_in FROM room_logs WHERE personnel_id = '{$user['id']}' AND time_in IS NOT NULL";
+    $result = mysqli_query($db, $check_query);
+    
+    // Proceed only if there are no records with a non-empty time_in
+    if ($result && mysqli_num_rows($result) == 0) {
+        // Prepare the insert query
+        $insert_query1 = "INSERT INTO room_logs (personnel_id, time_in, date_logged, location) 
+                           VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
+    
+        // Execute the insert query
+        if (mysqli_query($db, $insert_query1)) {
+            echo "New record created successfully.";
+        } else {
+            echo "Error: " . mysqli_error($db);
+        }
+    } else {
+        echo "Time in is already set. Cannot insert record.";
+    }
+    
  
 }
 
