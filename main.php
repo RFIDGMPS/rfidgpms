@@ -247,7 +247,7 @@ if ($user1) {
         mysqli_query($db, $update_query);
     } else {
         $voice='Please wait for the appropriate time period.';
-                    $time_in_out = '';
+                    $time_in_out = 'Tap Your Card';
     }
 
 } else {
@@ -410,7 +410,7 @@ if ($row) {
                     
                 } else {
                     $voice='Please wait for the appropriate time period.';
-                    $time_in_out = '';
+                    $time_in_out = 'Tap Your Card';
                 }
             } else {
                 echo '<script>$(document).ready(function() {
@@ -620,7 +620,7 @@ else {
 }
 
   
-if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'UNAUTHORIZE' || $time_in_out == ''){      
+if($time_in_out == 'BLOCKED' || $time_in_out == 'STRANGER' || $time_in_out == 'UNAUTHORIZE'){      
     
     $row['photo']=$row['full_name']=$row['department']=$row['role']=$row['time_in']=$row['time_out']=$row['time_in_am']=$row['time_out_am']=$row['time_in_pm']=$row['time_out_pm'] = '';
 }
