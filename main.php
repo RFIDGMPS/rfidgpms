@@ -522,7 +522,7 @@ if ($row) {
              
         <?php 
         include 'connection.php'; 
-
+      
         // Combine and fetch data from both tables for the current date, ordering by the latest update
         if($department == 'Main') {
 
@@ -604,7 +604,7 @@ if ($row) {
     ");
     }
     
-
+echo $results;
                            
         // Fetch and display the results
         while ($row = mysqli_fetch_array($results)) {
