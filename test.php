@@ -9,27 +9,14 @@ $query = "
     p.department,
     p.role,
     CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-   pl.time_in,
-    pl.time_out,
+   pl.time_in_pm AS time_in,
+    pl.time_out_pm AS time_out,
     pl.date_logged,
     pl.id
 FROM personell_logs pl
 JOIN personell p ON pl.personnel_id = p.id
 WHERE pl.date_logged = CURRENT_DATE()
 
-UNION ALL
-
-SELECT 
-    vl.photo,
-    vl.department,
-    'Visitor' AS role,
-    vl.name AS full_name,
-    vl.time_in,
-    vl.time_out,
-    vl.date_logged,
-    vl.id
-FROM visitor_logs vl
-WHERE vl.date_logged = CURRENT_DATE()
 
 ORDER BY 
     id DESC
@@ -51,10 +38,7 @@ if ($results && mysqli_num_rows($results) > 0) {
        
     
     while ($row = mysqli_fetch_assoc($results)) {
-        $row['time_in'] = $row['time_in_pm'];
-        echo $row['time_in'];
-        $row['time_out'] = $row['time_out_pm'];
-        echo $row['time_out'];
+      
         echo "<div style='border: 1px solid #ccc; padding: 10px; margin: 10px;'>";
         echo "<img src='admin/uploads/{$row['photo']}' alt='Photo' style='width: 100px; height: auto;'/>";
         echo "<p><strong>Name:</strong> {$row['full_name']}</p>";
