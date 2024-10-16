@@ -3,40 +3,41 @@ include 'connection.php';  // Ensure this file contains the DB connection logic
 // Your existing query
 $query = "
     SELECT 
-        p.photo,
-        p.department,
-        p.role,
-        CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-        CASE
-            WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_in_am
-            ELSE pl.time_in_pm
-        END AS time_in,
-        CASE
-            WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_out_am
-            ELSE pl.time_out_pm
-        END AS time_out,
-        pl.date_logged,
-        pl.id
-    FROM personell_logs pl
-    JOIN personell p ON pl.personnel_id = p.id
-    WHERE pl.date_logged = CURRENT_DATE()
-    
-    UNION
-    
-    SELECT 
-        vl.photo,
-        vl.department,
-        'Visitor' AS role,
-        vl.name AS full_name,
-        vl.time_in,
-        vl.time_out,
-        vl.date_logged,
-        vl.id
-    FROM visitor_logs vl
-    WHERE vl.date_logged = CURRENT_DATE()
-    
-    ORDER BY 
-        id DESC;
+    p.photo,
+    p.department,
+    p.role,
+    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+    CASE
+        WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_in_am
+        ELSE pl.time_in_pm
+    END AS time_in,
+    CASE
+        WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_out_am
+        ELSE pl.time_out_pm
+    END AS time_out,
+    pl.date_logged,
+    pl.id
+FROM personell_logs pl
+JOIN personell p ON pl.personnel_id = p.id
+WHERE pl.date_logged = CURRENT_DATE()
+
+UNION
+
+SELECT 
+    vl.photo,
+    vl.department,
+    'Visitor' AS role,
+    vl.name AS full_name,
+    vl.time_in,
+    vl.time_out,
+    vl.date_logged,
+    vl.id
+FROM visitor_logs vl
+WHERE vl.date_logged = CURRENT_DATE()
+
+ORDER BY 
+    id DESC;
+
 ";
 
 $results = mysqli_query($db, $query);
