@@ -245,6 +245,9 @@ if ($user1) {
         // Update the respective time_out column
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
+
+        echo "<script>alert('".$update_field."');</script>";
+        echo "<script>alert('".$time."');</script>";
     } else {
         echo "<script>alert('Please wait for the appropriate time period.');</script>";
     }
@@ -265,6 +268,10 @@ if ($user1) {
     $insert_query = "INSERT INTO personell_logs (personnel_id, $time_field, date_logged, location) 
                      VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
     mysqli_query($db, $insert_query);
+
+    
+    echo "<script>alert('".$time_field."');</script>";
+    echo "<script>alert('".$time."');</script>";
 }
 
         
