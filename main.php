@@ -315,45 +315,6 @@ if ($user1) {
             //     mysqli_query($db, $insert_query);
                 
             // }
-
-            $results = mysqli_query($db, "
-            SELECT 
-            p.photo,
-            p.department,
-            p.role,
-            CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-            CASE
-                WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_in_am
-                ELSE pl.time_in_pm
-            END AS time_in,
-            CASE
-                WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_out_am
-                ELSE pl.time_out_pm
-            END AS time_out,
-            pl.date_logged,
-            pl.id -- Assuming id is the primary key and auto-increments
-        FROM personell_logs pl
-        JOIN personell p ON pl.personnel_id = p.id
-        WHERE pl.date_logged = CURRENT_DATE()
-        
-        UNION
-        
-        SELECT 
-            vl.photo,
-            vl.department,
-            'Visitor' AS role,
-            vl.name AS full_name,
-            vl.time_in,
-            vl.time_out,
-            vl.date_logged,
-            vl.id -- Assuming id is the primary key in visitor_logs
-        FROM visitor_logs vl
-        WHERE vl.date_logged = CURRENT_DATE()
-        
-        ORDER BY 
-            id DESC -- Sorting by the most recent id
-        LIMIT 1;"
-        );
         } else {
         // Check if user is already logged today
 // Query to get the latest log for the user
@@ -562,52 +523,49 @@ if ($row) {
         <?php 
         include 'connection.php'; 
       
-        // Combine and fetch data from both tables for the current date, ordering by the latest update
-//         if($department == 'Main') {
-
+     
         
-      
+        $results = mysqli_query($db, "
+        SELECT 
+        p.photo,
+        p.department,
+        p.role,
+        CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+        CASE
+            WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_in_am
+            ELSE pl.time_in_pm
+        END AS time_in,
+        CASE
+            WHEN CURRENT_TIME() < '12:00:00' THEN pl.time_out_am
+            ELSE pl.time_out_pm
+        END AS time_out,
+        pl.date_logged,
+        pl.id -- Assuming id is the primary key and auto-increments
+    FROM personell_logs pl
+    JOIN personell p ON pl.personnel_id = p.id
+    WHERE pl.date_logged = CURRENT_DATE()
+    
+    UNION
+    
+    SELECT 
+        vl.photo,
+        vl.department,
+        'Visitor' AS role,
+        vl.name AS full_name,
+        vl.time_in,
+        vl.time_out,
+        vl.date_logged,
+        vl.id -- Assuming id is the primary key in visitor_logs
+    FROM visitor_logs vl
+    WHERE vl.date_logged = CURRENT_DATE()
+    
+    ORDER BY 
+        id DESC -- Sorting by the most recent id
+    LIMIT 1;
     
 
-//     ");
-//     } else {
-//         $results = mysqli_query($db, "
-//         SELECT 
-//         p.photo,
-//         p.department,
-//         p.role,
-//         CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-//        pl.time_in,
-//         pl.time_out,
-//         pl.date_logged,
-//         pl.id -- Assuming id is the primary key and auto-increments
-//     FROM personell_logs pl
-//     JOIN personell p ON pl.personnel_id = p.id
-//     WHERE pl.date_logged = CURRENT_DATE()
-    
-//     UNION
-    
-//     SELECT 
-//         vl.photo,
-//         vl.department,
-//         'Visitor' AS role,
-//         vl.name AS full_name,
-//         vl.time_in,
-//         vl.time_out,
-//         vl.date_logged,
-//         vl.id -- Assuming id is the primary key in visitor_logs
-//     FROM visitor_logs vl
-//     WHERE vl.date_logged = CURRENT_DATE()
-    
-//     ORDER BY 
-//         id DESC -- Sorting by the most recent id
-//     LIMIT 1;
-    
-
-//     ");
-//     }
-    
-// echo $results;
+    ");
+   
                            
         // Fetch and display the results
         while ($row = mysqli_fetch_array($results)) {
