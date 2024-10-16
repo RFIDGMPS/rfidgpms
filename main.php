@@ -223,42 +223,43 @@ if (isset($_POST['submit'])) {
         } else {
      // Check if user is already logged today
      if($department == 'Main'){
-        $query1 = "SELECT * FROM personell_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged'";
-        $result1 = mysqli_query($db, $query1);
-        $user1 = mysqli_fetch_assoc($result1);
-        
-        // Get current time period (AM/PM)
-        $current_period = date('A');
-        
-        if ($user1) {
-            // Determine which time_out column to update
-            $update_field = ($current_period === "AM") ? 'time_out_am' : 'time_out_pm';
-        
-            // Check if the respective time_out column is empty
-            if ($user1[$update_field] === '') {
-                $time_out_message = 'TIME OUT';
-                $voice = 'Take care ' . $user['first_name'] . ' ' . $user['last_name'] . '!';
-                
-                // Update personell_logs time_out
-                $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
-                mysqli_query($db, $update_query);
-                
-                // Update room_logs time_out
-                $query2 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' AND location='Gate'";
-                $result2 = mysqli_query($db, $query2);
-                $user2 = mysqli_fetch_assoc($result2);
-                
-                if ($user2) {
-                    $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE id = '{$user2['id']}'";
-                    mysqli_query($db, $update_query1);
-                }
-            } else {
-                $voice = 'Please wait for the appropriate time period.';
-            }
-        } else {
-            $voice = 'No log entry found for today.';
-        }
-             }         else {
+$query1 = "SELECT * FROM personell_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged'";
+$result1 = mysqli_query($db, $query1);
+$user1 = mysqli_fetch_assoc($result1);
+
+// Get current time period (AM/PM)
+$current_period = date('A');
+
+if ($user1) {
+    // Update existing log entry
+    if ($current_period === "AM") {
+        $update_field = ($user1['time_out_am'] == '') ? 'time_out_am' : null;
+    } else {
+        $update_field = ($user1['time_out_pm'] == '') ? 'time_out_pm' : null;
+    }
+    
+    if ($update_field) {
+        $time_in_out = 'TIME OUT';
+        $voice = 'Take care ' . $user['first_name'] . ' ' . $user['last_name'] . '!';
+
+        // Update the respective time_out column
+        $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
+        mysqli_query($db, $update_query);
+
+
+        $query2 = "SELECT * FROM room_logs WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged' AND location='Gate'";
+$result2 = mysqli_query($db, $query2);
+$user2 = mysqli_fetch_assoc($result2);
+if($user2){
+        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE id = '{$user2['id']}'";
+        mysqli_query($db, $update_query1);
+}
+     
+    } else {
+        $voice = 'Please wait for the appropriate time period.';
+    }
+
+} else {
     // Insert new log entry with the correct time_in field
     if ($current_period === "AM") {
         $time_field = 'time_in_am';
