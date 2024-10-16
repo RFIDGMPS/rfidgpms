@@ -31,7 +31,7 @@ FROM visitor_logs vl
 WHERE vl.date_logged = CURRENT_DATE()
 
 ORDER BY GREATEST(time_in, time_out) DESC
-LIMIT 1;
+;
 ";
 $result = $db->query($sql);
 
