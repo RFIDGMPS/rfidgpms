@@ -27,7 +27,7 @@ JOIN personell p ON rl.personnel_id = p.id
 WHERE rl.date_logged = CURRENT_DATE()
 ORDER BY 
     GREATEST(rl.time_in, rl.time_out) DESC
-LIMIT 1;
+;
 ";
 $result = $db->query($sql);
 
