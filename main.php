@@ -610,20 +610,25 @@ if ($row && $row['time_out']==null) {
             // Fetch data from room_logs
             $results = mysqli_query($db, "
                 SELECT 
-                    p.photo,
-                    p.department,
-                    p.role,
-                    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-                    rl.time_in,
-                    rl.time_out,
-                    rl.date_logged,
-                    rl.id
-                FROM room_logs rl
-                JOIN personell p ON rl.personnel_id = p.id
-                WHERE rl.date_logged = CURRENT_DATE()
-        
-                ORDER BY id DESC
-                LIMIT 1;
+    p.photo,
+    p.department,
+    p.role,
+    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
+    rl.time_in,
+    rl.time_out,
+    rl.date_logged,
+    rl.id
+FROM room_logs rl
+JOIN personell p ON rl.personnel_id = p.id
+WHERE rl.date_logged = CURRENT_DATE()
+ORDER BY 
+    CASE 
+        WHEN rl.time_out IS NOT NULL THEN 1
+        ELSE 0
+    END, 
+    rl.date_logged DESC
+LIMIT 1;
+
             ");
         }
     
