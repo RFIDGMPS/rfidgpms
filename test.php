@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
 
 
 // SQL query to fetch data from personell_logs
-$sql1 = "SELECT *,$timein as time_in, $timeout as time_out FROM personell_logs";
+$sql1 = "SELECT * FROM personell_logs";
 $result1 = $db->query($sql1);
 
 // Check if any rows were returned
@@ -87,6 +87,8 @@ if ($result1->num_rows > 0) {
             <th>Personell ID</th>
             <th>Time In</th>
             <th>Time Out</th>
+             <th>Time In</th>
+            <th>Time Out</th>
             <th>Location</th>
           </tr>";
     
@@ -95,8 +97,10 @@ if ($result1->num_rows > 0) {
         echo "<tr>
                 <td>" . $row["id"] . "</td>
                 <td>" . $row["personell_id"] . "</td>
-                <td>" . $row["time_in"] . "</td>
-                <td>" . $row["time_out"] . "</td>
+                <td>" . $row["time_in_am"] . "</td>
+                <td>" . $row["time_out_am"] . "</td>
+                <td>" . $row["time_in_pm"] . "</td>
+                <td>" . $row["time_out_pm"] . "</td>
                 <td>" . $row["location"] . "</td>
               </tr>";
     }
