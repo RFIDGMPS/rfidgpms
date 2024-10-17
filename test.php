@@ -33,7 +33,7 @@ $sql = " SELECT
     rl.time_in,
     rl.time_out,
     rl.date_logged,
-    rl.id,
+    rl.log_id,
     rl.location
 FROM room_logs rl
 JOIN personell p ON rl.personnel_id = p.id
@@ -60,7 +60,7 @@ if ($result->num_rows > 0) {
     // Output data of each row
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
-                <td>" . htmlspecialchars($row['id']) . "</td>
+                <td>" . htmlspecialchars($row['log_id']) . "</td>
                 <td>" . htmlspecialchars($row['full_name']) . "</td>
                 <td>" . htmlspecialchars($row['time_in']) . "</td>
                    <td>" . htmlspecialchars($row['time_out']) . "</td>
@@ -71,6 +71,40 @@ if ($result->num_rows > 0) {
     echo "</table>"; // End the table
 } else {
     echo "No records found.";
+}
+
+
+// SQL query to fetch data from personell_logs
+$sql1 = "SELECT *,$timein as time_in, $timeout as time_out FROM personell_logs";
+$result1 = $db->query($sql1);
+
+// Check if any rows were returned
+if ($result1->num_rows > 0) {
+    // Start table and table headers
+    echo "<table border='1'>";
+    echo "<tr>
+            <th>ID</th>
+            <th>Personell ID</th>
+            <th>Time In</th>
+            <th>Time Out</th>
+            <th>Location</th>
+          </tr>";
+    
+    // Loop through and display each row of data
+    while($row = $result1->fetch_assoc()) {
+        echo "<tr>
+                <td>" . $row["id"] . "</td>
+                <td>" . $row["personell_id"] . "</td>
+                <td>" . $row["time_in"] . "</td>
+                <td>" . $row["time_out"] . "</td>
+                <td>" . $row["location"] . "</td>
+              </tr>";
+    }
+
+    // End the table
+    echo "</table>";
+} else {
+    echo "No records found";
 }
 
 // Close connection
