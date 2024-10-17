@@ -230,7 +230,15 @@ $user1 = mysqli_fetch_assoc($result1);
 // Get current time period (AM/PM)
 $current_period = date('A');
 
-if ($user1 && $user1['time_in_pm'] != '') {
+if ($user1) {
+    if($current_period === 'PM' && $user1['time_in_pm'] == ''){
+        $update_query = "UPDATE personell_logs 
+        SET time_in_pm = '$time'
+        WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged'";
+
+mysqli_query($db, $update_query);
+
+    }else{
     // Update existing log entry
     if ($current_period === "AM") {
         $update_field = ($user1['time_out_am'] == '') ? 'time_out_am' : null;
@@ -253,7 +261,7 @@ if ($user1 && $user1['time_in_pm'] != '') {
     } else {
         $voice = 'Please wait for the appropriate time period.';
     }
-
+}
 } else {
     // Insert new log entry with the correct time_in field
     
@@ -299,7 +307,7 @@ if ($current_period === 'PM') {
 }
 
 // Insert into personell_logs
-$insert_query = "INSERT INTO personell_logs (personnel_id, $time_field, date_logged, location) 
+$insert_query = "INSERT INTO personell_logs (personnel_id, time_in_am, date_logged, location) 
                  VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
 
 if (mysqli_query($db, $insert_query)) {
