@@ -271,12 +271,7 @@ if ($user1) {
                      VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
     mysqli_query($db, $insert_query);
 
-    $check_query = "SELECT time_in FROM room_logs WHERE personnel_id = '{$user['id']}' AND time_in IS NOT NULL";
-    $result = mysqli_query($db, $check_query);
-    
-    // Proceed only if there are no records with a non-empty time_in
-    if ($result && mysqli_num_rows($result) == 0) {
-        // Prepare the insert query
+  
         $insert_query1 = "INSERT INTO room_logs (personnel_id, time_in, date_logged, location) 
                            VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
     
@@ -286,10 +281,7 @@ if ($user1) {
         } else {
             echo "Error: " . mysqli_error($db);
         }
-    } else {
-        echo "Time in is already set. Cannot insert record.";
-    }
-    
+   
 
     // if ($current_period === "PM") {
     //     // Clear time_out from room_logs for the corresponding personnel_id
