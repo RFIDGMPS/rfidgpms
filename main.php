@@ -246,7 +246,7 @@ if ($user1) {
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
 
-        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE personnel_id = '{$user1['id']}'";
+        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE log_id = '{$user1['id']}'";
         mysqli_query($db, $update_query1);
 
      

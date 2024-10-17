@@ -13,14 +13,7 @@ include 'connection.php';  // Ensure this file contains the DB connection logic
 // }
 
 
-$sql = "ALTER TABLE room_logs ADD COLUMN log_id INT";
 
-// Execute the query
-if ($db->query($sql) === TRUE) {
-    echo "Column log_id added successfully";
-} else {
-    echo "Error adding column: " . $db->error;
-}
 // $current_time = new DateTime();
 // $timein = $timeout = '';
 //     if ($current_time->format('A') === 'AM') {
