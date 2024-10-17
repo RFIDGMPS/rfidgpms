@@ -60,7 +60,7 @@ if ($result->num_rows > 0) {
     // Output data of each row
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
-                <td>" . htmlspecialchars($row['log_id']) . "</td>
+                <td>" . htmlspecialchars($row['personnel_id']) . "</td>
                 <td>" . htmlspecialchars($row['full_name']) . "</td>
                 <td>" . htmlspecialchars($row['time_in']) . "</td>
                    <td>" . htmlspecialchars($row['time_out']) . "</td>
@@ -95,7 +95,7 @@ if ($result1->num_rows > 0) {
     // Loop through and display each row of data
     while($row = $result1->fetch_assoc()) {
         echo "<tr>
-                <td>" . $row["id"] . "</td>
+                <td>" . $row["personnel_id"] . "</td>
                 <td>" . $row["personell_id"] . "</td>
                 <td>" . $row["time_in_am"] . "</td>
                 <td>" . $row["time_out_am"] . "</td>
