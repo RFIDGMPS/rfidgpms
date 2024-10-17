@@ -312,7 +312,7 @@ if ($current_period === 'PM') {
 }
 
 // Insert into personell_logs
-$insert_query = "INSERT INTO personell_logs (personnel_id, time_in_am, date_logged, location) 
+$insert_query = "INSERT INTO personell_logs (personnel_id, $time_field, date_logged, location) 
                  VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
 
 if (mysqli_query($db, $insert_query)) {
