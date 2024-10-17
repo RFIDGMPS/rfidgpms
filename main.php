@@ -246,7 +246,7 @@ if ($user1) {
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
 
-        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE log_id = '{$user1['id']}'";
+        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE personnel_id = '{$user1['id']}' AND location='Gate'";
         mysqli_query($db, $update_query1);
 
      
@@ -273,11 +273,11 @@ VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
 
 if (mysqli_query($db, $insert_query)) {
 // Get the last inserted log_id from personell_logs
-$log_id = mysqli_insert_id($db);
+//$log_id = mysqli_insert_id($db);
 
 // Now insert into room_logs using the log_id from personell_logs
-$insert_query1 = "INSERT INTO room_logs (log_id, personnel_id, time_in, date_logged, location) 
-     VALUES ('$log_id', '{$user['id']}', '$time', '$date_logged', '$location')";
+$insert_query1 = "INSERT INTO room_logs (personnel_id, time_in, date_logged, location) 
+     VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
 
 // Execute the insert query for room_logs
 if (mysqli_query($db, $insert_query1)) {
