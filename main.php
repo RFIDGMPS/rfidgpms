@@ -238,6 +238,11 @@ if ($user1) {
 
 mysqli_query($db, $update_query);
 
+        // Clear time_out from room_logs for the corresponding personnel_id
+        $update_query1 = "UPDATE room_logs SET time_out = NULL WHERE personnel_id = '{$user['id']}' AND location = 'Gate' AND date_logged = '$date_logged'";
+
+        mysqli_query($db, $update_query1);
+    
     }else{
     // Update existing log entry
     if ($current_period === "AM") {
@@ -329,16 +334,7 @@ if (mysqli_query($db, $insert_query)) {
 
    
 
-    // if ($current_period === "PM") {
-    //     // Clear time_out from room_logs for the corresponding personnel_id
-    //     $update_query = "UPDATE room_logs SET time_out = NULL WHERE personnel_id = '{$user['id']}' AND location = 'Gate' AND date_logged = '$date_logged'";
-
-    //     if (mysqli_query($db, $update_query)) {
-    //         echo "Time out cleared successfully for personnel ID: {$user['id']}.";
-    //     } else {
-    //         echo "Error clearing time out: " . mysqli_error($db);
-    //     }
-    // }
+    
  
 }
 

@@ -1,25 +1,25 @@
 <?php
 include 'connection.php';  // Ensure this file contains the DB connection logic
-// if ($db->query('TRUNCATE TABLE personell_logs') === TRUE) {
-//     echo "personell_logs table truncated successfully.<br>";
-// } else {
-//     echo "Error truncating personell_logs: " . $db->error . "<br>";
-// }
+if ($db->query('TRUNCATE TABLE personell_logs') === TRUE) {
+    echo "personell_logs table truncated successfully.<br>";
+} else {
+    echo "Error truncating personell_logs: " . $db->error . "<br>";
+}
 
-// if ($db->query('TRUNCATE TABLE room_logs') === TRUE) {
-//     echo "room_logs table truncated successfully.<br>";
-// } else {
-//     echo "Error truncating room_logs: " . $db->error . "<br>";
-// }
+if ($db->query('TRUNCATE TABLE room_logs') === TRUE) {
+    echo "room_logs table truncated successfully.<br>";
+} else {
+    echo "Error truncating room_logs: " . $db->error . "<br>";
+}
 
 
-// $insert_query = "INSERT INTO personell_logs (personnel_id, time_in_am, time_out_am, date_logged, location) 
-//                  VALUES ('1', '09:37:22', '10:37:22','2024-10-17', 'Gate')";
-//         mysqli_query($db, $insert_query);
+$insert_query = "INSERT INTO personell_logs (personnel_id, time_in_am, time_out_am, date_logged, location) 
+                 VALUES ('1', '09:37:22', '10:37:22','2024-10-17', 'Gate')";
+        mysqli_query($db, $insert_query);
 
-//         $insert_query1 = "INSERT INTO room_logs (personnel_id, time_in, time_out, date_logged, location) 
-//                           VALUES ('1', '09:37:22', '10:37:22', '2024-10-17', 'Gate')";
-//         mysqli_query($db, $insert_query1);
+        $insert_query1 = "INSERT INTO room_logs (personnel_id, time_in, time_out, date_logged, location) 
+                          VALUES ('1', '09:37:22', '10:37:22', '2024-10-17', 'Gate')";
+        mysqli_query($db, $insert_query1);
 
 $current_time = new DateTime();
 $timein = $timeout = '';
