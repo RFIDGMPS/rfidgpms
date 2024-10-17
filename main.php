@@ -267,20 +267,27 @@ if ($user1) {
     }
 
     // Insert into the respective time_in field
-    $insert_query = "INSERT INTO personell_logs (personnel_id, $time_field, date_logged, location) 
-                     VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
-    mysqli_query($db, $insert_query);
+   // Insert into personell_logs
+$insert_query = "INSERT INTO personell_logs (personnel_id, $time_field, date_logged, location) 
+VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
 
-  
-        $insert_query1 = "INSERT INTO room_logs (personnel_id, time_in, date_logged, location) 
-                           VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
-    
-        // Execute the insert query
-        if (mysqli_query($db, $insert_query1)) {
-            echo "New record created successfully.";
-        } else {
-            echo "Error: " . mysqli_error($db);
-        }
+if (mysqli_query($db, $insert_query)) {
+// Get the last inserted log_id from personell_logs
+$log_id = mysqli_insert_id($db);
+
+// Now insert into room_logs using the log_id from personell_logs
+$insert_query1 = "INSERT INTO room_logs (log_id, personnel_id, time_in, date_logged, location) 
+     VALUES ('$log_id', '{$user['id']}', '$time', '$date_logged', '$location')";
+
+// Execute the insert query for room_logs
+if (mysqli_query($db, $insert_query1)) {
+echo "New record created successfully in both personell_logs and room_logs.";
+} else {
+echo "Error in room_logs insert: " . mysqli_error($db);
+}
+} else {
+echo "Error in personell_logs insert: " . mysqli_error($db);
+}
    
 
     // if ($current_period === "PM") {

@@ -49,7 +49,7 @@ if ($result->num_rows > 0) {
     // Start the table
     echo "<table border='1'>
             <tr>
-                <th>ID</th>
+                <th>Log ID</th>
                 <th>Personnel ID</th>
                 <th>Time In</th>
                 <th>Time Out</th>
