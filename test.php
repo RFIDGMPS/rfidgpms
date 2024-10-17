@@ -1,16 +1,16 @@
 <?php
 include 'connection.php';  // Ensure this file contains the DB connection logic
-if ($db->query('TRUNCATE TABLE personell_logs') === TRUE) {
-    echo "personell_logs table truncated successfully.<br>";
-} else {
-    echo "Error truncating personell_logs: " . $db->error . "<br>";
-}
+// if ($db->query('TRUNCATE TABLE personell_logs') === TRUE) {
+//     echo "personell_logs table truncated successfully.<br>";
+// } else {
+//     echo "Error truncating personell_logs: " . $db->error . "<br>";
+// }
 
-if ($db->query('TRUNCATE TABLE room_logs') === TRUE) {
-    echo "room_logs table truncated successfully.<br>";
-} else {
-    echo "Error truncating room_logs: " . $db->error . "<br>";
-}
+// if ($db->query('TRUNCATE TABLE room_logs') === TRUE) {
+//     echo "room_logs table truncated successfully.<br>";
+// } else {
+//     echo "Error truncating room_logs: " . $db->error . "<br>";
+// }
 
 
 
