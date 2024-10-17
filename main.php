@@ -230,7 +230,7 @@ $user1 = mysqli_fetch_assoc($result1);
 // Get current time period (AM/PM)
 $current_period = date('A');
 
-if ($user1 && $user1['time_in_am'] != '' || $user1['time_in_pm'] != '') {
+if ($user1 && $user1['time_in_am'] != '' && $user1['time_in_pm'] != '') {
     // Update existing log entry
     if ($current_period === "AM") {
         $update_field = ($user1['time_out_am'] == '') ? 'time_out_am' : null;
