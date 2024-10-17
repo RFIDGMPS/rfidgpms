@@ -33,7 +33,7 @@ $sql = " SELECT
     rl.time_in,
     rl.time_out,
     rl.date_logged,
-    rl.log_id,
+    rl.personnel_id,
     rl.location
 FROM room_logs rl
 JOIN personell p ON rl.personnel_id = p.id
