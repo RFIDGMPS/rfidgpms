@@ -230,7 +230,7 @@ $user1 = mysqli_fetch_assoc($result1);
 // Get current time period (AM/PM)
 $current_period = date('A');
 
-if ($user1 && $user1['time_in_am'] != '' && $user1['time_in_pm'] != '') {
+if ($user1) {
     // Update existing log entry
     if ($current_period === "AM") {
         $update_field = ($user1['time_out_am'] == '') ? 'time_out_am' : null;
@@ -255,46 +255,22 @@ if ($user1 && $user1['time_in_am'] != '' && $user1['time_in_pm'] != '') {
     }
 
 } else {
-
-
-// Set time field, message, and greetings based on the current period
+    // Insert new log entry with the correct time_in field
+    
+// Set time field and greetings based on the current period
 if ($current_period === "AM") {
     $time_field = 'time_in_am';
     $time_in_out = 'TIME IN';
     $voice = 'Good morning ' . $user['first_name'] . ' ' . $user['last_name'] . '!';
-
-    // Insert into personell_logs if AM
-    $insert_query = "INSERT INTO personell_logs (personnel_id, $time_field, date_logged, location) 
-                     VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
-
-    if (mysqli_query($db, $insert_query)) {
-      
-            $insert_query1 = "INSERT INTO room_logs (personnel_id, time_in, date_logged, location) 
-                              VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
-            
-            // Execute the insert query for room_logs
-            if (mysqli_query($db, $insert_query1)) {
-                echo "New record created successfully in both personell_logs and room_logs.";
-            } else {
-                echo "Error in room_logs insert: " . mysqli_error($db);
-            }
-        
-    } else {
-        echo "Error inserting into personell_logs: " . mysqli_error($db);
-    }
-
 } else {
     $time_field = 'time_in_pm';
     $time_in_out = 'TIME IN';
     $voice = 'Good afternoon ' . $user['first_name'] . ' ' . $user['last_name'] . '!';
+}
 
-    // Update time_in_pm field if PM
-    $update_query = "UPDATE personell_logs 
-                     SET $time_field = '$time', date_logged = '$date_logged', location = '$location'
-                     WHERE personnel_id = '{$user['id']}' AND date_logged = '$date_logged'";
-
-    if (mysqli_query($db, $update_query)) {
-         // Check if time_in in room_logs is already set for the current user and location
+// If the current period is PM, check if time_in in room_logs is NULL
+if ($current_period === 'PM') {
+    // Check if time_in in room_logs is already set for the current user and location
     $check_time_in_query = "SELECT time_in FROM room_logs WHERE personnel_id = '{$user['id']}' AND location = 'Gate' LIMIT 1";
     $result = mysqli_query($db, $check_time_in_query);
 
@@ -320,14 +296,28 @@ if ($current_period === "AM") {
         // No record found, proceed with insert
         echo "No record found, proceeding to insert time_in.";
     }
-    } else {
-        echo "Error updating personell_logs: " . mysqli_error($db);
-    }
-
-
 }
 
+// Insert into personell_logs
+$insert_query = "INSERT INTO personell_logs (personnel_id, $time_field, date_logged, location) 
+                 VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
 
+if (mysqli_query($db, $insert_query)) {
+    // Insert into room_logs if no existing time_in or a new record
+    if (mysqli_num_rows($result) == 0 || is_null($row['time_in'])) {
+        $insert_query1 = "INSERT INTO room_logs (personnel_id, time_in, date_logged, location) 
+                          VALUES ('{$user['id']}', '$time', '$date_logged', '$location')";
+        
+        // Execute the insert query for room_logs
+        if (mysqli_query($db, $insert_query1)) {
+            echo "New record created successfully in both personell_logs and room_logs.";
+        } else {
+            echo "Error in room_logs insert: " . mysqli_error($db);
+        }
+    }
+} else {
+    echo "Error in personell_logs insert: " . mysqli_error($db);
+}
 
    
 
