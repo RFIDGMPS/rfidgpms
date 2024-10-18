@@ -6,7 +6,7 @@ include 'connection.php';
 
 
 <?php
-
+include 'connection.php';
 // Get the date for yesterday
 $yesterday = date('Y-m-d', strtotime('-1 day'));
 
