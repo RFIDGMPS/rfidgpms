@@ -307,7 +307,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
 
 
 
-
+</div>
 
                 </div>
                 <br>
