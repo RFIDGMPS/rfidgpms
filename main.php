@@ -526,7 +526,7 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     // If rfid_number is not found, insert a new record with attempts = 0
     $insert_query = "INSERT INTO stranger_logs (rfid_number, last_log, attempts)  
-                     VALUES ('$rfid_number', '$date_logged', 0)";
+                     VALUES ('$rfid_number', '$date_logged', 1)";
     
     if (mysqli_query($db, $insert_query)) {
         echo "New record inserted successfully for RFID: $rfid_number";
