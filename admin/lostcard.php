@@ -158,7 +158,7 @@ include 'header.php';
         // Delete User Function
         function deleteUser(personnelId) {
             Swal.fire({
-                title: 'Are you sure you want to delete this?',
+                title: 'Are you sure you want to delete this request?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -172,11 +172,11 @@ include 'header.php';
 
                     xhr.onload = function () {
                         if (xhr.status === 200) {
-                            Swal.fire('Deleted!', 'The user has been deleted.', 'success').then(() => {
+                            Swal.fire('Deleted!', 'The request has been deleted.', 'success').then(() => {
                                 location.reload(); // Reload page to reflect changes
                             });
                         } else {
-                            Swal.fire('Error', 'There was an error deleting the user.', 'error');
+                            Swal.fire('Error', 'There was an error deleting the request.', 'error');
                         }
                     };
                     xhr.send("action=delete&personnel_id=" + personnelId);
