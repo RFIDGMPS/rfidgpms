@@ -165,7 +165,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
     </div>
     
     <div id="strangerLogs" class="stranger-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
-        <h5 class="text-center mb-3">Stranger Logs</h5>
+       
         <ul class="list-unstyled">
             <?php
             // Fetch the current date
@@ -177,10 +177,9 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo '<li class="mb-2">';
-                    echo '<div class="bg-light border rounded p-2 d-flex justify-content-between">';
-                    echo '<span>' . htmlspecialchars($row["rfid_number"]) . '</span>';
+                    echo '<span><b>' . htmlspecialchars($row["rfid_number"]) . ': </b></span>';
                     echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempts</span>';
-                    echo '</div></li>';
+                    echo '</li>';
                 }
             } else {
                 echo '<li><p class="text-center">No logs found</p></li>';
