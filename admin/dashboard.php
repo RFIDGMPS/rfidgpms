@@ -142,13 +142,13 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             <ul class="list-unstyled">
                 <?php
                 // Fetch entrants logs from the database
-                $sql = "SELECT name, photo FROM personell_logs WHERE DATE(entry_time) = CURDATE() LIMIT 10";
+                $sql = "SELECT first_name, photo FROM personell_logs WHERE DATE(entry_time) = CURDATE() LIMIT 10";
                 $result = $db->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo '<li class="mb-2 d-flex align-items-center">';
                         echo '<img src="' . htmlspecialchars($row["photo"]) . '" alt="Photo" class="rounded-circle me-2" style="width: 40px; height: 40px;">';
-                        echo '<span>' . htmlspecialchars($row["name"]) . '</span>';
+                        echo '<span>' . htmlspecialchars($row["first_name"]) . '</span>';
                         echo '</li>';
                     }
                 } else {
@@ -175,13 +175,13 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             <ul class="list-unstyled">
                 <?php
                 // Fetch visitor logs from the database
-                $sql = "SELECT name, photo FROM visitor_logs WHERE DATE(visit_date) = CURDATE() LIMIT 10";
+                $sql = "SELECT first_name, photo FROM visitor_logs WHERE DATE(visit_date) = CURDATE() LIMIT 10";
                 $result = $db->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo '<li class="mb-2 d-flex align-items-center">';
                         echo '<img src="' . htmlspecialchars($row["photo"]) . '" alt="Photo" class="rounded-circle me-2" style="width: 40px; height: 40px;">';
-                        echo '<span>' . htmlspecialchars($row["name"]) . '</span>';
+                        echo '<span>' . htmlspecialchars($row["first_name"]) . '</span>';
                         echo '</li>';
                     }
                 } else {
@@ -208,13 +208,13 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             <ul class="list-unstyled">
                 <?php
                 // Fetch blocked personnel from the database
-                $sql = "SELECT name, photo FROM personell WHERE status = 'Block' LIMIT 10";
+                $sql = "SELECT first_name, photo FROM personell WHERE status = 'Block' LIMIT 10";
                 $result = $db->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo '<li class="mb-2 d-flex align-items-center">';
                         echo '<img src="' . htmlspecialchars($row["photo"]) . '" alt="Photo" class="rounded-circle me-2" style="width: 40px; height: 40px;">';
-                        echo '<span>' . htmlspecialchars($row["name"]) . '</span>';
+                        echo '<span>' . htmlspecialchars($row["first_name"]) . '</span>';
                         echo '</li>';
                     }
                 } else {
