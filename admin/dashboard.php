@@ -153,15 +153,86 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-user-secret fa-3x text-warning"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Strangers</p>
-                                <h6 class="mb-0"><?php echo $strangers; ?></h6>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Stranger Logs Display -->
+<div class="col-sm-6 col-xl-3">
+    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 stranger-container">
+        <i class="fa fa-user-secret fa-3x text-warning"></i>
+        <div class="ms-3">
+            <p class="mb-2">Strangers</p>
+            <h6 class="mb-0"><?php echo $strangers; ?></h6>
+        </div>
+
+        <!-- Hidden Tooltip for Stranger Logs -->
+        <div class="stranger-logs">
+            <h6>Stranger Logs</h6>
+            <ul id="stranger-logs-list">
+                <!-- Logs will be dynamically inserted here -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- CSS for Tooltip Display on Hover -->
+<style>
+    .stranger-container {
+        position: relative;
+    }
+    
+    .stranger-logs {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 250px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        z-index: 100;
+        display: none;
+        border-radius: 8px;
+    }
+
+    .stranger-logs h6 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .stranger-logs ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .stranger-logs ul li {
+        font-size: 12px;
+        padding: 2px 0;
+    }
+
+    /* Show logs on hover */
+    .stranger-container:hover .stranger-logs {
+        display: block;
+    }
+</style>
+
+<!-- JavaScript to Fetch Logs on Hover -->
+<script>
+    document.querySelector('.stranger-container').addEventListener('mouseenter', function() {
+        // AJAX call to fetch logs
+        fetch('fetch_stranger_logs.php')
+            .then(response => response.json())
+            .then(data => {
+                const logsList = document.getElementById('stranger-logs-list');
+                logsList.innerHTML = ''; // Clear previous logs
+                data.forEach(log => {
+                    const li = document.createElement('li');
+                    li.textContent = `${log.rfid_number} - ${log.attempts}`;
+                    logsList.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error fetching logs:', error));
+    });
+</script>
+
                 </div>
                 <br>
                 <div style="margin:0;padding:0;">
