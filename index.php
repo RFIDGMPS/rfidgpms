@@ -4,42 +4,105 @@ session_start();
 include 'connection.php';
 ?>
 
+
 <?php
 
-// SQL query to update NULL time fields to 'No time in' or 'No time out' if the date is yesterday
-$sql = "UPDATE personell_logs
-        SET time_in_am = IFNULL(time_in_am, '?'),
-            time_in_pm = IFNULL(time_in_pm, '?'),
-            time_out_am = IFNULL(time_out_am, '?'),
-            time_out_pm = IFNULL(time_out_pm, '?')
-        WHERE DATE(date_logged) = CURDATE() - INTERVAL 1 DAY";
+// Get the date for yesterday
+$yesterday = date('Y-m-d', strtotime('-1 day'));
 
-// Execute the query
-if (mysqli_query($db, $sql)) {
-    echo "Records updated successfully.";
+// Fetch records with NULL values for yesterday
+$sql = "SELECT id, time_in_am, time_in_pm, time_out_am, time_out_pm 
+        FROM personell_logs 
+        WHERE DATE(date_logged) = '$yesterday'";
+
+$result = $db->query($sql);
+
+// Check if there are any records
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        // Initialize an empty array to store the fields that need updating
+        $updateFields = [];
+
+        // Check each field if it is NULL and prepare for update
+        if (is_null($row['time_in_am'])) {
+            $updateFields[] = "time_in_am = '?'";
+        }
+        if (is_null($row['time_in_pm'])) {
+            $updateFields[] = "time_in_pm = '?'";
+        }
+        if (is_null($row['time_out_am'])) {
+            $updateFields[] = "time_out_am = '?'";
+        }
+        if (is_null($row['time_out_pm'])) {
+            $updateFields[] = "time_out_pm = '?'";
+        }
+
+        // If there are fields to update, run the update query
+        if (!empty($updateFields)) {
+            // Convert the array to a string for the SET clause
+            $updateQuery = implode(", ", $updateFields);
+            
+            // Update query for the specific record
+            $updateSql = "UPDATE personell_logs 
+                          SET $updateQuery 
+                          WHERE id = " . $row['id'];
+
+            // Execute the update query
+            if ($db->query($updateSql) === TRUE) {
+                echo "Record ID " . $row['id'] . " updated successfully.<br>";
+            } else {
+                echo "Error updating record ID " . $row['id'] . ": " . $db->error . "<br>";
+            }
+        }
+    }
 } else {
-    echo "Error updating records: " . mysqli_error($db);
+    echo "No records found for yesterday.";
+}
+
+// Close the database connection
+
+?>
+<?php
+
+// Function to get yesterday's date
+$yesterday = date('Y-m-d', strtotime("-1 day"));
+
+// SQL query to get all logs for yesterday with NULL values
+$sql = "SELECT * FROM room_logs WHERE DATE(date_logged) = '$yesterday' AND (time_in IS NULL OR time_out IS NULL)";
+$result = $db->query($sql);
+
+if ($result->num_rows > 0) {
+    // Loop through all rows with NULL values
+    while ($row = $result->fetch_assoc()) {
+        $id = $row['id']; // Assuming you have an 'id' column in room_logs for identification
+        
+        $updateFields = [];
+        // Check if time_in is NULL and needs to be updated
+        if (is_null($row['time_in'])) {
+            $updateFields[] = "time_in = '?'";
+        }
+        // Check if time_out is NULL and needs to be updated
+        if (is_null($row['time_out'])) {
+            $updateFields[] = "time_out = '?'";
+        }
+        
+        // Only update if there's something to update
+        if (!empty($updateFields)) {
+            $updateQuery = "UPDATE room_logs SET " . implode(", ", $updateFields) . " WHERE id = $id";
+            if ($db->query($updateQuery) === TRUE) {
+                echo "Record updated successfully for ID: $id <br>";
+            } else {
+                echo "Error updating record for ID: $id: " . $db->error . "<br>";
+            }
+        }
+    }
+} else {
+    echo "No records found with NULL values for yesterday.";
 }
 
 
 ?>
 
-<?php
-
-// SQL query to update NULL time fields to 'No time in' or 'No time out' if the date is yesterday
-$sql = "UPDATE room_logs
-        SET time_in = IFNULL(time_in, '?'),
-            time_out = IFNULL(time_out, '?')
-        WHERE DATE(date_logged) = CURDATE() - INTERVAL 1 DAY";
-
-// Execute the query
-if (mysqli_query($db, $sql)) {
-    echo "Records updated successfully.";
-} else {
-    echo "Error updating records: " . mysqli_error($db);
-}
-
-?>
 
 <?php
 
