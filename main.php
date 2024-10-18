@@ -988,12 +988,13 @@ if (isset($_POST['vsave'])) {
                         time_out: document.getElementById('time_out').innerHTML
                     };
 
+                
                     // Update displayed content with visitor info
                     document.getElementById('in_out').innerHTML = '<?php echo $time_in_out; ?>';
                     document.getElementById('entrant_name').innerHTML = '<?php echo $name; ?>';
                     document.getElementById('department').innerHTML = '<?php echo $department; ?>';
                     document.getElementById('role').innerHTML = 'Visitor';
-                    document.getElementById('time_in').innerHTML = '<?php echo $time; ?>';
+                    document.getElementById('time_in').innerHTML = '<?php echo date('h:i A', strtotime($time)); ?>';
                     document.getElementById('time_out').innerHTML = '';
                     document.getElementById('entrant_name').style.color = 'black';
                     document.getElementById('department').style.color = 'black';
