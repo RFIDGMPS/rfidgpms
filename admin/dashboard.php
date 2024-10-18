@@ -211,7 +211,7 @@ function hideStrangerLogs() {
 
 
 
-
+</div>
                 </div>
                 <br>
                 <div style="margin:0;padding:0;">
