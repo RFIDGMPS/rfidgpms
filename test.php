@@ -11,19 +11,7 @@ include 'connection.php';  // Ensure this file contains the DB connection logic
 // } else {
 //     echo "Error truncating room_logs: " . $db->error . "<br>";
 // }
-$sql = "CREATE TABLE stranger_logs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    attempts INT NOT NULL,
-    last_log VARCHAR(255),
-    rfid_number VARCHAR(255)
-)";
 
-// Execute the query
-if ($db->query($sql) === TRUE) {
-    echo "Table 'stranger_logs' created successfully.";
-} else {
-    echo "Error creating table: " . $db->error;
-}
 $current_time = new DateTime();
 $timein = $timeout = '';
     if ($current_time->format('A') === 'AM') {

@@ -501,9 +501,39 @@ if ($row && $row['time_out']==null) {
             console.log('Audio playback failed:', error);
         });</script>";
         $voice='Uknown Card!';
-            $insert_query = "INSERT INTO personell_logs (role, rfid_number, time_in, date_logged, photo) 
-                             VALUES ('Stranger', '$rfid_number', '$time', '$date_logged', 'stranger.jpg')";
-            mysqli_query($db, $insert_query);
+           
+// First, check if the rfid_number exists in the stranger_logs table
+$check_query = "SELECT id, attempts FROM stranger_logs WHERE rfid_number = '$rfid_number'";
+$result = mysqli_query($db, $check_query);
+
+// Check if any rows were returned
+if (mysqli_num_rows($result) > 0) {
+    // If rfid_number is found, fetch the record
+    $row = mysqli_fetch_assoc($result);
+    $id = $row['id'];
+    $attempts = $row['attempts'] + 1; // Increment the attempts count
+    
+    // Update the attempts count and last_log for the existing record
+    $update_query = "UPDATE stranger_logs 
+                     SET attempts = $attempts, last_log = '$date_logged' 
+                     WHERE id = $id";
+    
+    if (mysqli_query($db, $update_query)) {
+        echo "Record updated successfully for RFID: $rfid_number";
+    } else {
+        echo "Error updating record: " . mysqli_error($db);
+    }
+} else {
+    // If rfid_number is not found, insert a new record with attempts = 0
+    $insert_query = "INSERT INTO stranger_logs (rfid_number, last_log, attempts)  
+                     VALUES ('$rfid_number', '$date_logged', 0)";
+    
+    if (mysqli_query($db, $insert_query)) {
+        echo "New record inserted successfully for RFID: $rfid_number";
+    } else {
+        echo "Error inserting record: " . mysqli_error($db);
+    }
+}
         }
     }
     }
