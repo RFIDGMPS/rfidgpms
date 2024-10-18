@@ -819,8 +819,8 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                        <input type="hidden" id="capturedImage" name="capturedImage">
                                     </div>
         
-                                   
-                                    <div class="col-lg-12 col-md-6 col-sm-12">
+                                    <div class="row mb-3">
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
                                        <div class="form-group">
                                           <label>RFID NUMBER:</label>
                                           <input readonly value="<?php echo $row['rfid_number']; ?>" required type="text" class="form-control" name="rfid_number" id="rfid_number" minlength="10" maxlength="10" autocomplete="off">
@@ -828,6 +828,7 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                        </div>
                                     </div>
                                  </div>
+        </div>
                                  <?php }?>
                                  <div class="row mb-3">
                                     <div class="col-lg-3 col-md-6 col-sm-12" id="up_img">
