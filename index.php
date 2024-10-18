@@ -67,7 +67,7 @@ if ($result->num_rows > 0) {
 
 // Function to get yesterday's date
 $yesterday = date('Y-m-d', strtotime("-1 day"));
-
+echo date('Y-m-d');
 // SQL query to get all logs for yesterday with NULL values
 $sql = "SELECT * FROM room_logs WHERE DATE(date_logged) = '$yesterday' AND (time_in IS NULL OR time_out IS NULL)";
 $result = $db->query($sql);
