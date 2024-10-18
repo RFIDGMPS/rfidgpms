@@ -82,7 +82,7 @@ if ($result->num_rows > 0) {
 
 
 // SQL query to fetch data from personell_logs
-$sql1 = "SELECT * FROM personell_logs";
+$sql1 = "SELECT * FROM personell_logs WHERE rl.date_logged = CURRENT_DATE()";
 $result1 = $db->query($sql1);
 
 // Check if any rows were returned
