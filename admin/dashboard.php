@@ -145,63 +145,14 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
-    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4" 
-         onmouseover="showBlockedPersonnel()" onmouseout="hideBlockedPersonnel()">
-        <i class="fa fa-ban fa-3x text-warning"></i>
-        <div class="ms-3">
-            <p class="mb-2">Blocked</p>
-            <h6 class="mb-0"><?php echo $blocked; ?></h6>
-        </div>
-    </div>
-
-    <div id="blockedPersonnel" class="blocked-personnel" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
-        <h5 class="text-center mb-3">Blocked Personnel</h5>
-        <ul class="list-unstyled">
-            <?php
-            // Fetch blocked personnel from the database
-            $sql = "SELECT name, photo FROM personnel WHERE status = 'Block'";
-            $result = $db->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo '<li class="mb-2 d-flex align-items-center">';
-                    echo '<img src="' . htmlspecialchars($row["photo"]) . '" alt="Photo" class="rounded-circle me-2" style="width: 40px; height: 40px;">';
-                    echo '<span>' . htmlspecialchars($row["name"]) . '</span>';
-                    echo '</li>';
-                }
-            } else {
-                echo '<li><p class="text-center">No blocked personnel found</p></li>';
-            }
-            ?>
-        </ul>
-    </div>
-</div>
-
-<style>
-    .blocked-personnel {
-        max-height: 200px; /* Maximum height for the personnel display */
-        overflow: hidden; /* Disable scrolling */
-    }
-    .blocked-personnel li {
-        display: flex; /* Flex display for alignment */
-        align-items: center; /* Center items vertically */
-        padding: 5px 10px; /* Padding for list items */
-        border-bottom: 1px solid #ddd; /* Divider between list items */
-    }
-    .blocked-personnel img {
-        border: 1px solid #ddd; /* Optional border around images */
-    }
-</style>
-
-<script>
-function showBlockedPersonnel() {
-    document.getElementById('blockedPersonnel').style.display = 'block';
-}
-
-function hideBlockedPersonnel() {
-    document.getElementById('blockedPersonnel').style.display = 'none';
-}
-</script>
-
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-ban fa-3x text-warning"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Blocked</p>
+                                <h6 class="mb-0"><?php echo $blocked; ?></h6>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Stranger Logs Display -->
                     <div class="col-sm-6 col-xl-3 position-relative">
     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4" 
@@ -225,7 +176,7 @@ function hideBlockedPersonnel() {
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
+                   echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
                     echo '<span><b>' . htmlspecialchars($row["rfid_number"]) . ': </b></span>';
                     echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempts</span>';
                     echo '</li>';
