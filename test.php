@@ -13,13 +13,15 @@ include 'connection.php';  // Ensure this file contains the DB connection logic
 // }
 
 
-// $insert_query = "INSERT INTO personell_logs (personnel_id, time_in_am, time_out_am, date_logged, location) 
-//                  VALUES ('1', '09:37:22', '10:37:22','2024-10-17', 'Gate')";
-//         mysqli_query($db, $insert_query);
+$sql = "UPDATE personell_logs
+        SET date_logged = '2024-10-17'
+        WHERE id = '1'";
 
-//         $insert_query1 = "INSERT INTO room_logs (personnel_id, time_in, time_out, date_logged, location) 
-//                           VALUES ('1', '09:37:22', '10:37:22', '2024-10-17', 'Gate')";
-//         mysqli_query($db, $insert_query1);
+if ($db->query($sql) === TRUE) {
+    echo "Records updated successfully";
+} else {
+    echo "Error updating records: " . $db->error;
+};
 
 $current_time = new DateTime();
 $timein = $timeout = '';
