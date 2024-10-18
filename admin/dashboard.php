@@ -113,7 +113,7 @@ function getCount($db, $query) {
 
 $entrants_today = getCount($db, "
     SELECT COUNT(*) AS count FROM (
-        SELECT id FROM personell_logs WHERE date_logged = '$today' AND location='Main Gate'
+        SELECT id FROM room_logs WHERE date_logged = '$today' AND location='Main Gate'
         UNION ALL
         SELECT id FROM visitor_logs WHERE date_logged = '$today'
     ) AS combined_logs
@@ -242,19 +242,20 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM personell_logs WHERE d
                                     <tbody>
                                     <?php include '../connection.php'; ?>
                                  <?php  $results = mysqli_query($db, "
-            SELECT 
+
+                                  SELECT 
     p.photo,
     p.department,
     p.rfid_number,
     p.role,
     CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-    pl.time_in,
-    pl.time_out,
-    pl.location,
-    pl.date_logged
-FROM personell_logs pl
-JOIN personell p ON pl.personnel_id = p.id
-WHERE pl.date_logged = CURRENT_DATE()
+    rl.time_in,
+    rl.time_out,
+    rl.date_logged,
+    rl.location
+FROM room_logs rl
+JOIN personell p ON rl.personnel_id = p.id
+WHERE rl.date_logged = CURRENT_DATE()
 
 UNION
 
