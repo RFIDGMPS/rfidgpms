@@ -243,6 +243,7 @@ mysqli_query($db, $update_query);
 
         mysqli_query($db, $update_query1);
         $time_in_out='TIME IN';
+        $voice = 'Good afternoon ' . $user['first_name'] . ' ' . $user['last_name'] . '!';
     }else{
     // Update existing log entry
     if ($current_period === "AM") {
