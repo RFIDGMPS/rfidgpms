@@ -969,12 +969,7 @@ if (isset($_POST['vsave'])) {
             if (mysqli_query($db, $insert_query)) {
                 ?>
                 <script>
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Visitor record saved successfully!',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    });
+                  
 
                     // Update the page with visitor info
                     let originalTexts1 = {
