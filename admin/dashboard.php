@@ -164,33 +164,36 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
         </div>
     </div>
     
-    <div id="strangerLogs" class="stranger-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+    <div id="strangerLogs" class="stranger-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
         <h5 class="text-center mb-3">Stranger Logs</h5>
-        <div class="row">
+        <ul class="list-unstyled">
             <?php
-            // Fetch stranger logs from the database
-            $sql = "SELECT rfid_number, attempts FROM stranger_logs";
+            // Fetch the current date
+            $currentDate = date('Y-m-d');
+
+            // Fetch stranger logs from the database limited to the current date
+            $sql = "SELECT rfid_number, attempts FROM stranger_logs WHERE DATE(last_log) = '$currentDate' LIMIT 10";
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo '<div class="col-12 mb-2">';
+                    echo '<li class="mb-2">';
                     echo '<div class="bg-light border rounded p-2 d-flex justify-content-between">';
                     echo '<span>' . htmlspecialchars($row["rfid_number"]) . '</span>';
                     echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempts</span>';
-                    echo '</div></div>';
+                    echo '</div></li>';
                 }
             } else {
-                echo '<div class="col-12"><p class="text-center">No logs found</p></div>';
+                echo '<li><p class="text-center">No logs found</p></li>';
             }
             ?>
-        </div>
+        </ul>
     </div>
 </div>
 
 <style>
     .stranger-logs {
-        max-height: 200px;
-        overflow-y: auto;
+        max-height: 200px; /* Maximum height for the log display */
+        overflow: hidden; /* Disable scrolling */
     }
     .stranger-logs .bg-light {
         background-color: #f8f9fa; /* Light background color */
@@ -206,6 +209,7 @@ function hideStrangerLogs() {
     document.getElementById('strangerLogs').style.display = 'none';
 }
 </script>
+
 
 
 
