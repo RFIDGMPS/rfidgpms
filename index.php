@@ -11,7 +11,7 @@ date_default_timezone_set('Asia/Manila');
 // Get the date for yesterday
 $yesterday = date('Y-m-d', strtotime('-1 day'));
 
-// Fetch records with NULL values for yesterday
+// Fetch records from personell_logs with NULL values for yesterday
 $sql = "SELECT id, time_in_am, time_in_pm, time_out_am, time_out_pm 
         FROM personell_logs 
         WHERE DATE(date_logged) = '$yesterday'";
@@ -26,16 +26,16 @@ if ($result->num_rows > 0) {
 
         // Check each field if it is NULL and prepare for update
         if (is_null($row['time_in_am'])) {
-            $updateFields[] = "time_in_am = '?'";
+            $updateFields[] = "time_in_am = ''"; // Change NULL to empty string
         }
         if (is_null($row['time_in_pm'])) {
-            $updateFields[] = "time_in_pm = '?'";
+            $updateFields[] = "time_in_pm = ''"; // Change NULL to empty string
         }
         if (is_null($row['time_out_am'])) {
-            $updateFields[] = "time_out_am = '?'";
+            $updateFields[] = "time_out_am = ''"; // Change NULL to empty string
         }
         if (is_null($row['time_out_pm'])) {
-            $updateFields[] = "time_out_pm = '?'";
+            $updateFields[] = "time_out_pm = ''"; // Change NULL to empty string
         }
 
         // If there are fields to update, run the update query
@@ -57,18 +57,10 @@ if ($result->num_rows > 0) {
         }
     }
 } else {
-    echo "No records found for yesterday.";
+    echo "No records found for yesterday in personell_logs.";
 }
 
-// Close the database connection
-
-?>
-<?php
-
-// Function to get yesterday's date
-$yesterday = date('Y-m-d', strtotime("-1 day"));
-echo date('Y-m-d');
-// SQL query to get all logs for yesterday with NULL values
+// Fetch records from room_logs with NULL values for yesterday
 $sql = "SELECT * FROM room_logs WHERE DATE(date_logged) = '$yesterday' AND (time_in IS NULL OR time_out IS NULL)";
 $result = $db->query($sql);
 
@@ -80,11 +72,11 @@ if ($result->num_rows > 0) {
         $updateFields = [];
         // Check if time_in is NULL and needs to be updated
         if (is_null($row['time_in'])) {
-            $updateFields[] = "time_in = '?'";
+            $updateFields[] = "time_in = ''"; // Change NULL to empty string
         }
         // Check if time_out is NULL and needs to be updated
         if (is_null($row['time_out'])) {
-            $updateFields[] = "time_out = '?'";
+            $updateFields[] = "time_out = ''"; // Change NULL to empty string
         }
         
         // Only update if there's something to update
@@ -98,11 +90,14 @@ if ($result->num_rows > 0) {
         }
     }
 } else {
-    echo "No records found with NULL values for yesterday.";
+    echo "No records found with NULL values for yesterday in room_logs.";
 }
+
+// Close the database connection
 
 
 ?>
+
 
 
 <?php
