@@ -113,7 +113,7 @@ function getCount($db, $query) {
 
 $entrants_today = getCount($db, "
     SELECT COUNT(*) AS count FROM (
-        SELECT id FROM room_logs WHERE date_logged = '$today' AND location='Main Gate'
+        SELECT id FROM room_logs WHERE date_logged = '$today' AND location='Gate'
         UNION ALL
         SELECT id FROM visitor_logs WHERE date_logged = '$today'
     ) AS combined_logs
