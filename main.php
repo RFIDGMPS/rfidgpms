@@ -845,7 +845,6 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                     <div class="form-group">
                                           <label>SEX:</label>
                                           <select readonly required class="form-control dept_ID" name="sex" id="sex_id" autocomplete="off">
-                                             <option value="">&larr; Select Section &rarr;</option>
                                              <option value="Male">Male</option>
                                              <option value="Female">Female</option>
                                           </select>
@@ -858,8 +857,7 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                     <div class="form-group">
                                           <label>CIVIL STATUS:</label>
                                           <select readonly required class="form-control dept_ID" name="stat" id="stat_id" autocomplete="off">
-                                             <option value="">&larr; Select Status &rarr;</option>
-                                             <option value="Single">Single</option>
+                                            <option value="Single">Single</option>
                                              <option value="Married">Married</option>
                                              <option value="Widowed">Widowed</option>
                                           </select>
@@ -870,7 +868,7 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                     <div class="form-group">
                                           <label>DEPARTMENT:</label>
                                           <select readonly required class="form-control dept_ID" name="department" id="dept_id" autocomplete="off">
-										  <option value="">&larr; Select Department &rarr;</option>
+										
 <?php
 										  $sql = "SELECT * FROM department";
 $result = $db->query($sql);
@@ -932,9 +930,9 @@ while ($row = $result->fetch_assoc()) {
                      </div>
                   </div>
                </div>
-           
+               <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<?php
+               <?php
 if (isset($_POST['vsave'])) {
     // Check if an image has been captured
     if (isset($_POST['capturedImage']) && !empty($_POST['capturedImage'])) {
@@ -969,17 +967,16 @@ if (isset($_POST['vsave'])) {
                              VALUES ('$imageName', '$v_code', '$name', '$rfid_number', '$time', '$date_logged', '$department', '$sex', '$civil_status', '$contact_number', '$address', '$purpose', 'Visitor')";
 
             if (mysqli_query($db, $insert_query)) {
-                $time_in_out = 'TIME IN';
-                $voice = 'Welcome ' . $name . '!';
-                $alert = 'alert-primary';
-                if ($time_in_out == 'TIME IN') {
-                    $alert = 'alert-success';
-                } else {
-                    $alert = 'alert-danger';
-                }
                 ?>
                 <script>
-                    // Store original values
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Visitor record saved successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+
+                    // Update the page with visitor info
                     let originalTexts1 = {
                         in_out: document.getElementById('in_out').innerHTML,
                         entrant_name: document.getElementById('entrant_name').innerHTML,
@@ -989,7 +986,6 @@ if (isset($_POST['vsave'])) {
                         time_out: document.getElementById('time_out').innerHTML
                     };
 
-                    // Update displayed content with visitor info
                     document.getElementById('in_out').innerHTML = '<?php echo $time_in_out; ?>';
                     document.getElementById('entrant_name').innerHTML = '<?php echo $name; ?>';
                     document.getElementById('department').innerHTML = '<?php echo $department; ?>';
@@ -1025,16 +1021,39 @@ if (isset($_POST['vsave'])) {
                 </script>
                 <?php
             } else {
-                echo "Error updating record: " . mysqli_error($db);
+                ?>
+                <script>
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Error updating record: <?php echo mysqli_error($db); ?>',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                </script>
+                <?php
             }
         } else {
-            echo 'Error saving image.';
+            ?>
+            <script>
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error saving image.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+            <?php
         }
     } else {
         // Display error if no image was captured
         ?>
         <script>
-            document.querySelector('.img-error').innerHTML = 'Please capture an image.';
+            Swal.fire({
+                title: 'Warning!',
+                text: 'Please capture an image before submitting.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
         </script>
         <?php
     }
