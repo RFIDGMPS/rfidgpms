@@ -2,6 +2,50 @@
 <?php
 session_start();
 include 'connection.php';
+?>
+
+<?php
+
+// SQL query to update NULL time fields to 'No time in' or 'No time out' if the date is yesterday
+$sql = "UPDATE personell_logs
+        SET time_in_am = IFNULL(time_in_am, '?'),
+            time_in_pm = IFNULL(time_in_pm, '?'),
+            time_out_am = IFNULL(time_out_am, '?'),
+            time_out_pm = IFNULL(time_out_pm, '?')
+        WHERE DATE(date_logged) = CURDATE() - INTERVAL 1 DAY";
+
+// Execute the query
+if (mysqli_query($db, $sql)) {
+    echo "Records updated successfully.";
+} else {
+    echo "Error updating records: " . mysqli_error($db);
+}
+
+
+?>
+
+<?php
+
+// SQL query to update NULL time fields to 'No time in' or 'No time out' if the date is yesterday
+$sql = "UPDATE room_logs
+        SET time_in = IFNULL(time_in, '?'),
+            time_out = IFNULL(time_out, '?')
+        WHERE DATE(date_logged) = CURDATE() - INTERVAL 1 DAY";
+
+// Execute the query
+if (mysqli_query($db, $sql)) {
+    echo "Records updated successfully.";
+} else {
+    echo "Error updating records: " . mysqli_error($db);
+}
+
+?>
+
+<?php
+
+
+
+
 
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Secure token generation
@@ -11,6 +55,10 @@ if (empty($_SESSION['csrf_token'])) {
 function sanitizeInput($data) {
     return htmlspecialchars(stripslashes(trim($data)));
 }
+
+
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $department = sanitizeInput($_POST['roomdpt']);
