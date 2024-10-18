@@ -229,7 +229,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM personell_logs WHERE d
                                         <tr>
                                             <th scope="col">Photo</th>
                                             <th scope="col">Full Name</th>
-                                            <th scope="col">RFID Number</th>
+                                            <th scope="col">Department</th>
                                             <th scope="col">Role</th>
                                             <th scope="col">Location</th>
                                             <th scope="col">Time In</th>
@@ -284,7 +284,7 @@ ORDER BY
                                                 <center><img src="uploads/<?php echo $row['photo']; ?>" width="50px" height="50px"></center>
                                             </td>
                                             <td><?php echo $row['full_name']; ?></td>
-                                            <td><?php echo $row['rfid_number']; ?></td>
+                                            <td><?php echo $row['department']; ?></td>
                                             <td><?php echo $row['role']; ?></td>
                                             <td><?php echo $row['location']; ?></td>
 
