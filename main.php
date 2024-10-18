@@ -930,9 +930,10 @@ while ($row = $result->fetch_assoc()) {
                      </div>
                   </div>
                </div>
+           
                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-               <?php
+<?php
 if (isset($_POST['vsave'])) {
     // Check if an image has been captured
     if (isset($_POST['capturedImage']) && !empty($_POST['capturedImage'])) {
@@ -967,11 +968,17 @@ if (isset($_POST['vsave'])) {
                              VALUES ('$imageName', '$v_code', '$name', '$rfid_number', '$time', '$date_logged', '$department', '$sex', '$civil_status', '$contact_number', '$address', '$purpose', 'Visitor')";
 
             if (mysqli_query($db, $insert_query)) {
+                $time_in_out = 'TIME IN';
+                $voice = 'Welcome ' . $name . '!';
+                $alert = 'alert-primary';
+                if ($time_in_out == 'TIME IN') {
+                    $alert = 'alert-success';
+                } else {
+                    $alert = 'alert-danger';
+                }
                 ?>
                 <script>
-                  
-
-                    // Update the page with visitor info
+                    // Store original values
                     let originalTexts1 = {
                         in_out: document.getElementById('in_out').innerHTML,
                         entrant_name: document.getElementById('entrant_name').innerHTML,
@@ -981,6 +988,7 @@ if (isset($_POST['vsave'])) {
                         time_out: document.getElementById('time_out').innerHTML
                     };
 
+                    // Update displayed content with visitor info
                     document.getElementById('in_out').innerHTML = '<?php echo $time_in_out; ?>';
                     document.getElementById('entrant_name').innerHTML = '<?php echo $name; ?>';
                     document.getElementById('department').innerHTML = '<?php echo $department; ?>';
