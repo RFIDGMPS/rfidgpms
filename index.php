@@ -2,21 +2,75 @@
 <?php
 session_start();
 include 'connection.php';
+date_default_timezone_set('Asia/Manila');
 ?>
 
+
 <?php
-include 'connection.php';
+
+// Get the date for yesterday
+$yesterday = date('Y-m-d', strtotime('-1 day'));
+
+// Fetch records with NULL values for yesterday
+$sql = "SELECT id, time_in_am, time_in_pm, time_out_am, time_out_pm 
+        FROM personell_logs 
+        WHERE DATE(date_logged) = '$yesterday'";
+
+$result = $db->query($sql);
+
+// Check if there are any records
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        // Initialize an empty array to store the fields that need updating
+        $updateFields = [];
+
+        // Check each field if it is NULL and prepare for update
+        if (is_null($row['time_in_am'])) {
+            $updateFields[] = "time_in_am = '?'";
+        }
+        if (is_null($row['time_in_pm'])) {
+            $updateFields[] = "time_in_pm = '?'";
+        }
+        if (is_null($row['time_out_am'])) {
+            $updateFields[] = "time_out_am = '?'";
+        }
+        if (is_null($row['time_out_pm'])) {
+            $updateFields[] = "time_out_pm = '?'";
+        }
+
+        // If there are fields to update, run the update query
+        if (!empty($updateFields)) {
+            // Convert the array to a string for the SET clause
+            $updateQuery = implode(", ", $updateFields);
+            
+            // Update query for the specific record
+            $updateSql = "UPDATE personell_logs 
+                          SET $updateQuery 
+                          WHERE id = " . $row['id'];
+
+            // Execute the update query
+            if ($db->query($updateSql) === TRUE) {
+                echo "Record ID " . $row['id'] . " updated successfully.<br>";
+            } else {
+                echo "Error updating record ID " . $row['id'] . ": " . $db->error . "<br>";
+            }
+        }
+    }
+} else {
+    echo "No records found for yesterday.";
+}
+
+// Close the database connection
+
+?>
+<?php
 
 // Function to get yesterday's date
 $yesterday = date('Y-m-d', strtotime("-1 day"));
-echo "Yesterday's Date: $yesterday <br>"; // Debugging line
 
 // SQL query to get all logs for yesterday with NULL values
 $sql = "SELECT * FROM room_logs WHERE DATE(date_logged) = '$yesterday' AND (time_in IS NULL OR time_out IS NULL)";
 $result = $db->query($sql);
-
-// Debugging: Print the SQL query to see if it's correct
-echo "SQL Query: $sql <br>";
 
 if ($result->num_rows > 0) {
     // Loop through all rows with NULL values
@@ -47,7 +101,7 @@ if ($result->num_rows > 0) {
     echo "No records found with NULL values for yesterday.";
 }
 
-$db->close();
+
 ?>
 
 
