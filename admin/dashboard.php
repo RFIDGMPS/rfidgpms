@@ -251,8 +251,9 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
     CONCAT(p.first_name, ' ', p.last_name) AS full_name,
     rl.time_in,
     rl.time_out,
-    rl.date_logged,
-    rl.location
+    rl.location,
+    rl.date_logged
+    
 FROM room_logs rl
 JOIN personell p ON rl.personnel_id = p.id
 WHERE rl.date_logged = CURRENT_DATE()
