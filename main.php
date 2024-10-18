@@ -1065,7 +1065,9 @@ else {
                                     echo 'Error saving image.';
                                 }
                             }
-                        
+                        else {
+                            echo 'Please attach image.';
+                        }
         
 ?>    
 
