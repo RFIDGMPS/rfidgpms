@@ -63,7 +63,7 @@ if ($result->num_rows > 0) {
 
 ?>
 <?php
-
+include 'connection.php';
 // Function to get yesterday's date
 $yesterday = date('Y-m-d', strtotime("-1 day"));
 
