@@ -15,7 +15,7 @@ include 'connection.php';  // Ensure this file contains the DB connection logic
 
 $sql = "UPDATE room_logs
         SET date_logged = '2024-10-17'
-        WHERE id = '1'";
+        WHERE personnel_id = '1'";
 
 if ($db->query($sql) === TRUE) {
     echo "Records updated successfully";
