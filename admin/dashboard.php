@@ -267,7 +267,7 @@ SELECT
     vl.name AS full_name,
     vl.time_in,
     vl.time_out,
-     'Gate' AS location,
+    vl.location,
     vl.date_logged
 FROM visitor_logs vl
 WHERE vl.date_logged = CURRENT_DATE()

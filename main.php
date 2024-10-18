@@ -964,8 +964,8 @@ if (isset($_POST['vsave'])) {
         // Check if the image was successfully saved
         if (file_put_contents($filePath, $decodedData)) {
             // Insert the record into the visitor_logs table
-            $insert_query = "INSERT INTO visitor_logs (photo, v_code, name, rfid_number, time_in, date_logged, department, sex, civil_status, contact_number, address, purpose, role)
-                             VALUES ('$imageName', '$v_code', '$name', '$rfid_number', '$time', '$date_logged', '$department', '$sex', '$civil_status', '$contact_number', '$address', '$purpose', 'Visitor')";
+            $insert_query = "INSERT INTO visitor_logs (photo, v_code, name, rfid_number, time_in, date_logged, department, sex, civil_status, contact_number, address, purpose, role, location)
+                             VALUES ('$imageName', '$v_code', '$name', '$rfid_number', '$time', '$date_logged', '$department', '$sex', '$civil_status', '$contact_number', '$address', '$purpose', 'Visitor','Gate')";
 
             if (mysqli_query($db, $insert_query)) {
                 $time_in_out = 'TIME IN';
