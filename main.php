@@ -819,7 +819,7 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                        <input type="hidden" id="capturedImage" name="capturedImage">
                                     </div>
         
-                                    <div class="row mb-3">
+                                   
                                     <div class="col-lg-3 col-md-6 col-sm-12">
                                        <div class="form-group">
                                           <label>RFID NUMBER:</label>
@@ -828,7 +828,7 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                        </div>
                                     </div>
                                  </div>
-        </div>
+        
                                  <?php }?>
                                  <div class="row mb-3">
                                     <div class="col-lg-3 col-md-6 col-sm-12" id="up_img">
