@@ -242,7 +242,7 @@ mysqli_query($db, $update_query);
         $update_query1 = "UPDATE room_logs SET time_out = NULL WHERE personnel_id = '{$user['id']}' AND location = 'Gate' AND date_logged = '$date_logged'";
 
         mysqli_query($db, $update_query1);
-    
+        $time_in_out='TIME IN';
     }else{
     // Update existing log entry
     if ($current_period === "AM") {
