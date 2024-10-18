@@ -144,7 +144,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-3 position-relative">
+                    <div class="col-sm-6 col-xl-3">
     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4" 
          onmouseover="showBlockedPersonnel()" onmouseout="hideBlockedPersonnel()">
         <i class="fa fa-ban fa-3x text-warning"></i>
