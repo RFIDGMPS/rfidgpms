@@ -817,6 +817,7 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                        </div>
 
                                        <input type="hidden" id="capturedImage" name="capturedImage">
+                                       <span class="img-error"></span>
                                     </div>
         
                                    
@@ -931,146 +932,115 @@ while ($row = $result->fetch_assoc()) {
                      </div>
                   </div>
                </div>
-               <?php
-          
-            if (isset($_POST['capturedImage'])) {
-                        
+               <span class="img-error"></span>
 
-
-
-
-
-
-
-
-
-
-
-                        $v_code = $_POST['v_code'];
-                        $rfid_number = $_POST['rfid_number'];
-                        date_default_timezone_set('Asia/Manila'); // Set your timezone
-                        $time = date('H:i:s'); // Current time
-                        $name = $_POST['fullName'];
-                        $department = $_POST['department'];
-                        $sex = $_POST['sex'];
-                        $civil_status = $_POST['stat'];
-                        $contact_number = $_POST['contact_number'];
-                        $address = $_POST['address'];
-                        $purpose = $_POST['purpose'];
-                       
-                       
-                        $date_logged = date('Y-m-d'); // Current date as date_logged
-                       
-                        // Determine appropriate time field to update
-                       
-                        $update_field = null;
-            
+<?php
+if (isset($_POST['vsave'])) {
+    // Check if an image has been captured
+    if (isset($_POST['capturedImage']) && !empty($_POST['capturedImage'])) {
+        // Proceed with the rest of the form processing
         
-                                $data_uri = $_POST['capturedImage'];
-                                $encodedData = str_replace(' ', '+', $data_uri);
-                                list($type, $encodedData) = explode(';', $encodedData);
-                                list(, $encodedData) = explode(',', $encodedData);
-                                $decodedData = base64_decode($encodedData);
-                        
-                                $imageName = $_POST['fullName'] . '.jpeg';
-                                $filePath = 'admin/uploads/' . $imageName;
-                        
-                                $current_period=date('A');
-        
-         //$time_field = $current_period === "AM" ? 'time_in_am' : 'time_in_pm';
-        
-        
-        
-        
-                                if (file_put_contents($filePath, $decodedData)) {
-                                    // Insert query for entrance table
-                                    $insert_query = "INSERT INTO visitor_logs (photo, v_code, name, rfid_number,  time_in, date_logged, department, sex,civil_status,contact_number,address,purpose,role) 
-                                    VALUES ('$imageName','$v_code', '$name', '$rfid_number', '$time', '$date_logged', '$department', '$sex','$civil_status','$contact_number','$address','$purpose','Visitor')";
-                    
-                           
-                        
-                       
-                                    // Execute query
-                                    if (mysqli_query($db, $insert_query)) {
-                                        
- if(isset($_POST['vsave'])){
-    $time_in_out='TIME IN';
-                        
-$voice='Welcome '.$name.'!';
-    $alert='alert-primary';
-if($time_in_out=='TIME IN'){
-$alert='alert-success';
-}
-else {
-    $alert='alert-danger'; 
-}
+        $v_code = $_POST['v_code'];
+        $rfid_number = $_POST['rfid_number'];
+        date_default_timezone_set('Asia/Manila'); // Set timezone
+        $time = date('H:i:s'); // Current time
+        $name = $_POST['fullName'];
+        $department = $_POST['department'];
+        $sex = $_POST['sex'];
+        $civil_status = $_POST['stat'];
+        $contact_number = $_POST['contact_number'];
+        $address = $_POST['address'];
+        $purpose = $_POST['purpose'];
+        $date_logged = date('Y-m-d'); // Current date as date_logged
 
+        // Process captured image
+        $data_uri = $_POST['capturedImage'];
+        $encodedData = str_replace(' ', '+', $data_uri);
+        list($type, $encodedData) = explode(';', $encodedData);
+        list(, $encodedData) = explode(',', $encodedData);
+        $decodedData = base64_decode($encodedData);
+        $imageName = $_POST['fullName'] . '.jpeg';
+        $filePath = 'admin/uploads/' . $imageName;
 
+        // Check if the image was successfully saved
+        if (file_put_contents($filePath, $decodedData)) {
+            // Insert the record into the visitor_logs table
+            $insert_query = "INSERT INTO visitor_logs (photo, v_code, name, rfid_number, time_in, date_logged, department, sex, civil_status, contact_number, address, purpose, role)
+                             VALUES ('$imageName', '$v_code', '$name', '$rfid_number', '$time', '$date_logged', '$department', '$sex', '$civil_status', '$contact_number', '$address', '$purpose', 'Visitor')";
 
-  
-?>
-  
-           <script>
-             // Store original values
-        let originalTexts1 = {
-            in_out: document.getElementById('in_out').innerHTML,
-            entrant_name: document.getElementById('entrant_name').innerHTML,
-            department: document.getElementById('department').innerHTML,
-            role: document.getElementById('role').innerHTML,
-            time_in: document.getElementById('time_in').innerHTML,
-            time_out: document.getElementById('time_out').innerHTML
-        };
+            if (mysqli_query($db, $insert_query)) {
+                $time_in_out = 'TIME IN';
+                $voice = 'Welcome ' . $name . '!';
+                $alert = 'alert-primary';
+                if ($time_in_out == 'TIME IN') {
+                    $alert = 'alert-success';
+                } else {
+                    $alert = 'alert-danger';
+                }
+                ?>
+                <script>
+                    // Store original values
+                    let originalTexts1 = {
+                        in_out: document.getElementById('in_out').innerHTML,
+                        entrant_name: document.getElementById('entrant_name').innerHTML,
+                        department: document.getElementById('department').innerHTML,
+                        role: document.getElementById('role').innerHTML,
+                        time_in: document.getElementById('time_in').innerHTML,
+                        time_out: document.getElementById('time_out').innerHTML
+                    };
 
-        // Change text to 'Hello World'
-        document.getElementById('in_out').innerHTML = '<?php echo $time_in_out;?>';
-        document.getElementById('entrant_name').innerHTML = '<?php echo $name; ?>';
-        document.getElementById('department').innerHTML = '<?php echo $department; ?>';
-        document.getElementById('role').innerHTML = 'Visitor';
-        document.getElementById('time_in').innerHTML = '<?php echo $time; ?>';
-        document.getElementById('time_out').innerHTML = '';
-        document.getElementById('entrant_name').style.color = 'black';
-        document.getElementById('department').style.color = 'black';
-            document.getElementById('role').style.color = 'black';
-            document.getElementById('time_in').style.color = 'black';
-            document.getElementById('time_out').style.color = 'black';
-            document.getElementById('alert').classList.remove('alert-primary');
-            document.getElementById('alert').classList.add('<?php echo $alert;?>');
-            document.getElementById('pic').src = 'admin/uploads/<?php echo $imageName; ?>';
-        // Revert text back to original after 3 seconds
-        setTimeout(function() {
-            document.getElementById('in_out').innerHTML = originalTexts1.in_out;
-            document.getElementById('entrant_name').innerHTML = originalTexts1.entrant_name;
-            document.getElementById('department').innerHTML = originalTexts1.department;
-            document.getElementById('role').innerHTML = originalTexts1.role;
-            document.getElementById('time_in').innerHTML = originalTexts1.time_in;
-            document.getElementById('time_out').innerHTML = originalTexts1.time_out;
-            document.getElementById('entrant_name').style.color = '#ced4da';
-            document.getElementById('department').style.color = '#ced4da';
-            document.getElementById('role').style.color = '#ced4da';
-            document.getElementById('time_in').style.color = '#ced4da';
-            document.getElementById('time_out').style.color = '#ced4da';
-            document.getElementById('alert').classList.remove('<?php echo $alert;?>');
-            document.getElementById('alert').classList.add('alert-primary');
-            document.getElementById('pic').src = "assets/img/section/istockphoto-1184670010-612x612.jpg";
-        }, 5000); // 3000 milliseconds = 3 seconds
-    </script>
-<?php 
+                    // Update displayed content with visitor info
+                    document.getElementById('in_out').innerHTML = '<?php echo $time_in_out; ?>';
+                    document.getElementById('entrant_name').innerHTML = '<?php echo $name; ?>';
+                    document.getElementById('department').innerHTML = '<?php echo $department; ?>';
+                    document.getElementById('role').innerHTML = 'Visitor';
+                    document.getElementById('time_in').innerHTML = '<?php echo $time; ?>';
+                    document.getElementById('time_out').innerHTML = '';
+                    document.getElementById('entrant_name').style.color = 'black';
+                    document.getElementById('department').style.color = 'black';
+                    document.getElementById('role').style.color = 'black';
+                    document.getElementById('time_in').style.color = 'black';
+                    document.getElementById('time_out').style.color = 'black';
+                    document.getElementById('alert').classList.remove('alert-primary');
+                    document.getElementById('alert').classList.add('<?php echo $alert; ?>');
+                    document.getElementById('pic').src = 'admin/uploads/<?php echo $imageName; ?>';
 
-    
+                    // Revert back after 5 seconds
+                    setTimeout(function() {
+                        document.getElementById('in_out').innerHTML = originalTexts1.in_out;
+                        document.getElementById('entrant_name').innerHTML = originalTexts1.entrant_name;
+                        document.getElementById('department').innerHTML = originalTexts1.department;
+                        document.getElementById('role').innerHTML = originalTexts1.role;
+                        document.getElementById('time_in').innerHTML = originalTexts1.time_in;
+                        document.getElementById('time_out').innerHTML = originalTexts1.time_out;
+                        document.getElementById('entrant_name').style.color = '#ced4da';
+                        document.getElementById('department').style.color = '#ced4da';
+                        document.getElementById('role').style.color = '#ced4da';
+                        document.getElementById('time_in').style.color = '#ced4da';
+                        document.getElementById('time_out').style.color = '#ced4da';
+                        document.getElementById('alert').classList.remove('<?php echo $alert; ?>');
+                        document.getElementById('alert').classList.add('alert-primary');
+                        document.getElementById('pic').src = "assets/img/section/istockphoto-1184670010-612x612.jpg";
+                    }, 5000);
+                </script>
+                <?php
+            } else {
+                echo "Error updating record: " . mysqli_error($db);
+            }
+        } else {
+            echo 'Error saving image.';
+        }
+    } else {
+        // Display error if no image was captured
+        ?>
+        <script>
+            document.querySelector('.img-error').innerHTML = 'Please capture an image.';
+        </script>
+        <?php
     }
-    
-                                    } else {
-                                        echo "Error updating record: " . mysqli_error($db);
-                                    }
-                                } else {
-                                    echo 'Error saving image.';
-                                }
-                            }
-                        else {
-                            echo 'Please attach image.';
-                        }
-        
-?>    
+}
+?>
+
 
  <script>
   
