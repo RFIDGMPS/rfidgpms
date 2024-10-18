@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
                 <td>" . htmlspecialchars($row['location']) . "</td>
               </tr>";
     }
-    echo "</table>"; // End the table
+    echo "</table>"; 
 } else {
     echo "No records found.";
 }
