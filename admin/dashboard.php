@@ -120,7 +120,7 @@ $entrants_today = getCount($db, "
 ");
 $visitor = getCount($db, "SELECT COUNT(*) AS count FROM visitor_logs WHERE date_logged = '$today'");
 $blocked = getCount($db, "SELECT COUNT(*) AS count FROM personell WHERE status = 'Block'");
-$strangers = getCount($db, "SELECT COUNT(*) AS count FROM personell_logs WHERE date_logged = '$today' AND role='Stranger'");
+$strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE last_log = '$today'");
 ?>
 
             <div class="container-fluid pt-4 px-4">
