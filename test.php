@@ -13,16 +13,6 @@ include 'connection.php';  // Ensure this file contains the DB connection logic
 // }
 
 
-$sql = "UPDATE room_logs
-        SET date_logged = '2024-10-17'
-        WHERE personnel_id = '1'";
-
-if ($db->query($sql) === TRUE) {
-    echo "Records updated successfully";
-} else {
-    echo "Error updating records: " . $db->error;
-};
-
 $current_time = new DateTime();
 $timein = $timeout = '';
     if ($current_time->format('A') === 'AM') {
@@ -83,7 +73,7 @@ if ($result->num_rows > 0) {
 
 
 // SQL query to fetch data from personell_logs
-$sql1 = "SELECT * FROM personell_logs WHERE date_logged = CURRENT_DATE()";
+$sql1 = "SELECT * FROM personell_logs";
 $result1 = $db->query($sql1);
 
 // Check if any rows were returned
@@ -104,7 +94,7 @@ if ($result1->num_rows > 0) {
     while($row = $result1->fetch_assoc()) {
         echo "<tr>
                 <td>" . $row["personnel_id"] . "</td>
-                <td>" . $row["personell_id"] . "</td>
+                <td>" . $row["date_logged"] . "</td>
                 <td>" . $row["time_in_am"] . "</td>
                 <td>" . $row["time_out_am"] . "</td>
                 <td>" . $row["time_in_pm"] . "</td>
