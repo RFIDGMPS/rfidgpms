@@ -810,7 +810,7 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
         while ($row = mysqli_fetch_array($results)) { ?>
                                  <div class="row">
                                     <div class="col-lg-3 col-md-6 col-sm-12" id="up_img">
-                                    <div class="file-uploader">
+                                    <div required class="file-uploader">
                                          
                                           <img id="captured" class="preview-1" src="assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg" style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 15%" title="Upload Photo.." />
                                           
@@ -819,14 +819,8 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                        <input type="hidden" id="capturedImage" name="capturedImage">
                                     </div>
         
-                                    <div class="col-lg-4 col-md-6 col-sm-12" id="lnamez">
-                                       <div class="form-group">
-                                          <label>VISITOR CODE:</label>
-                                          <input readonly value="<?php echo $row['v_code']; ?>" required type="text" class="form-control" name="v_code" id="v_code" autocomplete="off">
-                                          <span class="id-error"></span>
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-6 col-sm-12">
+                                   
+                                    <div class="col-lg-12 col-md-6 col-sm-12">
                                        <div class="form-group">
                                           <label>RFID NUMBER:</label>
                                           <input readonly value="<?php echo $row['rfid_number']; ?>" required type="text" class="form-control" name="rfid_number" id="rfid_number" minlength="10" maxlength="10" autocomplete="off">
