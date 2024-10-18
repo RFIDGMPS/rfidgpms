@@ -125,189 +125,92 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
 
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                <div class="row">
-    <!-- Entrants Section -->
-    <div class="col-sm-6 col-xl-3 position-relative">
-        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4" 
-             onmouseover="showEntrantsLogs()" onmouseout="hideEntrantsLogs()">
-            <i class="fa fa-users fa-3x text-warning"></i>
-            <div class="ms-3">
-                <p class="mb-2">Entrants</p>
-                <h6 class="mb-0"><?php echo $entrants_today; ?></h6>
-            </div>
-        </div>
-
-        <div id="entrantsLogs" class="entrants-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
-            <h5 class="text-center mb-3">Entrants</h5>
-            <ul class="list-unstyled">
-                <?php
-                // Fetch entrants logs from the database
-                $sql = "SELECT first_name, photo FROM personell_logs WHERE DATE(entry_time) = CURDATE() LIMIT 10";
-                $result = $db->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<li class="mb-2 d-flex align-items-center">';
-                        echo '<img src="' . htmlspecialchars($row["photo"]) . '" alt="Photo" class="rounded-circle me-2" style="width: 40px; height: 40px;">';
-                        echo '<span>' . htmlspecialchars($row["first_name"]) . '</span>';
-                        echo '</li>';
-                    }
-                } else {
-                    echo '<li><p class="text-center">No entrants found</p></li>';
-                }
-                ?>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Visitors Section -->
-    <div class="col-sm-6 col-xl-3 position-relative">
-        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4" 
-             onmouseover="showVisitorLogs()" onmouseout="hideVisitorLogs()">
-            <i class="fa fa-user-plus fa-3x text-warning"></i>
-            <div class="ms-3">
-                <p class="mb-2">Visitors</p>
-                <h6 class="mb-0"><?php echo $visitor; ?></h6>
-            </div>
-        </div>
-
-        <div id="visitorLogs" class="visitor-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
-            <h5 class="text-center mb-3">Visitors</h5>
-            <ul class="list-unstyled">
-                <?php
-                // Fetch visitor logs from the database
-                $sql = "SELECT first_name, photo FROM visitor_logs WHERE DATE(visit_date) = CURDATE() LIMIT 10";
-                $result = $db->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<li class="mb-2 d-flex align-items-center">';
-                        echo '<img src="' . htmlspecialchars($row["photo"]) . '" alt="Photo" class="rounded-circle me-2" style="width: 40px; height: 40px;">';
-                        echo '<span>' . htmlspecialchars($row["first_name"]) . '</span>';
-                        echo '</li>';
-                    }
-                } else {
-                    echo '<li><p class="text-center">No visitors found</p></li>';
-                }
-                ?>
-            </ul>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-users fa-3x text-warning"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Entrants</p>
+                                <h6 class="mb-0"><?php echo $entrants_today; ?></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-user-plus fa-3x text-warning"></i>
+                           
+                            <div class="ms-3">
+                                <p class="mb-2">Visitors</p>
+                                <h6 class="mb-0"><?php echo $visitor; ?></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-ban fa-3x text-warning"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Blocked</p>
+                                <h6 class="mb-0"><?php echo $blocked; ?></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stranger Logs Display -->
+                    <div class="col-sm-6 col-xl-3 position-relative">
+    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4" 
+         onmouseover="showStrangerLogs()" onmouseout="hideStrangerLogs()">
+        <i class="fa fa-user-secret fa-3x text-warning"></i>
+        <div class="ms-3">
+            <p class="mb-2">Strangers</p>
+            <h6 class="mb-0"><?php echo $strangers; ?></h6>
         </div>
     </div>
+    
+    <div id="strangerLogs" class="stranger-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
+       
+        <ul class="list-unstyled">
+            <?php
+            // Fetch the current date
+            $currentDate = date('Y-m-d');
 
-    <!-- Blocked Section -->
-    <div class="col-sm-6 col-xl-3 position-relative">
-        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4" 
-             onmouseover="showBlockedPersonnel()" onmouseout="hideBlockedPersonnel()">
-            <i class="fa fa-ban fa-3x text-warning"></i>
-            <div class="ms-3">
-                <p class="mb-2">Blocked</p>
-                <h6 class="mb-0"><?php echo $blocked; ?></h6>
-            </div>
-        </div>
-
-        <div id="blockedPersonnel" class="blocked-personnel" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
-            <h5 class="text-center mb-3">Blocked Personnel</h5>
-            <ul class="list-unstyled">
-                <?php
-                // Fetch blocked personnel from the database
-                $sql = "SELECT first_name, photo FROM personell WHERE status = 'Block' LIMIT 10";
-                $result = $db->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<li class="mb-2 d-flex align-items-center">';
-                        echo '<img src="' . htmlspecialchars($row["photo"]) . '" alt="Photo" class="rounded-circle me-2" style="width: 40px; height: 40px;">';
-                        echo '<span>' . htmlspecialchars($row["first_name"]) . '</span>';
-                        echo '</li>';
-                    }
-                } else {
-                    echo '<li><p class="text-center">No blocked personnel found</p></li>';
+            // Fetch stranger logs from the database limited to the current date
+            $sql = "SELECT rfid_number, attempts FROM stranger_logs WHERE DATE(last_log) = '$currentDate' LIMIT 10";
+            $result = $db->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                   echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
+                    echo '<span><b>' . htmlspecialchars($row["rfid_number"]) . ': </b></span>';
+                    echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempts</span>';
+                    echo '</li>';
                 }
-                ?>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Strangers Section -->
-    <div class="col-sm-6 col-xl-3 position-relative">
-        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4" 
-             onmouseover="showStrangerLogs()" onmouseout="hideStrangerLogs()">
-            <i class="fa fa-user-secret fa-3x text-warning"></i>
-            <div class="ms-3">
-                <p class="mb-2">Strangers</p>
-                <h6 class="mb-0"><?php echo $strangers; ?></h6>
-            </div>
-        </div>
-
-        <div id="strangerLogs" class="stranger-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
-            <h5 class="text-center mb-3">Stranger Logs</h5>
-            <ul class="list-unstyled">
-                <?php
-                // Fetch the current date
-                $currentDate = date('Y-m-d');
-
-                // Fetch stranger logs from the database limited to the current date
-                $sql = "SELECT rfid_number, attempts FROM stranger_logs WHERE DATE(last_log) = '$currentDate' LIMIT 10";
-                $result = $db->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
-                        echo '<span><b>' . htmlspecialchars($row["rfid_number"]) . ': </b></span>';
-                        echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempts</span>';
-                        echo '</li>';
-                    }
-                } else {
-                    echo '<li><p class="text-center">No logs found</p></li>';
-                }
-                ?>
-            </ul>
-        </div>
+            } else {
+                echo '<li><p class="text-center">No logs found</p></li>';
+            }
+            ?>
+        </ul>
     </div>
 </div>
 
 <style>
-    .stranger-logs, .entrants-logs, .visitor-logs, .blocked-personnel {
+    .stranger-logs {
         max-height: 200px; /* Maximum height for the log display */
         overflow: hidden; /* Disable scrolling */
     }
-    .stranger-logs li, .entrants-logs li, .visitor-logs li, .blocked-personnel li {
-        display: flex; /* Flex display for alignment */
-        align-items: center; /* Center items vertically */
-        padding: 5px 10px; /* Padding for list items */
-        border-bottom: 1px solid #ddd; /* Divider between list items */
-    }
-    .stranger-logs img, .entrants-logs img, .visitor-logs img, .blocked-personnel img {
-        border: 1px solid #ddd; /* Optional border around images */
+    .stranger-logs .bg-light {
+        background-color: #f8f9fa; /* Light background color */
     }
 </style>
 
 <script>
-    function showEntrantsLogs() {
-        document.getElementById('entrantsLogs').style.display = 'block';
-    }
-    function hideEntrantsLogs() {
-        document.getElementById('entrantsLogs').style.display = 'none';
-    }
-    function showVisitorLogs() {
-        document.getElementById('visitorLogs').style.display = 'block';
-    }
-    function hideVisitorLogs() {
-        document.getElementById('visitorLogs').style.display = 'none';
-    }
-    function showBlockedPersonnel() {
-        document.getElementById('blockedPersonnel').style.display = 'block';
-    }
-    function hideBlockedPersonnel() {
-        document.getElementById('blockedPersonnel').style.display = 'none';
-    }
-    function showStrangerLogs() {
-        document.getElementById('strangerLogs').style.display = 'block';
-    }
-    function hideStrangerLogs() {
-        document.getElementById('strangerLogs').style.display = 'none';
-    }
+function showStrangerLogs() {
+    document.getElementById('strangerLogs').style.display = 'block';
+}
+
+function hideStrangerLogs() {
+    document.getElementById('strangerLogs').style.display = 'none';
+}
 </script>
 
 
 
-</div>
 
                 </div>
                 <br>
