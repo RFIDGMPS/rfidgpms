@@ -13,7 +13,7 @@ include 'connection.php';  // Ensure this file contains the DB connection logic
 // }
 
 
-$sql = "UPDATE personell_logs
+$sql = "UPDATE room_logs
         SET date_logged = '2024-10-17'
         WHERE id = '1'";
 
