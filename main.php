@@ -932,7 +932,7 @@ while ($row = $result->fetch_assoc()) {
                      </div>
                   </div>
                </div>
-               <span class="img-error"></span>
+           
 
 <?php
 if (isset($_POST['vsave'])) {
