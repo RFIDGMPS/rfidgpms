@@ -259,7 +259,7 @@ mysqli_query($db, $update_query);
         $update_query = "UPDATE personell_logs SET $update_field = '$time' WHERE id = '{$user1['id']}'";
         mysqli_query($db, $update_query);
 
-        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE personnel_id = '{$user1['id']}' AND location='Gate'";
+        $update_query1 = "UPDATE room_logs SET time_out = '$time' WHERE personnel_id = '{$user1['personnel_id']}' AND location='Gate'";
         mysqli_query($db, $update_query1);
 
      
@@ -282,34 +282,34 @@ if ($current_period === "AM") {
 }
 
 // If the current period is PM, check if time_in in room_logs is NULL
-if ($current_period === 'PM') {
-    // Check if time_in in room_logs is already set for the current user and location
-    $check_time_in_query = "SELECT time_in FROM room_logs WHERE personnel_id = '{$user['id']}' AND location = 'Gate' LIMIT 1";
-    $result = mysqli_query($db, $check_time_in_query);
+// if ($current_period === 'PM') {
+//     // Check if time_in in room_logs is already set for the current user and location
+//     $check_time_in_query = "SELECT time_in FROM room_logs WHERE personnel_id = '{$user['id']}' AND location = 'Gate' LIMIT 1";
+//     $result = mysqli_query($db, $check_time_in_query);
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        if (!is_null($row['time_in'])) {
-            // If time_in is not NULL, skip updating time_in
-            echo "Time_in already exists, no need to update.";
-        } else {
-            // If time_in is NULL, update time_out to NULL for PM
-            $update_query = "UPDATE room_logs 
-                             SET time_out = NULL 
-                             WHERE personnel_id = '{$user['id']}' AND location='Gate'";
+//     if ($result && mysqli_num_rows($result) > 0) {
+//         $row = mysqli_fetch_assoc($result);
+//         if (!is_null($row['time_in'])) {
+//             // If time_in is not NULL, skip updating time_in
+//             echo "Time_in already exists, no need to update.";
+//         } else {
+//             // If time_in is NULL, update time_out to NULL for PM
+//             $update_query = "UPDATE room_logs 
+//                              SET time_out = NULL 
+//                              WHERE personnel_id = '{$user['id']}' AND location='Gate'";
             
-            // Execute the update query
-            if (mysqli_query($db, $update_query)) {
-                echo "Time out set to NULL in room_logs.";
-            } else {
-                echo "Error updating room_logs: " . mysqli_error($db);
-            }
-        }
-    } else {
-        // No record found, proceed with insert
-        echo "No record found, proceeding to insert time_in.";
-    }
-}
+//             // Execute the update query
+//             if (mysqli_query($db, $update_query)) {
+//                 echo "Time out set to NULL in room_logs.";
+//             } else {
+//                 echo "Error updating room_logs: " . mysqli_error($db);
+//             }
+//         }
+//     } else {
+//         // No record found, proceed with insert
+//         echo "No record found, proceeding to insert time_in.";
+//     }
+// }
 
 // Insert into personell_logs
 $insert_query = "INSERT INTO personell_logs (personnel_id, $time_field, date_logged, location) 
