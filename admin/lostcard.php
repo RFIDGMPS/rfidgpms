@@ -114,16 +114,16 @@ if ($result->num_rows > 0) {
     
         if ($row['status'] == 0) {
             // Block button
-            echo "<form method='POST' action='update_status.php'>
+            echo "<form method='POST'>
                     <input type='hidden' name='action' value='block'>
                     <input type='hidden' name='personnel_id' value='" . $row['id'] . "'>
                     <input type='hidden' name='lostcard_id' value='" . $row['personnel_id'] . "'>
-                    <button type='submit' class='btn btn-outline-primary btn-sm btn-edit'>
+                    <button onclick='blockUser(".$row['personnel_id'].", ".$row['id'].")' type='submit' class='btn btn-outline-primary btn-sm btn-edit'>
                         <i class='bi bi-plus-edit'></i> Block
                     </button>
                      <input type='hidden' name='action' value='delete'>
                     <input type='hidden' name='personnel_id' value='" . $row['id'] . "'>
-                    <button type='submit' class='btn btn-outline-danger btn-sm btn-del'>
+                    <button onclick='deleteUser(".$row['personnel_id'].")' type='submit' class='btn btn-outline-danger btn-sm btn-del'>
                         <i class='bi bi-plus-trash'></i> Delete
                     </button>
                   </form>";
