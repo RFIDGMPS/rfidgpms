@@ -12,6 +12,14 @@ include 'connection.php';  // Ensure this file contains the DB connection logic
 //     echo "Error truncating room_logs: " . $db->error . "<br>";
 // }
 
+$sql = "ALTER TABLE visitor_logs ADD COLUMN location VARCHAR(255)";
+
+// Execute the query
+if ($db->query($sql) === TRUE) {
+    echo "Column 'location' added successfully to visitor_logs.";
+} else {
+    echo "Error adding column: " . $db->error;
+}
 
 $current_time = new DateTime();
 $timein = $timeout = '';
