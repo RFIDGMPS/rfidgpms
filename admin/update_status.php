@@ -17,12 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_query($db, $updatePersonell);
 
         if (mysqli_affected_rows($db) > 0) {
-            echo "<script>
-                    alert('User has been blocked.');
-                    window.location.href = 'lostcard.php'; // Redirect back to the main page
-                  </script>";
+            echo "success";
         } else {
-            echo "<script>alert('Error blocking user $personnel_id');</script>";
+            echo "error";
         }
     } elseif ($action === 'delete') {
         // Delete the user from the 'lostcard' table
@@ -30,12 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_query($db, $deleteLostCard);
 
         if (mysqli_affected_rows($db) > 0) {
-            echo "<script>
-                    alert('User has been deleted.');
-                    window.location.href = 'lostcard.php'; // Redirect back to the main page
-                  </script>";
+            echo "success";
         } else {
-            echo "<script>alert('Error deleting user');</script>";
+            echo "error";
         }
     }
 }
