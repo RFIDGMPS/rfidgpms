@@ -158,7 +158,7 @@ include 'header.php';
         // Delete User Function
         function deleteUser(personnelId) {
             Swal.fire({
-                title: 'Are you sure you want to delete this user?',
+                title: 'Are you sure you want to delete this?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
