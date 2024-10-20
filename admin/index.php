@@ -103,14 +103,10 @@ if ($result->num_rows > 0) {
             // Execute the update query
             if ($db->query($updateSql) === TRUE) {
                 echo "Record ID " . $row['id'] . " updated successfully.<br>";
-            } else {
-                echo "Error updating record ID " . $row['id'] . ": " . $db->error . "<br>";
-            }
+            } 
         }
     }
-} else {
-    echo "No records found for yesterday in personell_logs.";
-}
+} 
 
 // Fetch records from room_logs for yesterday
 $sql = "SELECT * FROM room_logs WHERE DATE(date_logged) = '$yesterday' AND (time_in IS NULL OR time_out IS NULL OR time_in = '' OR time_out = '')";
@@ -136,13 +132,9 @@ if ($result->num_rows > 0) {
             $updateQuery = "UPDATE room_logs SET " . implode(", ", $updateFields) . " WHERE id = $id";
             if ($db->query($updateQuery) === TRUE) {
                 echo "Record updated successfully for ID: $id <br>";
-            } else {
-                echo "Error updating record for ID: $id: " . $db->error . "<br>";
-            }
+            } 
         }
     }
-} else {
-    echo "No records found with NULL or empty values for yesterday in room_logs.";
 }
 
 
