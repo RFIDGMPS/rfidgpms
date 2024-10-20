@@ -165,7 +165,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                   echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
+                   echo '<li class="mb-2 d-flex justify-content-between align-items-left">';
                     echo '<span><img src="uploads/' . htmlspecialchars($row["photo"]) . '" width="50px" height="50px"/></span>';
                     echo '<span class="text-muted" style="text-align:left;"><b>' . htmlspecialchars($row["full_name"]) . '</b></span>';
                     echo '</li>';
@@ -202,7 +202,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                 while ($row = $result->fetch_assoc()) {
                    echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
                     echo '<span><b>' . htmlspecialchars($row["rfid_number"]) . ': </b></span>';
-                    echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempts</span>';
+                    echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempt/s</span>';
                     echo '</li>';
                 }
             } else {
