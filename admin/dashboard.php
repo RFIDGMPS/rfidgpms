@@ -450,18 +450,24 @@ ORDER BY
         WHEN time_out IS NOT NULL THEN time_out 
         ELSE time_in 
     END DESC
-        "); function convertTo12HourFormat($time) {
-            // Split time into hours and minutes
-            list($hour, $minute) = explode(':', $time);
-            // Determine AM or PM
-            $period = ($hour >= 12) ? 'PM' : 'AM';
-            // Convert to 12-hour format
-            $hour = $hour % 12;
-            $hour = ($hour == 0) ? 12 : $hour; // Adjust hour from 0 to 12
-            return sprintf('%02d:%02d %s', $hour, $minute, $period);
-        }
-         ?>
-                                 <?php while ($row = mysqli_fetch_array($results)) { ?>
+        ");  ?>
+                                 <?php 
+                                 
+                                 function convertTo12HourFormat($time) {
+                                    // Split time into hours and minutes
+                                    list($hour, $minute) = explode(':', $time);
+                                    // Determine AM or PM
+                                    $period = ($hour >= 12) ? 'PM' : 'AM';
+                                    // Convert to 12-hour format
+                                    $hour = $hour % 12;
+                                    $hour = ($hour == 0) ? 12 : $hour; // Adjust hour from 0 to 12
+                                    return sprintf('%02d:%02d %s', $hour, $minute, $period);
+                                }
+                                
+                                 
+                                 while ($row = mysqli_fetch_array($results)) { 
+                                    
+                                    ?>
                                         <tr>
                                             <td>
                                                 <center><img src="uploads/<?php echo $row['photo']; ?>" width="50px" height="50px"></center>
