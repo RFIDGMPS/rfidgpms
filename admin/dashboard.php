@@ -463,7 +463,7 @@ ORDER BY
                                         $timein=$row['time_in'];
                                     }
 
-                                    if($row['time_in'] != null){
+                                    if($row['time_out'] != null){
                                        
                                         $timeout=date('h:i A', strtotime($row['time_out']));
                                     }else {
