@@ -461,9 +461,9 @@ ORDER BY
                                             <td><?php echo $row['role']; ?></td>
                                             <td><?php echo $row['location']; ?></td>
 
-                                            <td><?php echo $row['time_in']; ?></td>
-                                            <td>
-                                            <?php echo $row['time_out']; ?></td>
+                                            <td><?php echo date('h:i A', strtotime($row['time_in'])); ?></td>
+<td><?php echo date('h:i A', strtotime($row['time_out'])); ?></td>
+
                                           
                                            
                                         </tr>
