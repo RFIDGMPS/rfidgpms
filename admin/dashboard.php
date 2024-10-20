@@ -202,10 +202,10 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                 while ($row = $result->fetch_assoc()) {
                     echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
              // Right-aligned RFID number
-             echo '<span class="ms-auto"><b>' . htmlspecialchars($row["rfid_number"]) . ': </b></span>'; // ms-auto pushes this to the right
+             echo '<span class="ms-auto"><b>' . htmlspecialchars($row["rfid_number"]) . ' : </b></span>'; // ms-auto pushes this to the right
             
                     // Left-aligned attempts
-                    echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempt/s</span>';
+                    echo '<span class="text-muted"> ' . htmlspecialchars($row["attempts"]) . ' attempt/s</span>';
             
                    
                     echo '</li>';
