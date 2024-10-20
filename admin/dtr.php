@@ -269,8 +269,6 @@ $stmt->close();
 $daysData[$day] = $timeData;
 
 
-// Close the database connection
-$db->close();
 ?>
 
 <div class="container" id="container">
