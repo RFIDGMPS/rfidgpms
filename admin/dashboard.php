@@ -201,7 +201,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                   echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
+                   echo '<li \>';
                     echo '<span><b>' . htmlspecialchars($row["photo"]) . ': </b></span>';
                     echo '<span class="text-muted">' . htmlspecialchars($row["first_name"]) . ' attempts</span>';
                     echo '</li>';
