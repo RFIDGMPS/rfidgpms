@@ -146,7 +146,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4"
-                        onmouseover="showStrangerLogs()" onmouseout="hideStrangerLogs()">
+                        onmouseover="showBlockLogs()" onmouseout="hideBlockLogs()">
                             <i class="fa fa-ban fa-3x text-warning"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Blocked</p>
@@ -206,6 +206,13 @@ function showStrangerLogs() {
 }
 
 function hideStrangerLogs() {
+    document.getElementById('strangerLogs').style.display = 'none';
+}
+function showBlockLogs() {
+    document.getElementById('strangerLogs').style.display = 'block';
+}
+
+function hideBlockLogs() {
     document.getElementById('strangerLogs').style.display = 'none';
 }
 </script>
