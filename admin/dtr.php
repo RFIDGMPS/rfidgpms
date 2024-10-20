@@ -333,7 +333,7 @@ function convertTo12Hour($time) {
             // Check if time data exists for this day
             $timeData = isset($daysData[$day]) ? $daysData[$day] : null;
 
-            if($timeData['time_in_am'] != '' || $timeData['time_in_am'] != '?' ){
+            if($personnel['time_in_am'] != '' || $personnel['time_in_am'] != '?' ){
                 $timeData['time_in_am'] = '08:00 AM';
             }
             // Display the row for each day
