@@ -249,11 +249,7 @@ $result = $stmt->get_result();
 $timeData = $result->fetch_assoc(); // Get the fetched data
 
 // Check for null values and assign '?' if they are null
-foreach (['time_in_am', 'time_out_am', 'time_in_pm', 'time_out_pm'] as $key) {
-if (is_null($timeData[$key])) {
-    $timeData[$key] = '?';
-}
-}
+
 
 // Set default values if fields are '?' (which means they were originally null)
 if ($timeData['time_in_am'] === '?') {
