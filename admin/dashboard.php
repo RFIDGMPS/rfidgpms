@@ -450,7 +450,17 @@ ORDER BY
         WHEN time_out IS NOT NULL THEN time_out 
         ELSE time_in 
     END DESC
-        ");  ?>
+        "); function convertTo12HourFormat($time) {
+            // Split time into hours and minutes
+            list($hour, $minute) = explode(':', $time);
+            // Determine AM or PM
+            $period = ($hour >= 12) ? 'PM' : 'AM';
+            // Convert to 12-hour format
+            $hour = $hour % 12;
+            $hour = ($hour == 0) ? 12 : $hour; // Adjust hour from 0 to 12
+            return sprintf('%02d:%02d %s', $hour, $minute, $period);
+        }
+         ?>
                                  <?php while ($row = mysqli_fetch_array($results)) { ?>
                                         <tr>
                                             <td>
@@ -460,9 +470,9 @@ ORDER BY
                                             <td><?php echo $row['department']; ?></td>
                                             <td><?php echo $row['role']; ?></td>
                                             <td><?php echo $row['location']; ?></td>
+                                            <td><?php echo convertTo12HourFormat($row['time_in']); ?></td>
+<td><?php echo convertTo12HourFormat($row['time_out']); ?></td>
 
-                                            <td><?php echo date('h:i A', strtotime($row['time_in'])); ?></td>
-<td><?php echo date('h:i A', strtotime($row['time_out'])); ?></td>
 
                                           
                                            
