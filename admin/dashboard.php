@@ -189,7 +189,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
         </div>
     </div>
     
-    <div id="strangerLogs" class="stranger-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
+    <div id="strangerLogs" class="stranger-logs" >
        
         <ul class="list-unstyled">
             <?php
