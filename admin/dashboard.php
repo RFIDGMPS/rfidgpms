@@ -165,7 +165,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                   echo '<li class="mb-2 d-flex justify-content-between align-items-left">';
+                   echo '<li class="mb-2 d-flex align-items-left">';
                     echo '<span><img src="uploads/' . htmlspecialchars($row["photo"]) . '" width="50px" height="50px"/></span>';
                     echo '<span class="text-muted" style="text-align:left;"><b>' . htmlspecialchars($row["full_name"]) . '</b></span>';
                     echo '</li>';
