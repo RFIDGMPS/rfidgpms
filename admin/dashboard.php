@@ -148,7 +148,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                CONCAT(p.first_name, ' ', p.last_name) AS full_name
            FROM personell p
            JOIN personell_logs pl ON pl.personnel_id = p.id
-           WHERE pl.personnel_id = ?
+           WHERE pl.personnel_id = p.id
            ";
            
            $result = $db->query($sql);
