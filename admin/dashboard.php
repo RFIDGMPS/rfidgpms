@@ -138,23 +138,23 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
        
        <ul class="list-unstyled">
            <?php
-           // Fetch the current date
-           $currentDate = date('Y-m-d');
+        //    // Fetch the current date
+        //    $currentDate = date('Y-m-d');
 
-           // Fetch stranger logs from the database limited to the current date
-           $sql = "SELECT photo, first_name from personell";
+        //    // Fetch stranger logs from the database limited to the current date
+        //    $sql = "SELECT photo, first_name from personell";
            
-           $result = $db->query($sql);
-           if ($result->num_rows > 0) {
-               while ($row = $result->fetch_assoc()) {
-                   echo '<li class="mb-2 d-flex align-items-center">';
-                   echo '<span><img style="border-radius:50%;" src="uploads/' . htmlspecialchars($row["photo"]) . '" width="20px" height="20px"/></span>';
-                   echo '<span class="text-muted ms-3"><b>' . htmlspecialchars($row["first_name"]) . '</b></span>';
-                   echo '</li>';
-               }
-           } else {
-               echo '<li><p class="text-center">No logs found</p></li>';
-           }
+        //    $result = $db->query($sql);
+        //    if ($result->num_rows > 0) {
+        //        while ($row = $result->fetch_assoc()) {
+        //            echo '<li class="mb-2 d-flex align-items-center">';
+        //            echo '<span><img style="border-radius:50%;" src="uploads/' . htmlspecialchars($row["photo"]) . '" width="20px" height="20px"/></span>';
+        //            echo '<span class="text-muted ms-3"><b>' . htmlspecialchars($row["first_name"]) . '</b></span>';
+        //            echo '</li>';
+        //        }
+        //    } else {
+        //        echo '<li><p class="text-center">No logs found</p></li>';
+        //    }
            ?>
        </ul>
    </div>
