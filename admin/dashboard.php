@@ -142,20 +142,23 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
            $currentDate = date('Y-m-d');
 
            // Fetch stranger logs from the database limited to the current date
-           $sql = "   SELECT 
+           $sql = " SELECT 
     p.photo,
     CONCAT(p.first_name, ' ', p.last_name) AS full_name
 FROM personell p
 JOIN personell_logs pl ON pl.personnel_id = p.id
 WHERE pl.date_logged = CURRENT_DATE()
 
-UNION
+UNION ALL
 
 SELECT 
     vl.photo,
     vl.name AS full_name
 FROM visitor_logs vl
-WHERE vl.date_logged = CURRENT_DATE() LIMIT 10";
+WHERE vl.date_logged = CURRENT_DATE()
+
+LIMIT 10;
+";
            $result = $db->query($sql);
            if ($result->num_rows > 0) {
                while ($row = $result->fetch_assoc()) {
