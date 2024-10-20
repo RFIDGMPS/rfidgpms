@@ -236,27 +236,34 @@ for ($day = 1; $day <= 31; $day++) {
 
     // SQL query to fetch time data for the current day
     $sql = "SELECT time_in_am, time_out_am, time_in_pm, time_out_pm 
-            FROM personell_logs 
-            WHERE date_logged = ? AND personnel_id = ?"; // Use prepared statement to avoid SQL injection
+    FROM personell_logs 
+    WHERE date_logged = ? AND personnel_id = ?"; // Use prepared statement to avoid SQL injection
 
-    // Prepare and execute the query
-    $stmt = $db->prepare($sql);
-    $stmt->bind_param("si", $formattedDate, $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+// Prepare and execute the query
+$stmt = $db->prepare($sql);
+$stmt->bind_param("si", $formattedDate, $id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    // Fetch the data if available
-    $timeData = null; // Default to null if no data is found
-    if ($row = $result->fetch_assoc()) {
-        $timeData = $row; // Store the times if found
-    }
+// Fetch the data if available
+$timeData = [
+'time_in_am' => '08:00 AM',
+'time_out_am' => '12:00 PM',
+'time_in_pm' => '01:00 PM',
+'time_out_pm' => '05:00 PM'
+]; // Default values
 
-    
-    // Close the statement
-    $stmt->close();
+if ($row = $result->fetch_assoc()) {
+// Override default values with fetched data
+$timeData = array_merge($timeData, $row);
+}
 
-    // Store or use the data for the day
-    $daysData[$day] = $timeData;
+// Close the statement
+$stmt->close();
+
+// Store or use the data for the day
+$daysData[$day] = $timeData;
+
 }
 
 // Close the database connection
@@ -334,9 +341,9 @@ function convertTo12Hour($time) {
             $timeData = isset($daysData[$day]) ? $daysData[$day] : null;
         
             // Set default values for time_in_am if it's empty or a placeholder
-            if ($timeData && (empty($timeData['time_in_am']) || $timeData['time_in_am'] === '?')) {
-                $timeData['time_in_am'] = '08:00 AM';
-            }
+            // if ($timeData && (empty($timeData['time_in_am']) || $timeData['time_in_am'] === '?')) {
+            //     $timeData['time_in_am'] = '08:00 AM';
+            // }
         
             // Display the row for each day
             echo "<tr>";
