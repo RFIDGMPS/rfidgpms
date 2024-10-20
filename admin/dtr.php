@@ -249,7 +249,7 @@ $result = $stmt->get_result();
 $timeData = $result->fetch_assoc(); // Get the fetched data
 
 // Set default values if fields are empty or equal to '?'
-if (empty($timeData['time_in_am']) || $timeData['time_in_am'] === '?') {
+if (!empty($timeData['time_in_am']) || $timeData['time_in_am'] !== '?') {
 $timeData['time_in_am'] = '08:00 AM';
 }
 if (empty($timeData['time_out_am']) || $timeData['time_out_am'] === '?') {
