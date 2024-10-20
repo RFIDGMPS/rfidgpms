@@ -144,10 +144,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
            // Fetch stranger logs from the database limited to the current date
            $sql = "
            SELECT 
-               p.photo,
-               CONCAT(p.first_name, ' ', p.last_name) AS full_name
-           FROM personell p
-           JOIN personell_logs pl ON pl.personnel_id = p.id
+               * from personell
            ";
            
            $result = $db->query($sql);
