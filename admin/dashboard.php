@@ -200,14 +200,20 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                   echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
-                    echo '<span><b>' . htmlspecialchars($row["rfid_number"]) . ': </b></span>';
+                    echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
+            
+                    // Left-aligned attempts
                     echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempt/s</span>';
+            
+                    // Right-aligned RFID number
+                    echo '<span class="ms-auto"><b>' . htmlspecialchars($row["rfid_number"]) . ': </b></span>'; // ms-auto pushes this to the right
+            
                     echo '</li>';
                 }
             } else {
                 echo '<li><p class="text-center">No logs found</p></li>';
             }
+            
             ?>
         </ul>
     </div>
