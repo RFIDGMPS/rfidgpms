@@ -331,11 +331,13 @@ function convertTo12Hour($time) {
         // Loop through all the days of the month (1 to 31)
         for ($day = 1; $day <= 31; $day++) {
             // Check if time data exists for this day
-            //$timeData = isset($daysData[$day]) ? $daysData[$day] : null;
-
-            if($timeData['time_in_am'] != '' || $timeData['time_in_am'] != '?' ){
+            $timeData = isset($daysData[$day]) ? $daysData[$day] : null;
+        
+            // Set default values for time_in_am if it's empty or a placeholder
+            if ($timeData && (empty($timeData['time_in_am']) || $timeData['time_in_am'] === '?')) {
                 $timeData['time_in_am'] = '08:00 AM';
             }
+        
             // Display the row for each day
             echo "<tr>";
             echo "<td>" . $day . "</td>";
@@ -348,6 +350,7 @@ function convertTo12Hour($time) {
             echo "<td></td>"; // Placeholder for undertime
             echo "</tr>";
         }
+        
         ?>
         </tbody>
         <tfoot>
