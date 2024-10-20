@@ -142,10 +142,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
            $currentDate = date('Y-m-d');
 
            // Fetch stranger logs from the database limited to the current date
-           $sql = "
-           SELECT 
-               * from personell
-           ";
+           $sql = "SELECT * from personell";
            
            $result = $db->query($sql);
            if ($result->num_rows > 0) {
