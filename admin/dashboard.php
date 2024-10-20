@@ -453,20 +453,23 @@ ORDER BY
         ");  ?>
                                  <?php 
                                  
-                                //  function convertTo12HourFormat($time) {
-                                //     // Split time into hours and minutes
-                                //     list($hour, $minute) = explode(':', $time);
-                                //     // Determine AM or PM
-                                //     $period = ($hour >= 12) ? 'PM' : 'AM';
-                                //     // Convert to 12-hour format
-                                //     $hour = $hour % 12;
-                                //     $hour = ($hour == 0) ? 12 : $hour; // Adjust hour from 0 to 12
-                                //     return sprintf('%02d:%02d %s', $hour, $minute, $period);
-                                // }
+                               
                                 
                                  
                                  while ($row = mysqli_fetch_array($results)) { 
-                                    
+                                    if($row['time_in'] != null){
+                                        $timein=date('h:i A', strtotime($row['time_in']));
+                                    }else {
+                                        $timein=$row['time_in'];
+                                    }
+
+                                    if($row['time_in'] != null){
+                                       
+                                        $timeout=date('h:i A', strtotime($row['time_out']));
+                                    }else {
+                                   
+                                        $timeout=$row['time_out'];
+                                    }
                                     ?>
                                         <tr>
                                             <td>
@@ -476,8 +479,9 @@ ORDER BY
                                             <td><?php echo $row['department']; ?></td>
                                             <td><?php echo $row['role']; ?></td>
                                             <td><?php echo $row['location']; ?></td>
-                                            <td><?php echo $row['time_in']; ?></td>
-<td><?php echo $row['time_out']; ?></td>
+                                            <td><?php echo $timein; ?></td>
+                                            <td><?php echo $timeout; ?></td>
+
 
 
                                           
