@@ -126,13 +126,50 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4"
+                        onmouseover="showEntrantsLogs()" onmouseout="hideEntrantsLogs()">
                             <i class="fa fa-users fa-3x text-warning"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Entrants</p>
                                 <h6 class="mb-0"><?php echo $entrants_today; ?></h6>
                             </div>
                         </div>
+                        <div id="entrantsLogs" class="stranger-logs" style="display:none; position: absolute;background: white; border: 1px solid #ccc; padding: 10px;border-radius: 5px; z-index: 100;box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
+       
+       <ul class="list-unstyled">
+           <?php
+           // Fetch the current date
+           $currentDate = date('Y-m-d');
+
+           // Fetch stranger logs from the database limited to the current date
+           $sql = "   SELECT 
+    p.photo,
+    CONCAT(p.first_name, ' ', p.last_name) AS full_name, 
+FROM personell_logs pl
+JOIN personell p ON pl.personnel_id = p.id
+WHERE pl.date_logged = CURRENT_DATE()
+
+UNION
+
+SELECT 
+    vl.photo,
+    vl.name AS full_name,
+FROM visitor_logs vl
+WHERE vl.date_logged = CURRENT_DATE() LIMIT 10";
+           $result = $db->query($sql);
+           if ($result->num_rows > 0) {
+               while ($row = $result->fetch_assoc()) {
+                   echo '<li class="mb-2 d-flex align-items-center">';
+                   echo '<span><img style="border-radius:50%;" src="uploads/' . htmlspecialchars($row["photo"]) . '" width="20px" height="20px"/></span>';
+                   echo '<span class="text-muted ms-3"><b>' . htmlspecialchars($row["full_name"]) . '</b></span>';
+                   echo '</li>';
+               }
+           } else {
+               echo '<li><p class="text-center">No logs found</p></li>';
+           }
+           ?>
+       </ul>
+   </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4"
@@ -153,7 +190,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
            $currentDate = date('Y-m-d');
 
            // Fetch stranger logs from the database limited to the current date
-           $sql = "SELECT photo,name  FROM visitor_logs WHERE DATE(date_logged) = '$currentDate'";
+           $sql = "SELECT photo,name  FROM visitor_logs WHERE DATE(date_logged) = '$currentDate' DESC LIMIT 10";
            $result = $db->query($sql);
            if ($result->num_rows > 0) {
                while ($row = $result->fetch_assoc()) {
@@ -186,7 +223,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             $currentDate = date('Y-m-d');
 
             // Fetch stranger logs from the database limited to the current date
-            $sql = "SELECT photo,CONCAT(first_name, ' ', last_name) AS full_name  FROM personell WHERE status='Block'";
+            $sql = "SELECT photo,CONCAT(first_name, ' ', last_name) AS full_name  FROM personell WHERE status='Block' LIMIT 10";
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -221,7 +258,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             $currentDate = date('Y-m-d');
 
             // Fetch stranger logs from the database limited to the current date
-            $sql = "SELECT rfid_number, attempts FROM stranger_logs ";
+            $sql = "SELECT rfid_number, attempts FROM stranger_logs WHERE DATE(date_logged) = '$currentDate' DESC LIMIT 10";
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
