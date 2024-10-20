@@ -153,7 +153,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                                 <h6 class="mb-0"><?php echo $blocked; ?></h6>
                             </div>
                         </div>
-                        <div id="blockLogs" class="stranger-logs" style="background: white; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
+                        <div id="blockLogs" class="stranger-logs" style="display:none;background: white; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
        
         <ul class="list-unstyled">
             <?php
@@ -166,8 +166,8 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                    echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
-                    echo '<span><b>' . htmlspecialchars($row["photo"]) . ': </b></span>';
-                    echo '<span class="text-muted">' . htmlspecialchars($row["full_name"]) . ' attempts</span>';
+                    echo '<span><img src="uploads/' . htmlspecialchars($row["photo"]) . '/></span>';
+                    echo '<span class="text-muted">' . htmlspecialchars($row["full_name"]) . '</span>';
                     echo '</li>';
                 }
             } else {
