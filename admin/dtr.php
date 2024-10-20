@@ -251,7 +251,9 @@ for ($day = 1; $day <= 31; $day++) {
         $timeData = $row; // Store the times if found
     }
 
-    
+    if($timeData['time_in_am'] != '' || $timeData['time_in_am'] != '?' ){
+        $timeData['time_in_am'] = '08:00 AM';
+    }
     // Close the statement
     $stmt->close();
 
@@ -331,11 +333,9 @@ function convertTo12Hour($time) {
         // Loop through all the days of the month (1 to 31)
         for ($day = 1; $day <= 31; $day++) {
             // Check if time data exists for this day
-            $timeData = isset($daysData[$day]) ? $daysData[$day] : null;
+            //$timeData = isset($daysData[$day]) ? $daysData[$day] : null;
 
-            if($personnel['time_in_am'] != '' || $personnel['time_in_am'] != '?' ){
-                $timeData['time_in_am'] = '08:00 AM';
-            }
+            
             // Display the row for each day
             echo "<tr>";
             echo "<td>" . $day . "</td>";
