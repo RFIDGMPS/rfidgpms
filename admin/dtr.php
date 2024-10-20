@@ -235,9 +235,14 @@ for ($day = 1; $day <= 31; $day++) {
     $formattedDate = sprintf('%s-%02d-%02d', $currentYear, $currentMonth, $day);
 
     // SQL query to fetch time data for the current day
-    $sql = "SELECT time_in_am, time_out_am, time_in_pm, time_out_pm 
-            FROM personell_logs 
-            WHERE date_logged = ? AND personnel_id = ?"; // Use prepared statement to avoid SQL injection
+    $sql = "SELECT 
+    COALESCE(time_in_am, '08:00 AM') AS time_in_am, 
+    COALESCE(time_out_am, '12:00 PM') AS time_out_am, 
+    COALESCE(time_in_pm, '01:00 PM') AS time_in_pm, 
+    COALESCE(time_out_pm, '05:00 PM') AS time_out_pm 
+FROM personell_logs 
+WHERE date_logged = ? AND personnel_id = ?";
+
 
     // Prepare and execute the query
     $stmt = $db->prepare($sql);
