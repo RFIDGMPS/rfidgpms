@@ -60,7 +60,7 @@ $sql = " SELECT
     rl.personnel_id,
     rl.location
 FROM room_logs rl
-JOIN personell p ON rl.personnel_id = p.id
+JOIN personell p ON rl.personnel_id = p.id WHERE rl.date_logged = CURR_DATE()
 ORDER BY 
     GREATEST(rl.time_in, rl.time_out) DESC
 ;
@@ -98,7 +98,7 @@ if ($result->num_rows > 0) {
 
 
 // SQL query to fetch data from personell_logs
-$sql1 = "SELECT * FROM personell_logs";
+$sql1 = "SELECT * FROM personell_logs WHERE date_logged = CURR_DATE()";
 $result1 = $db->query($sql1);
 
 // Check if any rows were returned
