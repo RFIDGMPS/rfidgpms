@@ -317,11 +317,11 @@ function hideVisitorLogs() {
     document.getElementById('visitorLogs').style.display = 'none';
 }
 function showEntrantsLogs() {
-    document.getElementById('visitorLogs').style.display = 'block';
+    document.getElementById('entrantsLogs').style.display = 'block';
 }
 
 function hideEntrantsLogs() {
-    document.getElementById('visitorLogs').style.display = 'none';
+    document.getElementById('entrantsLogs').style.display = 'none';
 }
 </script>
 
