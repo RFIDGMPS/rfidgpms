@@ -72,7 +72,7 @@ include 'header.php';
 
 
 
-                                 <?php $results = mysqli_query($db, "SELECT * FROM rooms"); ?>
+                                 <?php $results = mysqli_query($db, "SELECT * FROM rooms ORDER BY id"); ?>
                                  <?php while ($row = mysqli_fetch_array($results)) { ?>
                                     <tr  class="table-<?php echo $row['id'];?>">
                                   
