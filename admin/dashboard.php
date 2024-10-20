@@ -145,13 +145,38 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4"
+                         onmouseover="showBlockLogs()" onmouseout="hideBlockLogs()">
                             <i class="fa fa-ban fa-3x text-warning"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Blocked</p>
                                 <h6 class="mb-0"><?php echo $blocked; ?></h6>
                             </div>
                         </div>
+
+                        <div id="blockLogs" class="stranger-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
+       
+       <ul class="list-unstyled">
+           <?php
+           // Fetch the current date
+           $currentDate = date('Y-m-d');
+
+           // Fetch stranger logs from the database limited to the current date
+           $sql = "SELECT rfid_number, attempts FROM stranger_logs WHERE DATE(last_log) = '$currentDate' LIMIT 10";
+           $result = $db->query($sql);
+           if ($result->num_rows > 0) {
+               while ($row = $result->fetch_assoc()) {
+                  echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
+                   echo '<span><b>' . htmlspecialchars($row["rfid_number"]) . ': </b></span>';
+                   echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempts</span>';
+                   echo '</li>';
+               }
+           } else {
+               echo '<li><p class="text-center">No logs found</p></li>';
+           }
+           ?>
+       </ul>
+   </div>
                     </div>
                     <!-- Stranger Logs Display -->
                     <div class="col-sm-6 col-xl-3 position-relative">
@@ -169,16 +194,16 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
         <ul class="list-unstyled">
             <?php
             // Fetch the current date
-            $currentDate = date('Y-m-d');
+          
 
             // Fetch stranger logs from the database limited to the current date
-            $sql = "SELECT rfid_number, attempts FROM stranger_logs WHERE DATE(last_log) = '$currentDate' LIMIT 10";
+            $sql = "SELECT photo, first_name FROM personell_logs WHERE status='Block' LIMIT 10";
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                    echo '<li class="mb-2 d-flex justify-content-between align-items-center">';
-                    echo '<span><b>' . htmlspecialchars($row["rfid_number"]) . ': </b></span>';
-                    echo '<span class="text-muted">' . htmlspecialchars($row["attempts"]) . ' attempts</span>';
+                    echo '<span><b>' . htmlspecialchars($row["photo"]) . ': </b></span>';
+                    echo '<span class="text-muted">' . htmlspecialchars($row["first_name"]) . ' attempts</span>';
                     echo '</li>';
                 }
             } else {
@@ -206,6 +231,13 @@ function showStrangerLogs() {
 
 function hideStrangerLogs() {
     document.getElementById('strangerLogs').style.display = 'none';
+}
+function showBlockLogs() {
+    document.getElementById('blockLogs').style.display = 'block';
+}
+
+function hideBlockLogs() {
+    document.getElementById('blockLogs').style.display = 'none';
 }
 </script>
 
