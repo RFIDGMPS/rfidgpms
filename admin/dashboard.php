@@ -221,7 +221,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             $currentDate = date('Y-m-d');
 
             // Fetch stranger logs from the database limited to the current date
-            $sql = "SELECT rfid_number, attempts FROM stranger_logs ";
+            $sql = "SELECT rfid_number, attempts FROM stranger_logs WHERE DATE(date_logged) = '$currentDate' LIMIT 10";
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
