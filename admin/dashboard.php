@@ -145,8 +145,8 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
            $sql = "   SELECT 
     p.photo,
     CONCAT(p.first_name, ' ', p.last_name) AS full_name
-FROM personell_logs pl
-JOIN personell p ON pl.personnel_id = p.id
+FROM personell p
+JOIN personell_logs pl ON pl.personnel_id = p.id
 WHERE pl.date_logged = CURRENT_DATE()
 
 UNION
