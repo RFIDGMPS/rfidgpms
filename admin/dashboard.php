@@ -144,7 +144,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
            // Fetch stranger logs from the database limited to the current date
            $sql = "   SELECT 
     p.photo,
-    CONCAT(p.first_name, ' ', p.last_name) AS full_name, 
+    CONCAT(p.first_name, ' ', p.last_name) AS full_name
 FROM personell_logs pl
 JOIN personell p ON pl.personnel_id = p.id
 WHERE pl.date_logged = CURRENT_DATE()
@@ -153,7 +153,7 @@ UNION
 
 SELECT 
     vl.photo,
-    vl.name AS full_name,
+    vl.name AS full_name
 FROM visitor_logs vl
 WHERE vl.date_logged = CURRENT_DATE() LIMIT 10";
            $result = $db->query($sql);
@@ -311,6 +311,13 @@ function showVisitorLogs() {
 }
 
 function hideVisitorLogs() {
+    document.getElementById('visitorLogs').style.display = 'none';
+}
+function showEntrantsLogs() {
+    document.getElementById('visitorLogs').style.display = 'block';
+}
+
+function hideEntrantsLogs() {
     document.getElementById('visitorLogs').style.display = 'none';
 }
 </script>
