@@ -158,7 +158,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
            if ($result->num_rows > 0) {
                while ($row = $result->fetch_assoc()) {
                    echo '<li class="mb-2 d-flex align-items-center">';
-                   echo '<span><img style="border-radius:50%;" src="uploads/' . htmlspecialchars($row["photo"]) . '" width="50px" height="50px"/></span>';
+                   echo '<span><img style="border-radius:50%;" src="uploads/' . htmlspecialchars($row["photo"]) . '" width="20px" height="20px"/></span>';
                    echo '<span class="text-muted ms-3"><b>' . htmlspecialchars($row["name"]) . '</b></span>';
                    echo '</li>';
                }
@@ -191,7 +191,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo '<li class="mb-2 d-flex align-items-center">';
-                    echo '<span><img style="border-radius:50%;" src="uploads/' . htmlspecialchars($row["photo"]) . '" width="50px" height="50px"/></span>';
+                    echo '<span><img style="border-radius:50%;" src="uploads/' . htmlspecialchars($row["photo"]) . '" width="20px" height="20px"/></span>';
                     echo '<span class="text-muted ms-3"><b>' . htmlspecialchars($row["full_name"]) . '</b></span>';
                     echo '</li>';
                 }
