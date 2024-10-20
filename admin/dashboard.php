@@ -146,30 +146,15 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4"
-                         onmouseover="showBlockLogs()" onmouseout="hideBlockLogs()">
+                         onmouseover="showStrangerLogs()" onmouseout="hideStrangerLogs()">
                             <i class="fa fa-ban fa-3x text-warning"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Blocked</p>
                                 <h6 class="mb-0"><?php echo $blocked; ?></h6>
                             </div>
                         </div>
-                        <script>
-function showStrangerLogs() {
-    document.getElementById('strangerLogs').style.display = 'block';
-}
 
-function hideStrangerLogs() {
-    document.getElementById('strangerLogs').style.display = 'none';
-}
-function showBlockLogs() {
-    document.getElementById('blockLogs').style.display = 'block';
-}
-
-function hideBlockLogs() {
-    document.getElementById('blockLogs').style.display = 'none';
-}
-</script>
-                        <div id="blockLogs" class="stranger-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
+                        <div id="strangerLogs" class="stranger-logs" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
        
        <ul class="list-unstyled">
            <?php
@@ -239,7 +224,16 @@ function hideBlockLogs() {
     }
 </style>
 
+<script>
+function showStrangerLogs() {
+    document.getElementById('strangerLogs').style.display = 'block';
+}
 
+function hideStrangerLogs() {
+    document.getElementById('strangerLogs').style.display = 'none';
+}
+
+</script>
 
 
 
