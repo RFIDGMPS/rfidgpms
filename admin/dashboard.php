@@ -153,7 +153,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
            $currentDate = date('Y-m-d');
 
            // Fetch stranger logs from the database limited to the current date
-           $sql = "SELECT photo,name  FROM visitor_logs WHERE DATE(date_logged) = '$currentDate' DESC LIMIT 10";
+           $sql = "SELECT photo,name  FROM visitor_logs WHERE DATE(date_logged) = '$currentDate'";
            $result = $db->query($sql);
            if ($result->num_rows > 0) {
                while ($row = $result->fetch_assoc()) {
@@ -186,7 +186,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             $currentDate = date('Y-m-d');
 
             // Fetch stranger logs from the database limited to the current date
-            $sql = "SELECT photo,CONCAT(first_name, ' ', last_name) AS full_name  FROM personell WHERE status='Block' LIMIT 10";
+            $sql = "SELECT photo,CONCAT(first_name, ' ', last_name) AS full_name  FROM personell WHERE status='Block'";
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -221,7 +221,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
             $currentDate = date('Y-m-d');
 
             // Fetch stranger logs from the database limited to the current date
-            $sql = "SELECT rfid_number, attempts FROM stranger_logs WHERE DATE(date_logged) = '$currentDate' DESC LIMIT 10";
+            $sql = "SELECT rfid_number, attempts FROM stranger_logs ";
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
