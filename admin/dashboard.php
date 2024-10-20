@@ -153,7 +153,7 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                                 <h6 class="mb-0"><?php echo $blocked; ?></h6>
                             </div>
                         </div>
-                        <div id="blockLogs" class="stranger-logs" style="position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
+                        <div id="blockLogs" class="stranger-logs" style="background: white; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-height: 200px;">
        
         <ul class="list-unstyled">
             <?php
