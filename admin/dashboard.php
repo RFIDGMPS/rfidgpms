@@ -142,14 +142,14 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
            $currentDate = date('Y-m-d');
 
            // Fetch stranger logs from the database limited to the current date
-           $sql = "SELECT * from personell";
+           $sql = "SELECT photo, first_name from personell";
            
            $result = $db->query($sql);
            if ($result->num_rows > 0) {
                while ($row = $result->fetch_assoc()) {
                    echo '<li class="mb-2 d-flex align-items-center">';
                    echo '<span><img style="border-radius:50%;" src="uploads/' . htmlspecialchars($row["photo"]) . '" width="20px" height="20px"/></span>';
-                   echo '<span class="text-muted ms-3"><b>' . htmlspecialchars($row["full_name"]) . '</b></span>';
+                   echo '<span class="text-muted ms-3"><b>' . htmlspecialchars($row["first_name"]) . '</b></span>';
                    echo '</li>';
                }
            } else {
