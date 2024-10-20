@@ -133,7 +133,6 @@ $strangers = getCount($db, "SELECT COUNT(*) AS count FROM stranger_logs WHERE la
                                 <h6 class="mb-0"><?php echo $entrants_today; ?></h6>
                             </div>
                         </div>
-                       
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4"
@@ -277,7 +276,6 @@ function showVisitorLogs() {
 function hideVisitorLogs() {
     document.getElementById('visitorLogs').style.display = 'none';
 }
-
 </script>
 
 
