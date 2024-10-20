@@ -235,9 +235,9 @@ for ($day = 1; $day <= 31; $day++) {
     $formattedDate = sprintf('%s-%02d-%02d', $currentYear, $currentMonth, $day);
 
     // SQL query to fetch time data for the current day
-$sql = "SELECT time_in_am, time_out_am, time_in_pm, time_out_pm 
-        FROM personell_logs 
-        WHERE date_logged = ? AND personnel_id = ?"; // Use prepared statement to avoid SQL injection
+    $sql = "SELECT time_in_am, time_out_am, time_in_pm, time_out_pm 
+    FROM personell_logs 
+    WHERE date_logged = ? AND personnel_id = ?"; // Use prepared statement to avoid SQL injection
 
 // Prepare and execute the query
 $stmt = $db->prepare($sql);
@@ -248,18 +248,25 @@ $result = $stmt->get_result();
 // Fetch the data if available
 $timeData = $result->fetch_assoc(); // Get the fetched data
 
-// Set default values if fields are empty or equal to '?'
-if (!empty($timeData['time_in_am']) || $timeData['time_in_am'] != '?') {
-    $timeData['time_in_am'] = '08:00 AM';
+// Check for null values and assign '?' if they are null
+foreach (['time_in_am', 'time_out_am', 'time_in_pm', 'time_out_pm'] as $key) {
+if (is_null($timeData[$key])) {
+    $timeData[$key] = '?';
 }
-if (!empty($timeData['time_out_am']) || $timeData['time_out_am'] != '?') {
-    $timeData['time_out_am'] = '12:00 PM';
 }
-if (!empty($timeData['time_in_pm']) || $timeData['time_in_pm'] != '?') {
-    $timeData['time_in_pm'] = '01:00 PM';
+
+// Set default values if fields are '?' (which means they were originally null)
+if ($timeData['time_in_am'] === '?') {
+$timeData['time_in_am'] = '08:00 AM';
 }
-if (!empty($timeData['time_out_pm']) || $timeData['time_out_pm'] != '?') {
-    $timeData['time_out_pm'] = '05:00 PM';
+if ($timeData['time_out_am'] === '?') {
+$timeData['time_out_am'] = '12:00 PM';
+}
+if ($timeData['time_in_pm'] === '?') {
+$timeData['time_in_pm'] = '01:00 PM';
+}
+if ($timeData['time_out_pm'] === '?') {
+$timeData['time_out_pm'] = '05:00 PM';
 }
 
 // Close the statement
@@ -267,7 +274,6 @@ $stmt->close();
 
 // Store or use the data for the day
 $daysData[$day] = $timeData;
-
 
 }
 
