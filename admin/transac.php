@@ -44,15 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (mysqli_query($db, $query)) {
         echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script type="text/javascript">
-                Swal.fire({
-                    icon: "success",
-                    title: "Successfully Added!",
-                    text: "New user has been added.",
-                    confirmButtonText: "OK"
-                }).then(function() {
-                    window.location = "personell.php";
-                });
-              </script>';
+   Swal.fire({
+      icon: "success",
+      title: "Successfully added.",
+      text: "Your entry has been successfully added.",
+      confirmButtonText: "OK"
+   }).then(function() {
+      window.location = "personell.php";
+   });
+</script>';
     } else {
         echo '<script type="text/javascript">
                 Swal.fire({
