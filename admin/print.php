@@ -23,15 +23,11 @@ include 'header.php';
                                         <th>Photo</th>
                                         <th>Full Name</th>
                                         <th>Department</th>
-                                          
-                                            <th>Role</th>
-                                          
-                                          
-                                            <th>Time In (AM)</th>
-                                            <th>Time Out (AM)</th>
-                                            <th>Time In (PM)</th>
-                                            <th>Time Out (PM)</th>
-                                            <th>Log Date</th>
+                                        <th>Location</th>
+                                        <th>Role</th>
+                                        <th>Time In</th>
+                                        <th>Time Out</th>
+                                        <th>Log Date</th>
                                         </tr>
                                     </thead>
                                     <tbody id="load_data">
