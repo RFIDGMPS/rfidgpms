@@ -20,10 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
         FROM personell AS p
         JOIN room_logs AS rl ON p.id = rl.personnel_id
-        WHERE rl.date_logged BETWEEN '$date1' AND '$date2'  ORDER BY CASE 
-        WHEN time_out IS NOT NULL THEN time_out 
-        ELSE time_in 
-    END DESC";
+        WHERE rl.date_logged BETWEEN '$date1' AND '$date2'  ORDER BY rl.date_logged DESC";
     $result = mysqli_query($db, $sql);
 
     // Check if query was successful
@@ -46,10 +43,7 @@ else {
 // Fetch all records from the database if no filtering is applied
 $sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
         FROM personell AS p
-        JOIN room_logs AS rl ON p.id = rl.personnel_id ORDER BY CASE 
-        WHEN time_out IS NOT NULL THEN time_out 
-        ELSE time_in 
-    END DESC";
+        JOIN room_logs AS rl ON p.id = rl.personnel_id ORDER BY rl.date_logged  DESC";
 $result = mysqli_query($db, $sql);
 if ($result) {
     // Initialize array to store filtered data
@@ -147,10 +141,7 @@ mysqli_close($db);
         $sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
         FROM personell AS p
         JOIN room_logs AS rl ON p.id = rl.personnel_id
-        WHERE rl.date_logged BETWEEN '$date1' AND '$date2'  ORDER BY CASE 
-        WHEN time_out IS NOT NULL THEN time_out 
-        ELSE time_in 
-    END DESC";
+        WHERE rl.date_logged BETWEEN '$date1' AND '$date2'  ORDER BY rl.date_logged DESC";
         $result = mysqli_query($db, $sql);
 
         // Check if query was successful
