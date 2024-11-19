@@ -611,30 +611,30 @@ while ($row = $result->fetch_assoc()) {
         const roleSelect = document.getElementById('role');
         const categorySelect = document.getElementById('category');
 
-        // Event listener for role changes
+        // Define category options
+        const categories = {
+            Student: ['Student'],
+            Default: ['Regular', 'Contractual']
+        };
+
+        // Add event listener to the role dropdown
         roleSelect.addEventListener('change', function () {
-            updateCategory(roleSelect.value);
-        });
+            const selectedRole = roleSelect.value;
 
-        function updateCategory(role) {
-            // Define category options
-            const categories = {
-                Student: ['Student'],
-                Default: ['Regular', 'Contractual']
-            };
-
-            // Clear existing options
+            // Clear existing category options
             categorySelect.innerHTML = '<option value="" disabled selected>Select Category</option>';
 
-            // Add appropriate category options
-            const selectedCategories = categories[role] || categories['Default'];
+            // Determine categories to display
+            const selectedCategories = categories[selectedRole] || categories['Default'];
+
+            // Add the appropriate categories to the dropdown
             selectedCategories.forEach(category => {
                 const option = document.createElement('option');
                 option.value = category;
                 option.textContent = category;
                 categorySelect.appendChild(option);
             });
-        }
+        });
     });
 </script>
 
