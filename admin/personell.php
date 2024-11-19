@@ -769,7 +769,7 @@ while ($row = $result->fetch_assoc()) {
          <div class="col-lg-4 col-md-6 col-sm-12">
                                        <div class="form-group">
                                           <label>RFID NUMBER:</label>
-                                          <input required type="text" class="form-control" name="rfid_number" id="rfid_number" minlength="10" maxlength="10" autocomplete="off">
+                                          <input required type="text" class="form-control edit-rfid" name="rfid_number" id="rfid_number" minlength="10" maxlength="10" autocomplete="off">
                                           <span class="rfidno-error"></span>
                                        </div>
                                     </div>
