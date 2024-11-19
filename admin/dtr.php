@@ -4,6 +4,7 @@
 include 'auth.php'; // Include session validation
 $personnel = [];
 $query = '';
+$month = date('F');
 $id=0;
 include '../connection.php';
 ?>
@@ -104,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
             <label>Month:</label>
            
             <select class="form-control" id="months" name="month">
-            <option value="<?php echo date('F'); ?>" disabled selected><?php echo date('F'); ?></option>
+            <option value="<?php echo $month; ?>" disabled selected><?php echo $month; ?></option>
     <option value="January">January</option>
     <option value="February">February</option>
     <option value="March">March</option>
