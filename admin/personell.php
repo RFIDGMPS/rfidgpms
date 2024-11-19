@@ -128,18 +128,12 @@ include '../connection.php';
                   </div>
                </div>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Ensure SweetAlert is included -->
+
 
 <script>
 $(document).ready(function() {
     // Initialize DataTable
-    $('#myDataTable').DataTable({
-        "paging": true,  // Enable pagination
-        "searching": true, // Enable search
-        "lengthChange": false, // Hide the entries dropdown
-        "pageLength": 10, // Set the number of records per page
-        "info": true // Display table info (such as "Showing 1 to 10 of 100 entries")
-    });
+    $('#myDataTable').DataTable();
 
     // Event delegation for the delete button
     $(document).on('click', '.d_user_id', function() {
@@ -259,7 +253,7 @@ $(document).ready(function() {
 
                                     </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
                                     <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
