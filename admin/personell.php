@@ -115,6 +115,13 @@ include '../connection.php';
         data-bs-target="#delemployee-modal">
     <i class="bi bi-plus-trash"></i> Delete
 </button>
+<style>
+
+.modal-backdrop {
+    z-index: 1040 !important; /* Ensure backdrop doesn't overlap content */
+}
+
+</style>
 <script>
 
 document.addEventListener('DOMContentLoaded', function () {
