@@ -762,7 +762,7 @@ while ($row = $result->fetch_assoc()) {
                                  <label for="inputTime">
                                  <b>Name:</b>
                                  </label>
-                                 <input  type="text" id="delete_departmentname" class="form-control d-personell" autocomplete="off" readonly="">
+                                 <input  type="text" id="delete_departmentname" class="form-control d-personell user_name" autocomplete="off" readonly="">
                                  <span class="deptname-error"></span>
                               </div>
                            </div>
