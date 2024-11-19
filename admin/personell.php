@@ -766,27 +766,26 @@ while ($row = $result->fetch_assoc()) {
       </div>
    </div>
 </div>
-<script>
-   // Check for the 'status' query parameter in the URL
-   const urlParams = new URLSearchParams(window.location.search);
-   const status = urlParams.get('status');
+<?php
+session_start();
+if (isset($_SESSION['swal_message'])) {
+    $swalMessage = $_SESSION['swal_message'];
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: "<?php echo $swalMessage['title']; ?>",
+                text: "<?php echo $swalMessage['text']; ?>",
+                icon: "<?php echo $swalMessage['icon']; ?>",
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+    <?php
+    unset($_SESSION['swal_message']); // Clear the session after displaying
+}
+?>
 
-   if (status === 'success') {
-      Swal.fire({
-         icon: 'success',
-         title: 'Success!',
-         text: 'User added successfully.',
-         confirmButtonText: 'OK'
-      });
-   } else if (status === 'error') {
-      Swal.fire({
-         icon: 'error',
-         title: 'Error!',
-         text: 'There was an issue adding the user.',
-         confirmButtonText: 'Try Again'
-      });
-   }
-</script>
             <!-- <script type="text/javascript">
                document.addEventListener('DOMContentLoaded', () => {
                	let btn = document.querySelector('#btn-delemp');
