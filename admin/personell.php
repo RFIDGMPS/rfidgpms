@@ -117,7 +117,7 @@ include '../connection.php';
 </button>
 <style>
 
-.modal-backdrop {
+.modal {
     z-index: 1040 !important; /* Ensure backdrop doesn't overlap content */
 }
 
