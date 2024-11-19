@@ -771,22 +771,16 @@ session_start();
 if (isset($_SESSION['swal_message'])) {
     $swalMessage = $_SESSION['swal_message'];
     ?>
-   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        Swal.fire({
-            title: "<?php echo $swalMessage['title']; ?>",
-            text: "<?php echo $swalMessage['text']; ?>",
-            icon: "<?php echo $swalMessage['icon']; ?>",
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Perform an action when "OK" is clicked
-                window.location.href = 'personell.php'; // Redirect to the same or another page
-            }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: "<?php echo $swalMessage['title']; ?>",
+                text: "<?php echo $swalMessage['text']; ?>",
+                icon: "<?php echo $swalMessage['icon']; ?>",
+                confirmButtonText: 'OK'
+            });
         });
-    });
-</script>
-
+    </script>
     <?php
     unset($_SESSION['swal_message']); // Clear the session after displaying
 }
