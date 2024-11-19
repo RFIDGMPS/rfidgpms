@@ -134,7 +134,9 @@ include '../connection.php';
                   </div>
                </div>
             </div>
-            <script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Ensure SweetAlert is included -->
+
+<script>
 $(document).ready(function() {
     // Initialize DataTable
     $('#myDataTable').DataTable({
@@ -144,155 +146,92 @@ $(document).ready(function() {
         "pageLength": 10, // Set the number of records per page
         "info": true // Display table info (such as "Showing 1 to 10 of 100 entries")
     });
-});
-</script>
 
-            <script type="text/javascript">
-            
-            $(document).ready(function() {
-               $("#myDataTable").DataTable();
-   
-       
-      //          $('#myDataTable tbody').on('click', '.d_user_id', function() {
-      //      // Show the modal using Bootstrap's modal method
-      //      var modal = new bootstrap.Modal(document.getElementById('delemployee-modal'));
-      //      modal.show(); // Open the modal
-   
-      //      // Retrieve the data attributes
-      //      var user_name = $(this).attr('user_name');
-      //      var id = $(this).attr('data-id');
-   
-      //      // Update modal content with the retrieved data
-      //      $('.user_name').html(user_name);
-      //      $('.d-personell').val(user_name); // If you want to set a readonly input with the name
-   
-      //      // Handle remove button click to delete the user
-      //      $('.remove_id').off('click').on('click', function() {
-      //          window.location = 'del.php?type=personell&id=' + id; // Redirect to delete script
-      //      });
-      //  });
-   
-   
-                       // Event delegation for edit button
-               $('#myDataTable tbody').on('click', '.e_user_id', function() {
-   
-                     alert('test');
-                        $id = $(this).attr('data-id');
-                        // $('#editModal').load('edit.php?id=' + $id);
-                  $('#editemployeeModal').modal('show');
-                  $getphoto =  $('.table-'+$id+' .photo').attr('src');
-            
-                  $getid =  $('.table-'+$id+' .id_number').val();
-                  $getrfid =  $('.table-'+$id+' .rfid').html();
-                  $getrole =  $('.table-'+$id+' .role').val();
-                  $getfname =  $('.table-'+$id+' .first_name').val();
-                  $getlname =  $('.table-'+$id+' .last_name').val();
-                  $getmname =  $('.table-'+$id+' .middle_name').val();
-                  $getdob =  $('.table-'+$id+' .date_of_birth').val();
-                  $getpob =  $('.table-'+$id+' .place_of_birth').val();
-                  $getsex =  $('.table-'+$id+' .sex').val();
-                  $getcivil =  $('.table-'+$id+' .civil_status').val();
-               
-                  $getcnumber =  $('.table-'+$id+' .contact_number').val();
-                  $getemail =  $('.table-'+$id+' .email_address').val();
-                  $getdepartment =  $('.table-'+$id+' .department').val();
-                  $getstatus =  $('.table-'+$id+' .status').val();
-               
-                  $address =  $(this).attr('address');
-         
-          $('.e-address').val($address);
-   
-                  $('.edit-photo').attr('src',$getphoto);
-                  
-                  $('.edit-photo-input').attr('image',$getphoto);
-                  $('.edit-rfid').val($getrfid);
-                  $('.edit-id').val($getid);
-                  $('.edit-role-val').html($getrole);
-                  $('.edit-fname').val($getfname);
-                  $('.edit-lname').val($getlname);
-                  $('.capturedImage').val($getphoto);
-                  $('.edit-mname').val($getmname);
-                  $('.edit-dob').val($getdob);
-                  $('.edit-pob').val($getpob);
-                  $('.edit-sex').html($getsex);
-                  $('.edit-cnumber').val($getcnumber);
-                  $('.edit-status').html($getcivil);
-                  $('.edit-email').val($getemail);
-                  $('.edit-department').html($getdepartment);
-                  $('.edit-status1').html($getstatus);
-               
-                  $('.edit-form').attr('action','edit1.php?edit=personell&id='+$id);
-                  
-                     });
-            });
-          
-          </script>
-<script>
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Handle button click to open modal and set user info
-    
-    document.querySelectorAll('.d_user_id').forEach(function (button) {
-    button.addEventListener('click', function () {
-        var userName = button.getAttribute('user_name');
-        var userId = button.getAttribute('data-id');
+    // Event delegation for the delete button
+    $(document).on('click', '.d_user_id', function() {
+        var userName = $(this).attr('user_name');
+        var userId = $(this).attr('data-id');
 
         // Set user name and user ID in modal
-        document.querySelector('.user_name').value = userName;
-        document.querySelector('#delete_employeeid').value = userId;
+        $('.user_name').val(userName);
+        $('#delete_employeeid').val(userId);
 
-        // Show the custom modal
-        document.getElementById('delemployee-modal').style.display = 'flex';  // Manually show the modal
+        // Show the custom modal (display it manually if using a custom modal)
+        $('#delemployee-modal').show(); 
     });
-});
 
-
-    // Handle "Yes" button click (delete action)
-    document.getElementById('btn-delemp').addEventListener('click', function () {
-        var userId = document.getElementById('delete_employeeid').value;
+    // Handle "Yes" button click for deletion
+    $('#btn-delemp').on('click', function () {
+        var userId = $('#delete_employeeid').val();
 
         if (userId) {
-        
-           
-                    // Proceed with deletion (AJAX or direct redirection)
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "del.php?type=personell", true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    xhr.onload = function () {
-                        if (xhr.status === 200) {
-                            // Success: Show success message with SweetAlert
-                            Swal.fire(
-                                'Deleted!',
-                                'The user has been deleted.',
-                                'success'
-                            ).then(() => {
-                                // Optionally reload the page or update the UI
-                                location.reload();
-                            });
-                        } else {
-                            // Failure: Show error message with SweetAlert
-                            Swal.fire(
-                                'Error!',
-                                'There was a problem deleting the user.',
-                                'error'
-                            );
-                        }
-                    };
-                    xhr.send("id=" + userId);
-            
-           
+            // AJAX request to delete the user
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "del.php?type=personell", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Show success message with SweetAlert
+                    Swal.fire('Deleted!', 'The user has been deleted.', 'success').then(() => {
+                        // Reload the page or update the UI
+                        location.reload();
+                    });
+                } else {
+                    // Show error message with SweetAlert
+                    Swal.fire('Error!', 'There was a problem deleting the user.', 'error');
+                }
+            };
+            xhr.send("id=" + userId);
         } else {
-            Swal.fire(
-                'Error!',
-                'User ID not found!',
-                'error'
-            );
+            Swal.fire('Error!', 'User ID not found!', 'error');
         }
     });
-});
 
+    // Event delegation for the edit button
+    $(document).on('click', '.e_user_id', function() {
+        var $id = $(this).attr('data-id');
+        $('#editemployeeModal').modal('show'); // Bootstrap modal for editing
+
+        // Retrieve data from the selected row
+        var $getphoto = $('.table-' + $id + ' .photo').attr('src');
+        var $getrfid = $('.table-' + $id + ' .rfid').html();
+        var $getrole = $('.table-' + $id + ' .role').val();
+        var $getfname = $('.table-' + $id + ' .first_name').val();
+        var $getlname = $('.table-' + $id + ' .last_name').val();
+        var $getmname = $('.table-' + $id + ' .middle_name').val();
+        var $getdob = $('.table-' + $id + ' .date_of_birth').val();
+        var $getpob = $('.table-' + $id + ' .place_of_birth').val();
+        var $getsex = $('.table-' + $id + ' .sex').val();
+        var $getcivil = $('.table-' + $id + ' .civil_status').val();
+        var $getcnumber = $('.table-' + $id + ' .contact_number').val();
+        var $getemail = $('.table-' + $id + ' .email_address').val();
+        var $getdepartment = $('.table-' + $id + ' .department').val();
+        var $getstatus = $('.table-' + $id + ' .status').val();
+
+        // Update the modal fields with data
+        $('.edit-photo').attr('src', $getphoto);
+        $('.edit-rfid').val($getrfid);
+        $('.edit-id').val($id);
+        $('.edit-role-val').html($getrole);
+        $('.edit-fname').val($getfname);
+        $('.edit-lname').val($getlname);
+        $('.capturedImage').val($getphoto);
+        $('.edit-mname').val($getmname);
+        $('.edit-dob').val($getdob);
+        $('.edit-pob').val($getpob);
+        $('.edit-sex').html($getsex);
+        $('.edit-cnumber').val($getcnumber);
+        $('.edit-status').html($getcivil);
+        $('.edit-email').val($getemail);
+        $('.edit-department').html($getdepartment);
+        $('.edit-status1').html($getstatus);
+
+        // Update the form action dynamically
+        $('.edit-form').attr('action', 'edit1.php?edit=personell&id=' + $id);
+    });
+});
 </script>
-		
+
             <!-- Modal -->
             <form role="form" method="post" action="transac.php?action=add" enctype="multipart/form-data">
                <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
