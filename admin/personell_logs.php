@@ -120,7 +120,7 @@ mysqli_close($db);
                         </div>
                         <hr>
                         <div class="table-responsive">
-                        <table class="table table-border" id="myDataTable">
+                        <table class="table table-border" id="dataTable">
                                 <thead>
                                     <tr>
                                         <th>Photo</th>
