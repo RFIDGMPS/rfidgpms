@@ -70,6 +70,7 @@ include '../connection.php';
                                  <tr class="table-<?php echo $row['id'];?>">
 								 <input class="id_number" type="hidden" value="<?php echo $row['id_no']; ?>" />
 									<input class="role" type="hidden" value="<?php echo $row['role']; ?>" />
+                           <input class="categ" type="hidden" value="<?php echo $row['category']; ?>" />
 									<input class="last_name" type="hidden" value="<?php echo $row['last_name']; ?>" />
 									<input class="first_name" type="hidden" value="<?php echo $row['first_name']; ?>" />
 									<input class="middle_name" type="hidden" value="<?php echo $row['middle_name']; ?>" />
@@ -186,6 +187,7 @@ $(document).ready(function() {
         var $getphoto = $('.table-' + $id + ' .photo').attr('src');
         var $getrfid = $('.table-' + $id + ' .rfid').html();
         var $getrole = $('.table-' + $id + ' .role').val();
+        var $getcateg = $('.table-' + $id + ' .categ').val();
         var $getfname = $('.table-' + $id + ' .first_name').val();
         var $getlname = $('.table-' + $id + ' .last_name').val();
         var $getmname = $('.table-' + $id + ' .middle_name').val();
@@ -203,6 +205,7 @@ $(document).ready(function() {
         $('.edit-rfid').val($getrfid);
         $('.edit-id').val($id);
         $('.edit-role-val').html($getrole);
+        $('.edit-categ-val').html($getcateg);
         $('.edit-fname').val($getfname);
         $('.edit-lname').val($getlname);
         $('.capturedImage').val($getphoto);
@@ -598,7 +601,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>Category:</label>
         <select required class="form-control" name="category" id="category" autocomplete="off">
-            <!-- Category options will be populated by JavaScript -->
+        <option class="edit-categ-val" selected></option>
         </select>
         <span class="id-error"></span>
     </div>
