@@ -131,7 +131,13 @@ include '../connection.php';
             <script type="text/javascript">
             
             $(document).ready(function() {
-               $("#myDataTable").DataTable();
+               $('#myDataTable').DataTable({
+        "paging": true,
+        "searching": true,
+        "info": true,
+        "lengthChange": false,
+        "pageLength": 10,
+    });
    
        
       //          $('#myDataTable tbody').on('click', '.d_user_id', function() {
