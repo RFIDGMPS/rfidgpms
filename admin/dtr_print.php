@@ -285,10 +285,6 @@ $db->close();
                     </tbody>
                 </table>
             </div>
-        </div>
-
-        <!-- Second Column -->
-        <div class="table-column">
             <div class="footer">
                 <p><strong>Prepared by:</strong> (Signature over printed name)</p>
                 <p>Approved by:</p>
@@ -297,6 +293,11 @@ $db->close();
                     <p><strong>In-Charge</strong></p>
                 </div>
             </div>
+        </div>
+
+        <!-- Second Column -->
+        <div class="table-column">
+            
         </div>
     </div>
 </body>
