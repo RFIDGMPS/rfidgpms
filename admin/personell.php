@@ -1,13 +1,5 @@
 
 <!DOCTYPE html>
-<!-- Include jQuery first -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Include DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-
-<!-- Include DataTables JS -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 <?php
 include 'auth.php'; // Include session validation
@@ -133,21 +125,24 @@ include '../connection.php';
          	$("#myDataTable").DataTable();
 
     
-			 $('#myDataTable tbody').on('click', '.d_user_id', function() {
-			// $('.d_user_id').click(function(){
-            alert('test');
-				$('#delemployee-modal').modal('show');
-            		    
-						$('.user_name').html($(this).attr('user_name'));
-               		$id = $(this).attr('data-id');
-                     $username =  $(this).attr('user_name');
-       
-                       $('.d-personell').val($username);
-               		$('.remove_id').click(function(){
-               			window.location = 'del.php?type=personell&id=' + $id;
-						 
-               		});
-               	});
+            $('#myDataTable tbody').on('click', '.d_user_id', function() {
+        // Show the modal
+        $('#delemployee-modal').modal('show');
+
+        // Retrieve data from the clicked element
+        var user_name = $(this).attr('user_name');
+        var id = $(this).attr('data-id');
+
+        // Update modal content
+        $('.user_name').html(user_name);
+        $('.d-personell').val(user_name);
+
+        // Bind click event to the remove button dynamically
+        $('.remove_id').off('click').on('click', function() {
+            // Redirect to the deletion URL
+            window.location = 'del.php?type=personell&id=' + id;
+        });
+    });
 				        // Event delegation for edit button
             $('#myDataTable tbody').on('click', '.e_user_id', function() {
 
