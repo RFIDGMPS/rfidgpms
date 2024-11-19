@@ -265,6 +265,7 @@ $(document).ready(function() {
 
                                     </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                                     <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
@@ -464,7 +465,8 @@ while ($row = $result->fetch_assoc()) {
                                        </div>
                                     </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
    $(document).ready(function() {
       $('#rfid_number').on('blur', function() {
@@ -1092,15 +1094,12 @@ include '../connection.php';
                                  <div class="" style="border: 1PX solid #b3f0fc;padding: 1%;background-color: #f7cfa1;color: black;font-size: 1.2rem">PERSONAL INFORMATION</div>
                                  <div class="row">
                                     <div class="col-lg-3 col-md-6 col-sm-12" id="up_img">
-                                    <div class="file-uploader">
-   <label for="photo" class="upload-img-btn" style="cursor: pointer;">
-      <img class="preview-1" src="../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg"
-           style="width: 140px!important; height: 130px!important; position: absolute; border: 1px solid gray; top: 15%;"
-           title="Upload Photo.." />
-   </label>
-   <input type="file" id="photo" name="photo" class="upload-field-1" 
-          style="opacity: 0; position: absolute; z-index: -1;" accept="image/*" required>
-</div>
+                                       <div class="file-uploader">
+                                          <label name="upload-label" class="upload-img-btn">
+                                          <input required type="file" id="photo" name="photo" class="upload-field-1" style="display:none;" accept="image/*" title="Upload Foto.."/>
+                                          <img class="preview-1" src="../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg" style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 15%" title="Upload Photo.." />
+                                          </label>
+                                       </div>
                                     </div>
                                     <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
@@ -1299,39 +1298,6 @@ while ($row = $result->fetch_assoc()) {
                                           <span class="rfidno-error"></span>
                                        </div>
                                     </div>
-                                    
-<script>
-   $(document).ready(function() {
-      $('#rfid_number').on('blur', function() {
-         const rfidNumber = $(this).val();
-         
-         if (rfidNumber.length === 10) {
-            $.ajax({
-               url: 'check_rfid.php', // Backend PHP file
-               method: 'POST',
-               data: { rfid_number: rfidNumber },
-               success: function(response) {
-                  const res = JSON.parse(response);
-                  if (res.exists) {
-                     Swal.fire({
-                        icon: 'warning',
-                        title: 'Duplicate RFID',
-                        text: 'This RFID number already exists in the system.',
-                     });
-                  } 
-               },
-               error: function() {
-                  Swal.fire({
-                     icon: 'error',
-                     title: 'Error',
-                     text: 'Unable to check RFID. Please try again later.',
-                  });
-               }
-            });
-         }
-      });
-   });
-</script>
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                        <div class="form-group">
                                           <label>STATUS:</label>
@@ -1611,7 +1577,7 @@ while ($row = $result->fetch_assoc()) {
                   </div>
                </div>
             </div>
-            <!-- <script type="text/javascript">
+            <script type="text/javascript">
                document.addEventListener('DOMContentLoaded', () => {
                	let btn = document.querySelector('#btn-delemp');
                	btn.addEventListener('click', (e) => {
@@ -1641,52 +1607,8 @@ while ($row = $result->fetch_assoc()) {
                		// }
                	});
                });
-            </script> -->
-            <script type="text/javascript">
-           function readURL(input) {
-    if (input.files && input.files[0]) {
-        const file = input.files[0];
-        const validFormats = ['image/jpeg', 'image/png'];
-        const maxSize = 2 * 1024 * 1024; // 2MB
-
-        // Validate file format
-        if (!validFormats.includes(file.type)) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Invalid Format',
-                text: 'Only JPG and PNG formats are allowed.',
-            });
-            input.value = ''; // Reset the input
-            return;
-        }
-
-        // Validate file size
-        if (file.size > maxSize) {
-            Swal.fire({
-                icon: 'error',
-                title: 'File Too Large',
-                text: 'Maximum file size is 2MB.',
-            });
-            input.value = ''; // Reset the input
-            return;
-        }
-
-        // Preview the image
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var num = $(input).attr('class').split('-')[2];
-            $('.file-uploader .preview-' + num).attr('src', e.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-// Attach change event to all inputs with a class starting with 'upload-field-'
-$("[class^=upload-field-]").change(function () {
-    readURL(this);
-});
-
-         </script>
+            </script>
+			
             <?php
 include 'footer.php';
 			?>
