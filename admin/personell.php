@@ -520,10 +520,25 @@ while ($row = $result->fetch_assoc()) {
     document.addEventListener('DOMContentLoaded', function () {
         const modal = document.getElementById('employeeModal');
         const form = document.getElementById('personellForm');
+        const fileInput = document.getElementById('photo');
+        const previewImage = document.querySelector('.preview-1');
 
         // Listen for the modal's hide event
         modal.addEventListener('hide.bs.modal', function () {
             form.reset(); // Reset the form
+            previewImage.src = "../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg"; // Reset image preview
+        });
+
+        // Update the preview image when a file is selected
+        fileInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result; // Set the preview to the selected image
+                };
+                reader.readAsDataURL(file);
+            }
         });
     });
 </script>
