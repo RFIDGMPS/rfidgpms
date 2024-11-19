@@ -194,7 +194,7 @@ mysqli_close($db);
     $results = mysqli_query($db, "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
     FROM personell AS p
     JOIN personell_logs AS pl ON p.id = pl.personnel_id
-    JOIN room_logs AS rl ON p.id = rl.personell_id  -- Assuming this is the correct relation
+    JOIN room_logs AS rl ON p.id = rl.personnel_id  -- Assuming this is the correct relation
     ORDER BY pl.id DESC");  // Order by the personell_logs.id in descending order
 
 
