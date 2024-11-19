@@ -77,9 +77,18 @@ if ($result->num_rows > 0) {
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-success" id="saveButton" style="padding: 10px 20px; display:none;"> <i class="bi bi-save"></i> Save</button> 
-                                    <button type="button" class="btn btn-secondary" id="cancelButton" onclick="cancelEdit()" style="padding: 10px 20px; display:none;"><i class="bi bi-cancel"></i>Cancel</button>
-                                </div>
+                                <div class="d-flex justify-content-end gap-2">
+    <!-- Save Button -->
+    <button type="submit" class="btn btn-success" id="saveButton" style="padding: 10px 20px; display:none;"> 
+        <i class="bi bi-save"></i> Save
+    </button> 
+
+    <!-- Cancel Button with modified icon and space between buttons -->
+    <button type="button" class="btn btn-secondary" id="cancelButton" onclick="cancelEdit()" style="padding: 10px 20px; display:none;">
+        <i class="bi bi-x-circle"></i> Cancel
+    </button>
+</div>
+ </div>
                             </form>
                         </div>
                     </div>
