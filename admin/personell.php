@@ -1,6 +1,6 @@
 
-
 <!DOCTYPE html>
+
 <?php
 include 'auth.php'; // Include session validation
 
@@ -107,8 +107,16 @@ include '../connection.php';
                                        <center>
                                           <button address="<?php echo $row['complete_address']; ?>" data-id="<?php echo $row['id'];?>" class="btn btn-outline-primary btn-sm btn-edit e_user_id" >
                                           <i class="bi bi-plus-edit"></i> Edit </button>
-                                          <button user_name="<?php echo $row['first_name'] .' '. $row['last_name']; ?>" data-id="<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm btn-del d_user_id">
-                                          <i class="bi bi-plus-trash"></i> Delete </button>
+                                        <!-- Delete Button -->
+<button user_name="<?php echo $row['first_name'] . ' ' . $row['last_name']; ?>" 
+        data-id="<?php echo $row['id']; ?>" 
+        class="btn btn-outline-danger btn-sm btn-del d_user_id" 
+        data-bs-toggle="modal" 
+        data-bs-target="#delemployee-modal">
+    <i class="bi bi-plus-trash"></i> Delete
+</button>
+
+
                                        </center>
                                     </td>
                                  </tr>
@@ -120,79 +128,104 @@ include '../connection.php';
                   </div>
                </div>
             </div>
-			<script type="text/javascript">
-         $(document).ready(function() {
-         	$("#myDataTable").DataTable();
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Ensure SweetAlert is included -->
 
-    
-			 $('#myDataTable tbody').on('click', '.d_user_id', function() {
-			// $('.d_user_id').click(function(){
-				$('#delemployee-modal').modal('show');
-            		    
-						$('.user_name').html($(this).attr('user_name'));
-               		$id = $(this).attr('data-id');
-                     $username =  $(this).attr('user_name');
-       
-                       $('.d-personell').val($username);
-               		$('.remove_id').click(function(){
-               			window.location = 'del.php?type=personell&id=' + $id;
-						 
-               		});
-               	});
-				        // Event delegation for edit button
-            $('#myDataTable tbody').on('click', '.e_user_id', function() {
+<script>
+$(document).ready(function() {
+    // Initialize DataTable
+    $('#myDataTable').DataTable({
+        "paging": true,  // Enable pagination
+        "searching": true, // Enable search
+        "lengthChange": false, // Hide the entries dropdown
+        "pageLength": 10, // Set the number of records per page
+        "info": true // Display table info (such as "Showing 1 to 10 of 100 entries")
+    });
 
-               	//$('.e_user_id').click(function(){
-               		$id = $(this).attr('data-id');
-               		// $('#editModal').load('edit.php?id=' + $id);
-					$('#editemployeeModal').modal('show');
-					$getphoto =  $('.table-'+$id+' .photo').attr('src');
-			
-					$getid =  $('.table-'+$id+' .id_number').val();
-					$getrfid =  $('.table-'+$id+' .rfid').html();
-					$getrole =  $('.table-'+$id+' .role').val();
-					$getfname =  $('.table-'+$id+' .first_name').val();
-					$getlname =  $('.table-'+$id+' .last_name').val();
-					$getmname =  $('.table-'+$id+' .middle_name').val();
-					$getdob =  $('.table-'+$id+' .date_of_birth').val();
-					$getpob =  $('.table-'+$id+' .place_of_birth').val();
-					$getsex =  $('.table-'+$id+' .sex').val();
-					$getcivil =  $('.table-'+$id+' .civil_status').val();
-            
-					$getcnumber =  $('.table-'+$id+' .contact_number').val();
-					$getemail =  $('.table-'+$id+' .email_address').val();
-					$getdepartment =  $('.table-'+$id+' .department').val();
-					$getstatus =  $('.table-'+$id+' .status').val();
-				
-               $address =  $(this).attr('address');
-      
-       $('.e-address').val($address);
+    // Event delegation for the delete button
+    $(document).on('click', '.d_user_id', function() {
+        var userName = $(this).attr('user_name');
+        var userId = $(this).attr('data-id');
 
-					$('.edit-photo').attr('src',$getphoto);
-               
-					$('.edit-photo-input').attr('image',$getphoto);
-					$('.edit-rfid').val($getrfid);
-					$('.edit-id').val($getid);
-					$('.edit-role-val').html($getrole);
-					$('.edit-fname').val($getfname);
-					$('.edit-lname').val($getlname);
-               $('.capturedImage').val($getphoto);
-					$('.edit-mname').val($getmname);
-					$('.edit-dob').val($getdob);
-					$('.edit-pob').val($getpob);
-					$('.edit-sex').html($getsex);
-					$('.edit-cnumber').val($getcnumber);
-					$('.edit-status').html($getcivil);
-					$('.edit-email').val($getemail);
-					$('.edit-department').html($getdepartment);
-					$('.edit-status1').html($getstatus);
-				
-					$('.edit-form').attr('action','edit1.php?edit=personell&id='+$id);
-					
-               	});
-         });
-		 
-		 </script>
+        // Set user name and user ID in modal
+        $('.user_name').val(userName);
+        $('#delete_employeeid').val(userId);
+
+        // Show the custom modal (display it manually if using a custom modal)
+        $('#delemployee-modal').show(); 
+    });
+
+    // Handle "Yes" button click for deletion
+    $('#btn-delemp').on('click', function () {
+        var userId = $('#delete_employeeid').val();
+
+        if (userId) {
+            // AJAX request to delete the user
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "del.php?type=personell", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Show success message with SweetAlert
+                    Swal.fire('Deleted!', 'The user has been deleted.', 'success').then(() => {
+                        // Reload the page or update the UI
+                        location.reload();
+                    });
+                } else {
+                    // Show error message with SweetAlert
+                    Swal.fire('Error!', 'There was a problem deleting the user.', 'error');
+                }
+            };
+            xhr.send("id=" + userId);
+        } else {
+            Swal.fire('Error!', 'User ID not found!', 'error');
+        }
+    });
+
+    // Event delegation for the edit button
+    $(document).on('click', '.e_user_id', function() {
+        var $id = $(this).attr('data-id');
+        $('#editemployeeModal').modal('show'); // Bootstrap modal for editing
+
+        // Retrieve data from the selected row
+        var $getphoto = $('.table-' + $id + ' .photo').attr('src');
+        var $getrfid = $('.table-' + $id + ' .rfid').html();
+        var $getrole = $('.table-' + $id + ' .role').val();
+        var $getfname = $('.table-' + $id + ' .first_name').val();
+        var $getlname = $('.table-' + $id + ' .last_name').val();
+        var $getmname = $('.table-' + $id + ' .middle_name').val();
+        var $getdob = $('.table-' + $id + ' .date_of_birth').val();
+        var $getpob = $('.table-' + $id + ' .place_of_birth').val();
+        var $getsex = $('.table-' + $id + ' .sex').val();
+        var $getcivil = $('.table-' + $id + ' .civil_status').val();
+        var $getcnumber = $('.table-' + $id + ' .contact_number').val();
+        var $getemail = $('.table-' + $id + ' .email_address').val();
+        var $getdepartment = $('.table-' + $id + ' .department').val();
+        var $getstatus = $('.table-' + $id + ' .status').val();
+
+        // Update the modal fields with data
+        $('.edit-photo').attr('src', $getphoto);
+        $('.edit-rfid').val($getrfid);
+        $('.edit-id').val($id);
+        $('.edit-role-val').html($getrole);
+        $('.edit-fname').val($getfname);
+        $('.edit-lname').val($getlname);
+        $('.capturedImage').val($getphoto);
+        $('.edit-mname').val($getmname);
+        $('.edit-dob').val($getdob);
+        $('.edit-pob').val($getpob);
+        $('.edit-sex').html($getsex);
+        $('.edit-cnumber').val($getcnumber);
+        $('.edit-status').html($getcivil);
+        $('.edit-email').val($getemail);
+        $('.edit-department').html($getdepartment);
+        $('.edit-status1').html($getstatus);
+
+        // Update the form action dynamically
+        $('.edit-form').attr('action', 'edit1.php?edit=personell&id=' + $id);
+    });
+});
+</script>
+
             <!-- Modal -->
             <form role="form" method="post" action="transac.php?action=add" enctype="multipart/form-data">
                <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -212,13 +245,22 @@ include '../connection.php';
                                  <div class="" style="border: 1PX solid #b3f0fc;padding: 1%;background-color: #f7cfa1;color: black;font-size: 1.2rem">PERSONAL INFORMATION</div>
                                  <div class="row">
                                     <div class="col-lg-3 col-md-6 col-sm-12" id="up_img">
-                                       <div class="file-uploader">
-                                          <label name="upload-label" class="upload-img-btn">
-                                          <input required type="file" id="photo" name="photo" class="upload-field-1" style="display:none;" accept="image/*" title="Upload Foto.."/>
-                                          <img class="preview-1" src="../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg" style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 15%" title="Upload Photo.." />
-                                          </label>
-                                       </div>
+                                    <div class="file-uploader">
+   <label for="photo" class="upload-img-btn" style="cursor: pointer;">
+      <img class="preview-1" src="../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg"
+           style="width: 140px!important; height: 130px!important; position: absolute; border: 1px solid gray; top: 15%;"
+           title="Upload Photo.." />
+   </label>
+   <input type="file" id="photo" name="photo" class="upload-field-1" 
+          style="opacity: 0; position: absolute; z-index: -1;" accept="image/*" required>
+</div>
+
+
+
                                     </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
                                     <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
@@ -416,6 +458,41 @@ while ($row = $result->fetch_assoc()) {
                                           <span class="rfidno-error"></span>
                                        </div>
                                     </div>
+
+
+
+<script>
+   $(document).ready(function() {
+      $('#rfid_number').on('blur', function() {
+         const rfidNumber = $(this).val();
+         
+         if (rfidNumber.length === 10) {
+            $.ajax({
+               url: 'check_rfid.php', // Backend PHP file
+               method: 'POST',
+               data: { rfid_number: rfidNumber },
+               success: function(response) {
+                  const res = JSON.parse(response);
+                  if (res.exists) {
+                     Swal.fire({
+                        icon: 'warning',
+                        title: 'Duplicate RFID',
+                        text: 'This RFID number already exists in the system.',
+                     });
+                  } 
+               },
+               error: function() {
+                  Swal.fire({
+                     icon: 'error',
+                     title: 'Error',
+                     text: 'Unable to check RFID. Please try again later.',
+                  });
+               }
+            });
+         }
+      });
+   });
+</script>
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                        <div class="form-group">
                                           <label>STATUS:</label>
@@ -664,38 +741,37 @@ while ($row = $result->fetch_assoc()) {
                   </div>
                </div>
 
-            <div class="modal fade" id="delemployee-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-               <div class="modal-dialog">
-                  <div class="modal-content">
-                     <div class="modal-header">
-                        <h5 class="modal-title">
-                           <i class="bi bi-trash"></i> Delete User
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                     </div>
-                     <form method="POST">
-                        <div class="modal-body">
-                           <div class="col-lg-12 mt-1" id="mgs-delemp"></div>
-                           <div class="col-lg-12 mb-1">
-                              <div class="form-group">
-                                 <label for="inputTime">
-                                 <b>Name:</b>
-                                 </label>
-                                 <input  type="text" id="delete_departmentname" class="form-control d-personell" autocomplete="off" readonly="">
-                                 <span class="deptname-error"></span>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal-footer">
-                           <input type="hidden" name="" id="delete_employeeid">
-                           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">No</button>
-                           <button type="button" class="btn btn-outline-primary remove_id" id="btn-delemp">Yes</button>
-                        </div>
-                     </form>
+               <div class="modal fade" id="delemployee-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title">
+               <i class="bi bi-trash"></i> Delete User
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <form method="POST" id="delete-form">
+            <div class="modal-body">
+               <div class="col-lg-12 mt-1" id="mgs-delemp"></div>
+               <div class="col-lg-12 mb-1">
+                  <div class="form-group">
+                     <label for="inputTime"><b>Name:</b></label>
+                     <input type="text" id="delete_departmentname" class="form-control d-personell user_name" autocomplete="off" readonly="">
+                     <span class="deptname-error"></span>
                   </div>
                </div>
             </div>
-            <script type="text/javascript">
+            <div class="modal-footer">
+               <input type="hidden" name="user_id" id="delete_employeeid">
+               <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">No</button>
+               <button type="button" class="btn btn-outline-primary remove_id" id="btn-delemp">Yes</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+
+            <!-- <script type="text/javascript">
                document.addEventListener('DOMContentLoaded', () => {
                	let btn = document.querySelector('#btn-delemp');
                	btn.addEventListener('click', (e) => {
@@ -725,26 +801,56 @@ while ($row = $result->fetch_assoc()) {
                		// }
                	});
                });
-            </script>
+            </script> -->
 			
             <?php
 include 'footer.php';
 			?>
        
          <script type="text/javascript">
-            function readURL(input) {
-            	if (input.files && input.files[0]) {
-            		var reader = new FileReader();
-            		reader.onload = function(e) {
-            			var num = $(input).attr('class').split('-')[2];
-            			$('.file-uploader .preview-' + num).attr('src', e.target.result);
-            		}
-            		reader.readAsDataURL(input.files[0]);
-            	}
-            }
-            $("[class^=upload-field-]").change(function() {
-            	readURL(this);
+           function readURL(input) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const validFormats = ['image/jpeg', 'image/png'];
+        const maxSize = 2 * 1024 * 1024; // 2MB
+
+        // Validate file format
+        if (!validFormats.includes(file.type)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Format',
+                text: 'Only JPG and PNG formats are allowed.',
             });
+            input.value = ''; // Reset the input
+            return;
+        }
+
+        // Validate file size
+        if (file.size > maxSize) {
+            Swal.fire({
+                icon: 'error',
+                title: 'File Too Large',
+                text: 'Maximum file size is 2MB.',
+            });
+            input.value = ''; // Reset the input
+            return;
+        }
+
+        // Preview the image
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var num = $(input).attr('class').split('-')[2];
+            $('.file-uploader .preview-' + num).attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// Attach change event to all inputs with a class starting with 'upload-field-'
+$("[class^=upload-field-]").change(function () {
+    readURL(this);
+});
+
          </script>
          <a href="#" class="btn btn-lg btn-warning btn-lg-square back-to-top">
          <i class="bi bi-arrow-up"></i>
