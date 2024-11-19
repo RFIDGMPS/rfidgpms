@@ -264,11 +264,7 @@ fileInput.addEventListener('change', (event) => {
         return;
     }
 
-    Swal.fire({
-        icon: 'success',
-        title: 'File Selected',
-        text: 'Your file is valid!',
-    });
+   
 });
 
 </script>
