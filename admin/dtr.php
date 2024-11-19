@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
             <label>Month:</label>
            
             <select class="form-control" id="months" name="months">
-            <option value="" disabled selected><?php echo $currentMonthName; ?></option>
+            <option value="" disabled selected><?php echo date('m'); ?></option>
     <option value="1">January</option>
     <option value="2">February</option>
     <option value="3">March</option>
