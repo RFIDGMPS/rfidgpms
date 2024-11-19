@@ -120,6 +120,7 @@ include '../connection.php';
 
 document.addEventListener('DOMContentLoaded', function () {
     // Handle button click to open modal and set user info
+    $("#myDataTable").DataTable();
     document.querySelectorAll('.d_user_id').forEach(function (button) {
     button.addEventListener('click', function () {
         var userName = button.getAttribute('user_name');
