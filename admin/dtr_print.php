@@ -118,6 +118,7 @@ $db->close();
         max-width: 800px;
         margin: 0 auto;
         box-sizing: border-box;
+        page-break-inside: avoid;
     }
 
     .header {
@@ -188,21 +189,21 @@ $db->close();
         }
 
         .container {
-            width: 100%;
-            max-width: 100%;
+            width: 48%;
+            max-width: 48%;
             margin: 0;
             padding: 10px;
             box-sizing: border-box;
             font-size: 10px; /* Adjust the font size */
+            display: inline-block;
+            vertical-align: top;
         }
 
         /* Make sure table fits within page */
         table {
-            width: 48%;
+            width: 100%;
             margin: 10px;
             page-break-inside: avoid;
-            display: inline-block;
-            vertical-align: top;
         }
 
         th, td {
@@ -296,36 +297,30 @@ function convertTo12Hour($time) {
         <?php
         // Loop through all the days of the month (1 to 31)
         for ($day = 1; $day <= 31; $day++) {
-            // Check if time data exists for this day
-            $timeData = isset($daysData[$day]) ? $daysData[$day] : null;
-
-            // Display the row for each day
-            echo "<tr>";
-            echo "<td>" . ($day) . "</td>";
-
-            // Check if time data exists and display the values
-            if ($timeData) {
-                echo "<td>" . convertTo12Hour($timeData['time_in_am']) . "</td>";
-                echo "<td>" . convertTo12Hour($timeData['time_out_am']) . "</td>";
-                echo "<td>" . convertTo12Hour($timeData['time_in_pm']) . "</td>";
-                echo "<td>" . convertTo12Hour($timeData['time_out_pm']) . "</td>";
-                echo "<td>0</td><td>0</td>"; // Undertime placeholder
-            } else {
-                echo "<td colspan='6'>No data available</td>";
+            // Validate if the day exists in the current month
+            if (!checkdate($currentMonth, $day, $currentYear)) {
+                continue;
             }
-
-            echo "</tr>";
+            ?>
+            <tr>
+                <td><?php echo $day; ?></td>
+                <td><?php echo !empty($daysData[$day]['time_in_am']) ? convertTo12Hour($daysData[$day]['time_in_am']) : 'N/A'; ?></td>
+                <td><?php echo !empty($daysData[$day]['time_out_am']) ? convertTo12Hour($daysData[$day]['time_out_am']) : 'N/A'; ?></td>
+                <td><?php echo !empty($daysData[$day]['time_in_pm']) ? convertTo12Hour($daysData[$day]['time_in_pm']) : 'N/A'; ?></td>
+                <td><?php echo !empty($daysData[$day]['time_out_pm']) ? convertTo12Hour($daysData[$day]['time_out_pm']) : 'N/A'; ?></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <?php
         }
         ?>
         </tbody>
     </table>
-    
-    <div class="footer">
-        <div class="in-charge">
-            <p>Prepared by:</p>
-            <p>Signature over Printed Name</p>
-        </div>
-    </div>
+</div>
+
+<!-- Duplicate the container div -->
+<div class="container" id="container">
+    <!-- Repeat the same structure for the second container, adjust content as necessary -->
 </div>
 
 </body>
