@@ -49,6 +49,18 @@ include '../connection.php';
                         </div>
                         <hr>
                         </hr>
+                        <script>
+$(document).ready(function() {
+    $('#myDataTable').DataTable({
+        "paging": true,
+        "searching": true,
+        "info": true,
+        "lengthChange": false,
+        "pageLength": 10,
+    });
+});
+</script>
+
                         <div class="table-responsive">
                         <table class="table table-border" id="myDataTable">
     <thead>
@@ -126,18 +138,7 @@ include '../connection.php';
                   </div>
                </div>
             </div>
-            <script>
-$(document).ready(function() {
-    $('#myDataTable').DataTable({
-        "paging": true,
-        "searching": true,
-        "info": true,
-        "lengthChange": false,
-        "pageLength": 10,
-    });
-});
-</script>
-
+            
             <script type="text/javascript">
             
             $(document).ready(function() {
