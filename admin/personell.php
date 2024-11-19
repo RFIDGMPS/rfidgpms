@@ -676,12 +676,14 @@ document.addEventListener('DOMContentLoaded', function () {
          </div>
          <div class="col-lg-3 col-md-6 col-sm-12 mt-1">
             <div class="form-group">
-               <label>MIDDLE NAME:</label>
-               <input type="text" class="form-control edit-mname" name="middle_name" id="middle_name" placeholder="Optional..." autocomplete="off">
-            </div>
+            <label>DATE OF BIRTH:</label>
+               <input  type="date" class="form-control edit-dob" name="date_of_birth" id="date_of_birth" autocomplete="off">
+               <span class="dob-error"></span>
+             </div>
          </div>
       </div>
-      <div class="row mb-2">
+      
+      <!-- <div class="row mb-2">
          <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                <label>DATE OF BIRTH:</label>
@@ -706,8 +708,8 @@ document.addEventListener('DOMContentLoaded', function () {
                <span class="sex-error"></span>
             </div>
          </div>
-      </div>
-      <div class="row">
+      </div> -->
+      <!-- <div class="row">
          <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
             <label>CIVIL STATUS:</label>
@@ -732,7 +734,7 @@ document.addEventListener('DOMContentLoaded', function () {
                <input class="form-control edit-email"  type="email" name="email_address" id="email_address" placeholder="Optional" autocomplete="off">
             </div>
          </div>
-      </div>
+      </div> -->
       <div class="row">
          <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
@@ -765,34 +767,13 @@ while ($row = $result->fetch_assoc()) {
             </div>
          </div>
          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="form-group">
-               <label>ROLE:</label>
-               <select class="form-control" name="role" id="role" autocomplete="off">
-                  <option class="edit-role-val"></option>
-                  <?php
-										  $sql = "SELECT * FROM role";
-$result = $db->query($sql);
+                                       <div class="form-group">
+                                          <label>RFID NUMBER:</label>
+                                          <input required type="text" class="form-control" name="rfid_number" id="rfid_number" minlength="10" maxlength="10" autocomplete="off">
+                                          <span class="rfidno-error"></span>
+                                       </div>
+                                    </div>
 
-// Initialize an array to store department options
-$role_options = [];
-
-// Fetch and store department options
-while ($row = $result->fetch_assoc()) {
-    $id = $row['id'];
-    $role = $row['role'];
-    $role_options[] = "<option value='$role'>$role</option>";
-}?>
-                          <?php
-    // Output department options
-    foreach ($role_options as $option) {
-        echo $option;
-    }
-    ?>    
-                    
-               </select>
-               <span class="pob-error"></span>
-            </div>
-         </div>
          <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                <label>STATUS:</label>
@@ -805,7 +786,7 @@ while ($row = $result->fetch_assoc()) {
             </div>
          </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
          <div class="col-lg-12 col-md-6 col-sm-12">
             <div class="form-group">
                <label>COMPLETE ADDRESS:</label>
@@ -813,7 +794,7 @@ while ($row = $result->fetch_assoc()) {
                <span class="ca-error"></span>
             </div>
          </div>
-      </div>
+      </div> -->
    </div>
 </div></div>
 <div class="modal-footer">
