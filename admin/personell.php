@@ -214,60 +214,19 @@ include '../connection.php';
                                     <div class="file-uploader">
    <label for="photo" class="upload-img-btn" style="cursor: pointer;">
       <img class="preview-1" src="../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg"
-           style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 15%;"
+           style="width: 140px!important; height: 130px!important; position: absolute; border: 1px solid gray; top: 15%;"
            title="Upload Photo.." />
    </label>
-   <input type="file" id="photo" name="photo" accept="image/*"
-          style="opacity: 0; position: absolute; z-index: -1;" required>
+   <input type="file" id="photo" name="photo" class="upload-field-1" 
+          style="opacity: 0; position: absolute; z-index: -1;" accept="image/*" required>
 </div>
+
+
 
                                     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  const fileInput = document.getElementById('photo');
 
-// Listen for file selection
-fileInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    const validFormats = ['image/jpeg', 'image/png'];
-    const maxSize = 2 * 1024 * 1024; // 2MB
-
-    // Check if a file was selected
-    if (!file) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'No File Selected',
-            text: 'Please select an image file.',
-        });
-        return;
-    }
-
-    // Check file type and size
-    if (!validFormats.includes(file.type)) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Invalid Format',
-            text: 'Only JPG and PNG formats are allowed.',
-        });
-        fileInput.value = ''; // Reset the input
-        return;
-    }
-
-    if (file.size > maxSize) {
-        Swal.fire({
-            icon: 'error',
-            title: 'File Too Large',
-            text: 'Maximum file size is 2MB.',
-        });
-        fileInput.value = ''; // Reset the input
-        return;
-    }
-
-   
-});
-
-</script>
                                     <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
@@ -816,19 +775,49 @@ include 'footer.php';
 			?>
        
          <script type="text/javascript">
-            function readURL(input) {
-            	if (input.files && input.files[0]) {
-            		var reader = new FileReader();
-            		reader.onload = function(e) {
-            			var num = $(input).attr('class').split('-')[2];
-            			$('.file-uploader .preview-' + num).attr('src', e.target.result);
-            		}
-            		reader.readAsDataURL(input.files[0]);
-            	}
-            }
-            $("[class^=upload-field-]").change(function() {
-            	readURL(this);
+           function readURL(input) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const validFormats = ['image/jpeg', 'image/png'];
+        const maxSize = 2 * 1024 * 1024; // 2MB
+
+        // Validate file format
+        if (!validFormats.includes(file.type)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Format',
+                text: 'Only JPG and PNG formats are allowed.',
             });
+            input.value = ''; // Reset the input
+            return;
+        }
+
+        // Validate file size
+        if (file.size > maxSize) {
+            Swal.fire({
+                icon: 'error',
+                title: 'File Too Large',
+                text: 'Maximum file size is 2MB.',
+            });
+            input.value = ''; // Reset the input
+            return;
+        }
+
+        // Preview the image
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var num = $(input).attr('class').split('-')[2];
+            $('.file-uploader .preview-' + num).attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// Attach change event to all inputs with a class starting with 'upload-field-'
+$("[class^=upload-field-]").change(function () {
+    readURL(this);
+});
+
          </script>
          <a href="#" class="btn btn-lg btn-warning btn-lg-square back-to-top">
          <i class="bi bi-arrow-up"></i>
