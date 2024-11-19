@@ -602,9 +602,9 @@ while ($row = $result->fetch_assoc()) {
 
 <div class="col-lg-5 col-md-6 col-sm-12" id="lnamez">
     <div class="form-group">
-        <label>Category:</label>
+        <label>CATEGORY:</label>
         <select required class="form-control" name="category" id="category" autocomplete="off">
-            <!-- Category options will be populated by JavaScript -->
+        <option class='edit-categ-val'></option>
         </select>
         <span class="id-error"></span>
     </div>
