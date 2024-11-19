@@ -198,43 +198,50 @@ if (isset($_GET['id']) && isset($_POST['rfid_number'])) {
 
 											break;
 											case 'about':
-												$name = $_POST['name'];
-												$address = $_POST['address'];
-												$logo1 = $_POST['logo1'];
-												$logo2 = $_POST['logo2'];
-												$logo1= trim($logo1,"uploads/");
-												$logo2= trim($logo2,"uploads/");
+												if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+													// Get form data
+													$name = $_POST['name'];
+													$address = $_POST['address'];
+													$logo1 = $_POST['logo1'];
+													$logo2 = $_POST['logo2'];
 												
-							if(isset($_FILES['logo1']['name']) && $_FILES['logo1']['name'] != null){
-								$logo1= $_FILES['logo1']['name'];
-							
-								$target_dir = "uploads/";
-								$target_file = $target_dir . basename($_FILES["logo1"]["name"]);
-								move_uploaded_file($_FILES["logo1"]["tmp_name"], $target_file);
-								
-							}
-
-							if(isset($_FILES['logo2']['name']) && $_FILES['logo2']['name'] != null){
-								$logo2= $_FILES['logo2']['name'];
-							
-								$target_dir = "uploads/";
-								$target_file = $target_dir . basename($_FILES["logo2"]["name"]);
-								move_uploaded_file($_FILES["logo2"]["tmp_name"], $target_file);
-								
-							}
-						
-
-												$query = "UPDATE about SET 
+													// Trim logos
+													$logo1 = trim($logo1, "uploads/");
+													$logo2 = trim($logo2, "uploads/");
+												
+													// Handle logo1 file upload
+													if (isset($_FILES['logo1']['name']) && $_FILES['logo1']['name'] != null) {
+														$logo1 = $_FILES['logo1']['name'];
+														$target_dir = "uploads/";
+														$target_file = $target_dir . basename($_FILES["logo1"]["name"]);
+														move_uploaded_file($_FILES["logo1"]["tmp_name"], $target_file);
+													}
+												
+													// Handle logo2 file upload
+													if (isset($_FILES['logo2']['name']) && $_FILES['logo2']['name'] != null) {
+														$logo2 = $_FILES['logo2']['name'];
+														$target_dir = "uploads/";
+														$target_file = $target_dir . basename($_FILES["logo2"]["name"]);
+														move_uploaded_file($_FILES["logo2"]["tmp_name"], $target_file);
+													}
+												
+													// Update database
+													$query = "UPDATE about SET 
 																name = '$name',
 																address = '$address',
 																logo1 = '$logo1',
 																logo2 = '$logo2'
 																WHERE id = 1";
-																	$result = mysqli_query($db, $query) or die(mysqli_error($db));
-																	echo '<script type="text/javascript">
-																	alert("Saved.");
-																	window.location = "settings.php";
-																</script>';
+													$result = mysqli_query($db, $query);
+												
+													if ($result) {
+														// Return success response
+														echo json_encode(["status" => "success"]);
+													} else {
+														// Return failure response
+														echo json_encode(["status" => "error", "message" => mysqli_error($db)]);
+													}
+												}
 																break;
 																case 'role':
 																	

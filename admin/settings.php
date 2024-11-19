@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
                             <button id="editButton" class="btn btn-primary" onclick="toggleEdit()"><i class="bi bi-pencil"></i> Edit</button>
                         </div>
                         <div class="card-body">
-                            <form role="form" method="post" action="edit1.php?edit=about" enctype="multipart/form-data">
+                            <form id="settingsForm" role="form" method="post" enctype="multipart/form-data">
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="name" class="form-label">Name:</label>
@@ -95,6 +95,43 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
 
+            <script>
+    // Handling form submission with AJAX
+    $('#settingsForm').on('submit', function(e) {
+        e.preventDefault(); // Prevent normal form submission
+        
+        var formData = new FormData(this); // Get form data
+
+        $.ajax({
+            url: 'edit1.php?edit=about', // PHP backend file to handle the request
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                // Show success SweetAlert if successful
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Settings Saved!',
+                    text: 'Your settings have been saved successfully.',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = 'settings.php'; // Redirect to settings page
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                // Show error SweetAlert if there's an issue
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong. Please try again!',
+                });
+            }
+        });
+    });
+</script>
             <?php include 'footer.php'; ?>
         </div>
     </div>
