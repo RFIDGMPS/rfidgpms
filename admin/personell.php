@@ -559,7 +559,7 @@ while ($row = $result->fetch_assoc()) {
                         <div class="col-lg-11 mb-2 mt-1" id="mgs-emp" style="margin-left: 4%"></div>
                         <div id="editModal">
 
-    <form class="edit-form" role="form" method="post" action="" enctype="multipart/form-data">
+    <form id="editPersonellForm" class="edit-form" role="form" method="post" action="" enctype="multipart/form-data">
     <div class="modal-body" id="editModal">
 <div class="row justify-content-md-center">
    <div id="msg-emp" style=""></div>
@@ -854,6 +854,32 @@ while ($row = $result->fetch_assoc()) {
       </div>
    </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('editemployeeModal');
+        const form = document.getElementById('editPersonellForm');
+        const fileInput = document.getElementById('photo');
+        const previewImage = document.querySelector('.preview-1');
+
+        // Listen for the modal's hide event
+        modal.addEventListener('hide.bs.modal', function () {
+            form.reset(); // Reset the form
+            previewImage.src = "../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg"; // Reset image preview
+        });
+
+        // Update the preview image when a file is selected
+        fileInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result; // Set the preview to the selected image
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
 <?php
 session_start();
 if (isset($_SESSION['swal_message'])) {
