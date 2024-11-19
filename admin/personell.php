@@ -226,27 +226,6 @@ include '../connection.php';
                                     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-   // Check for the 'status' query parameter in the URL
-   const urlParams = new URLSearchParams(window.location.search);
-   const status = urlParams.get('status');
-
-   if (status === 'success') {
-      Swal.fire({
-         icon: 'success',
-         title: 'Success!',
-         text: 'User added successfully.',
-         confirmButtonText: 'OK'
-      });
-   } else if (status === 'error') {
-      Swal.fire({
-         icon: 'error',
-         title: 'Error!',
-         text: 'There was an issue adding the user.',
-         confirmButtonText: 'Try Again'
-      });
-   }
-</script>
 
                                     <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
