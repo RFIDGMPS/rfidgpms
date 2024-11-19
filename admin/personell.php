@@ -97,9 +97,6 @@ include '../connection.php';
                                     <td><?php if ($row['status'] == 'Active') {
 											echo '<span class="badge bg-success">Active</span>';
 									} 
-									elseif($row['status'] == 'Inactive'){
-										echo '<span class="badge bg-warning">Inactive</span>';
-									}
 									else {
 										echo '<span class="badge bg-danger">Blocked</span>';
 									}
@@ -812,7 +809,6 @@ while ($row = $result->fetch_assoc()) {
 			   <select class="form-control" name="status" id="status" autocomplete="off">
                   <option class="edit-status1"></option>
                   <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
                   <option value="Block">Block</option>
                </select>
             </div>
