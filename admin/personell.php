@@ -125,9 +125,10 @@ include '../connection.php';
          	$("#myDataTable").DataTable();
 
     
-            $('#myDataTable tbody').on('click', '.d_user_id', function() {
-        // Show the modal
-        $('#delemployee-modal').modal('show');
+    // Handle click event for elements with class 'd_user_id' inside the table
+    $('#myDataTable tbody').on('click', '.d_user_id', function() {
+        // Show the modal by adding 'show' class to the modal
+        $('#delemployee-modal').addClass('show').css('display', 'block');
 
         // Retrieve data from the clicked element
         var user_name = $(this).attr('user_name');
@@ -142,6 +143,11 @@ include '../connection.php';
             // Redirect to the deletion URL
             window.location = 'del.php?type=personell&id=' + id;
         });
+    });
+
+    // Close the modal when the close button or backdrop is clicked
+    $('#delemployee-modal').on('click', '.close, .modal-backdrop', function() {
+        $('#delemployee-modal').removeClass('show').css('display', 'none');
     });
 				        // Event delegation for edit button
             $('#myDataTable tbody').on('click', '.e_user_id', function() {
