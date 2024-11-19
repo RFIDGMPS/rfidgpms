@@ -579,28 +579,18 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>ROLE:</label>
         <select class="form-control" name="role" id="role" autocomplete="off">
-                  <option class="edit-role-val"></option>
-                  <?php
-										  $sql = "SELECT * FROM role";
-$result = $db->query($sql);
+            <option class="edit-role-val"></option>
+            <?php
+            $sql = "SELECT * FROM role";
+            $result = $db->query($sql);
 
-// Initialize an array to store department options
-$role_options = [];
-
-// Fetch and store department options
-while ($row = $result->fetch_assoc()) {
-
-    $role = $row['role'];
-    $role_options[] = "<option value='$role'>$role</option>";
-}?>
-                          <?php
-    // Output department options
-    foreach ($role_options as $option) {
-        echo $option;
-    }
-    ?>    
-                    
-               </select>
+            // Fetch and output role options
+            while ($row = $result->fetch_assoc()) {
+                $role = $row['role'];
+                echo "<option value='$role'>$role</option>";
+            }
+            ?>
+        </select>
         <span class="pob-error"></span>
     </div>
 </div>
@@ -609,47 +599,50 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>Category:</label>
         <select required class="form-control" name="category" id="category" autocomplete="off">
-        <option class="edit-categ-val" selected></option>
+            <option class="edit-categ-val" selected></option>
         </select>
         <span class="id-error"></span>
     </div>
 </div>
 
 <script>
-// Ensure the 'Student' role is preselected and categories updated accordingly
-document.addEventListener('DOMContentLoaded', function () {
-    updateCategory(); // Initialize category based on the default selected role
-});
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize the category on page load
+        updateCategory();
 
-function updateCategory() {
-    var role = document.getElementById('role').value;
-    var categorySelect = document.getElementById('category');
-    
-    // Clear the existing options
-    categorySelect.innerHTML = '';
+        // Add change event listener to the role dropdown
+        var roleSelect = document.getElementById('role');
+        roleSelect.addEventListener('change', updateCategory);
+    });
 
-    if (role === 'Student') {
-        // If the role is 'Student', show 'Student' only in category
-        var option = document.createElement('option');
-        option.value = 'Student';
-        option.text = 'Student';
-        categorySelect.appendChild(option);
-    } else {
-        // If the role is not 'Student', show 'Regular' and 'Contractual'
-        var option1 = document.createElement('option');
-        option1.value = 'Regular';
-        option1.text = 'Regular';
-        categorySelect.appendChild(option1);
+    function updateCategory() {
+        var role = document.getElementById('role').value;
+        var categorySelect = document.getElementById('category');
 
-        var option2 = document.createElement('option');
-        option2.value = 'Contractual';
-        option2.text = 'Contractual';
-        categorySelect.appendChild(option2);
+        // Clear the existing options
+        categorySelect.innerHTML = '';
+
+        if (role === 'Student') {
+            // If the role is 'Student', add 'Student' to category
+            var option = document.createElement('option');
+            option.value = 'Student';
+            option.text = 'Student';
+            categorySelect.appendChild(option);
+        } else if (role) {
+            // If the role is not 'Student', add 'Regular' and 'Contractual'
+            var option1 = document.createElement('option');
+            option1.value = 'Regular';
+            option1.text = 'Regular';
+            categorySelect.appendChild(option1);
+
+            var option2 = document.createElement('option');
+            option2.value = 'Contractual';
+            option2.text = 'Contractual';
+            categorySelect.appendChild(option2);
+        }
     }
-}
 </script>
-                             
-      </div>
+   </div>
       <div class="row mb-3 mt-1">
          <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="form-group">
