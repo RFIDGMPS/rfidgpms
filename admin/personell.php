@@ -582,7 +582,7 @@ while ($row = $result->fetch_assoc()) {
             <?php
                 $sql = "SELECT * FROM role";
                 $result = $db->query($sql);
-                echo "<option class='edit-role-val'></option>";
+               //  echo "<option class='edit-role-val'></option>";
                 // Fetch and display role options
                 while ($row = $result->fetch_assoc()) {
                     $role = $row['role'];
@@ -604,7 +604,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>CATEGORY:</label>
         <select required class="form-control" name="category" id="category" autocomplete="off">
-        <option class='edit-categ-val'></option>
+    
         </select>
         <span class="id-error"></span>
     </div>
