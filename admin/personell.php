@@ -287,7 +287,7 @@ $(document).ready(function() {
 
 <div class="col-lg-5 col-md-6 col-sm-12" id="lnamez">
     <div class="form-group">
-        <label>Category:</label>
+        <label>CATEGORY:</label>
         <select required class="form-control" name="category" id="category" autocomplete="off">
             <!-- Category options will be populated by JavaScript -->
         </select>
@@ -351,10 +351,23 @@ function updateCategory() {
                                     </div>
                                     <div class="col-lg-3 col-md-6 col-sm-12 mt-1">
                                        <div class="form-group">
-                                          <label>SCHOOL YEAR:</label>
-                                          <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Optional..." autocomplete="off">
-                                       </div>
+                                       <label>DATE OF BIRTH:</label>
+                                          <input required type="date" class="form-control" name="date_of_birth" id="date_of_birth" autocomplete="off">
+                                          <span class="dob-error"></span>
+                                        </div>
                                     </div>
+                                    <script>
+        // Function to set the max date to 18 years ago
+        function setMaxDate() {
+            const today = new Date();
+            const maxDate = new Date(today.setFullYear(today.getFullYear() - 18));
+            const maxDateString = maxDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+            document.getElementById('date_of_birth').setAttribute('max', maxDateString);
+        }
+
+        // Call the function when the page loads
+        window.onload = setMaxDate;
+    </script>
                                  </div>
                                  <!-- <div class="row mb-2">
                                     <div class="col-lg-4 col-md-6 col-sm-12">
