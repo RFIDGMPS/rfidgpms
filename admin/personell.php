@@ -117,23 +117,80 @@ include '../connection.php';
 </button>
 <script>
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Listen for the modal toggle and populate modal content
-    var deleteButtons = document.querySelectorAll('.d_user_id');
-    
-    deleteButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    // Handle button click to open modal and set user info
+    document.querySelectorAll('.d_user_id').forEach(function (button) {
+        button.addEventListener('click', function () {
             var userName = button.getAttribute('user_name');
             var userId = button.getAttribute('data-id');
 
-            // Set the modal content
-            document.querySelector('.user_name').textContent = userName;
-            document.querySelector('.d-personell').value = userName;
+            // Set user name and user ID in modal
+            document.querySelector('.user_name').value = userName;
+            document.querySelector('#delete_employeeid').value = userId;
 
-            // Set the link for the confirm delete button
-            var confirmDeleteLink = document.getElementById('confirm-delete');
-            confirmDeleteLink.href = 'del.php?type=personell&id=' + userId;
+            // Show the modal (You can still use the bootstrap modal or remove it entirely)
+            var modal = new bootstrap.Modal(document.getElementById('delemployee-modal'));
+            modal.show();
         });
+    });
+
+    // Handle "Yes" button click (delete action)
+    document.getElementById('btn-delemp').addEventListener('click', function () {
+        var userId = document.getElementById('delete_employeeid').value;
+
+        if (userId) {
+            // Show SweetAlert confirmation before deleting
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Proceed with deletion (AJAX or direct redirection)
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "del.php?type=personell", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            // Success: Show success message with SweetAlert
+                            Swal.fire(
+                                'Deleted!',
+                                'The user has been deleted.',
+                                'success'
+                            ).then(() => {
+                                // Optionally reload the page or update the UI
+                                location.reload();
+                            });
+                        } else {
+                            // Failure: Show error message with SweetAlert
+                            Swal.fire(
+                                'Error!',
+                                'There was a problem deleting the user.',
+                                'error'
+                            );
+                        }
+                    };
+                    xhr.send("id=" + userId);
+                } else {
+                    // User canceled deletion
+                    Swal.fire(
+                        'Cancelled',
+                        'The user was not deleted.',
+                        'info'
+                    );
+                }
+            });
+        } else {
+            Swal.fire(
+                'Error!',
+                'User ID not found!',
+                'error'
+            );
+        }
     });
 });
 
@@ -745,37 +802,36 @@ while ($row = $result->fetch_assoc()) {
                   </div>
                </div>
 
-            <div class="modal fade" id="delemployee-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-               <div class="modal-dialog">
-                  <div class="modal-content">
-                     <div class="modal-header">
-                        <h5 class="modal-title">
-                           <i class="bi bi-trash"></i> Delete User
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                     </div>
-                     <form method="POST">
-                        <div class="modal-body">
-                           <div class="col-lg-12 mt-1" id="mgs-delemp"></div>
-                           <div class="col-lg-12 mb-1">
-                              <div class="form-group">
-                                 <label for="inputTime">
-                                 <b>Name:</b>
-                                 </label>
-                                 <input  type="text" id="delete_departmentname" class="form-control d-personell user_name" autocomplete="off" readonly="">
-                                 <span class="deptname-error"></span>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal-footer">
-                           <input type="hidden" name="" id="delete_employeeid">
-                           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">No</button>
-                           <button type="button" class="btn btn-outline-primary remove_id" id="btn-delemp">Yes</button>
-                        </div>
-                     </form>
+               <div class="modal fade" id="delemployee-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title">
+               <i class="bi bi-trash"></i> Delete User
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <form method="POST" id="delete-form">
+            <div class="modal-body">
+               <div class="col-lg-12 mt-1" id="mgs-delemp"></div>
+               <div class="col-lg-12 mb-1">
+                  <div class="form-group">
+                     <label for="inputTime"><b>Name:</b></label>
+                     <input type="text" id="delete_departmentname" class="form-control d-personell user_name" autocomplete="off" readonly="">
+                     <span class="deptname-error"></span>
                   </div>
                </div>
             </div>
+            <div class="modal-footer">
+               <input type="hidden" name="user_id" id="delete_employeeid">
+               <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">No</button>
+               <button type="button" class="btn btn-outline-primary remove_id" id="btn-delemp">Yes</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+
             <!-- <script type="text/javascript">
                document.addEventListener('DOMContentLoaded', () => {
                	let btn = document.querySelector('#btn-delemp');
