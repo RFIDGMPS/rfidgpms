@@ -579,7 +579,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>ROLE:</label>
         <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off">
-        <option class="edit-role-val" value="" disabled></option>
+        <option class="edit-role-val" disabled></option>
             <?php
                 $sql = "SELECT * FROM role";
                 $result = $db->query($sql);
@@ -601,7 +601,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>CATEGORY:</label>
         <select required class="form-control" name="category" id="ecategory" autocomplete="off">
-        <option class="edit-categ-val" value="" disabled ></option>
+        <option class="edit-categ-val"  disabled ></option>
         </select>
         <span class="id-error"></span>
     </div>
