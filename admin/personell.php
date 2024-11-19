@@ -131,13 +131,7 @@ include '../connection.php';
             <script type="text/javascript">
             
             $(document).ready(function() {
-               $('#myDataTable').DataTable({
-        "paging": true,
-        "searching": true,
-        "info": true,
-        "lengthChange": false,
-        "pageLength": 10,
-    });
+               $("#myDataTable").DataTable();
    
        
       //          $('#myDataTable tbody').on('click', '.d_user_id', function() {
@@ -214,7 +208,7 @@ include '../connection.php';
             });
           
           </script>
-<script>
+<!-- <script>
 
 document.addEventListener('DOMContentLoaded', function () {
     // Handle button click to open modal and set user info
@@ -278,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-</script>
+</script> -->
 		
             <!-- Modal -->
             <form role="form" method="post" action="transac.php?action=add" enctype="multipart/form-data">
