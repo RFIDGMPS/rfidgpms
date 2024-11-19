@@ -126,6 +126,7 @@ include '../connection.php';
     
 			 $('#myDataTable tbody').on('click', '.d_user_id', function() {
 			// $('.d_user_id').click(function(){
+            alert('test');
 				$('#delemployee-modal').modal('show');
             		    
 						$('.user_name').html($(this).attr('user_name'));
