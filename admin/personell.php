@@ -601,7 +601,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>CATEGORY:</label>
         <select required class="form-control" name="category" id="ecategory" autocomplete="off">
-        <option class="edit-categ-val" disabled ></option>
+        <option class="edit-categ-val" value="" disabled ></option>
         </select>
         <span class="id-error"></span>
     </div>
