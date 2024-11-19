@@ -116,11 +116,24 @@ include '../connection.php';
     <i class="bi bi-plus-trash"></i> Delete
 </button>
 
+
+                                       </center>
+                                    </td>
+                                 </tr>
+                                 <?php } ?>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            
 <script>
 
 document.addEventListener('DOMContentLoaded', function () {
     // Handle button click to open modal and set user info
-    $("#myDataTable").DataTable();
+    
     document.querySelectorAll('.d_user_id').forEach(function (button) {
     button.addEventListener('click', function () {
         var userName = button.getAttribute('user_name');
@@ -181,18 +194,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 </script>
-
-                                       </center>
-                                    </td>
-                                 </tr>
-                                 <?php } ?>
-                              </tbody>
-                           </table>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
 			<script type="text/javascript">
             
          $(document).ready(function() {
