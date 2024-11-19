@@ -230,6 +230,7 @@ $db->close();
 
 </style>
 
+<!-- First Container (original) -->
 <div class="container" id="container">
     <div class="header">
         <h5>Civil Service Form No. 48</h5>
@@ -320,7 +321,91 @@ function convertTo12Hour($time) {
 
 <!-- Duplicate the container div -->
 <div class="container" id="container">
-    <!-- Repeat the same structure for the second container, adjust content as necessary -->
+    <div class="header">
+        <h5>Civil Service Form No. 48</h5>
+        <h4>DAILY TIME RECORD</h4>
+        <?php if (!empty($personnel)): ?>
+            <h1><?php echo htmlspecialchars($personnel['first_name'] . ' ' . $personnel['last_name']); ?></h1>
+        <?php else: ?>
+            <p>No personnel found.</p>
+        <?php endif; ?>
+    </div>
+
+    <?php
+    // Get the current month and year
+    $currentMonthName = date('F'); // Full month name (e.g., January, February)
+    $currentYear = date('Y');  // Full year (e.g., 2024)
+    ?>
+<?php
+// Function to convert 24-hour time to 12-hour AM/PM time
+function convertTo12Hour($time) {
+    // Use strtotime to parse the time and convert it to a Unix timestamp
+    $timestamp = strtotime($time);
+    
+    // If strtotime successfully parses the time, format it into 12-hour AM/PM format
+    if ($timestamp !== false) {
+        return date("g:i A", $timestamp); // Return the time in 12-hour AM/PM format (e.g., 2:30 PM)
+    }
+    // If the time cannot be parsed, return the original time string
+    return $time;
+}
+?>
+
+    <table class="info-table">
+        <tr>
+            <th>For the month of</th>
+            <td><?php echo $currentMonthName; ?></td>
+            <td><?php echo $currentYear; ?></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Official hours of arrival and departure:</th>
+            <td>Regular Days: _______________</td>
+            <td>Saturdays: _______________</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th rowspan="2">Days</th>
+                <th colspan="2">A.M.</th>
+                <th colspan="2">P.M.</th>
+                <th colspan="2">Undertime</th>
+            </tr>
+            <tr>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th>Hours</th>
+                <th>Minutes</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        // Loop through all the days of the month (1 to 31)
+        for ($day = 1; $day <= 31; $day++) {
+            // Validate if the day exists in the current month
+            if (!checkdate($currentMonth, $day, $currentYear)) {
+                continue;
+            }
+            ?>
+            <tr>
+                <td><?php echo $day; ?></td>
+                <td><?php echo !empty($daysData[$day]['time_in_am']) ? convertTo12Hour($daysData[$day]['time_in_am']) : 'N/A'; ?></td>
+                <td><?php echo !empty($daysData[$day]['time_out_am']) ? convertTo12Hour($daysData[$day]['time_out_am']) : 'N/A'; ?></td>
+                <td><?php echo !empty($daysData[$day]['time_in_pm']) ? convertTo12Hour($daysData[$day]['time_in_pm']) : 'N/A'; ?></td>
+                <td><?php echo !empty($daysData[$day]['time_out_pm']) ? convertTo12Hour($daysData[$day]['time_out_pm']) : 'N/A'; ?></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <?php
+        }
+        ?>
+        </tbody>
+    </table>
 </div>
 
 </body>
