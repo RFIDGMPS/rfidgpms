@@ -109,7 +109,7 @@ mysqli_close($db);
                         </div>
                         <hr>
                         <div class="table-responsive">
-                            <table class="table table-border" id="dataTable">
+                        <table class="table table-border" id="myDataTable">
                                 <thead>
                                     <tr>
                                         <th>Photo</th>
@@ -207,7 +207,13 @@ mysqli_close($db);
             <?php include 'footer.php'; ?>
             
         </div>
-    
+        <script>
+        $(document).ready(function() {
+    // Initialize DataTable
+    $('#myDataTable').DataTable({
+        order: [[0, 'desc']] // Adjust the index (0) to the appropriate column
+    });
+});</script>
         <script type="text/javascript">
     $(document).ready(function() {
         $('#date1').datepicker();
