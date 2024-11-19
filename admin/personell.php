@@ -126,27 +126,25 @@ include '../connection.php';
 
     
             $('#myDataTable tbody').on('click', '.d_user_id', function() {
-        // Create a modal instance
+        // Show the modal using Bootstrap's modal method
         var modal = new bootstrap.Modal(document.getElementById('delemployee-modal'));
+        modal.show(); // Open the modal
 
-        // Show the modal
-        modal.show();
-
-        // Retrieve data from the clicked element
+        // Retrieve the data attributes
         var user_name = $(this).attr('user_name');
         var id = $(this).attr('data-id');
 
-        // Update modal content
+        // Update modal content with the retrieved data
         $('.user_name').html(user_name);
-        $('.d-personell').val(user_name);
+        $('.d-personell').val(user_name); // If you want to set a readonly input with the name
 
-        // Bind click event to the remove button dynamically
+        // Handle remove button click to delete the user
         $('.remove_id').off('click').on('click', function() {
-            window.location = 'del.php?type=personell&id=' + id;
+            window.location = 'del.php?type=personell&id=' + id; // Redirect to delete script
         });
     });
 
-    
+
 				        // Event delegation for edit button
             $('#myDataTable tbody').on('click', '.e_user_id', function() {
 
