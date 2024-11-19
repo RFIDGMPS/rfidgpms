@@ -1,4 +1,3 @@
-
 <?php
 include 'auth.php'; // Include session validation
 ?>
@@ -89,6 +88,8 @@ if ($result->num_rows > 0) {
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Ensure jQuery is included -->
+
     <script>
         $(document).ready(function() {
             $logo1 =  $('.edit-logo1').attr('src');
@@ -114,17 +115,21 @@ if ($result->num_rows > 0) {
     </script>
 
     <script type="text/javascript">
+        // Function to read image URL for preview
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    var num = $(input).attr('class').split('-')[2];
-                    $('.file-uploader .preview-' + num).attr('src', e.target.result);
+                    // Get the preview class number from the input class
+                    var num = $(input).attr('id').split('logo')[1]; // Get 1 or 2 from id
+                    $('.preview-' + num).attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        $("[class^=upload-field-]").change(function() {
+
+        // Bind change event to upload fields for file upload
+        $("input[type='file']").change(function() {
             readURL(this);
         });
     </script>
