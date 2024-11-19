@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (userId) {
         
-                if (result.isConfirmed) {
+           
                     // Proceed with deletion (AJAX or direct redirection)
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", "del.php?type=personell", true);
@@ -166,14 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     };
                     xhr.send("id=" + userId);
-                } else {
-                    // User canceled deletion
-                    Swal.fire(
-                        'Cancelled',
-                        'The user was not deleted.',
-                        'info'
-                    );
-                }
+            
            
         } else {
             Swal.fire(
