@@ -70,7 +70,7 @@ include '../connection.php';
                                  <tr class="table-<?php echo $row['id'];?>">
 								 <input class="id_number" type="hidden" value="<?php echo $row['id_no']; ?>" />
 									<input class="role" type="hidden" value="<?php echo $row['role']; ?>" />
-                           <input class="categ" type="hidden" value="<?php echo $row['category']; ?>" />
+               
 									<input class="last_name" type="hidden" value="<?php echo $row['last_name']; ?>" />
 									<input class="first_name" type="hidden" value="<?php echo $row['first_name']; ?>" />
 									<input class="middle_name" type="hidden" value="<?php echo $row['middle_name']; ?>" />
