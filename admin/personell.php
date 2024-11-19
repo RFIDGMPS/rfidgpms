@@ -578,7 +578,7 @@ while ($row = $result->fetch_assoc()) {
          <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
-        <select required class="form-control dept_ID" name="role" id="role" autocomplete="off" onchange="updateCategory1()">
+        <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off" onchange="updateCategory1()">
             <?php
                 $sql = "SELECT * FROM role";
                 $result = $db->query($sql);
@@ -603,7 +603,7 @@ while ($row = $result->fetch_assoc()) {
 <div class="col-lg-5 col-md-6 col-sm-12" id="lnamez">
     <div class="form-group">
         <label>CATEGORY:</label>
-        <select required class="form-control" name="category" id="category" autocomplete="off">
+        <select required class="form-control" name="category" id="ecategory" autocomplete="off">
     
         </select>
         <span class="id-error"></span>
@@ -617,8 +617,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function updateCategory1() {
-    var role = document.getElementById('role').value;
-    var categorySelect = document.getElementById('category');
+    var role = document.getElementById('erole').value;
+    var categorySelect = document.getElementById('ecategory');
     
     // Clear the existing options
     categorySelect.innerHTML = '';
