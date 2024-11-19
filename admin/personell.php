@@ -575,7 +575,7 @@ while ($row = $result->fetch_assoc()) {
                </label>
             </div>
          </div>
-         <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
         <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off">
@@ -587,9 +587,11 @@ while ($row = $result->fetch_assoc()) {
                 // Fetch and display role options
                 while ($row = $result->fetch_assoc()) {
                     $role = $row['role'];
-                   
+                    if ($role === 'Student') {
+                        echo "<option value='$role' selected>$role</option>";
+                    } else {
                         echo "<option value='$role'>$role</option>";
-                    
+                    }
                 }
             ?>
         </select>
