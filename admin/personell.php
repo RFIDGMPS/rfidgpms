@@ -134,6 +134,19 @@ include '../connection.php';
                   </div>
                </div>
             </div>
+            <script>
+$(document).ready(function() {
+    // Initialize DataTable
+    $('#myDataTable').DataTable({
+        "paging": true,  // Enable pagination
+        "searching": true, // Enable search
+        "lengthChange": false, // Hide the entries dropdown
+        "pageLength": 10, // Set the number of records per page
+        "info": true // Display table info (such as "Showing 1 to 10 of 100 entries")
+    });
+});
+</script>
+
             <script type="text/javascript">
             
             $(document).ready(function() {
