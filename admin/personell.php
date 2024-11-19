@@ -575,7 +575,7 @@ while ($row = $result->fetch_assoc()) {
                </label>
             </div>
          </div>
-         <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
         <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off">
@@ -632,7 +632,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function updateCategory(role) {
-      
+        // Clear existing options except the default one
+        categoryDropdown.innerHTML = '<option value="" selected>Select Category</option>';
 
         if (role === 'Student') {
             // Add 'Student' category for 'Student' role
