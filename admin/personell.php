@@ -126,6 +126,18 @@ include '../connection.php';
                   </div>
                </div>
             </div>
+            <script>
+$(document).ready(function() {
+    $('#myDataTable').DataTable({
+        "paging": true,
+        "searching": true,
+        "info": true,
+        "lengthChange": false,
+        "pageLength": 10,
+    });
+});
+</script>
+
             <script type="text/javascript">
             
             $(document).ready(function() {
