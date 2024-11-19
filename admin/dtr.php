@@ -99,7 +99,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                
             
         </div>
-    
+        <div class="col-lg-3">
+            <label>Month:</label>
+           
+            <select id="months" name="months">
+    <option value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+</select>
+               
+            
+        </div>
         <div class="col-lg-3 mt-4">
             <label></label>
             <button type="submit" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button>
@@ -108,11 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         <div class="col-lg-3 mt-4" style="text-align:right;">
                                 <label></label>
                                 <button onclick="printDiv('container')" type="button" class="btn btn-success" id="btn_print"><i class="fa fa-print"> Print</i></button> 
-                                <label>Format: </label>
-                                <select>
-                <option>1 column</option>
-                <option>2 column</option>
-            </select>
+                               
                             </div></form>
          <!-- Display Results -->
          <?php if (isset($query) && $query !== ''): ?>
