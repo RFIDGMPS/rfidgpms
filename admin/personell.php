@@ -133,7 +133,9 @@ include '../connection.php';
 <script>
 $(document).ready(function() {
     // Initialize DataTable
-    $('#myDataTable').DataTable();
+    $('#myDataTable').DataTable({
+        order: [[0, 'desc']] // Adjust the index (0) to the appropriate column
+    });
 
     // Event delegation for the delete button
     $(document).on('click', '.d_user_id', function() {
@@ -764,7 +766,27 @@ while ($row = $result->fetch_assoc()) {
       </div>
    </div>
 </div>
+<script>
+   // Check for the 'status' query parameter in the URL
+   const urlParams = new URLSearchParams(window.location.search);
+   const status = urlParams.get('status');
 
+   if (status === 'success') {
+      Swal.fire({
+         icon: 'success',
+         title: 'Success!',
+         text: 'User added successfully.',
+         confirmButtonText: 'OK'
+      });
+   } else if (status === 'error') {
+      Swal.fire({
+         icon: 'error',
+         title: 'Error!',
+         text: 'There was an issue adding the user.',
+         confirmButtonText: 'Try Again'
+      });
+   }
+</script>
             <!-- <script type="text/javascript">
                document.addEventListener('DOMContentLoaded', () => {
                	let btn = document.querySelector('#btn-delemp');
