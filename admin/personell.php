@@ -141,7 +141,7 @@ include '../connection.php';
 				        // Event delegation for edit button
             $('#myDataTable tbody').on('click', '.e_user_id', function() {
 
-               	//$('.e_user_id').click(function(){
+               	alert('test');
                		$id = $(this).attr('data-id');
                		// $('#editModal').load('edit.php?id=' + $id);
 					$('#editemployeeModal').modal('show');
