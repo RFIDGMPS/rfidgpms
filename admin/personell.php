@@ -211,64 +211,66 @@ include '../connection.php';
                                  <div class="" style="border: 1PX solid #b3f0fc;padding: 1%;background-color: #f7cfa1;color: black;font-size: 1.2rem">PERSONAL INFORMATION</div>
                                  <div class="row">
                                     <div class="col-lg-3 col-md-6 col-sm-12" id="up_img">
-                                       <div class="file-uploader">
-                                          <label name="upload-label" class="upload-img-btn">
-                                          <input required type="file" id="photo" name="photo" class="upload-field-1" style="display:none;" accept="image/*" title="Upload Foto.."/>
-                                          <img class="preview-1" src="../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg" style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 15%" title="Upload Photo.." />
-                                          </label>
-                                       </div>
+                                    <div class="file-uploader">
+   <label for="photo" class="upload-img-btn" style="cursor: pointer;">
+      <img class="preview-1" src="../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg"
+           style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 15%;"
+           title="Upload Photo.." />
+   </label>
+   <input type="file" id="photo" name="photo" accept="image/*"
+          style="opacity: 0; position: absolute; z-index: -1;" required>
+</div>
+
                                     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-   document.getElementById('photo').addEventListener('change', function(event) {
-      const file = event.target.files[0]; // Get selected file
-      const validFormats = ['image/jpeg', 'image/png']; // Allowed MIME types
-      const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+  const fileInput = document.getElementById('photo');
 
-      const fileInput = event.target; // The file input element
+// Listen for file selection
+fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    const validFormats = ['image/jpeg', 'image/png'];
+    const maxSize = 2 * 1024 * 1024; // 2MB
 
-// Check if no file is selected using the input's value property
-if (!fileInput.value) {
-    Swal.fire({
-        icon: 'warning',
-        title: 'No File Selected',
-        text: 'Please select an image file.',
-    });
-    return;
-}
+    // Check if a file was selected
+    if (!file) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'No File Selected',
+            text: 'Please select an image file.',
+        });
+        return;
+    }
 
-
-
-      // Check file format
-      if (!validFormats.includes(file.type)) {
-         Swal.fire({
+    // Check file type and size
+    if (!validFormats.includes(file.type)) {
+        Swal.fire({
             icon: 'error',
-            title: 'Invalid File Format',
+            title: 'Invalid Format',
             text: 'Only JPG and PNG formats are allowed.',
-         });
-         this.value = ''; // Clear the file input
-         return;
-      }
+        });
+        fileInput.value = ''; // Reset the input
+        return;
+    }
 
-      // Check file size
-      if (file.size > maxSize) {
-         Swal.fire({
+    if (file.size > maxSize) {
+        Swal.fire({
             icon: 'error',
             title: 'File Too Large',
-            text: 'The file size must not exceed 2MB.',
-         });
-         this.value = ''; // Clear the file input
-         return;
-      }
+            text: 'Maximum file size is 2MB.',
+        });
+        fileInput.value = ''; // Reset the input
+        return;
+    }
 
-      // Preview the image
-      const reader = new FileReader();
-      reader.onload = function(e) {
-         document.querySelector('.preview-1').src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-   });
+    Swal.fire({
+        icon: 'success',
+        title: 'File Selected',
+        text: 'Your file is valid!',
+    });
+});
+
 </script>
                                     <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
