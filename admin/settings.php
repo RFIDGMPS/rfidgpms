@@ -78,7 +78,7 @@ if ($result->num_rows > 0) {
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="submit" class="btn btn-success" id="saveButton" style="padding: 10px 20px; display:none;"> <i class="bi bi-save"></i> Save</button> 
-                                    <button type="button" class="btn btn-secondary" id="cancelButton" onclick="cancelEdit()" style="padding: 10px 20px; display:none;">Cancel</button>
+                                    <button type="button" class="btn btn-secondary" id="cancelButton" onclick="cancelEdit()" style="padding: 10px 20px; display:none;"><i class="bi bi-cancel"></i>Cancel</button>
                                 </div>
                             </form>
                         </div>
