@@ -21,6 +21,8 @@ include 'header.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
     if (isset($_POST['month'])) {
         $month = $_POST['month'];
+    }else {
+        $month = date('F');
     }
     $query = trim($_POST['query']);  // Get the search query and remove leading/trailing spaces
 
