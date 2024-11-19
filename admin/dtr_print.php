@@ -297,7 +297,64 @@ $db->close();
 
         <!-- Second Column -->
         <div class="table-column">
-            
+        <div class="container" id="container">
+                <div class="header">
+                    <h5>Civil Service Form No. 48</h5>
+                    <h4>DAILY TIME RECORD</h4>
+                    <?php if (!empty($personnel)): ?>
+                        <h1><?php echo htmlspecialchars($personnel['first_name'] . ' ' . $personnel['last_name']); ?></h1>
+                    <?php else: ?>
+                        <p>No personnel found.</p>
+                    <?php endif; ?>
+                </div>
+
+                <table class="info-table">
+                    <tr>
+                        <th>For the month of</th>
+                        <td><?php echo $currentMonthName; ?></td>
+                        <td><?php echo $currentYear; ?></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Official hours of arrival and departure:</th>
+                        <td>Regular Days: _______________</td>
+                        <td>Saturdays: _______________</td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <!-- Add more content for the table here -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>AM In</th>
+                            <th>AM Out</th>
+                            <th>PM In</th>
+                            <th>PM Out</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($daysData as $day => $data): ?>
+                            <tr>
+                                <td><?php echo sprintf('%02d', $day); ?></td>
+                                <td><?php echo $data['time_in_am']; ?></td>
+                                <td><?php echo $data['time_out_am']; ?></td>
+                                <td><?php echo $data['time_in_pm']; ?></td>
+                                <td><?php echo $data['time_out_pm']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer">
+                <p><strong>Prepared by:</strong> (Signature over printed name)</p>
+                <p>Approved by:</p>
+                <div class="in-charge">
+                    <p>____________________</p>
+                    <p><strong>In-Charge</strong></p>
+                </div>
+            </div>
         </div>
     </div>
 </body>
