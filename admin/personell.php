@@ -223,7 +223,7 @@ $(document).ready(function() {
 </script>
 
             <!-- Modal -->
-            <form role="form" method="post" action="transac.php?action=add" enctype="multipart/form-data">
+            <form  id="personellForm" role="form" method="post" action="transac.php?action=add" enctype="multipart/form-data">
                <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg">
                      <div class="modal-content">
@@ -516,7 +516,17 @@ while ($row = $result->fetch_assoc()) {
                   </div>
                </div>
             </form>
-          
+            <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('employeeModal');
+        const form = document.getElementById('personellForm');
+
+        // Listen for the modal's hide event
+        modal.addEventListener('hide.bs.modal', function () {
+            form.reset(); // Reset the form
+        });
+    });
+</script>
             <!-- Modal -->
 
                <div class="modal fade" id="editemployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
