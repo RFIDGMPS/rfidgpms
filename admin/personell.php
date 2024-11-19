@@ -115,21 +115,9 @@ include '../connection.php';
         data-bs-target="#delemployee-modal">
     <i class="bi bi-plus-trash"></i> Delete
 </button>
+<script>
 
-
-                                       </center>
-                                    </td>
-                                 </tr>
-                                 <?php } ?>
-                              </tbody>
-                           </table>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-			<script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Listen for the modal toggle and populate modal content
     var deleteButtons = document.querySelectorAll('.d_user_id');
     
@@ -149,6 +137,21 @@ include '../connection.php';
     });
 });
 
+</script>
+
+                                       </center>
+                                    </td>
+                                 </tr>
+                                 <?php } ?>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+			<script type="text/javascript">
+            
          $(document).ready(function() {
          	$("#myDataTable").DataTable();
 
