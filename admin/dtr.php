@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         <div class="col-lg-3">
             <label>Month:</label>
            
-            <select id="months" name="months">
+            <select class="form-control" id="months" name="months">
     <option value="1">January</option>
     <option value="2">February</option>
     <option value="3">March</option>
