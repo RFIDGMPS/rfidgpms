@@ -226,8 +226,10 @@ include '../connection.php';
       const validFormats = ['image/jpeg', 'image/png']; // Allowed MIME types
       const maxSize = 2 * 1024 * 1024; // 2MB in bytes
 
-   // Check if no file is selected
-if (event.target.files.length === 0) {
+      const fileInput = event.target; // The file input element
+
+// Check if no file is selected using the input's value property
+if (!fileInput.value) {
     Swal.fire({
         icon: 'warning',
         title: 'No File Selected',
@@ -235,6 +237,7 @@ if (event.target.files.length === 0) {
     });
     return;
 }
+
 
 
       // Check file format
