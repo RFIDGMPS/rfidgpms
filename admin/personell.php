@@ -50,79 +50,77 @@ include '../connection.php';
                         <hr>
                         </hr>
                         <div class="table-responsive">
-                           <table class="table table-border" id="myDataTable">
-                              <thead>
-                                 <tr>
-                                    <th scope="col">Photo</th>
-                                    <th scope="col">RFID Number</th>
-                                    <th scope="col">Full Name</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Department</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 
-                                 <?php $results = mysqli_query($db, "SELECT * FROM personell"); ?>
-                                 <?php while ($row = mysqli_fetch_array($results)) { ?>
-                                 <tr class="table-<?php echo $row['id'];?>">
-								 <input class="id_number" type="hidden" value="<?php echo $row['id_no']; ?>" />
-									<input class="role" type="hidden" value="<?php echo $row['role']; ?>" />
-									<input class="last_name" type="hidden" value="<?php echo $row['last_name']; ?>" />
-									<input class="first_name" type="hidden" value="<?php echo $row['first_name']; ?>" />
-									<input class="middle_name" type="hidden" value="<?php echo $row['middle_name']; ?>" />
-									<input class="date_of_birth" type="hidden" value="<?php echo $row['date_of_birth']; ?>" />
-									<input class="place_of_birth" type="hidden" value="<?php echo $row['place_of_birth']; ?>" />
-									<input class="sex" type="hidden" value="<?php echo $row['sex']; ?>" />
-									<input class="civil_status" type="hidden" value="<?php echo $row['civil_status']; ?>" />
-									<input class="contact_number" type="hidden" value="<?php echo $row['contact_number']; ?>" />
-                           <input class="category" type="hidden" value="<?php echo $row['category']; ?>" />
-									<input class="email_address" type="hidden" value="<?php echo $row['email_address']; ?>" />
-									<input class="status" type="hidden" value="<?php echo $row['status']; ?>" />
-									<input class="department" type="hidden" value="<?php echo $row['department']; ?>" />
-							
-                                    <td>
-                                       <center>
-                                          <img class="photo" src="uploads/<?php echo $row['photo']; ?>" width="50px" height="50px">
-                                       </center>
-                                    </td>
-                                    <td class="rfid"><?php echo $row['rfid_number']; ?></td>
-                                    <td><?php echo $row['first_name'] .' '.$row['last_name']; ?></td>
-                                    <td><?php echo $row['role']; ?></td>
-                                    <td><?php echo $row['category']; ?></td>
-                                    <td><?php echo $row['department']; ?></td>
-                                    <td><?php if ($row['status'] == 'Active') {
-											echo '<span class="badge bg-success">Active</span>';
-									} 
-									elseif($row['status'] == 'Inactive'){
-										echo '<span class="badge bg-warning">Inactive</span>';
-									}
-									else {
-										echo '<span class="badge bg-danger">Blocked</span>';
-									}
-									?></td>
-                                    <td width="14%">
-                                       <center>
-                                          <button address="<?php echo $row['complete_address']; ?>" data-id="<?php echo $row['id'];?>" class="btn btn-outline-primary btn-sm btn-edit e_user_id" >
-                                          <i class="bi bi-plus-edit"></i> Edit </button>
-                                        <!-- Delete Button -->
-<button user_name="<?php echo $row['first_name'] . ' ' . $row['last_name']; ?>" 
-        data-id="<?php echo $row['id']; ?>" 
-        class="btn btn-outline-danger btn-sm btn-del d_user_id" 
-        data-bs-toggle="modal" 
-        data-bs-target="#delemployee-modal">
-    <i class="bi bi-plus-trash"></i> Delete
-</button>
+                        <table class="table table-border" id="myDataTable">
+    <thead>
+        <tr>
+            <th scope="col">Photo</th>
+            <th scope="col">RFID Number</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Category</th>
+            <th scope="col">Department</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $results = mysqli_query($db, "SELECT * FROM personell"); ?>
+        <?php while ($row = mysqli_fetch_array($results)) { ?>
+        <tr class="table-<?php echo $row['id'];?>">
+            <input class="id_number" type="hidden" value="<?php echo $row['id_no']; ?>" />
+            <input class="role" type="hidden" value="<?php echo $row['role']; ?>" />
+            <input class="last_name" type="hidden" value="<?php echo $row['last_name']; ?>" />
+            <input class="first_name" type="hidden" value="<?php echo $row['first_name']; ?>" />
+            <input class="middle_name" type="hidden" value="<?php echo $row['middle_name']; ?>" />
+            <input class="date_of_birth" type="hidden" value="<?php echo $row['date_of_birth']; ?>" />
+            <input class="place_of_birth" type="hidden" value="<?php echo $row['place_of_birth']; ?>" />
+            <input class="sex" type="hidden" value="<?php echo $row['sex']; ?>" />
+            <input class="civil_status" type="hidden" value="<?php echo $row['civil_status']; ?>" />
+            <input class="contact_number" type="hidden" value="<?php echo $row['contact_number']; ?>" />
+            <input class="category" type="hidden" value="<?php echo $row['category']; ?>" />
+            <input class="email_address" type="hidden" value="<?php echo $row['email_address']; ?>" />
+            <input class="status" type="hidden" value="<?php echo $row['status']; ?>" />
+            <input class="department" type="hidden" value="<?php echo $row['department']; ?>" />
 
+            <td>
+                <center>
+                    <img class="photo" src="uploads/<?php echo $row['photo']; ?>" width="50px" height="50px">
+                </center>
+            </td>
+            <td class="rfid"><?php echo $row['rfid_number']; ?></td>
+            <td><?php echo $row['first_name'] .' '.$row['last_name']; ?></td>
+            <td><?php echo $row['role']; ?></td>
+            <td><?php echo $row['category']; ?></td>
+            <td><?php echo $row['department']; ?></td>
+            <td><?php if ($row['status'] == 'Active') {
+                    echo '<span class="badge bg-success">Active</span>';
+            } 
+            elseif($row['status'] == 'Inactive'){
+                echo '<span class="badge bg-warning">Inactive</span>';
+            }
+            else {
+                echo '<span class="badge bg-danger">Blocked</span>';
+            }
+            ?></td>
+            <td width="14%">
+                <center>
+                    <button address="<?php echo $row['complete_address']; ?>" data-id="<?php echo $row['id'];?>" class="btn btn-outline-primary btn-sm btn-edit e_user_id" >
+                    <i class="bi bi-plus-edit"></i> Edit </button>
+                    <!-- Delete Button -->
+                    <button user_name="<?php echo $row['first_name'] . ' ' . $row['last_name']; ?>" 
+                        data-id="<?php echo $row['id']; ?>" 
+                        class="btn btn-outline-danger btn-sm btn-del d_user_id" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#delemployee-modal">
+                        <i class="bi bi-plus-trash"></i> Delete
+                    </button>
+                </center>
+            </td>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
 
-                                       </center>
-                                    </td>
-                                 </tr>
-                                 <?php } ?>
-                              </tbody>
-                           </table>
                         </div>
                      </div>
                   </div>
