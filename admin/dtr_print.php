@@ -15,8 +15,6 @@ $query = '';
 $id=$_SESSION['id'];
 include '../connection.php';
 
-
-
 // Validate the ID (ensure it’s numeric)
 if (!$id || !is_numeric($id)) {
     die("Invalid personnel ID.");
@@ -119,7 +117,6 @@ $db->close();
         width: 100%;
         max-width: 800px;
         margin: 0 auto;
-       
         box-sizing: border-box;
     }
 
@@ -201,8 +198,11 @@ $db->close();
 
         /* Make sure table fits within page */
         table {
-            width: 100%;
+            width: 48%;
+            margin: 10px;
             page-break-inside: avoid;
+            display: inline-block;
+            vertical-align: top;
         }
 
         th, td {
@@ -301,33 +301,29 @@ function convertTo12Hour($time) {
 
             // Display the row for each day
             echo "<tr>";
-            echo "<td>" . $day . "</td>";
-            echo "<td>" . (isset($timeData['time_in_am']) ? htmlspecialchars($timeData['time_in_am']) : '') . "</td>";
-            echo "<td>" . (isset($timeData['time_out_am']) ? htmlspecialchars($timeData['time_out_am']) : '') . "</td>";
-            // Convert PM time to 12-hour AM/PM format before displaying
-            echo "<td>" . (isset($timeData['time_in_pm']) ? htmlspecialchars($timeData['time_in_pm']) : '') . "</td>";
-            echo "<td>" . (isset($timeData['time_out_pm']) ? htmlspecialchars($timeData['time_out_pm']) : '') . "</td>";
-            echo "<td></td>"; // Placeholder for undertime
-            echo "<td></td>"; // Placeholder for undertime
+            echo "<td>" . ($day) . "</td>";
+
+            // Check if time data exists and display the values
+            if ($timeData) {
+                echo "<td>" . convertTo12Hour($timeData['time_in_am']) . "</td>";
+                echo "<td>" . convertTo12Hour($timeData['time_out_am']) . "</td>";
+                echo "<td>" . convertTo12Hour($timeData['time_in_pm']) . "</td>";
+                echo "<td>" . convertTo12Hour($timeData['time_out_pm']) . "</td>";
+                echo "<td>0</td><td>0</td>"; // Undertime placeholder
+            } else {
+                echo "<td colspan='6'>No data available</td>";
+            }
+
             echo "</tr>";
         }
         ?>
         </tbody>
-        <tfoot>
-            <tr>
-                <th>Total</th>
-                <td colspan="6"></td>
-            </tr>
-        </tfoot>
     </table>
-
+    
     <div class="footer">
-        <p style="size:5px;">
-            I CERTIFY on my honor that the above is a true and correct report of the hours of work performed, record of which was made daily at the time of arrival and departure from the office.
-        </p>
         <div class="in-charge">
-            <p>__________________________</p>
-            <p>In-Charge</p>
+            <p>Prepared by:</p>
+            <p>Signature over Printed Name</p>
         </div>
     </div>
 </div>

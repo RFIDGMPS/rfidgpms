@@ -108,7 +108,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         <div class="col-lg-3 mt-4" style="text-align:right;">
                                 <label></label>
                                 <button onclick="printDiv('container')" type="button" class="btn btn-success" id="btn_print"><i class="fa fa-print"> Print</i></button> 
-            
+                                <label>Format: </label>
+                                <select>
+                <option>1 column</option>
+                <option>2 column</option>
+            </select>
                             </div></form>
          <!-- Display Results -->
          <?php if (isset($query) && $query !== ''): ?>
