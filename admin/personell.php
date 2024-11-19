@@ -112,29 +112,10 @@ include '../connection.php';
         data-id="<?php echo $row['id']; ?>" 
         class="btn btn-outline-danger btn-sm btn-del d_user_id" 
         data-bs-toggle="modal" 
-        data-bs-target="#delemployee1-modal">
+        data-bs-target="#delemployee-modal">
     <i class="bi bi-plus-trash"></i> Delete
 </button>
 
-<!-- Modal -->
-<div id="delemployee1-modal" class="modal fade" tabindex="-1" aria-labelledby="delemployee-modalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="delemployee-modalLabel">Delete Employee</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to delete <strong class="user_name"></strong>?</p>
-                <input type="text" class="d-personell" readonly />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <a href="#" id="confirm-delete" class="btn btn-danger">Delete</a>
-            </div>
-        </div>
-    </div>
-</div>
 
                                        </center>
                                     </td>
