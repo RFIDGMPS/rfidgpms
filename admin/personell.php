@@ -129,28 +129,48 @@ include '../connection.php';
                </div>
             </div>
 			<script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+    // Listen for the modal toggle and populate modal content
+    var deleteButtons = document.querySelectorAll('.d_user_id');
+    
+    deleteButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var userName = button.getAttribute('user_name');
+            var userId = button.getAttribute('data-id');
+
+            // Set the modal content
+            document.querySelector('.user_name').textContent = userName;
+            document.querySelector('.d-personell').value = userName;
+
+            // Set the link for the confirm delete button
+            var confirmDeleteLink = document.getElementById('confirm-delete');
+            confirmDeleteLink.href = 'del.php?type=personell&id=' + userId;
+        });
+    });
+});
+
          $(document).ready(function() {
          	$("#myDataTable").DataTable();
 
     
-            $('#myDataTable tbody').on('click', '.d_user_id', function() {
-        // Show the modal using Bootstrap's modal method
-        var modal = new bootstrap.Modal(document.getElementById('delemployee-modal'));
-        modal.show(); // Open the modal
+   //          $('#myDataTable tbody').on('click', '.d_user_id', function() {
+   //      // Show the modal using Bootstrap's modal method
+   //      var modal = new bootstrap.Modal(document.getElementById('delemployee-modal'));
+   //      modal.show(); // Open the modal
 
-        // Retrieve the data attributes
-        var user_name = $(this).attr('user_name');
-        var id = $(this).attr('data-id');
+   //      // Retrieve the data attributes
+   //      var user_name = $(this).attr('user_name');
+   //      var id = $(this).attr('data-id');
 
-        // Update modal content with the retrieved data
-        $('.user_name').html(user_name);
-        $('.d-personell').val(user_name); // If you want to set a readonly input with the name
+   //      // Update modal content with the retrieved data
+   //      $('.user_name').html(user_name);
+   //      $('.d-personell').val(user_name); // If you want to set a readonly input with the name
 
-        // Handle remove button click to delete the user
-        $('.remove_id').off('click').on('click', function() {
-            window.location = 'del.php?type=personell&id=' + id; // Redirect to delete script
-        });
-    });
+   //      // Handle remove button click to delete the user
+   //      $('.remove_id').off('click').on('click', function() {
+   //          window.location = 'del.php?type=personell&id=' + id; // Redirect to delete script
+   //      });
+   //  });
 
 
 				        // Event delegation for edit button
