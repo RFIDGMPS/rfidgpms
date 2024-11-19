@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                         <div class="col-lg-3">
             <label>Search Personnel:</label>
            
-                <input type="text" class="form-control" name="query" autocomplete="off"/>
+                <input required type="text" class="form-control" name="query" autocomplete="off"/>
                
             
         </div>
@@ -331,7 +331,13 @@ function convertTo12Hour($time) {
     <table class="info-table">
         <tr>
             <th>For the month of</th>
-            <td><?php echo $currentMonthName; ?></td>
+            <td><?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the selected month from the dropdown
+    $selectedMonth = $_POST['months'];
+
+    // Print the selected month
+    echo $selectedMonth;
+} ?></td>
             <td><?php echo $currentYear; ?></td>
             <td></td>
         </tr>
