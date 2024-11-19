@@ -79,7 +79,7 @@ include '../connection.php';
 									<input class="sex" type="hidden" value="<?php echo $row['sex']; ?>" />
 									<input class="civil_status" type="hidden" value="<?php echo $row['civil_status']; ?>" />
 									<input class="contact_number" type="hidden" value="<?php echo $row['contact_number']; ?>" />
-                           <input class="category" type="hidden" value="<?php echo $row['category']; ?>" />
+                           <input class="categ" type="hidden" value="<?php echo $row['category']; ?>" />
 									<input class="email_address" type="hidden" value="<?php echo $row['email_address']; ?>" />
 									<input class="status" type="hidden" value="<?php echo $row['status']; ?>" />
 									<input class="department" type="hidden" value="<?php echo $row['department']; ?>" />
