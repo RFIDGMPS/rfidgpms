@@ -90,8 +90,7 @@ if ($result->num_rows > 0) {
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Ensure jQuery is included -->
-
+  
     <script>
         $(document).ready(function() {
             $logo1 =  $('.edit-logo1').attr('src');
