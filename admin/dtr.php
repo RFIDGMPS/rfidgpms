@@ -8,11 +8,7 @@ $id=0;
 include '../connection.php';
 ?>
 <?php
-if (isset($_POST['month'])) {
-    $month = $_POST['month'];
-}else {
-    $month = date('F');
-}
+
 
 include 'header.php';
 
@@ -218,6 +214,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
 
 // Get the 'id' parameter from the URL
 $id = isset($_GET['id']) ? $_GET['id'] : null;
+$month=isset($_GET['month']) ? $_GET['month'] : date('F');
+
 $_SESSION['id'] =$id;
 
 
@@ -337,7 +335,7 @@ function convertTo12Hour($time) {
     <table class="info-table">
         <tr>
             <th>For the month of</th>
-            <td><?php echo $_GET('month'); ?></td>
+            <td><?php echo $month; ?></td>
             <td><?php echo $currentYear; ?></td>
             <td></td>
         </tr>
