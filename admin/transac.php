@@ -58,8 +58,6 @@ if ($result) {
     ];
 }
 
-// Redirect to personell.php
-header('Location: personell.php');
 exit;
     break;
     case 'add_department':
