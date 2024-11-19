@@ -19,11 +19,7 @@ include 'header.php';
 
 // Check if there's a search query
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
-    if (isset($_POST['month'])) {
-        $month = $_POST['month'];
-    }else {
-        $month = date('F');
-    }
+    
     $query = trim($_POST['query']);  // Get the search query and remove leading/trailing spaces
 
     // SQL query to fetch first_name, last_name, and category, excluding 'Student'
@@ -236,6 +232,9 @@ $result = $stmt->get_result();
 // Fetch the personnel data
 if ($row = $result->fetch_assoc()) {
     $personnel = $row; // Store first_name and last_name
+    if (isset($_POST['month'])) {
+        $month = $_POST['month'];
+    }
 }
 
 // Close the statement
