@@ -244,7 +244,7 @@ $(document).ready(function() {
                                     <div class="file-uploader">
    <label for="photo" class="upload-img-btn" style="cursor: pointer;">
       <img class="preview-1" src="../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg"
-           style="width: 140px!important; height: 130px!important; position: absolute; border: 1px solid gray; top: 15%;"
+           style="width: 140px!important; height: 130px!important; position: absolute; border: 1px solid gray; top: 25%;"
            title="Upload Photo.." />
    </label>
    <input type="file" id="photo" name="photo" class="upload-field-1" 
