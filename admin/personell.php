@@ -632,8 +632,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function updateCategory(role) {
-        // Clear existing options except the default one
-        categoryDropdown.innerHTML = '<option value="" selected>Select Category</option>';
+      
 
         if (role === 'Student') {
             // Add 'Student' category for 'Student' role
