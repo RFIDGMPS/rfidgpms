@@ -774,7 +774,36 @@ while ($row = $result->fetch_assoc()) {
                                        </div>
                                     </div>
 
-                                    <script>
+         <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="form-group">
+               <label>STATUS:</label>
+			   <select class="form-control" name="status" id="status" autocomplete="off">
+                  <option class="edit-status1"></option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                  <option value="Block">Block</option>
+               </select>
+            </div>
+         </div>
+      </div>
+      <!-- <div class="row">
+         <div class="col-lg-12 col-md-6 col-sm-12">
+            <div class="form-group">
+               <label>COMPLETE ADDRESS:</label>
+			   <input  type="text" class="form-control  e-address" name="complete_address" id="complete_address" autocomplete="off">
+               <span class="ca-error"></span>
+            </div>
+         </div>
+      </div> -->
+   </div>
+</div></div>
+<div class="modal-footer">
+                           <input type="hidden" id="edit_employeeid" name="">
+                           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                           <input value="Update" name="update" type="submit" id="btn-editemp" class="btn btn-outline-warning"/>
+                        </div>
+                        
+                        <script>
    $(document).ready(function() {
       $('#rfid_number1').on('blur', function() {
          const rfidNumber = $(this).val();
@@ -806,34 +835,6 @@ while ($row = $result->fetch_assoc()) {
       });
    });
 </script>
-         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="form-group">
-               <label>STATUS:</label>
-			   <select class="form-control" name="status" id="status" autocomplete="off">
-                  <option class="edit-status1"></option>
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                  <option value="Block">Block</option>
-               </select>
-            </div>
-         </div>
-      </div>
-      <!-- <div class="row">
-         <div class="col-lg-12 col-md-6 col-sm-12">
-            <div class="form-group">
-               <label>COMPLETE ADDRESS:</label>
-			   <input  type="text" class="form-control  e-address" name="complete_address" id="complete_address" autocomplete="off">
-               <span class="ca-error"></span>
-            </div>
-         </div>
-      </div> -->
-   </div>
-</div></div>
-<div class="modal-footer">
-                           <input type="hidden" id="edit_employeeid" name="">
-                           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                           <input value="Update" name="update" type="submit" id="btn-editemp" class="btn btn-outline-warning"/>
-                        </div>
 
     </form>
 
