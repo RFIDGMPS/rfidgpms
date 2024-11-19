@@ -127,19 +127,19 @@ include '../connection.php';
 document.addEventListener('DOMContentLoaded', function () {
     // Handle button click to open modal and set user info
     document.querySelectorAll('.d_user_id').forEach(function (button) {
-        button.addEventListener('click', function () {
-            var userName = button.getAttribute('user_name');
-            var userId = button.getAttribute('data-id');
+    button.addEventListener('click', function () {
+        var userName = button.getAttribute('user_name');
+        var userId = button.getAttribute('data-id');
 
-            // Set user name and user ID in modal
-            document.querySelector('.user_name').value = userName;
-            document.querySelector('#delete_employeeid').value = userId;
+        // Set user name and user ID in modal
+        document.querySelector('.user_name').value = userName;
+        document.querySelector('#delete_employeeid').value = userId;
 
-            // Show the modal (You can still use the bootstrap modal or remove it entirely)
-            var modal = new bootstrap.Modal(document.getElementById('delemployee-modal'));
-            modal.show();
-        });
+        // Show the custom modal
+        document.getElementById('delemployee-modal').style.display = 'flex';  // Manually show the modal
     });
+});
+
 
     // Handle "Yes" button click (delete action)
     document.getElementById('btn-delemp').addEventListener('click', function () {
