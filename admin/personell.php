@@ -568,24 +568,80 @@ while ($row = $result->fetch_assoc()) {
                <label name="upload-label" class="upload-img-btn">
                <input type="file" id="photo" name="photo" class="upload-field-1" style="display:none;" accept="image/*" title="Upload Foto.."/>
                <input type="hidden" id="capturedImage" name="capturedImage" class="capturedImage">
-               <img class="preview-1 edit-photo" src="" style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 15%" title="Upload Photo.." />
+               <img class="preview-1 edit-photo" src="" style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 25%" title="Upload Photo.." />
                </label>
             </div>
          </div>
-         <div class="col-lg-4 col-md-6 col-sm-12" id="lnamez">
-            <div class="form-group">
-               <label>ID Number:</label>
-               <input  type="text" value="" class="form-control edit-id" name="id_no" id="id_no" autocomplete="off">
-               <span class="id-error"></span>
-            </div>
-         </div>
-         <div class="col-lg-5 col-md-6 col-sm-12">
-            <div class="form-group">
-               <label>RFID NUMBER:</label>
-               <input  type="text" value="" class="form-control edit-rfid" name="rfid_number" id="frid_number" minlength="10" maxlength="10" autocomplete="off">
-               <span class="rfidno-error"></span>
-            </div>
-         </div>
+         <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="form-group">
+        <label>ROLE:</label>
+        <select required class="form-control dept_ID" name="role" id="role" autocomplete="off" onchange="updateCategory()">
+        <option class="edit-role-val"></option>
+            <?php
+                $sql = "SELECT * FROM role";
+                $result = $db->query($sql);
+
+                // Fetch and display role options
+                while ($row = $result->fetch_assoc()) {
+                    $role = $row['role'];
+                    
+                    // Set 'Student' as the default selected option
+                    if ($role === 'Student') {
+                        echo "<option value='$role' selected>$role</option>";
+                    } else {
+                        echo "<option value='$role'>$role</option>";
+                    }
+                }
+            ?>
+        </select>
+        <span class="pob-error"></span>
+    </div>
+</div>
+
+<div class="col-lg-5 col-md-6 col-sm-12" id="lnamez">
+    <div class="form-group">
+        <label>Category:</label>
+        <select required class="form-control" name="category" id="category" autocomplete="off">
+            <!-- Category options will be populated by JavaScript -->
+        </select>
+        <span class="id-error"></span>
+    </div>
+</div>
+
+<script>
+// Ensure the 'Student' role is preselected and categories updated accordingly
+document.addEventListener('DOMContentLoaded', function () {
+    updateCategory(); // Initialize category based on the default selected role
+});
+
+function updateCategory() {
+    var role = document.getElementById('role').value;
+    var categorySelect = document.getElementById('category');
+    
+    // Clear the existing options
+    categorySelect.innerHTML = '';
+
+    if (role === 'Student') {
+        // If the role is 'Student', show 'Student' only in category
+        var option = document.createElement('option');
+        option.value = 'Student';
+        option.text = 'Student';
+        categorySelect.appendChild(option);
+    } else {
+        // If the role is not 'Student', show 'Regular' and 'Contractual'
+        var option1 = document.createElement('option');
+        option1.value = 'Regular';
+        option1.text = 'Regular';
+        categorySelect.appendChild(option1);
+
+        var option2 = document.createElement('option');
+        option2.value = 'Contractual';
+        option2.text = 'Contractual';
+        categorySelect.appendChild(option2);
+    }
+}
+</script>
+                             
       </div>
       <div class="row mb-3 mt-1">
          <div class="col-lg-3 col-md-6 col-sm-12">
