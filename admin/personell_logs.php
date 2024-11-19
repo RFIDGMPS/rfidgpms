@@ -167,7 +167,8 @@ mysqli_close($db);
                 $output .= '<td>' . $row['location'] . '</td>';
                 $output .= '<td>' . $row['role'] . '</td>';
                 $output .= '<td>' . date("h:i A", strtotime($row['time_in'])) . '</td>';
-                $output .= '<td>' . date("h:i A", strtotime($row['time_out'])) . '</td>';
+                $output .= '<td>' . ($row['time_out'] === '?' ? '?' : date("h:i A", strtotime($row['time_out']))) . '</td>';
+                
                 
                 $output .= '<td>' . $row['date_logged'] . '</td>';
                 $output .= '</tr>';
@@ -200,7 +201,7 @@ mysqli_close($db);
             echo '<td>' . $row['location'] . '</td>';
             echo '<td>' . $row['role'] . '</td>';
             echo '<td>' . date("h:i A", strtotime($row['time_in']))  . '</td>';
-            echo '<td>' .  date("h:i A", strtotime($row['time_out'])) . '</td>';
+            echo '<td>' .  ($row['time_out'] === '?' ? '?' : date("h:i A", strtotime($row['time_out']))) . '</td>';
             echo '<td>' . $row['date_logged'] . '</td>';
             echo '</tr>';
         }
