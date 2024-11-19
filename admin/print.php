@@ -43,13 +43,12 @@ include 'header.php';
                                 foreach ($_SESSION['filtered_data'] as $row) {
                                     echo '<tr>';
                                     echo '<td><center><img src="uploads/' . $row['photo'] . '" width="50px" height="50px"></center></td>';
-                                    echo '<td>' . $row['full_name'] . '</td>';
+                                    echo '<td>' . $row['first_name'] . ' ' .  $row['last_name'] .'</td>';
                                     echo '<td>' . $row['department'] . '</td>';
+                                    echo '<td>' . $row['location'] . '</td>';
                                     echo '<td>' . $row['role'] . '</td>';
-                                    echo '<td>' . $row['time_in_am'] . '</td>';
-                                    echo '<td>' . $row['time_out_am'] . '</td>';
-                                    echo '<td>' . $row['time_in_pm'] . '</td>';
-                                    echo '<td>' . $row['time_out_pm'] . '</td>';
+                                    echo '<td>' . $row['time_in'] . '</td>';
+                                    echo '<td>' . $row['time_out'] . '</td>';
                                     echo '<td>' . $row['date_logged'] . '</td>';
                                     echo '</tr>';
                                 }
