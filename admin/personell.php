@@ -579,7 +579,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>ROLE:</label>
         <select class="form-control" name="role" id="role" autocomplete="off">
-            <option class="edit-role-val"></option>
+            <option value="" disabled selected>Select Role</option>
             <?php
             $sql = "SELECT * FROM role";
             $result = $db->query($sql);
@@ -599,12 +599,11 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>Category:</label>
         <select required class="form-control" name="category" id="category" autocomplete="off">
-            <option class="edit-categ-val" selected></option>
+            <option value="" disabled selected>Select Category</option>
         </select>
         <span class="id-error"></span>
     </div>
 </div>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -638,6 +637,7 @@ while ($row = $result->fetch_assoc()) {
         }
     });
 </script>
+
    </div>
       <div class="row mb-3 mt-1">
          <div class="col-lg-3 col-md-6 col-sm-12">
