@@ -7,6 +7,7 @@ $logo1 = "";
 $name = "";
 $address = "";
 $logo2 = "";
+
 // Fetch data from the about table
 $sql = "SELECT * FROM about LIMIT 1";
 $result = $db->query($sql);
@@ -77,6 +78,7 @@ if ($result->num_rows > 0) {
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="submit" class="btn btn-success" id="saveButton" style="padding: 10px 20px; display:none;"> <i class="bi bi-save"></i> Save</button> 
+                                    <button type="button" class="btn btn-secondary" id="cancelButton" onclick="cancelEdit()">Cancel</button>
                                 </div>
                             </form>
                         </div>
@@ -112,9 +114,23 @@ if ($result->num_rows > 0) {
             });
             saveButton.style.display = saveButton.style.display === 'none' ? 'inline-block' : 'none';
         }
-    </script>
 
-    <script type="text/javascript">
+        function cancelEdit() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will lose your changes.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, cancel',
+                cancelButtonText: 'No, stay'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Reset form or redirect
+                    window.location.href = 'settings.php'; // Redirect to settings or reset the form
+                }
+            });
+        }
+
         // Function to read image URL for preview
         function readURL(input) {
             if (input.files && input.files[0]) {
