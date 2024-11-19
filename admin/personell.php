@@ -1,6 +1,12 @@
 
 <!DOCTYPE html>
+<head><!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+</head>
 <?php
 include 'auth.php'; // Include session validation
 
