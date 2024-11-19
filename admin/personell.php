@@ -575,7 +575,7 @@ while ($row = $result->fetch_assoc()) {
                </label>
             </div>
          </div>
-    <div class="col-lg-4 col-md-6 col-sm-12">
+         <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
         <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off">
@@ -612,27 +612,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Check for default selected values
     const defaultRole = document.querySelector('.edit-role-val').value;
-    const defaultCategory = document.querySelector('.edit-categ-val').value;
 
-    // Set default values if provided
+    // Set default role if available
     if (defaultRole) {
         roleDropdown.value = defaultRole;
     }
 
-    if (defaultCategory) {
-        categoryDropdown.value = defaultCategory;
-    }
-
-    // Populate categories based on the selected role
+    // Populate categories when the page loads
     updateCategory(roleDropdown.value);
 
-    // Listen for changes on the role dropdown
+    // Listen for changes in the ROLE dropdown
     roleDropdown.addEventListener('change', function () {
         updateCategory(this.value);
     });
 
     function updateCategory(role) {
-        // Clear existing options except the default one
+        // Clear existing options
         categoryDropdown.innerHTML = '<option value="" selected>Select Category</option>';
 
         if (role === 'Student') {
@@ -649,7 +644,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
-
 
    </div>
       <div class="row mb-3 mt-1">
