@@ -226,15 +226,16 @@ include '../connection.php';
       const validFormats = ['image/jpeg', 'image/png']; // Allowed MIME types
       const maxSize = 2 * 1024 * 1024; // 2MB in bytes
 
-      // Check if file is selected
-      if (!file) {
-         Swal.fire({
-            icon: 'warning',
-            title: 'No File Selected',
-            text: 'Please select an image file.',
-         });
-         return;
-      }
+   // Check if no file is selected
+if (event.target.files.length === 0) {
+    Swal.fire({
+        icon: 'warning',
+        title: 'No File Selected',
+        text: 'Please select an image file.',
+    });
+    return;
+}
+
 
       // Check file format
       if (!validFormats.includes(file.type)) {
