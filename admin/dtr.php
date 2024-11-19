@@ -19,6 +19,9 @@ include 'header.php';
 
 // Check if there's a search query
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
+    if (isset($_POST['month'])) {
+        $month = $_POST['month'];
+    }
     $query = trim($_POST['query']);  // Get the search query and remove leading/trailing spaces
 
     // SQL query to fetch first_name, last_name, and category, excluding 'Student'
@@ -102,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         <div class="col-lg-3">
             <label>Month:</label>
            
-            <select class="form-control" id="months" name="months">
+            <select class="form-control" id="months" name="month">
             <option value="" disabled selected><?php echo date('F'); ?></option>
     <option value="1">January</option>
     <option value="2">February</option>
@@ -331,13 +334,7 @@ function convertTo12Hour($time) {
     <table class="info-table">
         <tr>
             <th>For the month of</th>
-            <td><?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the selected month from the dropdown
-    $selectedMonth = $_POST['months'];
-
-    // Print the selected month
-    echo $selectedMonth;
-} ?></td>
+            <td><?php echo $month; ?></td>
             <td><?php echo $currentYear; ?></td>
             <td></td>
         </tr>
