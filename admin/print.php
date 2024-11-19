@@ -43,8 +43,12 @@ include 'header.php';
                                     echo '<td>' . $row['department'] . '</td>';
                                     echo '<td>' . $row['location'] . '</td>';
                                     echo '<td>' . $row['role'] . '</td>';
-                                    echo '<td>' . $row['time_in'] . '</td>';
-                                    echo '<td>' . $row['time_out'] . '</td>';
+                                    echo '<td>' . date("h:i A", strtotime($row['time_in']))  . '</td>';
+            if ($row['time_out'] === '?' || $row['time_out'] === '' || is_null($row['time_out'])) {
+                echo'<td>' . $row['time_out'] . '</td>'; // Display as is
+            } else {
+                echo'<td>' . date("h:i A", strtotime($row['time_out'])) . '</td>';
+            }
                                     echo '<td>' . $row['date_logged'] . '</td>';
                                     echo '</tr>';
                                 }
