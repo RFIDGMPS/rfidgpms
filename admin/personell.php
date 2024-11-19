@@ -578,8 +578,8 @@ while ($row = $result->fetch_assoc()) {
          <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
-        <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off">
-            <option class="edit-role-val" value="" selected>Select Role</option>
+        <select required class="form-control dept_ID" name="role" id="role" autocomplete="off">
+            <option value="" selected>Select Role</option>
             <?php
                 $sql = "SELECT * FROM role";
                 $result = $db->query($sql);
@@ -598,8 +598,8 @@ while ($row = $result->fetch_assoc()) {
 <div class="col-lg-5 col-md-6 col-sm-12" id="lnamez">
     <div class="form-group">
         <label>CATEGORY:</label>
-        <select required class="form-control" name="category" id="ecategory" autocomplete="off">
-            <option class="edit-categ-val" value="" selected>Select Category</option>
+        <select required class="form-control" name="category" id="category" autocomplete="off">
+            <option value="" selected>Select Category</option>
         </select>
         <span class="id-error"></span>
     </div>
@@ -607,21 +607,13 @@ while ($row = $result->fetch_assoc()) {
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const roleDropdown = document.getElementById('erole');
-    const categoryDropdown = document.getElementById('ecategory');
+    const roleDropdown = document.getElementById('role');
+    const categoryDropdown = document.getElementById('category');
 
-    // Check for default selected values
-    const defaultRole = document.querySelector('.edit-role-val').value;
-
-    // Set default role if available
-    if (defaultRole) {
-        roleDropdown.value = defaultRole;
-    }
-
-    // Populate categories when the page loads
+    // Initialize the categories based on the default role
     updateCategory(roleDropdown.value);
 
-    // Listen for changes in the ROLE dropdown
+    // Listen for changes in the role dropdown
     roleDropdown.addEventListener('change', function () {
         updateCategory(this.value);
     });
@@ -631,11 +623,11 @@ document.addEventListener('DOMContentLoaded', function () {
         categoryDropdown.innerHTML = '<option value="" selected>Select Category</option>';
 
         if (role === 'Student') {
-            // Add 'Student' category for 'Student' role
+            // If "Student" is selected, show only "Student" as a category
             const studentOption = new Option('Student', 'Student');
             categoryDropdown.add(studentOption);
         } else if (role) {
-            // Add 'Regular' and 'Contractual' for other roles
+            // For other roles, show "Regular" and "Contractual"
             const regularOption = new Option('Regular', 'Regular');
             const contractualOption = new Option('Contractual', 'Contractual');
             categoryDropdown.add(regularOption);
@@ -644,6 +636,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
+
 
    </div>
       <div class="row mb-3 mt-1">
