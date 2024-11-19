@@ -108,19 +108,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
             <label>Month:</label>
            
             <select class="form-control" id="months" name="month">
-            <option value="" disabled selected><?php echo date('F'); ?></option>
-    <option value="1">January</option>
-    <option value="2">February</option>
-    <option value="3">March</option>
-    <option value="4">April</option>
-    <option value="5">May</option>
-    <option value="6">June</option>
-    <option value="7">July</option>
-    <option value="8">August</option>
-    <option value="9">September</option>
-    <option value="10">October</option>
-    <option value="11">November</option>
-    <option value="12">December</option>
+            <option value="" disabled selected><?php echo $month; ?></option>
+    <option value="January">January</option>
+    <option value="February">February</option>
+    <option value="March">March</option>
+    <option value="April">April</option>
+    <option value="May">May</option>
+    <option value="June">June</option>
+    <option value="July">July</option>
+    <option value="August">August</option>
+    <option value="September">September</option>
+    <option value="October">October</option>
+    <option value="November">November</option>
+    <option value="December">December</option>
 </select>
                
             
@@ -337,7 +337,7 @@ function convertTo12Hour($time) {
     <table class="info-table">
         <tr>
             <th>For the month of</th>
-            <td><?php echo $month; ?></td>
+            <td><?php echo $_GET('month'); ?></td>
             <td><?php echo $currentYear; ?></td>
             <td></td>
         </tr>
