@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         <ul class="personnel-list">
             <?php foreach ($personnel as $person): ?>
                 <li>
-                    <a href="?id=<?= htmlspecialchars($person['id']); ?>&month=<?= $_POST['month'];?>">
+                    <a href="?id=<?= htmlspecialchars($person['id']); ?>&month=<?= $month;?>">
                         <?= htmlspecialchars($person['first_name']) . ' ' . htmlspecialchars($person['last_name']); ?>
                     </a>
                 </li>
