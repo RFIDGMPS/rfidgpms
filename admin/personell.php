@@ -774,6 +774,38 @@ while ($row = $result->fetch_assoc()) {
                                        </div>
                                     </div>
 
+                                    <script>
+   $(document).ready(function() {
+      $('#rfid_number').on('blur', function() {
+         const rfidNumber = $(this).val();
+         
+         if (rfidNumber.length === 10) {
+            $.ajax({
+               url: 'check_rfid.php', // Backend PHP file
+               method: 'POST',
+               data: { rfid_number: rfidNumber },
+               success: function(response) {
+                  const res = JSON.parse(response);
+                  if (res.exists) {
+                     Swal.fire({
+                        icon: 'warning',
+                        title: 'Duplicate RFID',
+                        text: 'This RFID number already exists in the system.',
+                     });
+                  } 
+               },
+               error: function() {
+                  Swal.fire({
+                     icon: 'error',
+                     title: 'Error',
+                     text: 'Unable to check RFID. Please try again later.',
+                  });
+               }
+            });
+         }
+      });
+   });
+</script>
          <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                <label>STATUS:</label>
