@@ -605,42 +605,38 @@ while ($row = $result->fetch_assoc()) {
     </div>
 </div>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Initialize the category on page load
-        updateCategory();
+        // Get references to the dropdowns
+        const roleSelect = document.getElementById('role');
+        const categorySelect = document.getElementById('category');
 
-        // Add change event listener to the role dropdown
-        var roleSelect = document.getElementById('role');
-        roleSelect.addEventListener('change', updateCategory);
-    });
+        // Event listener for role changes
+        roleSelect.addEventListener('change', function () {
+            updateCategory(roleSelect.value);
+        });
 
-    function updateCategory() {
-        var role = document.getElementById('role').value;
-        var categorySelect = document.getElementById('category');
+        function updateCategory(role) {
+            // Define category options
+            const categories = {
+                Student: ['Student'],
+                Default: ['Regular', 'Contractual']
+            };
 
-        // Clear the existing options
-        categorySelect.innerHTML = '';
+            // Clear existing options
+            categorySelect.innerHTML = '<option value="" disabled selected>Select Category</option>';
 
-        if (role === 'Student') {
-            // If the role is 'Student', add 'Student' to category
-            var option = document.createElement('option');
-            option.value = 'Student';
-            option.text = 'Student';
-            categorySelect.appendChild(option);
-        } else if (role) {
-            // If the role is not 'Student', add 'Regular' and 'Contractual'
-            var option1 = document.createElement('option');
-            option1.value = 'Regular';
-            option1.text = 'Regular';
-            categorySelect.appendChild(option1);
-
-            var option2 = document.createElement('option');
-            option2.value = 'Contractual';
-            option2.text = 'Contractual';
-            categorySelect.appendChild(option2);
+            // Add appropriate category options
+            const selectedCategories = categories[role] || categories['Default'];
+            selectedCategories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categorySelect.appendChild(option);
+            });
         }
-    }
+    });
 </script>
    </div>
       <div class="row mb-3 mt-1">
