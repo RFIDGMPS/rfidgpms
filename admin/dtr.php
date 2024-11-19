@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         </div>
         <div class="col-lg-3">
             <label>Month:</label>
-           
+            
             <select class="form-control" id="months" name="month">
             <option value="<?php echo $month; ?>" disabled selected><?php echo $month; ?></option>
     <option value="January">January</option>
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
     <option value="November">November</option>
     <option value="December">December</option>
 </select>
-               
+<?php $month=$_POST['month']; ?>  
             
         </div>
         <div class="col-lg-3 mt-4">
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         <ul class="personnel-list">
             <?php foreach ($personnel as $person): ?>
                 <li>
-                    <a href="?id=<?= htmlspecialchars($person['id']); ?>&month=<?= $month;?>">
+                    <a href="?id=<?= htmlspecialchars($person['id']); ?>&month=<?= $_POST['month'];?>">
                         <?= htmlspecialchars($person['first_name']) . ' ' . htmlspecialchars($person['last_name']); ?>
                     </a>
                 </li>
