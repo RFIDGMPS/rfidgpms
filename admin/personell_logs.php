@@ -17,7 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date2 = date('Y-m-d', strtotime($_POST['date2']));
 
     // SQL query to fetch filtered data
-    $sql = "SELECT * FROM room_logs WHERE date_logged BETWEEN '$date1' AND '$date2'";
+    $sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
+        FROM personell AS p
+        JOIN room_logs AS rl ON p.id = rl.personnel_id
+        WHERE rl.date_logged BETWEEN '$date1' AND '$date2'  ORDER BY CASE 
+        WHEN time_out IS NOT NULL THEN time_out 
+        ELSE time_in 
+    END DESC";
     $result = mysqli_query($db, $sql);
 
     // Check if query was successful
@@ -38,7 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 else {
 // Fetch all records from the database if no filtering is applied
-$sql = "SELECT * FROM room_logs";
+$sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
+        FROM personell AS p
+        JOIN room_logs AS rl ON p.id = rl.personnel_id ORDER BY CASE 
+        WHEN time_out IS NOT NULL THEN time_out 
+        ELSE time_in 
+    END DESC";
 $result = mysqli_query($db, $sql);
 if ($result) {
     // Initialize array to store filtered data
