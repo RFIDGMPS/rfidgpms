@@ -583,11 +583,11 @@ while ($row = $result->fetch_assoc()) {
             <?php
                 $sql = "SELECT * FROM role";
                 $result = $db->query($sql);
-
+                echo "<option class='edit-role-val' selected></option>";
                 // Fetch and display role options
                 while ($row = $result->fetch_assoc()) {
                     $role = $row['role'];
-            echo "<option class='edit-role-val' selected></option>";
+          
                         echo "<option value='$role'>$role</option>";
                 
                 }
