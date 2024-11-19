@@ -582,12 +582,12 @@ while ($row = $result->fetch_assoc()) {
             <?php
                 $sql = "SELECT * FROM role";
                 $result = $db->query($sql);
-
+                echo "<option class='edit-role-val'></option>";
                 // Fetch and display role options
                 while ($row = $result->fetch_assoc()) {
                     $role = $row['role'];
                     
-                    // Set 'Student' as the default selected option
+                   
                     if ($role === 'Student') {
                         echo "<option value='$role' selected>$role</option>";
                     } else {
