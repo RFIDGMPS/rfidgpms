@@ -578,7 +578,7 @@ while ($row = $result->fetch_assoc()) {
          <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
-        <select required class="form-control dept_ID" name="role" id="role" autocomplete="off" onchange="updateCategory()">
+        <select required class="form-control dept_ID" name="role" id="role" autocomplete="off" onchange="updateCategory1()">
             <?php
                 $sql = "SELECT * FROM role";
                 $result = $db->query($sql);
@@ -613,10 +613,10 @@ while ($row = $result->fetch_assoc()) {
 <script>
 // Ensure the 'Student' role is preselected and categories updated accordingly
 document.addEventListener('DOMContentLoaded', function () {
-    updateCategory(); // Initialize category based on the default selected role
+    updateCategory1(); // Initialize category based on the default selected role
 });
 
-function updateCategory() {
+function updateCategory1() {
     var role = document.getElementById('role').value;
     var categorySelect = document.getElementById('category');
     
