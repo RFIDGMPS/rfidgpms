@@ -38,6 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Success
     echo json_encode(['success' => true, 'message' => 'File uploaded successfully!', 'file' => $fileName]);
 } else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method.']));
+    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 }
 ?>
