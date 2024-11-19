@@ -174,7 +174,7 @@ mysqli_close($db);
         // If date1 and date2 are not set, fetch all records
         $results = mysqli_query($db, "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
         FROM personell AS p
-        JOIN room_logs AS rl ON p.id = rl.personnel_id WHERE rl.date_logged = CURRENT_DATE() ORDER BY CASE 
+        JOIN room_logs AS rl ON p.id = rl.personnel_id ORDER BY CASE 
         WHEN time_out IS NOT NULL THEN time_out 
         ELSE time_in 
     END DESC");
