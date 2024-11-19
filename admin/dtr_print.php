@@ -15,6 +15,8 @@ $query = '';
 $id=$_SESSION['id'];
 include '../connection.php';
 
+
+
 // Validate the ID (ensure it’s numeric)
 if (!$id || !is_numeric($id)) {
     die("Invalid personnel ID.");
@@ -117,8 +119,8 @@ $db->close();
         width: 100%;
         max-width: 800px;
         margin: 0 auto;
+       
         box-sizing: border-box;
-        page-break-inside: avoid;
     }
 
     .header {
@@ -189,20 +191,17 @@ $db->close();
         }
 
         .container {
-            width: 48%;
-            max-width: 48%;
+            width: 100%;
+            max-width: 100%;
             margin: 0;
             padding: 10px;
             box-sizing: border-box;
             font-size: 10px; /* Adjust the font size */
-            display: inline-block;
-            vertical-align: top;
         }
 
         /* Make sure table fits within page */
         table {
             width: 100%;
-            margin: 10px;
             page-break-inside: avoid;
         }
 
@@ -230,7 +229,6 @@ $db->close();
 
 </style>
 
-<!-- First Container (original) -->
 <div class="container" id="container">
     <div class="header">
         <h5>Civil Service Form No. 48</h5>
@@ -298,114 +296,40 @@ function convertTo12Hour($time) {
         <?php
         // Loop through all the days of the month (1 to 31)
         for ($day = 1; $day <= 31; $day++) {
-            // Validate if the day exists in the current month
-            if (!checkdate($currentMonth, $day, $currentYear)) {
-                continue;
-            }
-            ?>
-            <tr>
-                <td><?php echo $day; ?></td>
-                <td><?php echo !empty($daysData[$day]['time_in_am']) ? convertTo12Hour($daysData[$day]['time_in_am']) : 'N/A'; ?></td>
-                <td><?php echo !empty($daysData[$day]['time_out_am']) ? convertTo12Hour($daysData[$day]['time_out_am']) : 'N/A'; ?></td>
-                <td><?php echo !empty($daysData[$day]['time_in_pm']) ? convertTo12Hour($daysData[$day]['time_in_pm']) : 'N/A'; ?></td>
-                <td><?php echo !empty($daysData[$day]['time_out_pm']) ? convertTo12Hour($daysData[$day]['time_out_pm']) : 'N/A'; ?></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <?php
+            // Check if time data exists for this day
+            $timeData = isset($daysData[$day]) ? $daysData[$day] : null;
+
+            // Display the row for each day
+            echo "<tr>";
+            echo "<td>" . $day . "</td>";
+            echo "<td>" . (isset($timeData['time_in_am']) ? htmlspecialchars($timeData['time_in_am']) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_out_am']) ? htmlspecialchars($timeData['time_out_am']) : '') . "</td>";
+            // Convert PM time to 12-hour AM/PM format before displaying
+            echo "<td>" . (isset($timeData['time_in_pm']) ? htmlspecialchars($timeData['time_in_pm']) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_out_pm']) ? htmlspecialchars($timeData['time_out_pm']) : '') . "</td>";
+            echo "<td></td>"; // Placeholder for undertime
+            echo "<td></td>"; // Placeholder for undertime
+            echo "</tr>";
         }
         ?>
         </tbody>
+        <tfoot>
+            <tr>
+                <th>Total</th>
+                <td colspan="6"></td>
+            </tr>
+        </tfoot>
     </table>
-</div>
 
-<!-- Duplicate the container div -->
-<div class="container" id="container">
-    <div class="header">
-        <h5>Civil Service Form No. 48</h5>
-        <h4>DAILY TIME RECORD</h4>
-        <?php if (!empty($personnel)): ?>
-            <h1><?php echo htmlspecialchars($personnel['first_name'] . ' ' . $personnel['last_name']); ?></h1>
-        <?php else: ?>
-            <p>No personnel found.</p>
-        <?php endif; ?>
+    <div class="footer">
+        <p style="size:5px;">
+            I CERTIFY on my honor that the above is a true and correct report of the hours of work performed, record of which was made daily at the time of arrival and departure from the office.
+        </p>
+        <div class="in-charge">
+            <p>__________________________</p>
+            <p>In-Charge</p>
+        </div>
     </div>
-
-    <?php
-    // Get the current month and year
-    $currentMonthName = date('F'); // Full month name (e.g., January, February)
-    $currentYear = date('Y');  // Full year (e.g., 2024)
-    ?>
-<?php
-// Function to convert 24-hour time to 12-hour AM/PM time
-function convertTo12Hour($time) {
-    // Use strtotime to parse the time and convert it to a Unix timestamp
-    $timestamp = strtotime($time);
-    
-    // If strtotime successfully parses the time, format it into 12-hour AM/PM format
-    if ($timestamp !== false) {
-        return date("g:i A", $timestamp); // Return the time in 12-hour AM/PM format (e.g., 2:30 PM)
-    }
-    // If the time cannot be parsed, return the original time string
-    return $time;
-}
-?>
-
-    <table class="info-table">
-        <tr>
-            <th>For the month of</th>
-            <td><?php echo $currentMonthName; ?></td>
-            <td><?php echo $currentYear; ?></td>
-            <td></td>
-        </tr>
-        <tr>
-            <th>Official hours of arrival and departure:</th>
-            <td>Regular Days: _______________</td>
-            <td>Saturdays: _______________</td>
-            <td></td>
-        </tr>
-    </table>
-
-    <table>
-        <thead>
-            <tr>
-                <th rowspan="2">Days</th>
-                <th colspan="2">A.M.</th>
-                <th colspan="2">P.M.</th>
-                <th colspan="2">Undertime</th>
-            </tr>
-            <tr>
-                <th>Arrival</th>
-                <th>Departure</th>
-                <th>Arrival</th>
-                <th>Departure</th>
-                <th>Hours</th>
-                <th>Minutes</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        // Loop through all the days of the month (1 to 31)
-        for ($day = 1; $day <= 31; $day++) {
-            // Validate if the day exists in the current month
-            if (!checkdate($currentMonth, $day, $currentYear)) {
-                continue;
-            }
-            ?>
-            <tr>
-                <td><?php echo $day; ?></td>
-                <td><?php echo !empty($daysData[$day]['time_in_am']) ? convertTo12Hour($daysData[$day]['time_in_am']) : 'N/A'; ?></td>
-                <td><?php echo !empty($daysData[$day]['time_out_am']) ? convertTo12Hour($daysData[$day]['time_out_am']) : 'N/A'; ?></td>
-                <td><?php echo !empty($daysData[$day]['time_in_pm']) ? convertTo12Hour($daysData[$day]['time_in_pm']) : 'N/A'; ?></td>
-                <td><?php echo !empty($daysData[$day]['time_out_pm']) ? convertTo12Hour($daysData[$day]['time_out_pm']) : 'N/A'; ?></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <?php
-        }
-        ?>
-        </tbody>
-    </table>
 </div>
 
 </body>
