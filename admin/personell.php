@@ -348,12 +348,12 @@ function updateCategory() {
                                     </div>
                                     <div class="col-lg-3 col-md-6 col-sm-12 mt-1">
                                        <div class="form-group">
-                                          <label>MIDDLE NAME:</label>
+                                          <label>SCHOOL YEAR:</label>
                                           <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Optional..." autocomplete="off">
                                        </div>
                                     </div>
                                  </div>
-                                 <div class="row mb-2">
+                                 <!-- <div class="row mb-2">
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                        <div class="form-group">
                                           <label>DATE OF BIRTH:</label>
@@ -416,7 +416,7 @@ function updateCategory() {
                                           <input type="email" class="form-control" name="email_address" id="email_address" placeholder="Optional" autocomplete="off">
                                        </div>
                                     </div>
-                                 </div>
+                                 </div> -->
                                  <div class="row">
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                        <div class="form-group">
