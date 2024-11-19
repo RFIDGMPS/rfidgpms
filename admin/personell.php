@@ -218,6 +218,94 @@ include '../connection.php';
                                           </label>
                                        </div>
                                     </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+   document.getElementById('photo').addEventListener('change', function(event) {
+      const file = event.target.files[0]; // Get selected file
+      const validFormats = ['image/jpeg', 'image/png']; // Allowed MIME types
+      const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+
+      // Check if file is selected
+      if (!file) {
+         Swal.fire({
+            icon: 'warning',
+            title: 'No File Selected',
+            text: 'Please select an image file.',
+         });
+         return;
+      }
+
+      // Check file format
+      if (!validFormats.includes(file.type)) {
+         Swal.fire({
+            icon: 'error',
+            title: 'Invalid File Format',
+            text: 'Only JPG and PNG formats are allowed.',
+         });
+         this.value = ''; // Clear the file input
+         return;
+      }
+
+      // Check file size
+      if (file.size > maxSize) {
+         Swal.fire({
+            icon: 'error',
+            title: 'File Too Large',
+            text: 'The file size must not exceed 2MB.',
+         });
+         this.value = ''; // Clear the file input
+         return;
+      }
+
+      // Preview the image
+      const reader = new FileReader();
+      reader.onload = function(e) {
+         document.querySelector('.preview-1').src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+   });
+</script>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_FILES['photo'])) {
+        $file = $_FILES['photo'];
+        $maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
+        $allowedTypes = ['image/jpeg', 'image/png'];
+
+        // Check if there was an upload error
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            die(json_encode(['success' => false, 'message' => 'File upload error.']));
+        }
+
+        // Check file type
+        if (!in_array($file['type'], $allowedTypes)) {
+            die(json_encode(['success' => false, 'message' => 'Invalid file format. Only JPG and PNG are allowed.']));
+        }
+
+        // Check file size
+        if ($file['size'] > $maxFileSize) {
+            die(json_encode(['success' => false, 'message' => 'File is too large. Maximum size is 2MB.']));
+        }
+
+        // Generate a secure file name and move the file to the upload directory
+        $uploadDir = 'uploads/';
+        $fileName = uniqid('img_', true) . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
+
+        if (!move_uploaded_file($file['tmp_name'], $uploadDir . $fileName)) {
+            die(json_encode(['success' => false, 'message' => 'Failed to save file.']));
+        }
+
+        // Success
+        echo json_encode(['success' => true, 'message' => 'File uploaded successfully!', 'file' => $fileName]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'No file uploaded.']);
+    }
+} else {
+    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+}
+?>
+
                                     <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
@@ -436,13 +524,7 @@ while ($row = $result->fetch_assoc()) {
                         title: 'Duplicate RFID',
                         text: 'This RFID number already exists in the system.',
                      });
-                  } else {
-                     Swal.fire({
-                        icon: 'success',
-                        title: 'Valid RFID',
-                        text: 'This RFID number is unique.',
-                     });
-                  }
+                  } 
                },
                error: function() {
                   Swal.fire({
