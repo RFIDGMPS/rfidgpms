@@ -193,7 +193,7 @@ mysqli_close($db);
         // If date1 and date2 are not set, fetch all records
         $results = mysqli_query($db, "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
         FROM personell AS p
-        JOIN room_logs AS rl ON p.id = rl.personnel_id ORDER BY date_logged DESC");
+        JOIN room_logs AS rl ON p.id = rl.personnel_id ORDER BY rl.date_logged DESC");
 
         // Loop through all records and generate HTML output
         while ($row = mysqli_fetch_array($results)) {
