@@ -776,7 +776,7 @@ while ($row = $result->fetch_assoc()) {
                   </div>
                </div>
             </div>
-            <script type="text/javascript">
+            <!-- <script type="text/javascript">
                document.addEventListener('DOMContentLoaded', () => {
                	let btn = document.querySelector('#btn-delemp');
                	btn.addEventListener('click', (e) => {
@@ -806,7 +806,7 @@ while ($row = $result->fetch_assoc()) {
                		// }
                	});
                });
-            </script>
+            </script> -->
 			
             <?php
 include 'footer.php';
