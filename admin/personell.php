@@ -139,16 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var userId = document.getElementById('delete_employeeid').value;
 
         if (userId) {
-            // Show SweetAlert confirmation before deleting
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                reverseButtons: true
-            }).then((result) => {
+        
                 if (result.isConfirmed) {
                     // Proceed with deletion (AJAX or direct redirection)
                     var xhr = new XMLHttpRequest();
@@ -183,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         'info'
                     );
                 }
-            });
+           
         } else {
             Swal.fire(
                 'Error!',
