@@ -8,7 +8,11 @@ $id=0;
 include '../connection.php';
 ?>
 <?php
-
+if (isset($_POST['month'])) {
+    $month = $_POST['month'];
+}else {
+    $month = date('F');
+}
 
 include 'header.php';
 
@@ -137,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         <ul class="personnel-list">
             <?php foreach ($personnel as $person): ?>
                 <li>
-                    <a href="?id=<?= htmlspecialchars($person['id']); ?>">
+                    <a href="?id=<?= htmlspecialchars($person['id']); ?>&month=<?= $month;?>">
                         <?= htmlspecialchars($person['first_name']) . ' ' . htmlspecialchars($person['last_name']); ?>
                     </a>
                 </li>
@@ -232,9 +236,7 @@ $result = $stmt->get_result();
 // Fetch the personnel data
 if ($row = $result->fetch_assoc()) {
     $personnel = $row; // Store first_name and last_name
-    if (isset($_POST['month'])) {
-        $month = $_POST['month'];
-    }
+    
 }
 
 // Close the statement
