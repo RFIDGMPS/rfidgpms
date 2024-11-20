@@ -623,6 +623,10 @@ while ($row = $result->fetch_assoc()) {
 </div>
 
 <script>
+   // Automatically update category options based on role selection
+document.addEventListener('DOMContentLoaded', function () {
+ 
+ 
    const roleDropdown = document.getElementById('e_role');
    
     
@@ -633,7 +637,7 @@ while ($row = $result->fetch_assoc()) {
 
      const eroleDropdown = document.getElementById('erole');
      const categoryDropdown = document.getElementById('ecategory');
-     
+
     eroleDropdown.addEventListener('change', function () {
   alert(this.value);
       updateCategory1(this.value);
@@ -641,14 +645,8 @@ while ($row = $result->fetch_assoc()) {
    
   });
 
-// // Automatically update category options based on role selection
-// document.addEventListener('DOMContentLoaded', function () {
-    
-
-//     //Listen for changes on the role dropdown
    
-    
-// });
+});
 
 function updateCategory1(role) {
         // Clear existing options
