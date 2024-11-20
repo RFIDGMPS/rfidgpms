@@ -229,7 +229,7 @@ $(document).ready(function() {
                      <div class="modal-content">
                         <div class="modal-header">
                            <h5 class="modal-title" id="exampleModalLabel">
-                              <i class="bi bi-plus-circle"></i> New User
+                              <i class="bi bi-plus-circle"></i> New Personnel
                            </h5>
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -538,10 +538,11 @@ while ($row = $result->fetch_assoc()) {
         const form = document.getElementById('personellForm');
         const fileInput = document.getElementById('photo');
         const previewImage = document.querySelector('.preview-1');
-document.getElementById('role').value = 'Student';
-document.getElementById('category').value = 'Student';
+
         // Listen for the modal's hide event
         modal.addEventListener('hide.bs.modal', function () {
+         document.getElementById('role').value = 'Student';
+document.getElementById('category').value = 'Student';
             form.reset(); // Reset the form
             previewImage.src = "../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg"; // Reset image preview
         });
