@@ -487,6 +487,9 @@ while ($row = $result->fetch_assoc()) {
                         icon: 'warning',
                         title: 'Duplicate RFID',
                         text: 'This RFID number already exists in the system.',
+                     }).then(() => {
+                        // Clear the input field explicitly after the user clicks "OK"
+                        document.getElementById('rfid_number').value = '';
                      });
                   } 
                },
