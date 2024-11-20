@@ -626,8 +626,7 @@ while ($row = $result->fetch_assoc()) {
     const roleDropdown = document.getElementById('e_role');
    const eroleDropdown = document.getElementById('erole');
      const categoryDropdown = document.getElementById('ecategory');
-
-    
+     const form = document.getElementById('editPersonellForm');
    // Automatically update category options based on role selection
 document.addEventListener('DOMContentLoaded', function () {
  
@@ -635,8 +634,14 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
    // Populate categories when the page loads
- 
+   alert(roleDropdown.value);
+   updateCategory1(roleDropdown.value);
+   
 
+     
+   
+
+   
 });
 
 eroleDropdown.addEventListener('change', function () {
@@ -646,9 +651,13 @@ eroleDropdown.addEventListener('change', function () {
    
   });
 
-  alert(roleDropdown.value);
-   updateCategory1(roleDropdown.value);
-   
+  const modal = document.getElementById('editemployeeModal');
+ 
+        // Listen for the modal's hide event
+        modal.addEventListener('hide.bs.modal', function () {
+         form.reset();
+       });
+  
 function updateCategory1(role) {
         // Clear existing options
         categoryDropdown.innerHTML = '';
