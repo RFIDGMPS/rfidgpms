@@ -622,10 +622,6 @@ while ($row = $result->fetch_assoc()) {
     </div>
 </div>
 <script>
-// Ensure the 'Student' role is preselected and categories updated accordingly
-document.addEventListener('DOMContentLoaded', function () {
-    updateCategory(); // Initialize category based on the default selected role
-});
 
 function updateCategory() {
     var role = document.getElementById('erole').value;
