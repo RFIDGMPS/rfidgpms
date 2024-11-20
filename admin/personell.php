@@ -627,9 +627,7 @@ while ($row = $result->fetch_assoc()) {
    const eroleDropdown = document.getElementById('erole');
      const categoryDropdown = document.getElementById('ecategory');
 
-     alert(roleDropdown.value);
-   updateCategory1(roleDropdown.value);
-   
+    
    // Automatically update category options based on role selection
 document.addEventListener('DOMContentLoaded', function () {
  
@@ -648,7 +646,9 @@ eroleDropdown.addEventListener('change', function () {
    
   });
 
-  
+  alert(roleDropdown.value);
+   updateCategory1(roleDropdown.value);
+   
 function updateCategory1(role) {
         // Clear existing options
         categoryDropdown.innerHTML = '';
