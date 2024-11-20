@@ -625,7 +625,7 @@ while ($row = $result->fetch_assoc()) {
 <script>
      const eroleDropdown = document.getElementById('erole');
     eroleDropdown.addEventListener('change', function () {
-      
+      alert('test');
       updateCategory1(this.value);
   });
 
@@ -643,7 +643,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateCategory1(role) {
         // Clear existing options
         categoryDropdown.innerHTML = '';
-        alert('test');
+        
         if (role === 'Student') {
             // Only 'Student' category for 'Student' role
             const studentOption = new Option('Student', 'Student');
