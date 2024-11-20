@@ -631,10 +631,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Populate categories when the page loads
     updateCategory(roleDropdown.value);
 
-    // Listen for changes on the role dropdown
-    roleDropdown.addEventListener('change', function () {
-        updateCategory(this.value);
-    });
+   //  // Listen for changes on the role dropdown
+   //  roleDropdown.addEventListener('change', function () {
+   //      updateCategory(this.value);
+   //  });
 
     function updateCategory(role) {
         // Clear existing options
