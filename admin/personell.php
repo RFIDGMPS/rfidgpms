@@ -775,23 +775,15 @@ while ($row = $result->fetch_assoc()) {
                                     </div>
                                     <script>
    $(document).ready(function() {
-      // Store the previous value of the input
-      let previousRFID = '';
-
-      // Save the value before the input loses focus
-      $('#rfid_number1').on('focus', function() {
-         previousRFID = $(this).val();
-      });
-
-      // Check for duplicate RFID on blur
       $('#rfid_number1').on('blur', function() {
          const rfidNumber = $(this).val();
+         const currentRFID = $(this).data('current'); // Get the current RFID number if available
 
          if (rfidNumber.length === 10) {
             $.ajax({
                url: 'check_rfid.php', // Backend PHP file
                method: 'POST',
-               data: { rfid_number: rfidNumber },
+               data: { rfid_number: rfidNumber, current_rfid: currentRFID }, // Pass the current RFID value
                success: function(response) {
                   const res = JSON.parse(response);
                   if (res.exists) {
@@ -802,8 +794,8 @@ while ($row = $result->fetch_assoc()) {
                         text: 'This RFID number already exists in the system.',
                         confirmButtonText: 'OK'
                      }).then(() => {
-                        // Revert to the previous value
-                        $('#rfid_number1').val(previousRFID);
+                        // Optionally clear the input field or leave it as is
+                        $('#rfid_number1').val('');
                      });
                   }
                },
@@ -819,6 +811,7 @@ while ($row = $result->fetch_assoc()) {
       });
    });
 </script>
+
 
 
 
