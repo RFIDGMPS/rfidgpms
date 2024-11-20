@@ -538,7 +538,7 @@ while ($row = $result->fetch_assoc()) {
         const form = document.getElementById('personellForm');
         const fileInput = document.getElementById('photo');
         const previewImage = document.querySelector('.preview-1');
-
+document.getElementById('role').value = 'Student';
         // Listen for the modal's hide event
         modal.addEventListener('hide.bs.modal', function () {
             form.reset(); // Reset the form
@@ -775,15 +775,23 @@ while ($row = $result->fetch_assoc()) {
                                     </div>
                                     <script>
    $(document).ready(function() {
+      // Store the previous value of the input
+      let previousRFID = '';
+
+      // Save the value before the input loses focus
+      $('#rfid_number1').on('focus', function() {
+         previousRFID = $(this).val();
+      });
+
+      // Check for duplicate RFID on blur
       $('#rfid_number1').on('blur', function() {
          const rfidNumber = $(this).val();
-         const currentRFID = $(this).data('current'); // Get the current RFID number if available
 
          if (rfidNumber.length === 10) {
             $.ajax({
                url: 'check_rfid.php', // Backend PHP file
                method: 'POST',
-               data: { rfid_number: rfidNumber, current_rfid: currentRFID }, // Pass the current RFID value
+               data: { rfid_number: rfidNumber },
                success: function(response) {
                   const res = JSON.parse(response);
                   if (res.exists) {
@@ -794,8 +802,8 @@ while ($row = $result->fetch_assoc()) {
                         text: 'This RFID number already exists in the system.',
                         confirmButtonText: 'OK'
                      }).then(() => {
-                        // Optionally clear the input field or leave it as is
-                        $('#rfid_number1').val('');
+                        // Revert to the previous value
+                        $('#rfid_number1').val(previousRFID);
                      });
                   }
                },
@@ -811,7 +819,6 @@ while ($row = $result->fetch_assoc()) {
       });
    });
 </script>
-
 
 
 
