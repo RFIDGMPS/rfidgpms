@@ -593,7 +593,7 @@ while ($row = $result->fetch_assoc()) {
       <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
-        <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off">
+        <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off" onchange="updateCategory(this.value)">
         <option class="edit-role-val" value=""></option>
             <?php
                 $sql = "SELECT * FROM role";
@@ -626,16 +626,16 @@ while ($row = $result->fetch_assoc()) {
 // Automatically update category options based on role selection
 document.addEventListener('DOMContentLoaded', function () {
     const roleDropdown = document.getElementById('e_role');
-     const eroleDropdown = document.getElementById('erole');
+     //const eroleDropdown = document.getElementById('erole');
     const categoryDropdown = document.getElementById('ecategory');
 
     // Populate categories when the page loads
     updateCategory(roleDropdown.value);
 
     // Listen for changes on the role dropdown
-    eroleDropdown.addEventListener('change', function () {
-        updateCategory(this.value);
-    });
+   //  eroleDropdown.addEventListener('change', function () {
+   //      updateCategory(this.value);
+   //  });
 
     function updateCategory(role) {
         // Clear existing options
