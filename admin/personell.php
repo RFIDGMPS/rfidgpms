@@ -624,7 +624,9 @@ while ($row = $result->fetch_assoc()) {
 
 <script>
    const roleDropdown = document.getElementById('e_role');
-   
+   const eroleDropdown = document.getElementById('erole');
+     const categoryDropdown = document.getElementById('ecategory');
+
     
 
    // Populate categories when the page loads
@@ -636,9 +638,7 @@ document.addEventListener('DOMContentLoaded', function () {
  
    
 
-     const eroleDropdown = document.getElementById('erole');
-     const categoryDropdown = document.getElementById('ecategory');
-
+     
     eroleDropdown.addEventListener('change', function () {
   alert(this.value);
       updateCategory1(this.value);
