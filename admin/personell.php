@@ -787,13 +787,13 @@ while ($row = $result->fetch_assoc()) {
                         icon: 'warning',
                         title: 'Duplicate RFID',
                         text: 'This RFID number already exists in the system.',
-                        confirmButtonText: 'OK',
-                     }).then((result) => {
-                        if (result.isConfirmed) {
-                           // Clear the input field after user clicks "OK"
-                           $('#rfid_number1').val('');
-                        }
+                        confirmButtonText: 'OK'
                      });
+                     
+                     // Delay clearing the input slightly to ensure alert is shown
+                     setTimeout(() => {
+                        $('#rfid_number1').val('');
+                     }, 500);
                   }
                },
                error: function() {
