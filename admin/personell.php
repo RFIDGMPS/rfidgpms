@@ -640,7 +640,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //Listen for changes on the role dropdown
    
-    function updateCategory1(role) {
+    
+});
+
+function updateCategory1(role) {
         // Clear existing options
         categoryDropdown.innerHTML = '';
         
@@ -656,7 +659,6 @@ document.addEventListener('DOMContentLoaded', function () {
             categoryDropdown.add(contractualOption);
         }
     }
-});
 </script>
 
    </div>
