@@ -627,6 +627,23 @@ while ($row = $result->fetch_assoc()) {
     eroleDropdown.addEventListener('change', function () {
       alert(this.value);
       updateCategory1(this.value);
+
+      function updateCategory1(role) {
+        // Clear existing options
+        categoryDropdown.innerHTML = '';
+        
+        if (role === 'Student') {
+            // Only 'Student' category for 'Student' role
+            const studentOption = new Option('Student', 'Student');
+            categoryDropdown.add(studentOption);
+        } else {
+            // 'Regular' and 'Contractual' for other roles
+            const regularOption = new Option('Regular', 'Regular');
+            const contractualOption = new Option('Contractual', 'Contractual');
+            categoryDropdown.add(regularOption);
+            categoryDropdown.add(contractualOption);
+        }
+    }
   });
 
 // Automatically update category options based on role selection
@@ -643,22 +660,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
 });
 
-function updateCategory1(role) {
-        // Clear existing options
-        categoryDropdown.innerHTML = '';
-        
-        if (role === 'Student') {
-            // Only 'Student' category for 'Student' role
-            const studentOption = new Option('Student', 'Student');
-            categoryDropdown.add(studentOption);
-        } else {
-            // 'Regular' and 'Contractual' for other roles
-            const regularOption = new Option('Regular', 'Regular');
-            const contractualOption = new Option('Contractual', 'Contractual');
-            categoryDropdown.add(regularOption);
-            categoryDropdown.add(contractualOption);
-        }
-    }
+
 </script>
 
    </div>
