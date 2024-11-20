@@ -630,7 +630,12 @@ while ($row = $result->fetch_assoc()) {
    // Automatically update category options based on role selection
 document.addEventListener('DOMContentLoaded', function () {
  
-  
+   const modal = document.getElementById('editemployeeModal');
+ 
+        // Listen for the modal's hide event
+        modal.addEventListener('hide.bs.modal', function () {
+         form.reset();
+       });
     
 
    // Populate categories when the page loads
@@ -651,12 +656,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-  const modal = document.getElementById('editemployeeModal');
  
-        // Listen for the modal's hide event
-        modal.addEventListener('hide.bs.modal', function () {
-         form.reset();
-       });
   
 function updateCategory1(role) {
         // Clear existing options
