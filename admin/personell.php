@@ -541,7 +541,8 @@ while ($row = $result->fetch_assoc()) {
 
         // Listen for the modal's hide event
         modal.addEventListener('hide.bs.modal', function () {
-        updateCategory(); 
+         document.getElementById('role').value = 'Student';
+  updateCategory(); 
             form.reset(); // Reset the form
             previewImage.src = "../assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg"; // Reset image preview
         });
