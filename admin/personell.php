@@ -646,18 +646,6 @@ document.addEventListener('DOMContentLoaded', function () {
    
 //   });
 
-   
-});
-
-
-
-  const modal = document.getElementById('editemployeeModal');
- 
-        // Listen for the modal's hide event
-        modal.addEventListener('hide.bs.modal', function () {
-         form.reset();
-       });
-  
 function updateCategory1(role) {
         // Clear existing options
         categoryDropdown.innerHTML = '';
@@ -674,6 +662,18 @@ function updateCategory1(role) {
             categoryDropdown.add(contractualOption);
         }
     }
+});
+
+
+
+  const modal = document.getElementById('editemployeeModal');
+ 
+        // Listen for the modal's hide event
+        modal.addEventListener('hide.bs.modal', function () {
+         form.reset();
+       });
+  
+
 </script>
 
    </div>
