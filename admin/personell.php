@@ -770,12 +770,11 @@ while ($row = $result->fetch_assoc()) {
                                           <span class="rfidno-error"></span>
                                        </div>
                                     </div>
-
                                     <script>
    $(document).ready(function() {
       $('#rfid_number1').on('blur', function() {
          const rfidNumber = $(this).val();
-         
+
          if (rfidNumber.length === 10) {
             $.ajax({
                url: 'check_rfid.php', // Backend PHP file
@@ -788,8 +787,11 @@ while ($row = $result->fetch_assoc()) {
                         icon: 'warning',
                         title: 'Duplicate RFID',
                         text: 'This RFID number already exists in the system.',
+                     }).then(() => {
+                        // Clear the input field after the alert
+                        $('#rfid_number1').val('');
                      });
-                  } 
+                  }
                },
                error: function() {
                   Swal.fire({
@@ -803,6 +805,7 @@ while ($row = $result->fetch_assoc()) {
       });
    });
 </script>
+
          <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                <label>STATUS:</label>
