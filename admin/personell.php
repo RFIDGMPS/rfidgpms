@@ -567,7 +567,7 @@ while ($row = $result->fetch_assoc()) {
                      <div class="modal-content">
                         <div class="modal-header">
                            <h5 class="modal-title" id="exampleModalLabel">
-                              <i class="bi bi-pencil"></i> Edit User
+                              <i class="bi bi-pencil"></i> Edit Personnel
                            </h5>
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -594,7 +594,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>ROLE:</label>
         <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off">
-        <option class="edit-role-val" disabled></option>
+        <option class="edit-role-val" value=""></option>
             <?php
                 $sql = "SELECT * FROM role";
                 $result = $db->query($sql);
@@ -616,7 +616,7 @@ while ($row = $result->fetch_assoc()) {
     <div class="form-group">
         <label>CATEGORY:</label>
         <select required class="form-control" name="category" id="ecategory" autocomplete="off">
-        <option class="edit-categ-val"  disabled ></option>
+        <option class="edit-categ-val"  value="" ></option>
         </select>
         <span class="id-error"></span>
     </div>
