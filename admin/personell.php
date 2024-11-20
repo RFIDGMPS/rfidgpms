@@ -593,7 +593,7 @@ while ($row = $result->fetch_assoc()) {
       <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
-        <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off" onchange="updateCategory()">
+        <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off">
         <option class="edit-role-val" value=""></option>
             <?php
                 $sql = "SELECT * FROM role";
@@ -621,38 +621,38 @@ while ($row = $result->fetch_assoc()) {
         <span class="id-error"></span>
     </div>
 </div>
+
 <script>
-// Ensure the 'Student' role is preselected and categories updated accordingly
+// Automatically update category options based on role selection
 document.addEventListener('DOMContentLoaded', function () {
-   document.getElementByClassName('edit-categ-val').value = 'test';
-});
+    const roleDropdown = document.getElementById('e_role');
+    const categoryDropdown = document.getElementById('ecategory');
 
-function updateCategory() {
-    var role = document.getElementById('erole').value;
-    var categorySelect = document.getElementById('ecategory');
-    
-    // Clear the existing options
-    categorySelect.innerHTML = '';
+    // Populate categories when the page loads
+    updateCategory(roleDropdown.value);
 
-    if (role === 'Student') {
-        // If the role is 'Student', show 'Student' only in category
-        var option = document.createElement('option');
-        option.value = 'Student';
-        option.text = 'Student';
-        categorySelect.appendChild(option);
-    } else {
-        // If the role is not 'Student', show 'Regular' and 'Contractual'
-        var option1 = document.createElement('option');
-        option1.value = 'Regular';
-        option1.text = 'Regular';
-        categorySelect.appendChild(option1);
+    // Listen for changes on the role dropdown
+    roleDropdown.addEventListener('change', function () {
+        updateCategory(this.value);
+    });
 
-        var option2 = document.createElement('option');
-        option2.value = 'Contractual';
-        option2.text = 'Contractual';
-        categorySelect.appendChild(option2);
+    function updateCategory(role) {
+        // Clear existing options
+        categoryDropdown.innerHTML = '';
+
+        if (role === 'Student') {
+            // Only 'Student' category for 'Student' role
+            const studentOption = new Option('Student', 'Student');
+            categoryDropdown.add(studentOption);
+        } else {
+            // 'Regular' and 'Contractual' for other roles
+            const regularOption = new Option('Regular', 'Regular');
+            const contractualOption = new Option('Contractual', 'Contractual');
+            categoryDropdown.add(regularOption);
+            categoryDropdown.add(contractualOption);
+        }
     }
-}
+});
 </script>
 
    </div>
