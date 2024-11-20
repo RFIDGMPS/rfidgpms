@@ -627,6 +627,9 @@ while ($row = $result->fetch_assoc()) {
    const eroleDropdown = document.getElementById('erole');
      const categoryDropdown = document.getElementById('ecategory');
 
+     alert(roleDropdown.value);
+   updateCategory1(roleDropdown.value);
+   
    // Automatically update category options based on role selection
 document.addEventListener('DOMContentLoaded', function () {
  
@@ -634,14 +637,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
    // Populate categories when the page loads
-   alert(roleDropdown.value);
-   updateCategory1(roleDropdown.value);
-   
+ 
 
-     
-   
-
-   
 });
 
 eroleDropdown.addEventListener('change', function () {
@@ -650,6 +647,8 @@ eroleDropdown.addEventListener('change', function () {
 
    
   });
+
+  
 function updateCategory1(role) {
         // Clear existing options
         categoryDropdown.innerHTML = '';
