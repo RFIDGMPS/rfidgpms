@@ -639,17 +639,17 @@ document.addEventListener('DOMContentLoaded', function () {
    
 
      
-   
-
-   
-});
-
-eroleDropdown.addEventListener('change', function () {
+   eroleDropdown.addEventListener('change', function () {
   alert(this.value);
       updateCategory1(this.value);
 
    
   });
+
+   
+});
+
+
 
   const modal = document.getElementById('editemployeeModal');
  
