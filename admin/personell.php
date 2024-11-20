@@ -633,6 +633,7 @@ while ($row = $result->fetch_assoc()) {
 
      const eroleDropdown = document.getElementById('erole');
      const categoryDropdown = document.getElementById('ecategory');
+     
     eroleDropdown.addEventListener('change', function () {
   alert(this.value);
       updateCategory1(this.value);
