@@ -539,6 +539,7 @@ while ($row = $result->fetch_assoc()) {
         const fileInput = document.getElementById('photo');
         const previewImage = document.querySelector('.preview-1');
 document.getElementById('role').value = 'Student';
+document.getElementById('category').value = 'Student';
         // Listen for the modal's hide event
         modal.addEventListener('hide.bs.modal', function () {
             form.reset(); // Reset the form
