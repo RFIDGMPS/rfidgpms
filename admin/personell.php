@@ -783,17 +783,16 @@ while ($row = $result->fetch_assoc()) {
                success: function(response) {
                   const res = JSON.parse(response);
                   if (res.exists) {
+                     // Show SweetAlert
                      Swal.fire({
                         icon: 'warning',
                         title: 'Duplicate RFID',
                         text: 'This RFID number already exists in the system.',
                         confirmButtonText: 'OK'
+                     }).then(() => {
+                        // Clear the input field explicitly after the user clicks "OK"
+                        document.getElementById('rfid_number1').value = '';
                      });
-                     
-                     // Delay clearing the input slightly to ensure alert is shown
-                     setTimeout(() => {
-                        $('#rfid_number1').val('');
-                     }, 500);
                   }
                },
                error: function() {
@@ -808,6 +807,7 @@ while ($row = $result->fetch_assoc()) {
       });
    });
 </script>
+
 
 
          <div class="col-lg-4 col-md-6 col-sm-12">
