@@ -624,11 +624,29 @@ while ($row = $result->fetch_assoc()) {
 
 <script>
      const eroleDropdown = document.getElementById('erole');
+     const categoryDropdown = document.getElementById('ecategory');
     eroleDropdown.addEventListener('change', function () {
       alert(this.value);
       updateCategory1(this.value);
 
-      function updateCategory1(role) {
+   
+  });
+
+// Automatically update category options based on role selection
+document.addEventListener('DOMContentLoaded', function () {
+    const roleDropdown = document.getElementById('e_role');
+   
+    
+
+    // Populate categories when the page loads
+    updateCategory1(roleDropdown.value);
+
+    //Listen for changes on the role dropdown
+   
+    
+});
+
+function updateCategory1(role) {
         // Clear existing options
         categoryDropdown.innerHTML = '';
         
@@ -644,23 +662,6 @@ while ($row = $result->fetch_assoc()) {
             categoryDropdown.add(contractualOption);
         }
     }
-  });
-
-// Automatically update category options based on role selection
-document.addEventListener('DOMContentLoaded', function () {
-    const roleDropdown = document.getElementById('e_role');
-   
-    const categoryDropdown = document.getElementById('ecategory');
-
-    // Populate categories when the page loads
-    updateCategory1(roleDropdown.value);
-
-    //Listen for changes on the role dropdown
-   
-    
-});
-
-
 </script>
 
    </div>
