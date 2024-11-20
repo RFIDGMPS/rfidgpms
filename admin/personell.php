@@ -621,38 +621,38 @@ while ($row = $result->fetch_assoc()) {
         <span class="id-error"></span>
     </div>
 </div>
-
 <script>
-// Automatically update category options based on role selection
+// Ensure the 'Student' role is preselected and categories updated accordingly
 document.addEventListener('DOMContentLoaded', function () {
-    const roleDropdown = document.getElementById('erole');
-    const categoryDropdown = document.getElementById('ecategory');
-
-    // Populate categories when the page loads
-    updateCategory(roleDropdown.value);
-
-   //  // Listen for changes on the role dropdown
-   //  roleDropdown.addEventListener('change', function () {
-   //      updateCategory(this.value);
-   //  });
-
-    function updateCategory(role) {
-        // Clear existing options
-        categoryDropdown.innerHTML = '';
-
-        if (role === 'Student') {
-            // Only 'Student' category for 'Student' role
-            const studentOption = new Option('Student', 'Student');
-            categoryDropdown.add(studentOption);
-        } else {
-            // 'Regular' and 'Contractual' for other roles
-            const regularOption = new Option('Regular', 'Regular');
-            const contractualOption = new Option('Contractual', 'Contractual');
-            categoryDropdown.add(regularOption);
-            categoryDropdown.add(contractualOption);
-        }
-    }
+    updateCategory(); // Initialize category based on the default selected role
 });
+
+function updateCategory() {
+    var role = document.getElementById('erole').value;
+    var categorySelect = document.getElementById('ecategory');
+    
+    // Clear the existing options
+    categorySelect.innerHTML = '';
+
+    if (role === 'Student') {
+        // If the role is 'Student', show 'Student' only in category
+        var option = document.createElement('option');
+        option.value = 'Student';
+        option.text = 'Student';
+        categorySelect.appendChild(option);
+    } else {
+        // If the role is not 'Student', show 'Regular' and 'Contractual'
+        var option1 = document.createElement('option');
+        option1.value = 'Regular';
+        option1.text = 'Regular';
+        categorySelect.appendChild(option1);
+
+        var option2 = document.createElement('option');
+        option2.value = 'Contractual';
+        option2.text = 'Contractual';
+        categorySelect.appendChild(option2);
+    }
+}
 </script>
 
    </div>
