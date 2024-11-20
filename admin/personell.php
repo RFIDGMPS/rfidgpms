@@ -593,7 +593,7 @@ while ($row = $result->fetch_assoc()) {
       <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
-        <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off">
+        <select required class="form-control dept_ID" name="role" id="erole" autocomplete="off" onchange="updateCategory()">
         <option class="edit-role-val" value=""></option>
             <?php
                 $sql = "SELECT * FROM role";
