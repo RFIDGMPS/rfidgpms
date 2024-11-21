@@ -810,23 +810,13 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
         while ($row = mysqli_fetch_array($results)) { ?>
                                  <div class="row">
                                     <div class="col-lg-3 col-md-6 col-sm-12" id="up_img">
-                                  
-
-
-
-
-
-
-
-
-                                    <div class="file-uploader">
-                                    <label for="photo" class="upload-img-btn" style="cursor: pointer;">
+                                    <div required class="file-uploader">
+                                         
                                           <img id="captured" class="preview-1" src="assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg" style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 15%" title="Upload Photo.." />
-                                          </label>
-
+                                          
                                        </div>
 
-                                       <input type="hidden" id="capturedImage" name="capturedImage" required>
+                                       <input type="hidden" id="capturedImage" name="capturedImage">
                                        <span class="img-error"></span>
                                     </div>
         
@@ -1163,51 +1153,22 @@ Webcam.snap(function(data_uri){
       <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
       <!-- Template Javascript -->
       <script src="js/main.js"></script>
-      <script type="text/javascript">
-           function readURL(input) {
-    if (input.files && input.files[0]) {
-        const file = input.files[0];
-        const validFormats = ['image/jpeg', 'image/png'];
-        const maxSize = 2 * 1024 * 1024; // 2MB
-
-        // Validate file format
-        if (!validFormats.includes(file.type)) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Invalid Format',
-                text: 'Only JPG and PNG formats are allowed.',
+       <script type="text/javascript">
+            function readURL(input) {
+            	if (input.files && input.files[0]) {
+            		var reader = new FileReader();
+            		reader.onload = function(e) {
+            			var num = $(input).attr('class').split('-')[2];
+            			$('.file-uploader .preview-' + num).attr('src', e.target.result);
+            		}
+            		reader.readAsDataURL(input.files[0]);
+            	}
+            }
+            $("[class^=upload-field-]").change(function() {
+            	readURL(this);
             });
-            input.value = ''; // Reset the input
-            return;
-        }
-
-        // Validate file size
-        if (file.size > maxSize) {
-            Swal.fire({
-                icon: 'error',
-                title: 'File Too Large',
-                text: 'Maximum file size is 2MB.',
-            });
-            input.value = ''; // Reset the input
-            return;
-        }
-
-        // Preview the image
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var num = $(input).attr('class').split('-')[2];
-            $('.file-uploader .preview-' + num).attr('src', e.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-// Attach change event to all inputs with a class starting with 'upload-field-'
-$("[class^=upload-field-]").change(function () {
-    readURL(this);
-});
-
          </script>
+
          <?php
          if($department == 'Main') { ?>
         <button class="chatbot-toggler" style="background:#FBC257;">
