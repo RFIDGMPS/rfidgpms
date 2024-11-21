@@ -455,7 +455,7 @@ function convertTo12Hour($time) {
             </tr>
         </tfoot>
     </table>
-
+    </div>
     <div class="footer">
         <p>
             I CERTIFY on my honor that the above is a true and correct report of the hours of work performed, record of which was made daily at the time of arrival and departure from the office.
