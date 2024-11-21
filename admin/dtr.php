@@ -286,7 +286,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 // Query to fetch first_name and last_name for the given personnel ID
-// Query to fetch first_name and last_name for the given personnel ID
 $personnel = [];
 $sql = "SELECT first_name, last_name 
         FROM personell 
@@ -465,7 +464,7 @@ function convertTo12Hour($time) {
     </div>
 </div><!-- JavaScript to handle printing -->
 
-    </div>
+
 
 
 
