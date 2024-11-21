@@ -81,6 +81,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
             background-color: #f0f0f0;
         }
     </style>
+    <style>
+        /* Basic styling for the search results */
+        #suggestions {
+            border: 1px solid #ddd;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 5px;
+        }
+        #suggestions div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+        }
+        #suggestions div:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
             <div class="container-fluid pt-4 px-4">
                 <div class="col-sm-12 col-xl-12">
                     <div class="bg-light rounded h-100 p-4">
