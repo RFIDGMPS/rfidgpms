@@ -122,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
            
             <input type="text" name="pname" class="form-control" id="searchInput" autocomplete="off">
             <input hidden type="text" id="pername" name="pername" autocomplete="off">
+            <input hidden type="text" id="perid" name="perid" autocomplete="off">
     <div id="suggestions"></div> <!-- Display search results here -->
 
     <script>
@@ -161,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                                 suggestionsDiv.innerHTML = ''; // Clear suggestions after selection
                                
                                 document.getElementById('pername').value = searchInput.value;
-                                
+                                document.getElementById('perid').value = `${person.id}`;
                             });
                             suggestionsDiv.appendChild(div);
                         });
@@ -279,10 +280,79 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the value from the hidden input field
     $name = $_POST['pername']; // Sanitize the input
     $month = $_POST['month'] ?? '';
-echo 'M: '.$month;
+    $id = $_POST['perid'];
+echo $id;
     // Add additional processing logic here, such as database queries
 }
         ?>
+
+<?php
+
+// Query to fetch first_name and last_name for the given personnel ID
+$personnel = [];
+$sql = "SELECT first_name, last_name 
+        FROM personell 
+        WHERE id = ?";
+
+// Prepare and execute the query
+$stmt = $db->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Fetch the personnel data
+if ($row = $result->fetch_assoc()) {
+    $personnel = $row; // Store first_name and last_name
+}
+
+// Close the statement
+$stmt->close();
+
+// Get current date, month, and year
+$currentDate = date('Y-m-d');
+$currentMonth = date('m');
+$currentYear = date('Y');
+
+// Initialize the array to store the data for each day
+$daysData = [];
+
+// Loop through all days of the current month (1-31)
+for ($day = 1; $day <= 31; $day++) {
+    // Validate day number to avoid invalid days for current month
+    if (!checkdate($currentMonth, $day, $currentYear)) {
+        continue; // Skip invalid days (e.g., 31st in a month with 30 days or February 30th)
+    }
+
+    // Format the current day as 'YYYY-MM-DD' for comparison
+    $formattedDate = sprintf('%s-%02d-%02d', $currentYear, $currentMonth, $day);
+
+    // SQL query to fetch time data for the current day
+    $sql = "SELECT time_in_am, time_out_am, time_in_pm, time_out_pm 
+            FROM personell_logs 
+            WHERE date_logged = ? AND personnel_id = ?"; // Use prepared statement to avoid SQL injection
+
+    // Prepare and execute the query
+    $stmt = $db->prepare($sql);
+    $stmt->bind_param("si", $formattedDate, $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Fetch the data if available
+    $timeData = null; // Default to null if no data is found
+    if ($row = $result->fetch_assoc()) {
+        $timeData = $row; // Store the times if found
+    }
+
+    // Close the statement
+    $stmt->close();
+
+    // Store or use the data for the day
+    $daysData[$day] = $timeData;
+}
+
+// Close the database connection
+$db->close();
+?>
 <div class="container" id="container">
     <div class="header">
         <h5>Civil Service Form No. 48</h5>
