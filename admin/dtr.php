@@ -116,12 +116,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                         <form id="filterForm" method="POST">
                         <div class="row">
 
-                        <form method="POST" action="">
+                        <form method="POST" action="process_input.php">
                         <div class="col-lg-3">
             <label>Search Personnel:</label>
            
             <input type="text" name="pname" class="form-control" id="searchInput" autocomplete="off">
-            <input type="hidden" class="form-control" id="pname" autocomplete="off">
+       
     <div id="suggestions"></div> <!-- Display search results here -->
 
     <script>
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                             div.textContent = `${person.first_name} ${person.last_name}`;
                             div.addEventListener('click', () => {
                                 searchInput.value = `${person.first_name} ${person.last_name}`; // Autofill the input
-                                document.getElementById('pname').value= `${person.first_name} ${person.last_name}`;
+                               // document.getElementById('pname').value= `${person.first_name} ${person.last_name}`;
                                 suggestionsDiv.innerHTML = ''; // Clear suggestions after selection
                             });
                             suggestionsDiv.appendChild(div);
@@ -198,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         </div>
         <div class="col-lg-3 mt-4">
             <label></label>
-            <button type="submit" name="submit" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button>
+            <button type="submit" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button>
           
         </div>
         <div class="col-lg-3 mt-4" style="text-align:right;">
