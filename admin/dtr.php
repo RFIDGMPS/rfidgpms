@@ -169,9 +169,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                 .catch(error => {
                     console.error('Error fetching data:', error);
                 });
+
+                alert(searchInput.value);
         });
 
-        alert(searchInput.value);
+        
     </script>
                
             
