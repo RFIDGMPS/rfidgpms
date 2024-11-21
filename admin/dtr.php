@@ -339,15 +339,17 @@ for ($day = 1; $day <= 31; $day++) {
     // Format the current day as 'YYYY-MM-DD' for comparison
     $formattedDate = sprintf('%s-%02d-%02d', $currentYear, $currentMonth, $day);
 
-    // SQL query to fetch time data for the current day
-    $sql = "SELECT time_in_am, time_out_am, time_in_pm, time_out_pm 
-    FROM personell_logs 
-    WHERE MONTHNAME(date_logged) = ? AND personnel_id = ?";
+    $monthNumber = date('m', strtotime($month)); // Convert to numeric month
 
-
-    // Prepare and execute the query
+    
+    // SQL query
+    $sql = "SELECT date_logged, time_in_am, time_out_am, time_in_pm, time_out_pm 
+            FROM personell_logs 
+            WHERE MONTH(date_logged) = ? AND personnel_id = ?";
+    
+    // Prepare statement
     $stmt = $db->prepare($sql);
-    $stmt->bind_param("si", $month, $id); // Bind parameters
+    $stmt->bind_param("ii", $monthNumber, $id); // Bind parameters
     $stmt->execute();
     $result = $stmt->get_result();
 
