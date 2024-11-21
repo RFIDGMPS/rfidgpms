@@ -4,7 +4,7 @@ include '../connection.php';
 
 if (isset($_GET['query'])) {
     $query = htmlspecialchars($_GET['query']);
-    $safe_query = $conn->real_escape_string($query);
+    $safe_query = $db->real_escape_string($query);
 
     // SQL query to search for matches in first_name or last_name
     $sql = "SELECT first_name, last_name 
@@ -12,7 +12,7 @@ if (isset($_GET['query'])) {
             WHERE first_name LIKE '%$safe_query%' OR last_name LIKE '%$safe_query%' 
             LIMIT 10";
 
-    $result = $conn->query($sql);
+    $result = $db->query($sql);
 
     $output = [];
     if ($result->num_rows > 0) {
@@ -27,5 +27,5 @@ if (isset($_GET['query'])) {
 }
 
 // Close the database connection
-$conn->close();
+$db->close();
 ?>
