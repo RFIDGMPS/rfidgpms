@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                             </div>
                         </div>
                         <br>
-                        <form id="filterForm" method="POST">
+                        
                         <div class="row">
 
                         <form method="POST" action="process_input.php">
@@ -209,7 +209,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         
 
 
-                          </form>
                         </div>
                         <hr>
                         <div class="table-responsive">
