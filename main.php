@@ -828,7 +828,7 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                           <span class="rfidno-error"></span>
                                        </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12" id="lnamez">
+                                    <div class="col-lg-5 col-md-6 col-sm-12" id="lnamez">
                                     <div class="form-group">
                                           <label>NAME:</label>
                                           <input required type="text" class="form-control" name="fullName" id="fullName" autocomplete="off">
@@ -871,28 +871,14 @@ while ($row = $result->fetch_assoc()) {
                                           <span class="dprt-error"></span>
                                        </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="col-lg-5 col-md-6 col-sm-12">
                                     <div class="form-group">
                                           <label>CONTACT NUMBER:</label>
                                           <input required type="text" class="form-control" name="contact_number" id="contact_number" minlength="11" maxlength="11" autocomplete="off">
                                        </div>
                                     </div>
                                  </div>
-                                 <div class="row mb-2">
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                          <label>CIVIL STATUS:</label>
-                                          <select readonly required class="form-control dept_ID" name="stat" id="stat_id" autocomplete="off">
-                                            <option value="Single">Single</option>
-                                             <option value="Married">Married</option>
-                                             <option value="Widowed">Widowed</option>
-                                          </select>
-                                          <span class="stat-error"></span>
-                                       </div>
-                                    </div>
-                                   
-                                 </div>
-                                
+                               
                                  <div class="row">
                                     <div class="col-lg-12 col-md-6 col-sm-12">
                                        <div class="form-group">
