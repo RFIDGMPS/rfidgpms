@@ -299,11 +299,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $personnel = [];
 $sql = "SELECT first_name, last_name
         FROM personell 
-        WHERE id = ? AND role != ?";
+        WHERE id = ?";
 
 // Prepare and execute the query
 $stmt = $db->prepare($sql);
-$stmt->bind_param("is", $id,'Student');
+$stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
 

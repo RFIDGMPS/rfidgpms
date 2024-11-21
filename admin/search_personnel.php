@@ -11,9 +11,10 @@ if (isset($_GET['query'])) {
     $safe_query = $db->real_escape_string($query); // Escape special characters for security
 
     // SQL query to search for first or last name matching the input
-    $sql = "SELECT id,first_name, last_name,category 
-            FROM personell 
-            WHERE first_name LIKE '%$safe_query%' OR last_name LIKE '%$safe_query%'"; // Limit to 10 results
+    $sql = "SELECT id, first_name, last_name, category 
+    FROM personell 
+    WHERE role != 'Student' 
+    AND (first_name LIKE '%$safe_query%' OR last_name LIKE '%$safe_query%')";
 
     // Execute the query
     $result = $db->query($sql);
