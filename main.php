@@ -1029,18 +1029,14 @@ if (isset($_POST['vsave'])) {
     } else {
         // Display error if no image was captured
         ?>
-       <script>
-    document.getElementById('myForm').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent form from reloading the page
-
-        Swal.fire({
-            title: 'Warning!',
-            text: 'Please capture an image before submitting.',
-            icon: 'warning',
-            confirmButtonText: 'OK'
-        });
-    });
-</script>
+        <script>
+            Swal.fire({
+                title: 'Warning!',
+                text: 'Please capture an image before submitting.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+        </script>
         <?php
     }
 }
