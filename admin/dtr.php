@@ -196,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         </div>
         <div class="col-lg-3 mt-4">
             <label></label>
-            <button type="submit" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button>
+            <button type="submit" name="submit" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button>
           
         </div>
         <div class="col-lg-3 mt-4" style="text-align:right;">
@@ -268,8 +268,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
     </style>
    
 <?php
+if(isset($_POST['submit'])){
 echo ' <script>alert('.$_POST['pname'].');</script>';
 echo ' <script>alert('.$_POST['month'].');</script>';
+
 $sql = "SELECT first_name, last_name 
         FROM personell 
         WHERE id = ?";
@@ -348,6 +350,8 @@ $daysData[$day] = $timeData;
 
 // Close the database connection
 $db->close();
+
+}
 ?>
 
 <div class="container" id="container">
