@@ -286,8 +286,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 // Query to fetch first_name and last_name for the given personnel ID
-
-// Query to fetch first_name and last_name for the given personnel ID
 $personnel = [];
 $sql = "SELECT first_name, last_name 
         FROM personell 
@@ -351,14 +349,14 @@ for ($day = 1; $day <= 31; $day++) {
 
 // Close the database connection
 $db->close();
+}
 ?>
-
 <div class="container" id="container">
     <div class="header">
         <h5>Civil Service Form No. 48</h5>
         <h4>DAILY TIME RECORD</h4>
-        <?php if (!empty($personnel)): ?>
-            <h1><?php echo htmlspecialchars($personnel['first_name'] . ' ' . $personnel['last_name']); ?></h1>
+        <?php if (!empty($name)): ?>
+            <h1><?php echo htmlspecialchars($name); ?></h1>
         <?php else: ?>
             <p>(Name)</p>
         <?php endif; ?>
@@ -381,7 +379,6 @@ function convertTo12Hour($time) {
     }
     // If the time cannot be parsed, return the original time string
     return $time;
-}
 }
 ?>
 
