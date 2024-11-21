@@ -317,7 +317,11 @@ function convertTo12Hour($time) {
     <table class="info-table">
         <tr>
             <th>For the month of</th>
-            <td><?php echo $month; ?></td>
+            <td><?php if (!empty($month)): ?>
+            <h1><?php echo htmlspecialchars($month); ?></h1>
+        <?php else: ?>
+            <p>(Month)</p>
+        <?php endif; ?></td>
             <td><?php echo $currentYear; ?></td>
             <td></td>
         </tr>
