@@ -13,6 +13,8 @@ include 'header.php';
 $personnel = [];
 $query = '';
 $id = $_SESSION['id'];
+$name = $_SESSION['name'];
+$month = $_SESSION['month'];
 include '../connection.php';
 
 // Validate the ID (ensure it’s numeric)
@@ -239,8 +241,8 @@ $db->close();
                 <div class="header">
                     <h5>Civil Service Form No. 48</h5>
                     <h4>DAILY TIME RECORD</h4>
-                    <?php if (!empty($personnel)): ?>
-                        <h1><?php echo htmlspecialchars($personnel['first_name'] . ' ' . $personnel['last_name']); ?></h1>
+                    <?php if (!empty($name)): ?>
+                        <h1><?php echo htmlspecialchars($name); ?></h1>
                     <?php else: ?>
                         <p>No personnel found.</p>
                     <?php endif; ?>
@@ -249,7 +251,7 @@ $db->close();
                 <table class="info-table">
                     <tr>
                         <th>For the month of</th>
-                        <td><?php echo $currentMonthName; ?></td>
+                        <td><?php echo $month; ?></td>
                         <td><?php echo $currentYear; ?></td>
                         <td></td>
                     </tr>

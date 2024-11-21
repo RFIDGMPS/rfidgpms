@@ -284,7 +284,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['perid'];
     $_SESSION['id'] = $id;
     // Add additional processing logic here, such as database queries
-
+    $_SESSION['name'] =$name;
+    $_SESSION['month']=$month;
 
 // Query to fetch first_name and last_name for the given personnel ID
 $personnel = [];
@@ -337,8 +338,18 @@ for ($day = 1; $day <= 31; $day++) {
 
     // Fetch the data if available
     $timeData = null; // Default to null if no data is found
-    if ($row = $result->fetch_assoc()) {
-        $timeData = $row; // Store the times if found
+     // Set default values if fields are '?' (which means they were originally null)
+     if ($timeData['time_in_am'] != '?' && $timeData['time_in_am'] != null) {
+        $timeData['time_in_am'] = '08:00 AM';
+    }
+    if ($timeData['time_out_am'] != '?' && $timeData['time_out_am'] != null) {
+        $timeData['time_out_am'] = '12:00 PM';
+    }
+    if ($timeData['time_in_pm'] != '?' && $timeData['time_in_pm'] != null) {
+        $timeData['time_in_pm'] = '01:00 PM';
+    }
+    if ($timeData['time_out_pm'] != '?' && $timeData['time_out_pm'] != null) {
+        $timeData['time_out_pm'] = '05:00 PM';
     }
 
     // Close the statement
