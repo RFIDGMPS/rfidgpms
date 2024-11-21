@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                         <div class="col-lg-3">
             <label>Search Personnel:</label>
            
-            <input type="text" class="form-control" id="searchInput" autocomplete="off">
+            <input type="text" name="pname" class="form-control" id="searchInput" autocomplete="off">
     <div id="suggestions"></div> <!-- Display search results here -->
 
     <script>
@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
     <option value="November">November</option>
     <option value="December">December</option>
 </select>
-<?php $month=$_POST['month']; ?>  
+ 
             
         </div>
         <div class="col-lg-3 mt-4">
@@ -204,22 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                                 <button onclick="printDiv('container')" type="button" class="btn btn-success" id="btn_print"><i class="fa fa-print"> Print</i></button> 
                                
                             </div></form>
-         <!-- Display Results -->
-         <?php if (isset($query) && $query !== ''): ?>
-    <?php if (!empty($personnel)): ?>
-        <ul class="personnel-list">
-            <?php foreach ($personnel as $person): ?>
-                <li>
-                    <a href="?id=<?= htmlspecialchars($person['id']); ?>&month=<?= $_POST['month'];?>">
-                        <?= htmlspecialchars($person['first_name']) . ' ' . htmlspecialchars($person['last_name']); ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-
-    <?php endif; ?>
-<?php endif; ?>
-
+        
 
 
                           </form>
@@ -281,19 +266,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
             margin-top: 30px;
         }
     </style>
+   
 <?php
-// Include the database connection
-
-
-// Get the 'id' parameter from the URL
-$id = isset($_GET['id']) ? $_GET['id'] : null;
-$month=isset($_GET['month']) ? $_GET['month'] : date('F');
-
-$_SESSION['id'] =$id;
-
-
-// Query to fetch first_name and last_name for the given personnel ID
-$personnel = [];
+echo ' <script>alert('.$_POST['pname'].');</script>';
+echo ' <script>alert('.$_POST['month'].');</script>';
 $sql = "SELECT first_name, last_name 
         FROM personell 
         WHERE id = ?";
