@@ -1,5 +1,5 @@
 <?php
- include 'connection.php';
+ include '../connection.php';
 
 if (isset($_POST['query'])) {
     $search = $db->real_escape_string($_POST['query']);
