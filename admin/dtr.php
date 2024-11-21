@@ -297,13 +297,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Query to fetch first_name and last_name for the given personnel ID
 $personnel = [];
-$sql = "SELECT id,first_name, last_name,category
+$sql = "SELECT first_name, last_name
         FROM personell 
-        WHERE id = ? AND category != 'Student'";
+        WHERE id = ? AND category != ?";
 
 // Prepare and execute the query
 $stmt = $db->prepare($sql);
-$stmt->bind_param("i", $id);
+$stmt->bind_param("is", $id,'Student');
 $stmt->execute();
 $result = $stmt->get_result();
 
