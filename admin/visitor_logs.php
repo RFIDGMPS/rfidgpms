@@ -77,7 +77,7 @@ mysqli_close($db);
                     <div class="bg-light rounded h-100 p-4">
                         <div class="row">
                             <div class="col-9">
-                                <h6 class="mb-4">Manage Report</h6>
+                                <h6 class="mb-4">Generate Report</h6>
                             </div>
                         </div>
                         <br>
@@ -133,7 +133,7 @@ mysqli_close($db);
         $date2 = date('Y-m-d', strtotime($_POST['date2']));
 
         // SQL query to fetch filtered data
-        $sql = "SELECT * FROM visitor_logs WHERE date_logged BETWEEN '$date1' AND '$date2'";
+        $sql = "SELECT * FROM visitor_logs WHERE date_logged BETWEEN '$date1' AND '$date2' ORDER BY id DESC";
         $result = mysqli_query($db, $sql);
 
         // Check if query was successful

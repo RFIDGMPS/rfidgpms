@@ -81,7 +81,7 @@ mysqli_close($db);
                     <div class="bg-light rounded h-100 p-4">
                         <div class="row">
                             <div class="col-9">
-                                <h6 class="mb-4">Manage Report</h6>
+                                <h6 class="mb-4">Generate Report</h6>
                             </div>
                         </div>
                         <br>
