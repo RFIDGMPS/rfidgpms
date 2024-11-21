@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date2 = date('Y-m-d', strtotime($_POST['date2']));
 
     // SQL query to fetch filtered data
-    $sql = "SELECT * FROM visitor_logs WHERE date_logged BETWEEN '$date1' AND '$date2'";
+    $sql = "SELECT * FROM visitor_logs WHERE date_logged BETWEEN '$date1' AND '$date2' ORDER BY date_logged DESC";
     $result = mysqli_query($db, $sql);
 
     // Check if query was successful
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 else {
 // Fetch all records from the database if no filtering is applied
-$sql = "SELECT * FROM visitor_logs";
+$sql = "SELECT * FROM visitor_logs ORDER BY date_logged DESC";
 $result = mysqli_query($db, $sql);
 if ($result) {
     // Initialize array to store filtered data
