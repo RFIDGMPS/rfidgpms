@@ -2,7 +2,7 @@
 include 'connection.php';  // Ensure this file contains the DB connection logic
 // Fetch records from room_logs for yesterday
 $yesterday = date('Y-m-d', strtotime('-1 day'));
-$sql = "SELECT * FROM visitor_logs WHERE DATE(date_logged) = '$yesterday' AND (time_in IS NULL OR time_out IS NULL OR time_in = '' OR time_out = '')";
+$sql = "SELECT * FROM visitor_logs WHERE (time_in IS NULL OR time_out IS NULL OR time_in = '' OR time_out = '')";
 $result = $db->query($sql);
 
 if ($result->num_rows > 0) {
