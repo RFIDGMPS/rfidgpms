@@ -43,10 +43,10 @@ if ($row = $result->fetch_assoc()) {
 $stmt->close();
 
 // Check if personnel data is available
-if (empty($personnel)) {
-    echo "No personnel found for the given ID.";
-    exit;
-}
+// if (empty($personnel)) {
+//     echo "No personnel found for the given ID.";
+//     exit;
+// }
 
 // Get current date, month, and year
 $currentDate = date('Y-m-d');
