@@ -278,8 +278,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the value from the hidden input field
     $name = $_POST['pername']; // Sanitize the input
-    $month = $_POST['month']; 
-echo 'M: '.$month;
+    $selectedMonth = $_POST['month'] ?? ''; // Use null coalescing operator to avoid undefined index warnings
+
+    // Sanitize the input
+    $selectedMonth = htmlspecialchars($selectedMonth);
+
+    // Display the selected month
+    if (!empty($selectedMonth)) {
+        echo "You selected: " . $selectedMonth;
+    } else {
+        echo "No month was selected.";
+    }
     // Add additional processing logic here, such as database queries
 }
         ?>
