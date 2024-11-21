@@ -433,11 +433,11 @@ function convertTo12Hour($time) {
             // Display the row for each day
             echo "<tr>";
             echo "<td>" . $day . "</td>";
-            echo "<td>" . (isset($timeData['time_in_am']) ? htmlspecialchars(convertTo12Hour($timeData['time_in_am'])) : '') . "</td>";
-            echo "<td>" . (isset($timeData['time_out_am']) ? htmlspecialchars(convertTo12Hour($timeData['time_out_am'])) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_in_am']) ? htmlspecialchars($timeData['time_in_am']) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_out_am']) ? htmlspecialchars($timeData['time_out_am']) : '') . "</td>";
             // Convert PM time to 12-hour AM/PM format before displaying
-            echo "<td>" . (isset($timeData['time_in_pm']) ? htmlspecialchars(convertTo12Hour($timeData['time_in_pm'])) : '') . "</td>";
-            echo "<td>" . (isset($timeData['time_out_pm']) ? htmlspecialchars(convertTo12Hour($timeData['time_out_pm'])) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_in_pm']) ? htmlspecialchars($timeData['time_in_pm']) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_out_pm']) ? htmlspecialchars($timeData['time_out_pm']) : '') . "</td>";
             echo "<td></td>"; // Placeholder for undertime
             echo "<td></td>"; // Placeholder for undertime
             echo "</tr>";
