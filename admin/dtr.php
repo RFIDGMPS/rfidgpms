@@ -281,12 +281,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['pername']; // Sanitize the input
     $month = $_POST['month'] ?? '';
     $id = $_POST['perid'];
-echo $id;
-    // Add additional processing logic here, such as database queries
-}
-        ?>
 
-<?php
+    // Add additional processing logic here, such as database queries
+
 
 // Query to fetch first_name and last_name for the given personnel ID
 $personnel = [];
@@ -352,6 +349,7 @@ for ($day = 1; $day <= 31; $day++) {
 
 // Close the database connection
 $db->close();
+}
 ?>
 <div class="container" id="container">
     <div class="header">
