@@ -585,6 +585,6 @@ function convertTo12Hour($time) {
 
      
     </div>
-    <?php session_unset();?>
+
 </body>
 </html>
