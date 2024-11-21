@@ -318,7 +318,7 @@ function convertTo12Hour($time) {
         <tr>
             <th>For the month of</th>
             <td><?php if (!empty($month)): ?>
-            <h1><?php echo htmlspecialchars($month); ?></h1>
+            <?php echo htmlspecialchars($month); ?>
         <?php else: ?>
             <p>(Month)</p>
         <?php endif; ?></td>
