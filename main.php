@@ -842,29 +842,6 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
                                       
                                     </div>
                                     
-                                    <div class="col-lg-5 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                          <label>SEX:</label>
-                                          <select readonly required class="form-control dept_ID" name="sex" id="sex_id" autocomplete="off">
-                                             <option value="Male">Male</option>
-                                             <option value="Female">Female</option>
-                                          </select>
-                                          <span class="sex-error"></span>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="row mb-2">
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                          <label>CIVIL STATUS:</label>
-                                          <select readonly required class="form-control dept_ID" name="stat" id="stat_id" autocomplete="off">
-                                            <option value="Single">Single</option>
-                                             <option value="Married">Married</option>
-                                             <option value="Widowed">Widowed</option>
-                                          </select>
-                                          <span class="stat-error"></span>
-                                       </div>
-                                    </div>
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                           <label>DEPARTMENT:</label>
@@ -900,6 +877,20 @@ while ($row = $result->fetch_assoc()) {
                                           <input required type="text" class="form-control" name="contact_number" id="contact_number" minlength="11" maxlength="11" autocomplete="off">
                                        </div>
                                     </div>
+                                 </div>
+                                 <div class="row mb-2">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                          <label>CIVIL STATUS:</label>
+                                          <select readonly required class="form-control dept_ID" name="stat" id="stat_id" autocomplete="off">
+                                            <option value="Single">Single</option>
+                                             <option value="Married">Married</option>
+                                             <option value="Widowed">Widowed</option>
+                                          </select>
+                                          <span class="stat-error"></span>
+                                       </div>
+                                    </div>
+                                   
                                  </div>
                                 
                                  <div class="row">
