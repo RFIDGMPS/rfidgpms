@@ -149,9 +149,13 @@ mysqli_close($db);
             
                 $output .= '<td>' . $row['address'] . '</td>';
                
-              
-                $output .= '<td>' . $row['time_in'] . '</td>';
-                $output .= '<td>' . $row['time_out'] . '</td>';
+                $output .= '<td>' . date("h:i A", strtotime($row['time_in'])) . '</td>';
+
+                if ($row['time_out'] === '?' || $row['time_out'] === '' || is_null($row['time_out'])) {
+                    $output .= '<td>' . $row['time_out'] . '</td>'; // Display as is
+                } else {
+                    $output .= '<td>' . date("h:i A", strtotime($row['time_out'])) . '</td>';
+                }
                 $output .= '<td>' . $row['date_logged'] . '</td>';
                 $output .= '<td>' . $row['purpose'] . '</td>';
                 $output .= '</tr>';
@@ -176,8 +180,12 @@ mysqli_close($db);
             echo '<td><center><img src="uploads/' . $row['photo'] . '" width="50px" height="50px"></center></td>';
             echo '<td>' . $row['name'] . '</td>';
             echo '<td>' . $row['address'] . '</td>';
-            echo '<td>' . $row['time_in'] . '</td>';
-            echo '<td>' . $row['time_out'] . '</td>';
+            echo '<td>' . date("h:i A", strtotime($row['time_in']))  . '</td>';
+            if ($row['time_out'] === '?' || $row['time_out'] === '' || is_null($row['time_out'])) {
+                echo'<td>' . $row['time_out'] . '</td>'; // Display as is
+            } else {
+                echo'<td>' . date("h:i A", strtotime($row['time_out'])) . '</td>';
+            }
             echo '<td>' . $row['date_logged'] . '</td>';
             echo '<td>' . $row['purpose'] . '</td>';
             echo '</tr>';
