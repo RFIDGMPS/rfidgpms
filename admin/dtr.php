@@ -4,7 +4,7 @@
 include 'auth.php'; // Include session validation
 $personnel = [];
 $query = '';
-$month = date('F');
+
 $id=0;
 include '../connection.php';
 ?>
