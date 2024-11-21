@@ -917,14 +917,14 @@ if (isset($_POST['vsave'])) {
     if (isset($_POST['capturedImage']) && !empty($_POST['capturedImage'])) {
         // Proceed with the rest of the form processing
         
-        $v_code = $_POST['v_code'];
+        //$v_code = $_POST['v_code'];
         $rfid_number = $_POST['rfid_number'];
         date_default_timezone_set('Asia/Manila'); // Set timezone
         $time = date('H:i:s'); // Current time
         $name = $_POST['fullName'];
         $department = $_POST['department'];
-        $sex = $_POST['sex'];
-        $civil_status = $_POST['stat'];
+        //$sex = $_POST['sex'];
+        //$civil_status = $_POST['stat'];
         $contact_number = $_POST['contact_number'];
         $address = $_POST['address'];
         $purpose = $_POST['purpose'];
@@ -942,8 +942,8 @@ if (isset($_POST['vsave'])) {
         // Check if the image was successfully saved
         if (file_put_contents($filePath, $decodedData)) {
             // Insert the record into the visitor_logs table
-            $insert_query = "INSERT INTO visitor_logs (photo, v_code, name, rfid_number, time_in, date_logged, department, sex, civil_status, contact_number, address, purpose, role, location)
-                             VALUES ('$imageName', '$v_code', '$name', '$rfid_number', '$time', '$date_logged', '$department', '$sex', '$civil_status', '$contact_number', '$address', '$purpose', 'Visitor','Gate')";
+            $insert_query = "INSERT INTO visitor_logs (photo, name, rfid_number, time_in, date_logged, department, contact_number, address, purpose, role, location)
+                             VALUES ('$imageName', '$name', '$rfid_number', '$time', '$date_logged', '$department', '$contact_number', '$address', '$purpose', 'Visitor','Gate')";
 
             if (mysqli_query($db, $insert_query)) {
                 $time_in_out = 'TIME IN';
