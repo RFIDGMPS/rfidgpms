@@ -172,7 +172,7 @@ mysqli_close($db);
         mysqli_close($db);
     } else {
         // If date1 and date2 are not set, fetch all records
-        $results = mysqli_query($db, "SELECT * FROM visitor_logs");
+        $results = mysqli_query($db, "SELECT * FROM visitor_logs ORDER BY date_logged DESC");
 
         // Loop through all records and generate HTML output
         while ($row = mysqli_fetch_array($results)) {
