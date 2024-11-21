@@ -12,7 +12,7 @@ include 'header.php';
 <body style="text-align:center;" onload="window.print()">
     <img src="uploads/header.png"/>
     <br><br>
-    <h1>Campus Entrance Log Monitoring Report</h1>
+    <h1>Visitor Entrance Log Monitoring Report</h1>
     <br>
     <div class="table-responsive">
                                 <table class="table table-border" id="">
@@ -26,10 +26,8 @@ include 'header.php';
                                         <th>Address</th>
                                      
                                    
-                                        <th>Time In (AM)</th>
-                                        <th>Time Out (AM)</th>
-                                        <th>Time In (PM)</th>
-                                        <th>Time Out (PM)</th>
+                                        <th>Time In</th>
+                                        <th>Time Out</th>
                                         <th>Log Date</th>
                                         <th>Purpose</th>
                                         </tr>
@@ -48,10 +46,8 @@ include 'header.php';
                                     echo '<td>' . $row['address'] . '</td>';
                                   
                             
-                                    echo '<td>' . $row['time_in_am'] . '</td>';
-                                    echo '<td>' . $row['time_out_am'] . '</td>';
-                                    echo '<td>' . $row['time_in_pm'] . '</td>';
-                                    echo '<td>' . $row['time_out_pm'] . '</td>';
+                                    echo '<td>' . $row['time_in'] . '</td>';
+                                    echo '<td>' . $row['time_out'] . '</td>';
                                     echo '<td>' . $row['date_logged'] . '</td>';
                                     echo '<td>' . $row['purpose'] . '</td>';
                                     echo '</tr>';
