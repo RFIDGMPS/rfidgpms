@@ -124,13 +124,14 @@ if ($result1->num_rows > 0) {
         <span class="badge1"><?php echo $new_lost_cards; ?></span>
     <?php endif; ?>
 </a>
+<a href="dtr.php" class="nav-item nav-link <?php echo ($current_page == 'dtr.php') ? 'active' : ''; ?>">
+                <i class="fa fa-clipboard me-2"></i>Generate DTR
+            </a>
             <!-- Settings -->
             <a href="settings.php" class="nav-item nav-link <?php echo ($current_page == 'settings.php') ? 'active' : ''; ?>">
                 <i class="fa fa-cog me-2"></i>Settings
             </a>
-            <a href="dtr.php" class="nav-item nav-link <?php echo ($current_page == 'dtr.php') ? 'active' : ''; ?>">
-                <i class="fa fa-clipboard me-2"></i>Generate DTR
-            </a>
+            
         </div>
     </nav>
 </div>
