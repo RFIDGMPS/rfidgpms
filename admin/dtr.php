@@ -307,6 +307,12 @@ if ($row = $result->fetch_assoc()) {
 // Close the statement
 $stmt->close();
 
+// Check if personnel data is available
+if (empty($personnel)) {
+    echo "No personnel found for the given ID.";
+    exit;
+}
+
 // Get current date, month, and year
 $currentDate = date('Y-m-d');
 $currentMonth = date('m');
@@ -327,8 +333,8 @@ for ($day = 1; $day <= 31; $day++) {
 
     // SQL query to fetch time data for the current day
     $sql = "SELECT time_in_am, time_out_am, time_in_pm, time_out_pm 
-            FROM personell_logs 
-            WHERE date_logged = ? AND personnel_id = ?"; // Use prepared statement to avoid SQL injection
+    FROM personell_logs 
+    WHERE date_logged = ? AND personnel_id = ?"; // Use prepared statement to avoid SQL injection
 
     // Prepare and execute the query
     $stmt = $db->prepare($sql);
@@ -337,9 +343,12 @@ for ($day = 1; $day <= 31; $day++) {
     $result = $stmt->get_result();
 
     // Fetch the data if available
-    $timeData = null; // Default to null if no data is found
-     // Set default values if fields are '?' (which means they were originally null)
-     if ($timeData['time_in_am'] != '?' && $timeData['time_in_am'] != null) {
+    $timeData = $result->fetch_assoc(); // Get the fetched data
+
+    // Check for null values and assign '?' if they are null
+
+    // Set default values if fields are '?' (which means they were originally null)
+    if ($timeData['time_in_am'] != '?' && $timeData['time_in_am'] != null) {
         $timeData['time_in_am'] = '08:00 AM';
     }
     if ($timeData['time_out_am'] != '?' && $timeData['time_out_am'] != null) {
