@@ -304,20 +304,24 @@ $db->close();
         <!-- Second Column -->
         <div class="table-column">
         <div class="container" id="container">
-                <div class="header">
+        <div class="header">
                     <h5>Civil Service Form No. 48</h5>
                     <h4>DAILY TIME RECORD</h4>
-                    <?php if (!empty($personnel)): ?>
-                        <h1><?php echo htmlspecialchars($personnel['first_name'] . ' ' . $personnel['last_name']); ?></h1>
+                    <?php if (!empty($name)): ?>
+                        <h1><?php echo htmlspecialchars($name); ?></h1>
                     <?php else: ?>
-                        <p>No personnel found.</p>
+                        <p>(Name)</p>
                     <?php endif; ?>
                 </div>
 
                 <table class="info-table">
                     <tr>
                         <th>For the month of</th>
-                        <td><?php echo $currentMonthName; ?></td>
+                        <td>  <?php if (!empty($name)): ?>
+                        <?php echo htmlspecialchars($month); ?>
+                    <?php else: ?>
+                        <p>(Month)</p>
+                    <?php endif; ?></td>
                         <td><?php echo $currentYear; ?></td>
                         <td></td>
                     </tr>
