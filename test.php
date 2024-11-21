@@ -17,7 +17,7 @@
                 let query = $(this).val();
                 if (query.length > 0) {
                     $.ajax({
-                        url: "fetch_personnel.php",
+                        url: "admin/fetch_personnel.php",
                         method: "POST",
                         data: { query: query },
                         success: function (data) {
