@@ -157,6 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                             div.textContent = `${person.first_name} ${person.last_name}`;
                             div.addEventListener('click', () => {
                                 searchInput.value = `${person.first_name} ${person.last_name}`; // Autofill the input
+                                document.getElementById('searchInput').value= `${person.first_name} ${person.last_name}`;
                                 suggestionsDiv.innerHTML = ''; // Clear suggestions after selection
                             });
                             suggestionsDiv.appendChild(div);
