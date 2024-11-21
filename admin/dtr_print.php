@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
+session_start();
 if (isset($_SESSION['reload_flag'])) {
     // Unset specific session variables
     unset($_SESSION['month']); 

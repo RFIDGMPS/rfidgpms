@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 if (isset($_SESSION['reload_flag'])) {
     // Unset specific session variables
     unset($_SESSION['month']); 
@@ -282,7 +283,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
     
 </style>
 <?php
-session_start();
+
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the value from the hidden input field
