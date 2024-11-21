@@ -266,7 +266,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
             margin-top: 30px;
         }
     </style>
-   
+    <script>var name = document.getElementById('searchInput').value;
+    
+    alert(name);</script>
 <?php
 if(isset($_POST['submit'])){
 echo ' <script>alert('.$_POST['pname'].');</script>';
