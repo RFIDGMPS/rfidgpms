@@ -821,15 +821,12 @@ if($time_in_out == 'TIME IN' || $time_in_out == 'TIME OUT'){
 
                                     <div class="file-uploader">
                                     <label for="photo" class="upload-img-btn" style="cursor: pointer;">
-                                          <img id="captured" class="preview-1" src="assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg" style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 25%" title="Upload Photo.." />
+                                          <img id="captured" class="preview-1" src="assets/img/pngtree-vector-add-user-icon-png-image_780447.jpg" style="width: 140px!important;height: 130px!important;position: absolute;border: 1px solid gray;top: 15%" title="Upload Photo.." />
                                           </label>
 
-                                             
-   <input type="file" id="photo" name="photo" class="upload-field-1" 
-          style="opacity: 0; position: absolute; z-index: -1;" accept="image/*" required>
                                        </div>
 
-                                       <input type="hidden" id="capturedImage" name="capturedImage">
+                                       <input type="hidden" id="capturedImage" name="capturedImage" required>
                                        <span class="img-error"></span>
                                     </div>
         
