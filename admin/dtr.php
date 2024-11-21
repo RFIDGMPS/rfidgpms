@@ -212,16 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                                 <button onclick="printDiv('container')" type="button" class="btn btn-success" id="btn_print"><i class="fa fa-print"> Print</i></button> 
                                
                             </div></form>
-        <?php
-// Check if the form was submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the value from the hidden input field
-    $pername = htmlspecialchars($_POST['pername']); // Sanitize the input
-    echo "Hidden input value: " . $pername;
-
-    // Add additional processing logic here, such as database queries
-}
-        ?>
+        
 
                         </div>
                         <hr>
@@ -282,13 +273,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     
 </style>
+<?php
+// Check if the form was submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the value from the hidden input field
+    $name = $_POST['pername']; // Sanitize the input
 
+
+    // Add additional processing logic here, such as database queries
+}
+        ?>
 <div class="container" id="container">
     <div class="header">
         <h5>Civil Service Form No. 48</h5>
         <h4>DAILY TIME RECORD</h4>
-        <?php if (!empty($personnel)): ?>
-            <h1><?php echo htmlspecialchars($personnel['first_name'] . ' ' . $personnel['last_name']); ?></h1>
+        <?php if (!empty($name)): ?>
+            <h1><?php echo htmlspecialchars($name); ?></h1>
         <?php else: ?>
             <p>(Name)</p>
         <?php endif; ?>
