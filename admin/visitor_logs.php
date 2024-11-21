@@ -175,10 +175,7 @@ mysqli_close($db);
             echo '<tr>';
             echo '<td><center><img src="uploads/' . $row['photo'] . '" width="50px" height="50px"></center></td>';
             echo '<td>' . $row['name'] . '</td>';
-        
             echo '<td>' . $row['address'] . '</td>';
-        
-         
             echo '<td>' . $row['time_in'] . '</td>';
             echo '<td>' . $row['time_out'] . '</td>';
             echo '<td>' . $row['date_logged'] . '</td>';

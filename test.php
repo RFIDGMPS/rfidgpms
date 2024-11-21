@@ -29,40 +29,10 @@ if ($result->num_rows > 0) {
         }
     }
 
-    echo "<table border='1'>";
-    echo "<tr>
-            <th>ID</th>
-            <th>Datelogged</th>
-            <th>Time In</th>
-            <th>Time Out</th>
-           
-          </tr>";
-    
-    // Loop through and display each row of data
-    while($row = $result1->fetch_assoc()) {
-        echo "<tr>
-                <td>" . $row["id"] . "</td>
-                <td>" . $row["date_logged"] . "</td>
-                <td>" . $row["time_in"] . "</td>
-                <td>" . $row["time_out"] . "</td>
-              </tr>";
-    }
-
-    // End the table
-    echo "</table>";
+   
 }
 else {
     echo "No records found";
-}
-
-// SQL query to fetch data from personell_logs
-$sql1 = "SELECT * FROM visitor_logs";
-$result1 = $db->query($sql1);
-
-// Check if any rows were returned
-if ($result1->num_rows > 0) {
-    // Start table and table headers
-   
 }
 
 // Close connection
