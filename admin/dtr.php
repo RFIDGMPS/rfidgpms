@@ -270,7 +270,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
     </style>
     <script>var name = document.getElementById('pname').value;
     
-    alert(name);</script>
+    alert('My '+name);</script>
 <?php
 if(isset($_POST['submit'])){
 echo ' <script>alert('.$_POST['pname'].');</script>';
