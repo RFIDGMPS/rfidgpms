@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
             <label>Search Personnel:</label>
            
             <input type="text" name="pname" class="form-control" id="searchInput" autocomplete="off">
-       
+            <input hidden type="text" id="pername" autocomplete="off">
     <div id="suggestions"></div> <!-- Display search results here -->
 
     <script>
@@ -160,6 +160,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                                 searchInput.value = `${person.first_name} ${person.last_name}`; // Autofill the input
                                 suggestionsDiv.innerHTML = ''; // Clear suggestions after selection
                                 alert(searchInput.value);
+                                document.getElementById('pername').value = searchInput.value;
+                                alert(document.getElementById('pername').value);
                             });
                             suggestionsDiv.appendChild(div);
                         });
