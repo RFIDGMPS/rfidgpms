@@ -159,6 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                             div.addEventListener('click', () => {
                                 searchInput.value = `${person.first_name} ${person.last_name}`; // Autofill the input
                                 suggestionsDiv.innerHTML = ''; // Clear suggestions after selection
+                                alert(searchInput.value);
                             });
                             suggestionsDiv.appendChild(div);
                         });
@@ -170,10 +171,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                     console.error('Error fetching data:', error);
                 });
 
-                alert(searchInput.value);
+                
         });
 
-        
+        alert(searchInput.value);
     </script>
                
             
