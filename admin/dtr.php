@@ -278,7 +278,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the value from the hidden input field
     $name = $_POST['pername']; // Sanitize the input
-
+    $month = $_POST['months']; 
 
     // Add additional processing logic here, such as database queries
 }
