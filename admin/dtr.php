@@ -85,12 +85,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
          #suggestions {
             position: absolute;
             z-index: 9999; /* Ensure it appears on top */
-            border: 1px solid #ddd;
+            /* border: 1px solid #ddd; */
             max-height: 200px;
             overflow-y: auto;
             background-color: white; /* Make background white to distinguish from page */
             width: 200px; /* Adjust width as needed */
-            /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); Add shadow for better visibility */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); Add shadow for better visibility
             margin-top: 5px; /* Slight margin below the input box */
         }
 
