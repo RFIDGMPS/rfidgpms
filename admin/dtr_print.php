@@ -17,10 +17,10 @@ $name = $_SESSION['name'];
 $month = $_SESSION['month'];
 include '../connection.php';
 
-// Validate the ID (ensure it’s numeric)
-if (!$id || !is_numeric($id)) {
-    die("Invalid personnel ID.");
-}
+// // Validate the ID (ensure it’s numeric)
+// if (!$id || !is_numeric($id)) {
+//     die("Invalid personnel ID.");
+// }
 
 // Query to fetch first_name and last_name for the given personnel ID
 $personnel = [];
