@@ -347,7 +347,7 @@ for ($day = 1; $day <= 31; $day++) {
 
     // Prepare and execute the query
     $stmt = $db->prepare($sql);
-    $stmt->bind_param("si", $month, $personnel_id); // Bind parameters
+    $stmt->bind_param("si", $month, $id); // Bind parameters
     $stmt->execute();
     $result = $stmt->get_result();
 
