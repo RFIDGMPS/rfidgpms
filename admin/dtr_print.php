@@ -2,14 +2,14 @@
 <html>
 <?php
 session_start();
-if (isset($_SESSION['reload_flag'])) {
+
     // Unset specific session variables
     unset($_SESSION['month']); 
     unset($_SESSION['name']);
     unset($_SESSION['id']);
 
 
-} 
+
 include 'auth.php'; // Include session validation
 ?>
 <?php
