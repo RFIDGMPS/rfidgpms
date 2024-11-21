@@ -113,10 +113,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                             </div>
                         </div>
                         <br>
-                        
+                        <form id="filterForm" method="POST" action="process_input.php">
                         <div class="row">
 
-                        <form method="POST" action="process_input.php">
+              
                         <div class="col-lg-3">
             <label>Search Personnel:</label>
            
@@ -207,7 +207,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                                
                             </div></form>
         
-
 
                         </div>
                         <hr>
