@@ -297,7 +297,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Query to fetch first_name and last_name for the given personnel ID
 $personnel = [];
-$sql = "SELECT first_name, last_name 
+$sql = "SELECT id,first_name, last_name,category
         FROM personell 
         WHERE id = ? AND category != 'Student'";
 
