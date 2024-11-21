@@ -299,7 +299,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $personnel = [];
 $sql = "SELECT first_name, last_name
         FROM personell 
-        WHERE id = ? AND category != ?";
+        WHERE id = ? AND role != ?";
 
 // Prepare and execute the query
 $stmt = $db->prepare($sql);
