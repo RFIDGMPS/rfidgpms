@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                         <div class="col-lg-3">
             <label>Search Personnel:</label>
            
-            <input type="text" id="searchInput" placeholder="Search by first or last name" autocomplete="off">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search by first or last name" autocomplete="off">
     <div id="suggestions"></div> <!-- Display search results here -->
 
     <script>
