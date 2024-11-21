@@ -1,137 +1,68 @@
 <?php
 include 'connection.php';  // Ensure this file contains the DB connection logic
-// if ($db->query('TRUNCATE TABLE personell_logs') === TRUE) {
-//     echo "personell_logs table truncated successfully.<br>";
-// } else {
-//     echo "Error truncating personell_logs: " . $db->error . "<br>";
-// }
-
-// if ($db->query('TRUNCATE TABLE room_logs') === TRUE) {
-//     echo "room_logs table truncated successfully.<br>";
-// } else {
-//     echo "Error truncating room_logs: " . $db->error . "<br>";
-// }
-$sql = "SELECT id, rfid_number, last_log, attempts FROM stranger_logs";
-$result = mysqli_query($db, $sql);
-
-// Check if there are any records
-if (mysqli_num_rows($result) > 0) {
-    echo "<table border='1'>
-            <tr>
-                <th>ID</th>
-                <th>RFID Number</th>
-                <th>Last Log</th>
-                <th>Attempts</th>
-            </tr>";
-
-    // Loop through the results and display each row
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "<tr>
-                <td>" . $row['id'] . "</td>
-                <td>" . $row['rfid_number'] . "</td>
-                <td>" . $row['last_log'] . "</td>
-                <td>" . $row['attempts'] . "</td>
-              </tr>";
-    }
-
-    echo "</table>";
-} else {
-    echo "No records found.";
-}
-$current_time = new DateTime();
-$timein = $timeout = '';
-    if ($current_time->format('A') === 'AM') {
-        $timein = 'time_in_am';
-        $timeout = 'time_out_am';
-    } else {
-        $timein = 'time_in_pm';
-        $timeout = 'time_out_pm';
-    }
-
-// SQL query to select all records from room_logs
-$sql = " SELECT 
-    p.photo,
-    p.department,
-    p.role,
-    CONCAT(p.first_name, ' ', p.last_name) AS full_name,
-    rl.time_in,
-    rl.time_out,
-    rl.date_logged,
-    rl.personnel_id,
-    rl.location
-FROM room_logs rl
-JOIN personell p ON rl.personnel_id = p.id
-ORDER BY 
-    GREATEST(rl.time_in, rl.time_out) DESC
-;
-";
+// Fetch records from room_logs for yesterday
+$yesterday = date('Y-m-d', strtotime('-1 day'));
+$sql = "SELECT * FROM visitor_logs WHERE DATE(date_logged) = '$yesterday' AND (time_in IS NULL OR time_out IS NULL OR time_in = '' OR time_out = '')";
 $result = $db->query($sql);
 
-// Check if there are results and display them
 if ($result->num_rows > 0) {
-    // Start the table
-    echo "<table border='1'>
-            <tr>
-                <th>Log ID</th>
-                <th>Personnel ID</th>
-                <th>Time In</th>
-                <th>Time Out</th>
-                <th>Date Logged</th>
-                <th>Location</th>
-            </tr>";
-
-    // Output data of each row
+    // Loop through all rows with NULL or empty time fields
     while ($row = $result->fetch_assoc()) {
-        echo "<tr>
-                <td>" . htmlspecialchars($row['personnel_id']) . "</td>
-                <td>" . htmlspecialchars($row['full_name']) . "</td>
-                <td>" . htmlspecialchars($row['time_in']) . "</td>
-                   <td>" . htmlspecialchars($row['time_out']) . "</td>
-                <td>" . htmlspecialchars($row['date_logged']) . "</td>
-                <td>" . htmlspecialchars($row['location']) . "</td>
-              </tr>";
+        $id = $row['id']; // Assuming you have an 'id' column in room_logs for identification
+        
+        $updateFields = [];
+        // Check if time_in is NULL or an empty string and needs to be updated
+        if (is_null($row['time_in']) || $row['time_in'] === '') {
+            $updateFields[] = "time_in = '?'";
+        }
+        // Check if time_out is NULL or an empty string and needs to be updated
+        if (is_null($row['time_out']) || $row['time_out'] === '') {
+            $updateFields[] = "time_out = '?'";
+        }
+        
+        // Only update if there's something to update
+        if (!empty($updateFields)) {
+            $updateQuery = "UPDATE visitor_logs SET " . implode(", ", $updateFields) . " WHERE id = $id";
+            if ($db->query($updateQuery) === TRUE) {
+                echo "Record updated successfully for ID: $id <br>";
+            } 
+        }
     }
-    echo "</table>"; 
-} else {
-    echo "No records found.";
-}
 
-
-// SQL query to fetch data from personell_logs
-$sql1 = "SELECT * FROM personell_logs";
-$result1 = $db->query($sql1);
-
-// Check if any rows were returned
-if ($result1->num_rows > 0) {
-    // Start table and table headers
     echo "<table border='1'>";
     echo "<tr>
             <th>ID</th>
-            <th>Personell ID</th>
+            <th>Datelogged</th>
             <th>Time In</th>
             <th>Time Out</th>
-             <th>Time In</th>
-            <th>Time Out</th>
-            <th>Location</th>
+           
           </tr>";
     
     // Loop through and display each row of data
     while($row = $result1->fetch_assoc()) {
         echo "<tr>
-                <td>" . $row["personnel_id"] . "</td>
+                <td>" . $row["id"] . "</td>
                 <td>" . $row["date_logged"] . "</td>
-                <td>" . $row["time_in_am"] . "</td>
-                <td>" . $row["time_out_am"] . "</td>
-                <td>" . $row["time_in_pm"] . "</td>
-                <td>" . $row["time_out_pm"] . "</td>
-                <td>" . $row["location"] . "</td>
+                <td>" . $row["time_in"] . "</td>
+                <td>" . $row["time_out"] . "</td>
               </tr>";
     }
 
     // End the table
     echo "</table>";
-} else {
+}
+else {
     echo "No records found";
+}
+
+// SQL query to fetch data from personell_logs
+$sql1 = "SELECT * FROM visitor_logs";
+$result1 = $db->query($sql1);
+
+// Check if any rows were returned
+if ($result1->num_rows > 0) {
+    // Start table and table headers
+   
 }
 
 // Close connection
