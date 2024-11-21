@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                             </div>
                         </div>
                         <br>
-                        <form id="filterForm" method="POST" action="process_input.php">
+                        <form id="filterForm" method="POST" action="">
                         <div class="row">
 
               
@@ -159,9 +159,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                             div.addEventListener('click', () => {
                                 searchInput.value = `${person.first_name} ${person.last_name}`; // Autofill the input
                                 suggestionsDiv.innerHTML = ''; // Clear suggestions after selection
-                                alert(searchInput.value);
+                               
                                 document.getElementById('pername').value = searchInput.value;
-                                alert(document.getElementById('pername').value);
+                                
                             });
                             suggestionsDiv.appendChild(div);
                         });
@@ -176,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                 
         });
 
-        alert(searchInput.value);
+  
     </script>
                
             
@@ -212,7 +212,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
                                 <button onclick="printDiv('container')" type="button" class="btn btn-success" id="btn_print"><i class="fa fa-print"> Print</i></button> 
                                
                             </div></form>
-        
+        <?php
+// Check if the form was submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the value from the hidden input field
+    $pername = htmlspecialchars($_POST['pername']); // Sanitize the input
+    echo "Hidden input value: " . $pername;
+
+    // Add additional processing logic here, such as database queries
+}
+        ?>
 
                         </div>
                         <hr>
