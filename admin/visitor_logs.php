@@ -133,7 +133,7 @@ mysqli_close($db);
         $date2 = date('Y-m-d', strtotime($_POST['date2']));
 
         // SQL query to fetch filtered data
-        $sql = "SELECT * FROM visitor_logs WHERE date_logged BETWEEN '$date1' AND '$date2' ORDER BY id DESC";
+        $sql = "SELECT * FROM visitor_logs WHERE date_logged BETWEEN '$date1' AND '$date2' ORDER BY date_logged DESC";
         $result = mysqli_query($db, $sql);
 
         // Check if query was successful
