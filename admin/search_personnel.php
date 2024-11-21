@@ -2,11 +2,6 @@
 // Set the content type to JSON
 header('Content-Type: application/json');
 
-// Enable error logging
-ini_set('display_errors', 0); // Disable direct error display
-ini_set('log_errors', 1);     // Enable logging
-error_reporting(E_ALL);       // Log all errors
-
 // Database connection settings
 include '../connection.php';
 
