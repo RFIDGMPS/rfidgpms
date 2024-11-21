@@ -82,18 +82,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['query'])) {
         }
     </style>
     <style>
-        /* Basic styling for the search results */
-        #suggestions {
+         #suggestions {
+            position: absolute;
+            z-index: 9999; /* Ensure it appears on top */
             border: 1px solid #ddd;
             max-height: 200px;
             overflow-y: auto;
-            margin-top: 5px;
+            background-color: white; /* Make background white to distinguish from page */
+            width: 200px; /* Adjust width as needed */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+            margin-top: 5px; /* Slight margin below the input box */
         }
+
         #suggestions div {
             padding: 10px;
             cursor: pointer;
             background-color: #f9f9f9;
         }
+
         #suggestions div:hover {
             background-color: #e0e0e0;
         }
