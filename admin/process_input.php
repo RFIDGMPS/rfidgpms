@@ -3,7 +3,7 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the input value
     $searchInput = htmlspecialchars($_POST['searchInput']); // Sanitize the input
-    echo "<script>alert('You entered: " . $searchInput."')</script>";
+    echo "You entered: " . $searchInput;
 
     // Add your database query or other logic here
 }
