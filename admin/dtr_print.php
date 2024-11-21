@@ -244,14 +244,18 @@ $db->close();
                     <?php if (!empty($name)): ?>
                         <h1><?php echo htmlspecialchars($name); ?></h1>
                     <?php else: ?>
-                        <p>No personnel found.</p>
+                        <p>(Name)</p>
                     <?php endif; ?>
                 </div>
 
                 <table class="info-table">
                     <tr>
                         <th>For the month of</th>
-                        <td><?php echo $month; ?></td>
+                        <td>  <?php if (!empty($name)): ?>
+                        <?php echo htmlspecialchars($month); ?>
+                    <?php else: ?>
+                        <p>(Month)</p>
+                    <?php endif; ?></td>
                         <td><?php echo $currentYear; ?></td>
                         <td></td>
                     </tr>
