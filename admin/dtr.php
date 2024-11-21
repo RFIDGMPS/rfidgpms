@@ -342,7 +342,8 @@ for ($day = 1; $day <= 31; $day++) {
     // SQL query to fetch time data for the current day
     $sql = "SELECT time_in_am, time_out_am, time_in_pm, time_out_pm 
     FROM personell_logs 
-    WHERE date_logged = ? AND personnel_id = ?"; // Use prepared statement to avoid SQL injection
+    WHERE MONTHNAME(date_logged) = ? AND personnel_id = ?";
+
 
     // Prepare and execute the query
     $stmt = $db->prepare($sql);
