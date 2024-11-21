@@ -281,7 +281,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['pername']; // Sanitize the input
     $month = $_POST['month'] ?? '';
     $id = $_POST['perid'];
-
+    $_SESSION['id'] = $id;
     // Add additional processing logic here, such as database queries
 
 
