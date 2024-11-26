@@ -343,53 +343,19 @@ for ($day = 1; $day <= 31; $day++) {
 
     
     // SQL query
-    
     $sql = "SELECT date_logged, time_in_am, time_out_am, time_in_pm, time_out_pm 
             FROM personell_logs 
             WHERE MONTH(date_logged) = ? AND personnel_id = ?";
     
-    // Debug: Print the raw query with placeholders
-    echo "SQL Query: " . $sql . "<br>";
-    
-    // Debug: Print the variables being bound
-    echo "Month Number: " . htmlspecialchars($monthNumber) . "<br>";
-    echo "Personnel ID: " . htmlspecialchars($id) . "<br>";
-    
-    // Prepare the statement
+    // Prepare statement
     $stmt = $db->prepare($sql);
-    
-    if (!$stmt) {
-        // Debug: Output any error in preparing the statement
-        die("Error preparing the statement: " . $db->error);
-    }
-    
     $stmt->bind_param("ii", $monthNumber, $id); // Bind parameters
-    
-    // Debug: Check if parameters bind successfully
-    if (!$stmt->execute()) {
-        // Debug: Output the error if execution fails
-        die("Error executing the query: " . $stmt->error);
-    }
-    
+    $stmt->execute();
     $result = $stmt->get_result();
-    
-    if ($result) {
-        // Debug: Output number of rows returned
-        echo "Number of rows returned: " . $result->num_rows . "<br>";
-    
-        // Fetch the data
-        $timeData = $result->fetch_assoc();
-        if ($timeData) {
-            echo "Data fetched successfully:<br>";
-            print_r($timeData);
-        } else {
-            echo "No data found for the given criteria.<br>";
-        }
-    } else {
-        echo "Error fetching results: " . $stmt->error;
-    }
-    
-    
+
+    // Fetch the data if available
+    $timeData = $result->fetch_assoc(); // Get the fetched data
+
     // Check for null values and assign '?' if they are null
 
     // Set default values if fields are '?' (which means they were originally null)
