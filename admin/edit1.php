@@ -10,69 +10,62 @@ switch ($_GET['edit'])
 {
     case 'personell':
 		
-		
-$id = $_GET['id'];
-$photo = $_POST['capturedImage'] . ' ';
-$photo = trim($photo, "uploads/");
 
-// Retrieve form data
+// Get data from POST
+$id = $_POST['id'];
 $rfid_number = $_POST['rfid_number'];
 $last_name = $_POST['last_name'];
 $first_name = $_POST['first_name'];
 $date_of_birth = $_POST['date_of_birth'];
-$department = $_POST['e_department'];
-$category = $_POST['ecategory'];
-$role = $_POST['erole'];
+$department = $_POST['department'];
+$category = $_POST['category'];
+$role = $_POST['role'];
 $status = $_POST['status'];
 
-if (isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != null) {
-    $photo = $_FILES['photo']['name'];
-    
+// File upload logic
+$photo = $_FILES['photo']['name'] ?? null;
+if ($photo) {
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["photo"]["name"]);
     move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
 }
 
-// Update personnel details
+// SQL query to update the personell record
 $query = "UPDATE personell SET 
     photo = '$photo',
-    rfid_number = '$rfid_number', 
-    category = '$category', 
-    last_name = '$last_name', 
-    first_name = '$first_name', 
-    date_of_birth = '$date_of_birth', 
-    department = '$department', 
-    role = '$role', 
+    rfid_number = '$rfid_number',
+    category = '$category',
+    last_name = '$last_name',
+    first_name = '$first_name',
+    date_of_birth = '$date_of_birth',
+    department = '$department',
+    role = '$role',
     status = '$status'
 WHERE id = '$id'";
 
-$result = mysqli_query($db, $query) or die(mysqli_error($db));
+$result = mysqli_query($db, $query);
 
-// Update lostcard status based on the personnel's status
 $status_value = ($status == 'Active') ? 0 : 1;
 $query1 = "UPDATE lostcard SET status = $status_value WHERE personnel_id = '$id'";
-$result1 = mysqli_query($db, $query1) or die(mysqli_error($db));
+$result1 = mysqli_query($db, $query1);
 
-// Set success message
+// Prepare the response
 if ($result && $result1) {
-    // Assuming $role and $category are relevant to the success message.
-    $_SESSION['swal_message'] = [
+    $response = [
         'title' => 'Success!',
-        'text' => 'The record has been updated successfully. Role: ' . $role . ', Category: ' . $category,
+        'text' => 'The record has been updated successfully.',
         'icon' => 'success'
     ];
 } else {
-    $_SESSION['swal_message'] = [
+    $response = [
         'title' => 'Error!',
         'text' => 'Failed to update the record. Please try again.',
         'icon' => 'error'
     ];
 }
 
-
-// Redirect to the same page or any page you want
-header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $id);
-exit;
+// Return the JSON response
+echo json_encode($response);
     break;
     case 'department':
 		$id = $_GET['id'];

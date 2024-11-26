@@ -221,7 +221,7 @@ $(document).ready(function() {
         $('.edit-status1').html($getstatus);
 
         // Update the form action dynamically
-        $('.edit-form').attr('action', 'edit1.php?edit=personell&id=' + $id);
+        //$('.edit-form').attr('action', 'edit1.php?edit=personell&id=' + $id);
     });
 });
 </script>
@@ -847,18 +847,7 @@ while ($row = $result->fetch_assoc()) {
    });
 </script>
 
-<script>
-// Check if the session message is set and display it using SweetAlert
-<?php if (isset($_SESSION['swal_message'])): ?>
-    Swal.fire({
-        title: '<?php echo $_SESSION['swal_message']['title']; ?>',
-        text: '<?php echo $_SESSION['swal_message']['text']; ?>',
-        icon: '<?php echo $_SESSION['swal_message']['icon']; ?>',
-        showConfirmButton: true
-    });
-    <?php unset($_SESSION['swal_message']); // Clear the session message ?>
-<?php endif; ?>
-</script>
+
 
 
          <div class="col-lg-4 col-md-6 col-sm-12">
@@ -890,6 +879,60 @@ while ($row = $result->fetch_assoc()) {
                         </div>
 
     </form>
+
+    <script>$(document).ready(function() {
+    var userId = '';  // Variable to store the selected user ID
+
+    // Handle the click event to get the user ID
+    $(document).on('click', '.e_user_id', function() {
+        userId = $(this).data('id');  // Get the ID of the clicked element
+       
+    });
+
+    // Handle form submission
+    $('#editPersonellForm').submit(function(e) {
+        e.preventDefault();  // Prevent default form submission
+
+        if (userId === '') {
+            Swal.fire({
+                title: 'Error!',
+                text: 'No user selected. Please select a user first.',
+                icon: 'error'
+            });
+            return;  // Stop the form submission if no user is selected
+        }
+
+        var formData = new FormData(this);  // Get form data
+
+        // Append the selected user ID to the form data
+        formData.append('id', userId);
+
+        $.ajax({
+            url: 'edit1.php?edit=personell&id=' + userId,  // PHP script that handles the update
+            type: 'POST',
+            data: formData,
+            contentType: false,  // Needed for file uploads
+            processData: false,  // Needed for file uploads
+            success: function(response) {
+                var result = JSON.parse(response);  // Parse the JSON response
+
+                // Show SweetAlert based on the response
+                Swal.fire({
+                    title: result.title,
+                    text: result.text,
+                    icon: result.icon
+                });
+            },
+            error: function() {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'An error occurred while processing the request.',
+                    icon: 'error'
+                });
+            }
+        });
+    });
+});
 
 						</div>
                      </div>
