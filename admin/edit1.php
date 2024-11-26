@@ -49,21 +49,6 @@ $status_value = ($status == 'Active') ? 0 : 1;
 $query1 = "UPDATE lostcard SET status = $status_value WHERE personnel_id = '$id'";
 $result1 = mysqli_query($db, $query1);
 
-// Prepare the response
-if ($result && $result1) {
-    $response = [
-        'title' => 'Success!',
-        'text' => 'The record has been updated successfully.',
-        'icon' => 'success'
-    ];
-} else {
-    $response = [
-        'title' => 'Error!',
-        'text' => 'Failed to update the record. Please try again.',
-        'icon' => 'error'
-    ];
-}
-
 // Return the JSON response
 echo json_encode($response);
     break;
