@@ -11,61 +11,70 @@
 switch ($_GET['action'])
 {
     case 'add':
-    
-session_start(); // Start the session
-function generateRandomId($length = 8) {
-    return substr(md5(uniqid(rand(), true)), 0, $length);
-}
+        session_start(); // Start the session
 
-// Example usage when inserting data:
-$id = generateRandomId();  
-// Retrieve form data
-// $id_no = $_POST['id_no'];
-$rfid_number = $_POST['rfid_number'];
-$last_name = $_POST['last_name'];
-$first_name = $_POST['first_name'];
-// $middle_name = $_POST['middle_name'];
-$date_of_birth = $_POST['date_of_birth'];
-// $place_of_birth = $_POST['place_of_birth'];
-$role = $_POST['role'];
-// $sex = $_POST['sex'];
-// $civil_status = $_POST['stat'];
-// $contact_number = $_POST['contact_number'];
-// $email_address = $_POST['email_address'];
-$department = $_POST['department'];
-// $section = $_POST['section'];
-$status = $_POST['status'];
-$category = $_POST['category'];
-// $complete_address = $_POST['complete_address'];
-$photo = $_FILES['photo']['name'];
-
-// File upload logic
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["photo"]["name"]);
-move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
-
-// Insert query
-$query = "INSERT INTO personell (id,category, rfid_number, last_name, first_name, date_of_birth, role, department, status, photo)
-          VALUES ('$id','$category', '$rfid_number', '$last_name', '$first_name', '$date_of_birth', '$role', '$department','$status', '$photo')";
-$result = mysqli_query($db, $query);
-
-if ($result) {
-    $_SESSION['swal_message'] = [
-        'title' => 'Success!',
-        'text' => 'Record added successfully.',
-        'icon' => 'success'
-    ];
-} else {
-    $_SESSION['swal_message'] = [
-        'title' => 'Error!',
-        'text' => 'Failed to add the record. Please try again.',
-        'icon' => 'error'
-    ];
-}
-
-// Redirect to personell.php
-header('Location: personell.php');
-exit;
+        // Function to generate a random unique ID
+        function generateRandomId($length = 8, $db) {
+            $id = substr(md5(uniqid(rand(), true)), 0, $length);
+        
+            // Check if the ID exists in the database
+            while (idExists($id, $db)) {
+                // If the ID exists, generate a new one
+                $id = substr(md5(uniqid(rand(), true)), 0, $length);
+            }
+        
+            return $id;
+        }
+        
+        // Function to check if the ID exists in the database
+        function idExists($id, $db) {
+            $query = "SELECT COUNT(*) FROM personell WHERE id = '$id'";
+            $result = mysqli_query($db, $query);
+            return mysqli_fetch_row($result)[0] > 0;
+        }
+        
+        // Example usage when inserting data:
+        $id = generateRandomId(8, $db);  // Generate a unique ID
+        
+        // Retrieve form data
+        $rfid_number = $_POST['rfid_number'];
+        $last_name = $_POST['last_name'];
+        $first_name = $_POST['first_name'];
+        $date_of_birth = $_POST['date_of_birth'];
+        $role = $_POST['role'];
+        $department = $_POST['department'];
+        $status = $_POST['status'];
+        $category = $_POST['category'];
+        $photo = $_FILES['photo']['name'];
+        
+        // File upload logic
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["photo"]["name"]);
+        move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
+        
+        // Insert query
+        $query = "INSERT INTO personell (id, category, rfid_number, last_name, first_name, date_of_birth, role, department, status, photo)
+                  VALUES ('$id', '$category', '$rfid_number', '$last_name', '$first_name', '$date_of_birth', '$role', '$department', '$status', '$photo')";
+        $result = mysqli_query($db, $query);
+        
+        if ($result) {
+            $_SESSION['swal_message'] = [
+                'title' => 'Success!',
+                'text' => 'Record added successfully.',
+                'icon' => 'success'
+            ];
+        } else {
+            $_SESSION['swal_message'] = [
+                'title' => 'Error!',
+                'text' => 'Failed to add the record. Please try again.',
+                'icon' => 'error'
+            ];
+        }
+        
+        // Redirect to personell.php
+        header('Location: personell.php');
+        exit;
+        
     break;
     case 'add_department':
 // Get the POST data
