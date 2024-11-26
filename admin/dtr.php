@@ -378,38 +378,6 @@ while ($row = $result->fetch_assoc()) {
 // Close the statement
 $stmt->close();
 
-// Display the data
-echo "<table border='1'>
-        <tr>
-            <th>Day</th>
-            <th>Date Logged</th>
-            <th>Time In (AM)</th>
-            <th>Time Out (AM)</th>
-            <th>Time In (PM)</th>
-            <th>Time Out (PM)</th>
-        </tr>";
-
-// Iterate through the days of the month
-for ($day = 1; $day <= 31; $day++) {
-    if (!checkdate($currentMonth, $day, $currentYear)) {
-        continue; // Skip invalid days
-    }
-
-    if (isset($daysData[$day])) {
-        // Display data for the specific day
-        echo "<tr>
-                <td>{$day}</td>
-                <td>{$daysData[$day]['date_logged']}</td>
-                <td>{$daysData[$day]['time_in_am']}</td>
-                <td>{$daysData[$day]['time_out_am']}</td>
-                <td>{$daysData[$day]['time_in_pm']}</td>
-                <td>{$daysData[$day]['time_out_pm']}</td>
-              </tr>";
-    }
-}
-
-echo "</table>";
-
 
 // Close the database connection
 $db->close();
