@@ -32,8 +32,7 @@ if (isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != null) {
     $target_file = $target_dir . basename($_FILES["photo"]["name"]);
     move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
 }
-echo '<script>alert('.$role.');</script>';
-echo '<script>alert('.$category.');</script>';
+
 // Update personnel details
 $query = "UPDATE personell SET 
     photo = '$photo',
@@ -56,9 +55,10 @@ $result1 = mysqli_query($db, $query1) or die(mysqli_error($db));
 
 // Set success message
 if ($result && $result1) {
+    // Assuming $role and $category are relevant to the success message.
     $_SESSION['swal_message'] = [
         'title' => 'Success!',
-        'text' => 'Record updated successfully.',
+        'text' => 'The record has been updated successfully. Role: ' . $role . ', Category: ' . $category,
         'icon' => 'success'
     ];
 } else {
@@ -68,6 +68,7 @@ if ($result && $result1) {
         'icon' => 'error'
     ];
 }
+
 
 // Redirect to the same page or any page you want
 header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $id);
