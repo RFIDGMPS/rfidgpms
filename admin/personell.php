@@ -227,7 +227,7 @@ $(document).ready(function() {
 </script>
 
             <!-- Modal -->
-            <form  id="personellForm" role="form" method="post" action="transac.php?action=add" enctype="multipart/form-data">
+            <form  id="personellForm" role="form" method="post" action="" enctype="multipart/form-data">
                <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg">
                      <div class="modal-content">
@@ -536,6 +536,49 @@ while ($row = $result->fetch_assoc()) {
                   </div>
                </div>
             </form>
+            
+    <script>$(document).ready(function() {
+    
+    // Handle form submission
+    $('#personellForm').submit(function(e) {
+        
+
+        var formData = new FormData(this);  // Get form data
+
+       
+
+        $.ajax({
+            url: 'transac.php?action=add',  // PHP script that handles the update
+            type: 'POST',
+            data: formData,
+            contentType: false,  // Needed for file uploads
+            processData: false,  // Needed for file uploads
+            success: function(response) {
+                var result = JSON.parse(response);  // Parse the JSON response
+
+                // Show SweetAlert based on the response
+                Swal.fire({
+                        title: result.title,
+                        text: result.text,
+                        icon: result.icon
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Reload the page after the alert is confirmed
+                            location.reload();
+                        }
+                    });
+            },
+            error: function() {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'An error occurred while processing the request.',
+                    icon: 'error'
+                });
+            }
+        });
+    });
+});
+</script>
             <script>
     document.addEventListener('DOMContentLoaded', function () {
         const modal = document.getElementById('employeeModal');
@@ -891,8 +934,7 @@ while ($row = $result->fetch_assoc()) {
 
     // Handle form submission
     $('#editPersonellForm').submit(function(e) {
-        e.preventDefault();  // Prevent default form submission
-
+     
         if (userId === '') {
             Swal.fire({
                 title: 'Error!',
@@ -999,25 +1041,7 @@ while ($row = $result->fetch_assoc()) {
         });
     });
 </script>
-<?php
-session_start();
-if (isset($_SESSION['swal_message'])) {
-    $swalMessage = $_SESSION['swal_message'];
-    ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                title: "<?php echo $swalMessage['title']; ?>",
-                text: "<?php echo $swalMessage['text']; ?>",
-                icon: "<?php echo $swalMessage['icon']; ?>",
-                confirmButtonText: 'OK'
-            });
-        });
-    </script>
-    <?php
-    unset($_SESSION['swal_message']); // Clear the session after displaying
-}
-?>
+
 
             <!-- <script type="text/javascript">
                document.addEventListener('DOMContentLoaded', () => {

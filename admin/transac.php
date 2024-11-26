@@ -58,21 +58,21 @@ switch ($_GET['action'])
         $result = mysqli_query($db, $query);
         
         if ($result) {
-            $_SESSION['swal_message'] = [
+            $response = [
                 'title' => 'Success!',
                 'text' => 'Record added successfully.',
                 'icon' => 'success'
             ];
         } else {
-            $_SESSION['swal_message'] = [
+            $response = [
                 'title' => 'Error!',
                 'text' => 'Failed to add the record. Please try again.',
                 'icon' => 'error'
             ];
         }
         
-        // Redirect to personell.php
-        header('Location: personell.php');
+        // Return the JSON response
+        echo json_encode($response);
         exit;
         
     break;
