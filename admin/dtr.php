@@ -365,14 +365,25 @@ echo $timeData['time_out_pm'];
     if ($timeData['time_in_am'] != '?' || $timeData['time_in_am'] != null) {
         $timeData['time_in_am'] = '08:00 AM';
     }
+    else{
+        $timeData['time_in_am'] = '?';
+    }
     if ($timeData['time_out_am'] != '?' || $timeData['time_out_am'] != null) {
         $timeData['time_out_am'] = '12:00 PM';
+    }
+    else{
+        $timeData['time_in_am'] = '?';
     }
     if ($timeData['time_in_pm'] != '?' || $timeData['time_in_pm'] != null) {
         $timeData['time_in_pm'] = '01:00 PM';
     }
+    else{
+        $timeData['time_in_am'] = '?';
+    }
     if ($timeData['time_out_pm'] != '?' || $timeData['time_out_pm'] != null) {
         $timeData['time_out_pm'] = '05:00 PM';
+    }else{
+        $timeData['time_in_am'] = '?';
     }
 
     // Close the statement
