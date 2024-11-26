@@ -117,6 +117,8 @@ include '../connection.php';
 
                                        </center>
                                     </td>
+                                    <td class="hidden-date"><?php echo $row['date_added']; ?></td> <!-- Hidden column -->
+         
                                  </tr>
                                  <?php } ?>
                               </tbody>
@@ -132,7 +134,7 @@ include '../connection.php';
 $(document).ready(function() {
     // Initialize DataTable
     $('#myDataTable').DataTable({
-        order: [[8, 'desc']] // Adjust the index (0) to the appropriate column
+        order: [[5, 'desc']] // Adjust the index (0) to the appropriate column
     });
 
     // Event delegation for the delete button
