@@ -117,7 +117,7 @@ include '../connection.php';
 
                                        </center>
                                     </td>
-                                    <td class="hidden-date"><?php echo $row['date_added']; ?></td> <!-- Hidden column -->
+                                    <td style="display:none;" class="hidden-date"><?php echo $row['date_added']; ?></td> <!-- Hidden column -->
          
                                  </tr>
                                  <?php } ?>
