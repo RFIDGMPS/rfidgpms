@@ -847,7 +847,18 @@ while ($row = $result->fetch_assoc()) {
    });
 </script>
 
-
+<script>
+// Check if the session message is set and display it using SweetAlert
+<?php if (isset($_SESSION['swal_message'])): ?>
+    Swal.fire({
+        title: '<?php echo $_SESSION['swal_message']['title']; ?>',
+        text: '<?php echo $_SESSION['swal_message']['text']; ?>',
+        icon: '<?php echo $_SESSION['swal_message']['icon']; ?>',
+        showConfirmButton: true
+    });
+    <?php unset($_SESSION['swal_message']); // Clear the session message ?>
+<?php endif; ?>
+</script>
 
 
          <div class="col-lg-4 col-md-6 col-sm-12">

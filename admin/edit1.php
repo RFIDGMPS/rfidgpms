@@ -10,79 +10,66 @@ switch ($_GET['edit'])
 {
     case 'personell':
 		
-		$id = $_GET['id'];
-				 $photo=$_POST['capturedImage'].' ';
-	
-				 $photo= trim($photo,"uploads/");
-			
-				//  $id_no= $_POST['id_no'];
-				 $rfid_number=$_POST['rfid_number'];
-				 $last_name=$_POST['last_name'];
-				 $first_name=$_POST['first_name'];
-				// $middle_name=$_POST['middle_name'];
-					$date_of_birth=$_POST['date_of_birth'];
-					// $place_of_birth=$_POST['place_of_birth'];
-			// 		$sex=$_POST['sex'];
-			// 		$civil_status=$_POST['c_status'];
-			// 		$contact_number=$_POST['contact_number'];
-			//    $email_address=$_POST['email_address'];
-					  $department=$_POST['e_department'];
-					  $category=$_POST['ecategory'];
-			   $role=$_POST['erole'];
-							$status=$_POST['status'];
-							// $complete_address=$_POST['complete_address'];
-					
-							if(isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != null){
-								$photo= $_FILES['photo']['name'];
-							
-								$target_dir = "uploads/";
-								$target_file = $target_dir . basename($_FILES["photo"]["name"]);
-								move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
-								
-							}
-							
-							
-						 $query = "UPDATE personell SET 
-						photo = '$photo',
-						
-						 rfid_number = '$rfid_number', 
-						 category = '$category', 
-						 last_name = '$last_name', 
-						 first_name = '$first_name', 
-						
-						 date_of_birth = '$date_of_birth', 
-						
-						 department = '$department', 
-						 role = '$role', 
-						 status = '$status'
-						 
-					 WHERE id = '$id'";
+		
+$id = $_GET['id'];
+$photo = $_POST['capturedImage'] . ' ';
+$photo = trim($photo, "uploads/");
 
+// Retrieve form data
+$rfid_number = $_POST['rfid_number'];
+$last_name = $_POST['last_name'];
+$first_name = $_POST['first_name'];
+$date_of_birth = $_POST['date_of_birth'];
+$department = $_POST['e_department'];
+$category = $_POST['ecategory'];
+$role = $_POST['erole'];
+$status = $_POST['status'];
 
-							$result = mysqli_query($db, $query) or die(mysqli_error($db));
+if (isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != null) {
+    $photo = $_FILES['photo']['name'];
+    
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["photo"]["name"]);
+    move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
+}
 
-							$status_value = ($status == 'Active') ? 0 : 1;
+// Update personnel details
+$query = "UPDATE personell SET 
+    photo = '$photo',
+    rfid_number = '$rfid_number', 
+    category = '$category', 
+    last_name = '$last_name', 
+    first_name = '$first_name', 
+    date_of_birth = '$date_of_birth', 
+    department = '$department', 
+    role = '$role', 
+    status = '$status'
+WHERE id = '$id'";
 
+$result = mysqli_query($db, $query) or die(mysqli_error($db));
+
+// Update lostcard status based on the personnel's status
+$status_value = ($status == 'Active') ? 0 : 1;
 $query1 = "UPDATE lostcard SET status = $status_value WHERE personnel_id = '$id'";
-$result = mysqli_query($db, $query1) or die(mysqli_error($db));
+$result1 = mysqli_query($db, $query1) or die(mysqli_error($db));
 
-							
-if ($result) {
+// Set success message
+if ($result && $result1) {
     $_SESSION['swal_message'] = [
         'title' => 'Success!',
-        'text' => 'Record added successfully.',
+        'text' => 'Record updated successfully.',
         'icon' => 'success'
     ];
 } else {
     $_SESSION['swal_message'] = [
         'title' => 'Error!',
-        'text' => 'Failed to add the record. Please try again.',
+        'text' => 'Failed to update the record. Please try again.',
         'icon' => 'error'
     ];
 }
 
-// Redirect to personell.php
-header('Location: personell.php');
+// Redirect to the same page or any page you want
+header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $id);
 exit;
     break;
     case 'department':
