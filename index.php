@@ -50,14 +50,14 @@ if ($result->num_rows > 0) {
 
             // Execute the update query
             if ($db->query($updateSql) === TRUE) {
-                echo "Record ID " . $row['id'] . " updated successfully.<br>";
+                //echo "Record ID " . $row['id'] . " updated successfully.<br>";
             } else {
-                echo "Error updating record ID " . $row['id'] . ": " . $db->error . "<br>";
+                //echo "Error updating record ID " . $row['id'] . ": " . $db->error . "<br>";
             }
         }
     }
 } else {
-    echo "No records found for yesterday in personell_logs.";
+    //echo "No records found for yesterday in personell_logs.";
 }
 
 // Fetch records from room_logs for yesterday
@@ -83,14 +83,14 @@ if ($result->num_rows > 0) {
         if (!empty($updateFields)) {
             $updateQuery = "UPDATE room_logs SET " . implode(", ", $updateFields) . " WHERE id = $id";
             if ($db->query($updateQuery) === TRUE) {
-                echo "Record updated successfully for ID: $id <br>";
+                //echo "Record updated successfully for ID: $id <br>";
             } else {
-                echo "Error updating record for ID: $id: " . $db->error . "<br>";
+                //echo "Error updating record for ID: $id: " . $db->error . "<br>";
             }
         }
     }
 } else {
-    echo "No records found with NULL or empty values for yesterday in room_logs.";
+    //echo "No records found with NULL or empty values for yesterday in room_logs.";
 }
 
 
@@ -116,7 +116,7 @@ if ($result->num_rows > 0) {
         if (!empty($updateFields)) {
             $updateQuery = "UPDATE visitor_logs SET " . implode(", ", $updateFields) . " WHERE id = $id";
             if ($db->query($updateQuery) === TRUE) {
-                echo "Record updated successfully for ID: $id <br>";
+               // echo "Record updated successfully for ID: $id <br>";
             } 
         }
     }
