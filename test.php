@@ -1,4 +1,6 @@
 <?php
+$monthNumber=11;
+$id=1;
 include 'connection.php';
 // SQL query to fetch data
 $sql = "SELECT date_logged, time_in_am, time_out_am, time_in_pm, time_out_pm 
