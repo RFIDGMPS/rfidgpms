@@ -145,8 +145,12 @@ include '../connection.php';
 $(document).ready(function() {
     // Initialize DataTable
     $('#myDataTable').DataTable({
-        order: [[8, 'desc']] // Adjust the index (0) to the appropriate column
-    });
+            "order": [[8, 'desc']], // Sort by the 4th column (Date Added)
+            "columnDefs": [
+                { "targets": [8], "orderable": true } // Make the hidden column sortable
+            ]
+        });
+
 
     // Event delegation for the delete button
     $(document).on('click', '.d_user_id', function() {
