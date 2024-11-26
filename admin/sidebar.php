@@ -125,7 +125,7 @@ if ($result1->num_rows > 0) {
 </div>
 
 <a href="lostcard.php" class="nav-item nav-link <?php echo ($current_page == 'lostcard.php') ? 'active' : ''; ?>">
-                <i class="fas fa-id-badge"></i>Lost Card
+                <!-- <i class="fas fa-id-badge"></i>Lost Card -->
             </a>
     
            
