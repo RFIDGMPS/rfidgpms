@@ -13,7 +13,12 @@ switch ($_GET['action'])
     case 'add':
     
 session_start(); // Start the session
+function generateRandomId($length = 8) {
+    return substr(md5(uniqid(rand(), true)), 0, $length);
+}
 
+// Example usage when inserting data:
+$id = generateRandomId();  
 // Retrieve form data
 // $id_no = $_POST['id_no'];
 $rfid_number = $_POST['rfid_number'];
@@ -40,8 +45,8 @@ $target_file = $target_dir . basename($_FILES["photo"]["name"]);
 move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
 
 // Insert query
-$query = "INSERT INTO personell (category, rfid_number, last_name, first_name, date_of_birth, role, department, status, photo)
-          VALUES ('$category', '$rfid_number', '$last_name', '$first_name', '$date_of_birth', '$role', '$department','$status', '$photo')";
+$query = "INSERT INTO personell (id,category, rfid_number, last_name, first_name, date_of_birth, role, department, status, photo)
+          VALUES ($id,'$category', '$rfid_number', '$last_name', '$first_name', '$date_of_birth', '$role', '$department','$status', '$photo')";
 $result = mysqli_query($db, $query);
 
 if ($result) {
