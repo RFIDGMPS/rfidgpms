@@ -318,7 +318,7 @@ $stmt->close();
 // Check if personnel data is available
 if (empty($personnel)) {
     echo "No personnel found for the given ID.";
-    echo $id;
+    
     exit;
 }
 
