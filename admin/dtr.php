@@ -371,12 +371,12 @@ for ($day = 1; $day <= 31; $day++) {
     if ($timeData['time_out_pm'] != '?' && $timeData['time_out_pm'] != null) {
         $timeData['time_out_pm'] = '05:00 PM';
     }
-
+    $daysData[$day] = $timeData;
     // Close the statement
     $stmt->close();
 
     // Store or use the data for the day
-    //$daysData[$day] = $timeData;
+    
 }
 
 // Close the database connection
