@@ -124,7 +124,7 @@ if ($result1->num_rows > 0) {
     </ul>
 </div>
 
-<a href="dtr.php" class="nav-item nav-link <?php echo ($current_page == 'dtr.php') ? 'active' : ''; ?>">
+<a href="lostcard.php" class="nav-item nav-link <?php echo ($current_page == 'lostcard.php') ? 'active' : ''; ?>">
                 <i class="fa fa-clipboard me-2"></i>Generate DTR
             </a>
     
