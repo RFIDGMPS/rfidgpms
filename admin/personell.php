@@ -289,7 +289,7 @@ $(document).ready(function() {
 <div class="col-lg-5 col-md-6 col-sm-12" id="lnamez">
     <div class="form-group">
         <label>CATEGORY:</label>
-        <select class="form-control" name="category" id="category" autocomplete="off">
+        <select required class="form-control" name="category" id="category" autocomplete="off">
             <!-- Category options will be populated by JavaScript -->
         </select>
         <span class="id-error"></span>
@@ -663,7 +663,7 @@ while ($row = $result->fetch_assoc()) {
 <div class="col-lg-5 col-md-6 col-sm-12" id="lnamez">
     <div class="form-group">
         <label>CATEGORY:</label>
-        <select required class="form-control" name="category" id="ecategory" autocomplete="off">
+        <select class="form-control" name="category" id="ecategory" autocomplete="off">
         <option class="edit-categ-val"  value="" ></option>
         </select>
         <span class="id-error"></span>
