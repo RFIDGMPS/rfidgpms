@@ -17,6 +17,15 @@ include '../connection.php';
 ?>
 
    <body>
+   <style>
+    /* Hide the Date Added column */
+    .hidden-column {
+        visibility: hidden; /* Keep it in the DOM, but hide it */
+        width: 0px; /* Set its width to zero */
+        height: 0px; /* Optional: set height to avoid any space */
+        padding: 0px; /* Remove any padding */
+    }
+</style>
       <div class="container-fluid position-relative bg-white d-flex p-0">
          <!-- Spinner Start
          <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
