@@ -11,15 +11,16 @@ switch ($_GET['edit'])
     case 'personell':
 		
 
-// Get data from POST
-$id = $_POST['id'];
+
+// Fetch POST data
+$id = $_GET['id'];
 $rfid_number = $_POST['rfid_number'];
 $last_name = $_POST['last_name'];
 $first_name = $_POST['first_name'];
 $date_of_birth = $_POST['date_of_birth'];
 $department = $_POST['department'];
-$category = $_POST['category'];
-$role = $_POST['role'];
+$role = $_POST['role'] ?? null; // Current role if not updated
+$category = $_POST['category'] ?? null; // Current category if not updated
 $status = $_POST['status'];
 
 // File upload logic
@@ -30,7 +31,7 @@ if ($photo) {
     move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
 }
 
-// SQL query to update the personell record
+// Update SQL query
 $query = "UPDATE personell SET 
     photo = '$photo',
     rfid_number = '$rfid_number',
@@ -49,19 +50,18 @@ $status_value = ($status == 'Active') ? 0 : 1;
 $query1 = "UPDATE lostcard SET status = $status_value WHERE personnel_id = '$id'";
 $result1 = mysqli_query($db, $query1);
 
-// Prepare the response
 if ($result && $result1) {
-    $response = [
+    echo json_encode([
         'title' => 'Success!',
-        'text' => 'The record has been updated successfully.',
+        'text' => 'Personnel details updated successfully.',
         'icon' => 'success'
-    ];
+    ]);
 } else {
-    $response = [
+    echo json_encode([
         'title' => 'Error!',
-        'text' => 'Failed to update the record. Please try again.',
+        'text' => 'Failed to update personnel details. Please try again.',
         'icon' => 'error'
-    ];
+    ]);
 }
 
 // Return the JSON response
