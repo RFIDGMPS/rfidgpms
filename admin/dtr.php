@@ -357,7 +357,10 @@ for ($day = 1; $day <= 31; $day++) {
     $timeData = $result->fetch_assoc(); // Get the fetched data
 
     // Check for null values and assign '?' if they are null
-
+echo $timeData['time_in_am'];
+echo $timeData['time_out_am'];
+echo $timeData['time_in_pm'];
+echo $timeData['time_out_pm'];
     // Set default values if fields are '?' (which means they were originally null)
     if ($timeData['time_in_am'] != '?' || $timeData['time_in_am'] != null) {
         $timeData['time_in_am'] = '08:00 AM';
