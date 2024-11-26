@@ -323,56 +323,84 @@ if (empty($personnel)) {
 }
 
 // Get current date, month, and year
-$currentDate = date('Y-m-d');
-$currentMonth = date('m');
-$currentYear = date('Y');
+$currentMonth = date('m'); // Current month
+$currentYear = date('Y'); // Current year
 
 // Initialize the array to store the data for each day
 $daysData = [];
 
-// Loop through all days of the current month (1-31)
+// SQL query to fetch all logs for the current month and personnel ID
+$sql = "SELECT date_logged, time_in_am, time_out_am, time_in_pm, time_out_pm 
+        FROM personell_logs 
+        WHERE MONTH(date_logged) = ? AND YEAR(date_logged) = ? AND personnel_id = ?";
+
+// Prepare statement
+$stmt = $db->prepare($sql);
+
+if (!$stmt) {
+    die("Error preparing statement: " . $db->error);
+}
+
+// Bind parameters (current month, current year, and personnel ID)
+$stmt->bind_param("iii", $currentMonth, $currentYear, $id);
+
+// Execute the statement
+if (!$stmt->execute()) {
+    die("Error executing query: " . $stmt->error);
+}
+
+// Get the result
+$result = $stmt->get_result();
+
+// Process the fetched records
+while ($row = $result->fetch_assoc()) {
+    // Extract the day from date_logged
+    $day = (int)date('d', strtotime($row['date_logged']));
+
+    // Assign default values for null fields
+    $row['time_in_am'] = $row['time_in_am'] ?? '08:00 AM';
+    $row['time_out_am'] = $row['time_out_am'] ?? '12:00 PM';
+    $row['time_in_pm'] = $row['time_in_pm'] ?? '01:00 PM';
+    $row['time_out_pm'] = $row['time_out_pm'] ?? '05:00 PM';
+
+    // Store the record in the corresponding day
+    $daysData[$day] = $row;
+}
+
+// Close the statement
+$stmt->close();
+
+// Display the data
+echo "<table border='1'>
+        <tr>
+            <th>Day</th>
+            <th>Date Logged</th>
+            <th>Time In (AM)</th>
+            <th>Time Out (AM)</th>
+            <th>Time In (PM)</th>
+            <th>Time Out (PM)</th>
+        </tr>";
+
+// Iterate through the days of the month
 for ($day = 1; $day <= 31; $day++) {
-    // Validate day number to avoid invalid days for the current month
     if (!checkdate($currentMonth, $day, $currentYear)) {
-        continue; // Skip invalid days (e.g., 31st in a month with 30 days or February 30th)
+        continue; // Skip invalid days
     }
 
-    // Format the current day as 'YYYY-MM-DD' for comparison
-    $formattedDate = sprintf('%s-%02d-%02d', $currentYear, $currentMonth, $day);
-
-    // SQL query
-    $sql = "SELECT date_logged, time_in_am, time_out_am, time_in_pm, time_out_pm 
-            FROM personell_logs 
-            WHERE MONTH(date_logged) = ? AND personnel_id = ?";
-    
-    // Prepare statement
-    $stmt = $db->prepare($sql);
-    $stmt->bind_param("ii", $currentMonth, $id); // Bind parameters
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Fetch the data
-    while ($timeData = $result->fetch_assoc()) {
-        // Check for null values and assign defaults if fields are null
-        $timeData['time_in_am'] = $timeData['time_in_am'] ?? '08:00 AM';
-        $timeData['time_out_am'] = $timeData['time_out_am'] ?? '12:00 PM';
-        $timeData['time_in_pm'] = $timeData['time_in_pm'] ?? '01:00 PM';
-        $timeData['time_out_pm'] = $timeData['time_out_pm'] ?? '05:00 PM';
-
-        // Add data to the array only if records exist
-        $daysData[$day] = $timeData;
+    if (isset($daysData[$day])) {
+        // Display data for the specific day
+        echo "<tr>
+                <td>{$day}</td>
+                <td>{$daysData[$day]['date_logged']}</td>
+                <td>{$daysData[$day]['time_in_am']}</td>
+                <td>{$daysData[$day]['time_out_am']}</td>
+                <td>{$daysData[$day]['time_in_pm']}</td>
+                <td>{$daysData[$day]['time_out_pm']}</td>
+              </tr>";
     }
-
-    // Close the statement
-    $stmt->close();
 }
 
-// Output or process the `$daysData` array
-if (empty($daysData)) {
-    echo "No records found for the current month.";
-} else {
-    print_r($daysData); // For debugging purposes
-}
+echo "</table>";
 
 
 // Close the database connection
