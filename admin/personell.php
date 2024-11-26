@@ -541,7 +541,8 @@ while ($row = $result->fetch_assoc()) {
     
     // Handle form submission
     $('#personellForm').submit(function(e) {
-        
+      e.preventDefault();  // Prevent default form submission
+
 
         var formData = new FormData(this);  // Get form data
 
@@ -934,7 +935,8 @@ while ($row = $result->fetch_assoc()) {
 
     // Handle form submission
     $('#editPersonellForm').submit(function(e) {
-     
+        e.preventDefault();  // Prevent default form submission
+
         if (userId === '') {
             Swal.fire({
                 title: 'Error!',
