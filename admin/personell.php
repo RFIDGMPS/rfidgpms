@@ -61,7 +61,7 @@ include '../connection.php';
                                     <th scope="col">Department</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
-                                    <th style="visibility:hidden;">Date Added</th> <!-- Hidden header for the date_added column -->
+                                    <th class="hidden-column">Date Added</th> <!-- Hidden header for the date_added column -->
       
                                  </tr>
                               </thead>
@@ -119,7 +119,7 @@ include '../connection.php';
 
                                        </center>
                                     </td>
-                                    <td style="visibility:hidden;" class="hidden-date"><?php echo $row['date_added']; ?></td> <!-- Hidden column -->
+                                    <td class="hidden-column"><?php echo $row['date_added']; ?></td> <!-- Hidden column -->
          
                                  </tr>
                                  <?php } ?>
