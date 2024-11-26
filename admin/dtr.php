@@ -325,7 +325,7 @@ if (empty($personnel)) {
 // Get current date, month, and year
 $currentMonth = date('m'); // Current month
 $currentYear = date('Y'); // Current year
-$month = date('m', strtotime($month)); 
+$month1 = date('m', strtotime($month)); 
 // Initialize the array to store the data for each day
 $daysData = [];
 
@@ -342,7 +342,7 @@ if (!$stmt) {
 }
 
 // Bind parameters (current month, current year, and personnel ID)
-$stmt->bind_param("iii", $month, $currentYear, $id);
+$stmt->bind_param("iii", $month1, $currentYear, $id);
 
 // Execute the statement
 if (!$stmt->execute()) {
