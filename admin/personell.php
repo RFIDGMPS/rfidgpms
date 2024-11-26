@@ -918,10 +918,15 @@ while ($row = $result->fetch_assoc()) {
 
                 // Show SweetAlert based on the response
                 Swal.fire({
-                    title: result.title,
-                    text: result.text,
-                    icon: result.icon
-                });
+                        title: result.title,
+                        text: result.text,
+                        icon: result.icon
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Reload the page after the alert is confirmed
+                            location.reload();
+                        }
+                    });
             },
             error: function() {
                 Swal.fire({
