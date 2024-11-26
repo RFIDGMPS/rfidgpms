@@ -389,8 +389,7 @@ for ($day = 1; $day <= 31; $day++) {
         echo "Error fetching results: " . $stmt->error;
     }
     
-    data
-
+    
     // Check for null values and assign '?' if they are null
 
     // Set default values if fields are '?' (which means they were originally null)
