@@ -86,15 +86,15 @@ if ($result1->num_rows > 0) {
                 <i class="fa fa-user-tie me-2"></i>Roles
             </a>
 
-          <!-- Personnel with Submenu -->
-<a class="nav-item nav-link <?php echo in_array($current_page, ['personell.php', 'personell_logs.php']) ? 'active' : 'collapsed'; ?>" 
-   href="javascript:void(0);" 
+      <!-- Personnel with Submenu -->
+<a class="nav-item nav-link collapsed <?php echo in_array($current_page, ['personell.php', 'personell_logs.php']) ? 'active' : ''; ?>" 
+   href="personell.php" 
    data-bs-toggle="collapse" 
    data-bs-target="#personnelSubmenu" 
    aria-expanded="<?php echo in_array($current_page, ['personell.php', 'personell_logs.php']) ? 'true' : 'false'; ?>">
     <i class="fa fa-users me-2"></i>Personnel
 </a>
-<div id="personnelSubmenu" class="collapse <?php echo in_array($current_page, ['personell.php', 'personell_logs.php']) ? 'show' : ''; ?>">
+<div id="personnelSubmenu" class="collapse <?php echo in_array($current_page, ['personell.php', 'personell_logs.php']) ? 'show' : ''; ?>" data-bs-parent=".navbar-nav">
     <ul class="navbar-nav ps-3">
         <li>
             <a href="personell.php" class="nav-item nav-link <?php echo ($current_page == 'personell.php') ? 'active' : ''; ?>">Personnel List</a>
@@ -106,14 +106,14 @@ if ($result1->num_rows > 0) {
 </div>
 
 <!-- Visitor with Submenu -->
-<a class="nav-item nav-link <?php echo in_array($current_page, ['visitor.php', 'visitor_logs.php']) ? 'active' : 'collapsed'; ?>" 
-   href="javascript:void(0);" 
+<a class="nav-item nav-link collapsed <?php echo in_array($current_page, ['visitor.php', 'visitor_logs.php']) ? 'active' : ''; ?>" 
+   href="visitor.php" 
    data-bs-toggle="collapse" 
    data-bs-target="#visitorSubmenu" 
    aria-expanded="<?php echo in_array($current_page, ['visitor.php', 'visitor_logs.php']) ? 'true' : 'false'; ?>">
     <i class="fa fa-user-plus me-2"></i>Visitor Cards
 </a>
-<div id="visitorSubmenu" class="collapse <?php echo in_array($current_page, ['visitor.php', 'visitor_logs.php']) ? 'show' : ''; ?>">
+<div id="visitorSubmenu" class="collapse <?php echo in_array($current_page, ['visitor.php', 'visitor_logs.php']) ? 'show' : ''; ?>" data-bs-parent=".navbar-nav">
     <ul class="navbar-nav ps-3">
         <li>
             <a href="visitor.php" class="nav-item nav-link <?php echo ($current_page == 'visitor.php') ? 'active' : ''; ?>">Card List</a>
@@ -124,22 +124,18 @@ if ($result1->num_rows > 0) {
     </ul>
 </div>
 
-<a href="lostcard.php" class="nav-item nav-link <?php echo ($current_page == 'lostcard.php') ? 'active' : ''; ?>">
-                <i class="fa fa-clipboard me-2"></i>Generate DTR
-            </a>
-    
-           
-<a href="dtr.php" class="nav-item nav-link <?php echo ($current_page == 'dtr.php') ? 'active' : ''; ?>">
-                <i class="fa fa-clipboard me-2"></i>Generate DTR
-            </a>
-             <!-- Lost and Found -->
-             <a href="lostcard.php" class="nav-item nav-link <?php echo ($current_page == 'lostcard.php') ? 'active' : ''; ?>">
+
+            <!-- Lost and Found -->
+            <a href="lostcard.php" class="nav-item nav-link <?php echo ($current_page == 'lostcard.php') ? 'active' : ''; ?>">
     <i class="fas fa-id-badge"></i> Lost Card
     <?php 
     if ($new_lost_cards > 0): ?>
         <span class="badge1"><?php echo $new_lost_cards; ?></span>
     <?php endif; ?>
 </a>
+<a href="dtr.php" class="nav-item nav-link <?php echo ($current_page == 'dtr.php') ? 'active' : ''; ?>">
+                <i class="fa fa-clipboard me-2"></i>Generate DTR
+            </a>
             <!-- Settings -->
             <a href="settings.php" class="nav-item nav-link <?php echo ($current_page == 'settings.php') ? 'active' : ''; ?>">
                 <i class="fa fa-cog me-2"></i>Settings
