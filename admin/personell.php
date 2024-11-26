@@ -17,15 +17,6 @@ include '../connection.php';
 ?>
 
    <body>
-   <style>
-    /* Hide the Date Added column */
-    .hidden-column {
-        visibility: hidden; /* Keep it in the DOM, but hide it */
-        width: 0px; /* Set its width to zero */
-        height: 0px; /* Optional: set height to avoid any space */
-        padding: 0px; /* Remove any padding */
-    }
-</style>
       <div class="container-fluid position-relative bg-white d-flex p-0">
          <!-- Spinner Start
          <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -70,7 +61,7 @@ include '../connection.php';
                                     <th scope="col">Department</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
-                                    <th class="hidden-column">Date Added</th> <!-- Hidden header for the date_added column -->
+                                          <th style="display: none;">Date Added</th> <!-- Hidden header for the date_added column -->
       
                                  </tr>
                               </thead>
@@ -128,7 +119,7 @@ include '../connection.php';
 
                                        </center>
                                     </td>
-                                    <td class="hidden-column"><?php echo $row['date_added']; ?></td> <!-- Hidden column -->
+                                    <td style="display:none;" class="hidden-date"><?php echo $row['date_added']; ?></td> <!-- Hidden column -->
          
                                  </tr>
                                  <?php } ?>
@@ -145,12 +136,8 @@ include '../connection.php';
 $(document).ready(function() {
     // Initialize DataTable
     $('#myDataTable').DataTable({
-            "order": [[8, 'desc']], // Sort by the 4th column (Date Added)
-            "columnDefs": [
-                { "targets": [8], "orderable": true } // Make the hidden column sortable
-            ]
-        });
-
+        order: [[8, 'desc']] // Adjust the index (0) to the appropriate column
+    });
 
     // Event delegation for the delete button
     $(document).on('click', '.d_user_id', function() {
