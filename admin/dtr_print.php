@@ -368,27 +368,56 @@ $db->close();
 
                 <!-- Add more content for the table here -->
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>AM In</th>
-                            <th>AM Out</th>
-                            <th>PM In</th>
-                            <th>PM Out</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($daysData as $day => $data): ?>
-                            <tr>
-                                <td><?php echo sprintf('%02d', $day); ?></td>
-                                <td><?php echo $data['time_in_am']; ?></td>
-                                <td><?php echo $data['time_out_am']; ?></td>
-                                <td><?php echo $data['time_in_pm']; ?></td>
-                                <td><?php echo $data['time_out_pm']; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+        <thead>
+            <tr>
+                <th rowspan="2">Days</th>
+                <th colspan="2">A.M.</th>
+                <th colspan="2">P.M.</th>
+                <th colspan="2">Undertime</th>
+            </tr>
+            <tr>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th>Hours</th>
+                <th>Minutes</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        // Loop through all the days of the month (1 to 31)
+        for ($day = 1; $day <= 31; $day++) {
+            // Check if time data exists for this day
+            $timeData = isset($daysData[$day]) ? $daysData[$day] : null;
+        
+            // Set default values for time_in_am if it's empty or a placeholder
+            // if ($timeData && (empty($timeData['time_in_am']) || $timeData['time_in_am'] === '?')) {
+            //     $timeData['time_in_am'] = '08:00 AM';
+            // }
+        
+            // Display the row for each day
+            echo "<tr>";
+            echo "<td>" . $day . "</td>";
+            echo "<td>" . (isset($timeData['time_in_am']) ? htmlspecialchars($timeData['time_in_am']) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_out_am']) ? htmlspecialchars($timeData['time_out_am']) : '') . "</td>";
+            // Convert PM time to 12-hour AM/PM format before displaying
+            echo "<td>" . (isset($timeData['time_in_pm']) ? htmlspecialchars($timeData['time_in_pm']) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_out_pm']) ? htmlspecialchars($timeData['time_out_pm']) : '') . "</td>";
+            echo "<td></td>"; // Placeholder for undertime
+            echo "<td></td>"; // Placeholder for undertime
+            echo "</tr>";
+        }
+        
+        ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Total</th>
+                <td colspan="6"></td>
+            </tr>
+        </tfoot>
+    </table>
             </div>
             <div class="footer">
                 <p><strong>Prepared by:</strong> (Signature over printed name)</p>
