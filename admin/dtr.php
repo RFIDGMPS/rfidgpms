@@ -332,7 +332,7 @@ $daysData = [];
 
 // Loop through all days of the current month (1-31)
 for ($day = 1; $day <= 31; $day++) {
-    // Validate day number to avoid invalid days for current month
+    // Validate day number to avoid invalid days for the current month
     if (!checkdate($currentMonth, $day, $currentYear)) {
         continue; // Skip invalid days (e.g., 31st in a month with 30 days or February 30th)
     }
@@ -340,9 +340,6 @@ for ($day = 1; $day <= 31; $day++) {
     // Format the current day as 'YYYY-MM-DD' for comparison
     $formattedDate = sprintf('%s-%02d-%02d', $currentYear, $currentMonth, $day);
 
-    $monthNumber = date('m', strtotime($month)); // Convert to numeric month
-
-    
     // SQL query
     $sql = "SELECT date_logged, time_in_am, time_out_am, time_in_pm, time_out_pm 
             FROM personell_logs 
@@ -350,35 +347,33 @@ for ($day = 1; $day <= 31; $day++) {
     
     // Prepare statement
     $stmt = $db->prepare($sql);
-    $stmt->bind_param("ii", $monthNumber, $id); // Bind parameters
+    $stmt->bind_param("ii", $currentMonth, $id); // Bind parameters
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Fetch the data if available
-    $timeData = $result->fetch_assoc(); // Get the fetched data
+    // Fetch the data
+    while ($timeData = $result->fetch_assoc()) {
+        // Check for null values and assign defaults if fields are null
+        $timeData['time_in_am'] = $timeData['time_in_am'] ?? '08:00 AM';
+        $timeData['time_out_am'] = $timeData['time_out_am'] ?? '12:00 PM';
+        $timeData['time_in_pm'] = $timeData['time_in_pm'] ?? '01:00 PM';
+        $timeData['time_out_pm'] = $timeData['time_out_pm'] ?? '05:00 PM';
 
-    // Check for null values and assign '?' if they are null
+        // Add data to the array only if records exist
+        $daysData[$day] = $timeData;
+    }
 
-    // Set default values if fields are '?' (which means they were originally null)
-    if ($timeData['time_in_am'] != '?' && $timeData['time_in_am'] != null) {
-        $timeData['time_in_am'] = '08:00 AM';
-    }
-    if ($timeData['time_out_am'] != '?' && $timeData['time_out_am'] != null) {
-        $timeData['time_out_am'] = '12:00 PM';
-    }
-    if ($timeData['time_in_pm'] != '?' && $timeData['time_in_pm'] != null) {
-        $timeData['time_in_pm'] = '01:00 PM';
-    }
-    if ($timeData['time_out_pm'] != '?' && $timeData['time_out_pm'] != null) {
-        $timeData['time_out_pm'] = '05:00 PM';
-    }
-    $daysData[$day] = $timeData;
     // Close the statement
     $stmt->close();
-
-    // Store or use the data for the day
-    
 }
+
+// Output or process the `$daysData` array
+if (empty($daysData)) {
+    echo "No records found for the current month.";
+} else {
+    print_r($daysData); // For debugging purposes
+}
+
 
 // Close the database connection
 $db->close();
