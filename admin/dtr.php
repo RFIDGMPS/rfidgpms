@@ -325,7 +325,7 @@ if (empty($personnel)) {
 // Get current date, month, and year
 $currentMonth = date('m'); // Current month
 $currentYear = date('Y'); // Current year
-
+$month = date('m', strtotime($month)); 
 // Initialize the array to store the data for each day
 $daysData = [];
 
