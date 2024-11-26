@@ -356,21 +356,21 @@ for ($day = 1; $day <= 31; $day++) {
     // Fetch the data if available
     $timeData = $result->fetch_assoc(); // Get the fetched data
 
-    // // Check for null values and assign '?' if they are null
+    // Check for null values and assign '?' if they are null
 
-    // // Set default values if fields are '?' (which means they were originally null)
-    // if ($timeData['time_in_am'] != '?' && $timeData['time_in_am'] != null) {
-    //     $timeData['time_in_am'] = '08:00 AM';
-    // }
-    // if ($timeData['time_out_am'] != '?' && $timeData['time_out_am'] != null) {
-    //     $timeData['time_out_am'] = '12:00 PM';
-    // }
-    // if ($timeData['time_in_pm'] != '?' && $timeData['time_in_pm'] != null) {
-    //     $timeData['time_in_pm'] = '01:00 PM';
-    // }
-    // if ($timeData['time_out_pm'] != '?' && $timeData['time_out_pm'] != null) {
-    //     $timeData['time_out_pm'] = '05:00 PM';
-    // }
+    // Set default values if fields are '?' (which means they were originally null)
+    if ($timeData['time_in_am'] != '?' || $timeData['time_in_am'] != null) {
+        $timeData['time_in_am'] = '08:00 AM';
+    }
+    if ($timeData['time_out_am'] != '?' || $timeData['time_out_am'] != null) {
+        $timeData['time_out_am'] = '12:00 PM';
+    }
+    if ($timeData['time_in_pm'] != '?' || $timeData['time_in_pm'] != null) {
+        $timeData['time_in_pm'] = '01:00 PM';
+    }
+    if ($timeData['time_out_pm'] != '?' || $timeData['time_out_pm'] != null) {
+        $timeData['time_out_pm'] = '05:00 PM';
+    }
 
     // Close the statement
     $stmt->close();
@@ -465,11 +465,11 @@ function convertTo12Hour($time) {
             // Display the row for each day
             echo "<tr>";
             echo "<td>" . $day . "</td>";
-            echo "<td>" . (isset($timeData['time_in_am']) ? ($timeData['time_in_am']) : '') . "</td>";
-            echo "<td>" . (isset($timeData['time_out_am']) ? ($timeData['time_out_am']) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_in_am']) ? htmlspecialchars($timeData['time_in_am']) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_out_am']) ? htmlspecialchars($timeData['time_out_am']) : '') . "</td>";
             // Convert PM time to 12-hour AM/PM format before displaying
-            echo "<td>" . (isset($timeData['time_in_pm']) ? ($timeData['time_in_pm']) : '') . "</td>";
-            echo "<td>" . (isset($timeData['time_out_pm']) ? ($timeData['time_out_pm']) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_in_pm']) ? htmlspecialchars($timeData['time_in_pm']) : '') . "</td>";
+            echo "<td>" . (isset($timeData['time_out_pm']) ? htmlspecialchars($timeData['time_out_pm']) : '') . "</td>";
             echo "<td></td>"; // Placeholder for undertime
             echo "<td></td>"; // Placeholder for undertime
             echo "</tr>";
