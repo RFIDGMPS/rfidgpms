@@ -124,7 +124,9 @@ if ($result1->num_rows > 0) {
     </ul>
 </div>
 
-
+<a href="lostcard.php" class="nav-item nav-link <?php echo ($current_page == 'lostcard.php') ? 'active' : ''; ?>">
+                <i class="fas fa-id-badge"></i>Lost Card
+            </a>
     
            
 <a href="dtr.php" class="nav-item nav-link <?php echo ($current_page == 'dtr.php') ? 'active' : ''; ?>">
@@ -133,7 +135,10 @@ if ($result1->num_rows > 0) {
              <!-- Lost and Found -->
              <a href="lostcard.php" class="nav-item nav-link <?php echo ($current_page == 'lostcard.php') ? 'active' : ''; ?>">
     <i class="fas fa-id-badge"></i> Lost Card
-    
+    <?php 
+    if ($new_lost_cards > 0): ?>
+        <span class="badge1"><?php echo $new_lost_cards; ?></span>
+    <?php endif; ?>
 </a>
             <!-- Settings -->
             <a href="settings.php" class="nav-item nav-link <?php echo ($current_page == 'settings.php') ? 'active' : ''; ?>">
