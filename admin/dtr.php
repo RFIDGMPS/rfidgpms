@@ -358,10 +358,18 @@ while ($row = $result->fetch_assoc()) {
     $day = (int)date('d', strtotime($row['date_logged']));
 
     // Assign default values for null fields
-    $row['time_in_am'] = $row['time_in_am'] ?? '08:00 AM';
-    $row['time_out_am'] = $row['time_out_am'] ?? '12:00 PM';
-    $row['time_in_pm'] = $row['time_in_pm'] ?? '01:00 PM';
-    $row['time_out_pm'] = $row['time_out_pm'] ?? '05:00 PM';
+    if ($timeData['time_in_am'] != '?' && $timeData['time_in_am'] != null) {
+        $timeData['time_in_am'] = '08:00 AM';
+    }
+    if ($timeData['time_out_am'] != '?' && $timeData['time_out_am'] != null) {
+        $timeData['time_out_am'] = '12:00 PM';
+    }
+    if ($timeData['time_in_pm'] != '?' && $timeData['time_in_pm'] != null) {
+        $timeData['time_in_pm'] = '01:00 PM';
+    }
+    if ($timeData['time_out_pm'] != '?' && $timeData['time_out_pm'] != null) {
+        $timeData['time_out_pm'] = '05:00 PM';
+    }
 
     // Store the record in the corresponding day
     $daysData[$day] = $row;
