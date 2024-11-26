@@ -134,7 +134,7 @@ include '../connection.php';
 $(document).ready(function() {
     // Initialize DataTable
     $('#myDataTable').DataTable({
-        order: [[5, 'desc']] // Adjust the index (0) to the appropriate column
+        order: [[8, 'desc']] // Adjust the index (0) to the appropriate column
     });
 
     // Event delegation for the delete button
