@@ -342,7 +342,7 @@ if (!$stmt) {
 }
 
 // Bind parameters (current month, current year, and personnel ID)
-$stmt->bind_param("iii", $currentMonth, $currentYear, $id);
+$stmt->bind_param("iii", $month, $currentYear, $id);
 
 // Execute the statement
 if (!$stmt->execute()) {
