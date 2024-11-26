@@ -32,8 +32,7 @@ if (isset($_FILES['photo']['name']) && $_FILES['photo']['name'] != null) {
     $target_file = $target_dir . basename($_FILES["photo"]["name"]);
     move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
 }
-echo $role;
-echo $category;
+
 // Update personnel details
 $query = "UPDATE personell SET 
     photo = '$photo',
