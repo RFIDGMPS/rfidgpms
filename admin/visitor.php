@@ -50,7 +50,7 @@ include 'header.php';
                                 <table class="table table-border" id="myDataTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col" style="text-align:left;">ID</th>
+                                            <!-- <th scope="col" style="text-align:left;">ID</th> -->
                                             <th scope="col" style="text-align:left;">RFID Number</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -61,7 +61,7 @@ include 'header.php';
                                  <?php $results = mysqli_query($db, "SELECT * FROM visitor"); ?>
                                  <?php while ($row = mysqli_fetch_array($results)) { ?>
                                     <tr  class="table-<?php echo $row['id'];?>">
-                                            <td style="text-align:left;"><?php echo $row['id']; ?></td>
+                                            <!-- <td style="text-align:left;"><?php echo $row['id']; ?></td> -->
                                             <td style="text-align:left;" class="rfid_number"><?php echo $row['rfid_number']; ?></td>
                                             <td width="14%">
                                             <center>

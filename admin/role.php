@@ -50,7 +50,7 @@ include 'header.php';
                                 <table class="table table-border" id="myDataTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col" style="text-align:left;">ID</th>
+                                            <!-- <th scope="col" style="text-align:left;">ID</th> -->
                                             <th scope="col">Role</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -60,7 +60,7 @@ include 'header.php';
                                         <?php include '../connection.php'; ?>
                                  <?php $results = mysqli_query($db, "SELECT * FROM role"); ?>
                                  <?php while ($row = mysqli_fetch_array($results)) { ?>
-                                    <tr  class="table-<?php echo $row['id'];?>">
+                                    <!-- <tr  class="table-<?php echo $row['id'];?>"> -->
                                             <td style="text-align:left;"><?php echo $row['id']; ?></td>
                                             <td><?php echo $row['role']; ?></td>
                                             <td width="14%">
