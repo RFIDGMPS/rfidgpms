@@ -61,12 +61,11 @@ switch ($_GET['edit'])
 
 							$result = mysqli_query($db, $query) or die(mysqli_error($db));
 
-							if($status == 'Active'){
-								$query1 = "UPDATE lostcard SET 
-								 status = 0
-								WHERE personnel_id = '$id'";
-								$result = mysqli_query($db, $query1) or die(mysqli_error($db));
-								}
+							$status_value = ($status == 'Active') ? 0 : 1;
+
+$query1 = "UPDATE lostcard SET status = $status_value WHERE personnel_id = '$id'";
+$result = mysqli_query($db, $query1) or die(mysqli_error($db));
+
 							
 if ($result) {
     $_SESSION['swal_message'] = [
