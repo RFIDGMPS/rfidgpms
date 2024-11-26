@@ -87,7 +87,11 @@ if ($result1->num_rows > 0) {
             </a>
 
           <!-- Personnel with Submenu -->
-<a class="nav-item nav-link <?php echo in_array($current_page, ['personell.php', 'personell_logs.php']) ? 'active' : 'collapsed'; ?>" href="#personnelSubmenu" data-bs-toggle="collapse" aria-expanded="<?php echo in_array($current_page, ['personell.php', 'personell_logs.php']) ? 'true' : 'false'; ?>">
+<a class="nav-item nav-link <?php echo in_array($current_page, ['personell.php', 'personell_logs.php']) ? 'active' : 'collapsed'; ?>" 
+   href="javascript:void(0);" 
+   data-bs-toggle="collapse" 
+   data-bs-target="#personnelSubmenu" 
+   aria-expanded="<?php echo in_array($current_page, ['personell.php', 'personell_logs.php']) ? 'true' : 'false'; ?>">
     <i class="fa fa-users me-2"></i>Personnel
 </a>
 <div id="personnelSubmenu" class="collapse <?php echo in_array($current_page, ['personell.php', 'personell_logs.php']) ? 'show' : ''; ?>" data-bs-parent=".navbar-nav">
@@ -102,7 +106,11 @@ if ($result1->num_rows > 0) {
 </div>
 
 <!-- Visitor with Submenu -->
-<a class="nav-item nav-link <?php echo in_array($current_page, ['visitor.php', 'visitor_logs.php']) ? 'active' : 'collapsed'; ?>" href="#visitorSubmenu" data-bs-toggle="collapse" aria-expanded="<?php echo in_array($current_page, ['visitor.php', 'visitor_logs.php']) ? 'true' : 'false'; ?>">
+<a class="nav-item nav-link <?php echo in_array($current_page, ['visitor.php', 'visitor_logs.php']) ? 'active' : 'collapsed'; ?>" 
+   href="javascript:void(0);" 
+   data-bs-toggle="collapse" 
+   data-bs-target="#visitorSubmenu" 
+   aria-expanded="<?php echo in_array($current_page, ['visitor.php', 'visitor_logs.php']) ? 'true' : 'false'; ?>">
     <i class="fa fa-user-plus me-2"></i>Visitor Cards
 </a>
 <div id="visitorSubmenu" class="collapse <?php echo in_array($current_page, ['visitor.php', 'visitor_logs.php']) ? 'show' : ''; ?>" data-bs-parent=".navbar-nav">
