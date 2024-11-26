@@ -1,34 +1,14 @@
 <?php
-
+// Include database connection
 include 'connection.php';
 
+// SQL query to add the 'date_added' column
+$query = "ALTER TABLE personell ADD COLUMN date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
 
-$sql = "SELECT id, first_name, last_name FROM personell";
-$result = $db->query($sql);
-
-// Check if there are results
-if ($result->num_rows > 0) {
-    // Start the HTML table
-    echo "<table border='1'>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-            </tr>";
-
-    // Output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr>
-                <td>" . $row["id"] . "</td>
-                <td>" . $row["first_name"] . "</td>
-                <td>" . $row["last_name"] . "</td>
-              </tr>";
-    }
-    echo "</table>";
+// Execute the query
+if ($db->query($query) === TRUE) {
+    echo "Column 'date_added' added successfully.";
 } else {
-    echo "0 results";
+    echo "Error: " . $db->error;
 }
-
-// Close the connection
-$db->close();
 ?>
