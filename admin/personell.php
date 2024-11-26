@@ -927,60 +927,60 @@ while ($row = $result->fetch_assoc()) {
     <script>$(document).ready(function() {
     var userId = '';  // Variable to store the selected user ID
 
-    $(document).on('click', '.e_user_id', function () {
-    var userId = $(this).data('id');
-    $('#editPersonellForm').attr('data-user-id', userId);
+    // Handle the click event to get the user ID
+    $(document).on('click', '.e_user_id', function() {
+        userId = $(this).data('id');  // Get the ID of the clicked element
+       
+    });
 
-    // Fetch current values for ROLE and CATEGORY dynamically
-    var currentRole = $('.table-' + userId + ' .role').text().trim();
-    var currentCategory = $('.table-' + userId + ' .categ').text().trim();
+    // Handle form submission
+    $('#editPersonellForm').submit(function(e) {
+        e.preventDefault();  // Prevent default form submission
 
-    // Populate the dropdowns with the current values
-    $('.edit-role-val').text(currentRole).val(currentRole);
-    $('.edit-categ-val').text(currentCategory).val(currentCategory);
-});
-
-$('#editPersonellForm').submit(function (e) {
-    e.preventDefault();
-
-    var formData = new FormData(this);
-    var userId = $('#editPersonellForm').data('user-id');
-
-    // Ensure current values are included if not updated
-    if (!formData.get('role')) {
-        formData.set('role', $('.edit-role-val').val());
-    }
-    if (!formData.get('category')) {
-        formData.set('category', $('.edit-categ-val').val());
-    }
-
-    $.ajax({
-        url: 'edit1.php?edit=personell&id=' + userId,
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            var result = JSON.parse(response);
-
-            Swal.fire({
-                title: result.title,
-                text: result.text,
-                icon: result.icon
-            }).then(() => {
-                location.reload();
-            });
-        },
-        error: function () {
+        if (userId === '') {
             Swal.fire({
                 title: 'Error!',
-                text: 'An error occurred.',
+                text: 'No user selected. Please select a user first.',
                 icon: 'error'
             });
+            return;  // Stop the form submission if no user is selected
         }
-    });
-});
 
+        var formData = new FormData(this);  // Get form data
+
+        // Append the selected user ID to the form data
+        formData.append('id', userId);
+
+        $.ajax({
+            url: 'edit1.php?edit=personell&id=' + userId,  // PHP script that handles the update
+            type: 'POST',
+            data: formData,
+            contentType: false,  // Needed for file uploads
+            processData: false,  // Needed for file uploads
+            success: function(response) {
+                var result = JSON.parse(response);  // Parse the JSON response
+
+                // Show SweetAlert based on the response
+                Swal.fire({
+                        title: result.title,
+                        text: result.text,
+                        icon: result.icon
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Reload the page after the alert is confirmed
+                            location.reload();
+                        }
+                    });
+            },
+            error: function() {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'An error occurred while processing the request.',
+                    icon: 'error'
+                });
+            }
+        });
+    });
 });
 </script>
 						</div>
