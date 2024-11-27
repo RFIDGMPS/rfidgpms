@@ -84,7 +84,7 @@
             margin-top: 20px;
             display: block;
             padding: 10px;
-            background-color: #3498db;
+            background-color: #ffc107;
             color: #fff;
             border-radius: 5px;
             text-decoration: none;
