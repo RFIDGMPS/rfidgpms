@@ -294,9 +294,11 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
                         <div id="lockout-message" class="text-danger" style="display: none;">
                             Too many attempts. Try again in <span id="countdown"></span> seconds.
                         </div>
+                        <a href="#">Terms and Conditions</a>
                     </form>
+                    <a href="#">Terms and Conditions</a>
                 </div>
-                <a href="#">Terms and Conditions</a>
+                
             </div>
 
         </div>
