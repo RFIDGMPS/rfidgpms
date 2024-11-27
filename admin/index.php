@@ -296,7 +296,7 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
                         </div>
                        
                     </form>
-                    <a style="padding-left:40%; font-size:5px;color:gray;" href="#">Terms and Conditions</a>
+                    <a style="text-align:left; font-size:10px;color:gray;" href="#">Terms and Conditions</a>
                 </div>
                 
             </div>
