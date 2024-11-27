@@ -299,10 +299,11 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
             </div>
         </div>
     </div>
-</div>
-<?php
+    <?php
     include 'footer.php';
     ?>
+</div>
+
 <script>
     // Toggle password visibility
     function togglePasswordVisibility() {
