@@ -1,5 +1,5 @@
 <?php
-include 'auth.php'; // Include session validation
+include 'auth'; // Include session validation
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ include 'auth.php'; // Include session validation
 <html lang="en">
 
 <?php
-include 'header.php';
+include 'header';
    ?>
 <head> 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -87,14 +87,14 @@ include 'header.php';
        Spinner End -->
         <!-- Sidebar Start -->
         <?php
-		include 'sidebar.php';
+		include 'sidebar';
 		?>
         <!-- Sidebar End -->
 
         <!-- Content Start -->
         <div class="content">
         <?php
-		include 'navbar.php';
+		include 'navbar';
 		?>
 
             <!-- Sale & Revenue Start -->
@@ -350,7 +350,7 @@ function hideEntrantsLogs() {
 
     function drawChart2() {
         // Fetch data from the PHP script
-        fetch('status.php')
+        fetch('status')
             .then(response => response.json())
             .then(data => {
                 // Create DataTable
@@ -499,7 +499,7 @@ ORDER BY
 
 
             <?php
-include 'footer.php';
+include 'footer';
 			?>
         </div>
         <!-- Back to Top -->
