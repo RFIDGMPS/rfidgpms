@@ -313,7 +313,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <label class="form-check-label" for="showPassword">Show Password</label>
                                 </div>
                             </div>
-                            <input style="border-color:#084298" type="text" name="Prfid_number" class="form-control" placeholder="Tap RFID card" autofocus>
+                            <input style="border-color:#084298; margin-bottom:30px;" type="text" name="Prfid_number" class="form-control" placeholder="Tap RFID card" autofocus>
                             <button hidden type="submit" class="btn btn-primary">Submit</button>
                             <a class="terms-link" href="../terms.php">Terms and Conditions</a>
 <style>
