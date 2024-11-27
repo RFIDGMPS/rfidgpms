@@ -10,6 +10,7 @@ switch ($_GET['edit'])
 {
     case 'personell':
 		
+
 // Get data from POST
 $id = $_POST['id'];
 $rfid_number = $_POST['rfid_number'];
@@ -21,9 +22,8 @@ $category = $_POST['category'];
 $role = $_POST['role'];
 $status = $_POST['status'];
 
-// Check if a new file is uploaded
+// File upload logic
 $photo = $_FILES['photo']['name'] ?? null;
-
 if ($photo) {
     // File upload logic
     $target_dir = "uploads/";
@@ -52,26 +52,24 @@ WHERE id = '$id'";
 
 $result = mysqli_query($db, $query);
 
-// Additional logic for lostcard status
 $status_value = ($status == 'Active') ? 0 : 1;
 $query1 = "UPDATE lostcard SET status = $status_value WHERE personnel_id = '$id'";
 $result1 = mysqli_query($db, $query1);
 
-// Return the JSON response
+// Prepare the response
 if ($result && $result1) {
-    echo json_encode([
+    $response = [
         'title' => 'Success!',
-        'text' => 'Record updated successfully.',
+        'text' => 'The record has been updated successfully.',
         'icon' => 'success'
-    ]);
+    ];
 } else {
-    echo json_encode([
+    $response = [
         'title' => 'Error!',
         'text' => 'Failed to update the record. Please try again.',
         'icon' => 'error'
-    ]);
+    ];
 }
-
 
 // Return the JSON response
 echo json_encode($response);
