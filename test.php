@@ -4,7 +4,7 @@ include 'connection.php';
 
 
 // SQL query to fetch data
-$query = "SELECT id, first_name, last_name, date_added FROM personell";
+$query = "SELECT id, first_name, last_name, date_added,status FROM personell";
 $result = $db->query($query);
 
 // Display records
