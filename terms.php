@@ -48,7 +48,7 @@
             font-size: 20px;
             margin-top: 20px;
             color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid #ffc107;
             padding-bottom: 5px;
         }
 
