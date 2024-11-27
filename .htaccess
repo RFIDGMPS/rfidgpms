@@ -1,2 +1,6 @@
 RewriteEngine On
 RewriteRule ^index\.php$ https://rfidgpms.com/ [R=301,L]
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
