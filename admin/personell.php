@@ -3,7 +3,7 @@
 
 <?php
 include 'auth.php'; // Include session validation
-
+date_default_timezone_set('Asia/Manila');
 
 ?>
 <html lang="en">
