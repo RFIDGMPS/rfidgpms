@@ -106,7 +106,6 @@
             <p>Please read these terms carefully before using the RFID-Based Gate Pass Management System.</p>
         </div>
 
-        <!-- Terms and Conditions Content -->
         <h2>1. Definitions</h2>
         <p>
             <strong>System:</strong> Refers to the RFID-Based Gate Pass Management System.<br>
@@ -114,12 +113,54 @@
             <strong>Administrator:</strong> Refers to the personnel responsible for managing the system.
         </p>
 
-        <!-- Other sections go here -->
+        <h2>2. Acceptance of Terms</h2>
+        <p>By using the system, you acknowledge that you have read, understood, and agree to these terms and conditions.</p>
 
-        <!-- Back Link -->
-        <a id="backLink" class="back-link" href="#">Back to Home</a>
+        <h2>3. Purpose</h2>
+        <p>The system is designed to enhance safety by tracking the entry and exit of personnel and visitors.</p>
+
+        <h2>4. User Responsibilities</h2>
+        <ul>
+            <li>Ensure your RFID card/tag is secure and used only by you.</li>
+            <li>Report any loss or theft of your RFID card/tag immediately.</li>
+            <li>Follow school policies when using the system.</li>
+        </ul>
+
+        <h2>5. Data Collection and Privacy</h2>
+        <p>
+            The system collects personal information for tracking and management purposes.
+            Your data is securely stored and will not be shared with unauthorized third parties.
+        </p>
+
+        <h2>6. System Access</h2>
+        <p>Access is restricted to authorized personnel. Unauthorized tampering or hacking is prohibited.</p>
+
+        <h2>7. Liability</h2>
+        <p>
+            The institution is not liable for unauthorized use of the system. In case of malfunctions, we aim to resolve issues promptly.
+        </p>
+
+        <h2>8. Prohibited Actions</h2>
+        <ul>
+            <li>Sharing RFID cards/tags with others.</li>
+            <li>Using someone else’s RFID card/tag.</li>
+            <li>Disrupting system operations.</li>
+        </ul>
+
+        <h2>9. Penalties for Misuse</h2>
+        <p>Misuse of the system will result in disciplinary action per institutional policies.</p>
+
+        <h2>10. System Maintenance</h2>
+        <p>Maintenance may cause temporary unavailability. Users will be informed of scheduled downtime.</p>
+
+        <h2>11. Amendments</h2>
+        <p>The institution reserves the right to amend these terms at any time. Users will be notified of changes.</p>
+
+        <h2>12. Contact</h2>
+        <p>For questions or concerns, contact the system administrator.</p>
+
+        <a href="#" id="backLink" class="back-link">Back to Home</a>
     </div>
-
     <script>
         // Redirect to the last visited page
         const backLink = document.getElementById('backLink');
