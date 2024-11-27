@@ -296,9 +296,6 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
                         </div>
                     </form>
                 </div>
-                <?php
-    include 'footer.php';
-    ?>
             </div>
             <?php
     include 'footer.php';
