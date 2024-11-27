@@ -37,6 +37,12 @@ if ($photo) {
     $photo = $row['photo']; // Use the current photo
 }
 
+if (empty($department)) {
+    $query = "SELECT department FROM personell WHERE id = '$id'";
+    $result = mysqli_query($db, $query);
+    $row = mysqli_fetch_assoc($result);
+    $department = $row['department']; // Use the current department
+}
 // SQL query to update the personell record
 $query = "UPDATE personell SET 
     photo = '$photo',
