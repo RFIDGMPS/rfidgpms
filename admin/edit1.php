@@ -18,8 +18,8 @@ $last_name = $_POST['last_name'];
 $first_name = $_POST['first_name'];
 $date_of_birth = $_POST['date_of_birth'];
 $department = $_POST['e_department'];
-$category = $_POST['category'];
-$role = $_POST['role'];
+$role = $_POST['role'] ?? null;
+$category = $_POST['category'] ?? null;
 $status = $_POST['status'];
 
 // File upload logic

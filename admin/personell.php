@@ -686,18 +686,7 @@ document.addEventListener('DOMContentLoaded', function () {
        });
     
 
-   // Populate categories when the page loads
-   // alert(roleDropdown.value);
-   // updateCategory1(roleDropdown.value);
-   
-
-     
-//    eroleDropdown.addEventListener('change', function () {
-//   alert(this.value);
-//       updateCategory1(this.value);
-
-   
-//   });
+  
 
    
 });
