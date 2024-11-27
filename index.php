@@ -317,22 +317,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <button hidden type="submit" class="btn btn-primary">Submit</button>
                           
                         </form>
-                        <a class="terms-link" href="../terms.php">Terms and Conditions</a>
-<style>
-.terms-link {
-    padding-left: 55%;
-    font-size: 12px;
-    color: gray;
-    text-decoration: none; /* Removes the default underline */
-    cursor: pointer;      /* Ensures pointer cursor */
-}
-
-.terms-link:hover {
-    text-decoration: underline; /* Adds underline on hover */
-    color: black;              /* Optional: Changes color on hover */
-}
-
-</style>
+                       
                         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                         <script>
                             $(document).ready(function () {
@@ -376,6 +361,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             }
                         </script>
                     </div>
+                    <a class="terms-link" href="../terms.php">Terms and Conditions</a>
+<style>
+.terms-link {
+    padding-left: 55%;
+    font-size: 12px;
+    color: gray;
+    text-decoration: none; /* Removes the default underline */
+    cursor: pointer;      /* Ensures pointer cursor */
+}
+
+.terms-link:hover {
+    text-decoration: underline; /* Adds underline on hover */
+    color: black;              /* Optional: Changes color on hover */
+}
+
+</style>
                 </div>
             </div>
         </div>
