@@ -319,7 +319,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <style>
 .terms-link {
     padding-left: 55%;
-    padding-top: 50px;
+   
     font-size: 12px;
     color: gray;
     text-decoration: none; /* Removes the default underline */
