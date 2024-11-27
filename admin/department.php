@@ -121,7 +121,7 @@ var id = $id;
       icon: "success"
 
             }).then(() => {
-                window.location.href = 'department.php'; // Redirect after 1.5 seconds
+                window.location.href = 'department'; // Redirect after 1.5 seconds
             });
                     } else {
                         Swal.fire({
@@ -230,7 +230,7 @@ if (!showError(inputField, 'deptname-error', 'This field is required.') ||
                           showConfirmButton: false,
                           timer: 1500
                       }).then(() => {
-                          window.location.href = 'department.php'; // Redirect after 1.5 seconds
+                          window.location.href = 'department'; // Redirect after 1.5 seconds
                       });
                               } else {
                                   Swal.fire({
@@ -377,7 +377,7 @@ var dptdesc =  document.getElementById('edit_departmentdescription').value;
                 showConfirmButton: false,
                 timer: 1500
             }).then(() => {
-                window.location.href = 'department.php'; // Redirect after 1.5 seconds
+                window.location.href = 'department'; // Redirect after 1.5 seconds
             });
                     } else {
                         Swal.fire({
