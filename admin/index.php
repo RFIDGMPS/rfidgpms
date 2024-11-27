@@ -212,7 +212,7 @@ if (isset($_POST['login'])) {
                     // Successful login
                     $_SESSION['login_attempts'] = 0;
                     $_SESSION['username'] = $username1;
-                    header("Location: dashboard.php");
+                    header("Location: dashboard");
                     exit();
                 } else {
                     // Invalid password
@@ -296,7 +296,7 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
                         </div>
                        
                     </form>
-                    <a class="terms-link" href="../terms.php">Terms and Conditions</a>
+                    <a class="terms-link" href="../terms">Terms and Conditions</a>
 <style>
 .terms-link {
     padding-left: 55%;
