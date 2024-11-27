@@ -17,10 +17,25 @@ $rfid_number = $_POST['rfid_number'];
 $last_name = $_POST['last_name'];
 $first_name = $_POST['first_name'];
 $date_of_birth = $_POST['date_of_birth'];
-$department = $_POST['e_department'];
+
+$status = $_POST['status'];
+
+// Get submitted values
 $role = $_POST['role'] ?? null;
 $category = $_POST['category'] ?? null;
-$status = $_POST['status'];
+$department = $_POST['e_department'] ?? null;
+
+// Retrieve current values if `role` or `category` are not provided
+$query = "SELECT role, category FROM personell WHERE id = '$id'";
+$result = mysqli_query($db, $query);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+
+    // Retain existing values if no new values are provided
+    $role = $role ?: $row['role'];
+    $category = $category ?: $row['category'];
+}
 
 // File upload logic
 $photo = $_FILES['photo']['name'] ?? null;

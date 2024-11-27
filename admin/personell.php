@@ -638,22 +638,20 @@ while ($row = $result->fetch_assoc()) {
                </label>
             </div>
          </div>
-      <div class="col-lg-4 col-md-6 col-sm-12">
+         <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <label>ROLE:</label>
-        <select class="form-control dept_ID" name="role" id="erole" autocomplete="off" onchange="updateCategory1(this.value)">
-        <option class="edit-role-val" value=""></option>
+        <select class="form-control dept_ID" name="role" id="erole" autocomplete="off" 
+                data-current-role="<?php echo htmlspecialchars($currentRole); ?>">
+            <option class="edit-role-val" value=""><?php echo htmlspecialchars($currentRole); ?></option>
             <?php
-                $sql = "SELECT * FROM role";
-                $result = $db->query($sql);
-
-                // Fetch and display role options
-                while ($row = $result->fetch_assoc()) {
-                    $role = $row['role'];
-                   
-                        echo "<option value='$role'>$role</option>";
-                    
-                }
+            // Fetch role options from the database
+            $sql = "SELECT * FROM role";
+            $result = $db->query($sql);
+            while ($row = $result->fetch_assoc()) {
+                $role = $row['role'];
+                echo "<option value='$role'>$role</option>";
+            }
             ?>
         </select>
         <span class="pob-error"></span>
@@ -663,54 +661,70 @@ while ($row = $result->fetch_assoc()) {
 <div class="col-lg-5 col-md-6 col-sm-12" id="lnamez">
     <div class="form-group">
         <label>CATEGORY:</label>
-        <select class="form-control" name="category" id="ecategory" autocomplete="off">
-        <option class="edit-categ-val"  value="" ></option>
+        <select class="form-control" name="category" id="ecategory" autocomplete="off"
+                data-current-category="<?php echo htmlspecialchars($currentCategory); ?>">
+            <option class="edit-categ-val" value=""><?php echo htmlspecialchars($currentCategory); ?></option>
         </select>
         <span class="id-error"></span>
     </div>
 </div>
 
+
+
+
 <script>
-    const roleDropdown = document.getElementById('e_role');
-   const eroleDropdown = document.getElementById('erole');
-     const categoryDropdown = document.getElementById('ecategory');
-     const form = document.getElementById('editPersonellForm');
-   // Automatically update category options based on role selection
-document.addEventListener('DOMContentLoaded', function () {
- 
-   const modal = document.getElementById('editemployeeModal');
- 
-        // Listen for the modal's hide event
-        modal.addEventListener('hide.bs.modal', function () {
-         form.reset();
-       });
-    
+    document.addEventListener('DOMContentLoaded', function () {
+    const roleDropdown = document.getElementById('erole');
+    const categoryDropdown = document.getElementById('ecategory');
+    const form = document.getElementById('editPersonellForm');
+    const modal = document.getElementById('editemployeeModal');
 
-  
+    // Placeholder values (replace with dynamically loaded values)
+    const currentRole = roleDropdown.dataset.currentRole || ''; // Set via `data-*` attribute
+    const currentCategory = categoryDropdown.dataset.currentCategory || ''; // Set via `data-*` attribute
 
-   
+    // Set the current values as default
+    roleDropdown.querySelector('.edit-role-val').textContent = currentRole;
+    roleDropdown.querySelector('.edit-role-val').value = currentRole;
+
+    categoryDropdown.querySelector('.edit-categ-val').textContent = currentCategory;
+    categoryDropdown.querySelector('.edit-categ-val').value = currentCategory;
+
+    // Handle form reset on modal hide
+    modal.addEventListener('hide.bs.modal', function () {
+        form.reset();
+
+        // Restore current values
+        roleDropdown.querySelector('.edit-role-val').textContent = currentRole;
+        roleDropdown.querySelector('.edit-role-val').value = currentRole;
+
+        categoryDropdown.querySelector('.edit-categ-val').textContent = currentCategory;
+        categoryDropdown.querySelector('.edit-categ-val').value = currentCategory;
+    });
+
+    // Update categories dynamically when role changes
+    roleDropdown.addEventListener('change', function () {
+        updateCategory1(this.value);
+    });
 });
 
-
-
- 
-  
 function updateCategory1(role) {
-        // Clear existing options
-        categoryDropdown.innerHTML = '';
-        
-        if (role === 'Student') {
-            // Only 'Student' category for 'Student' role
-            const studentOption = new Option('Student', 'Student');
-            categoryDropdown.add(studentOption);
-        } else {
-            // 'Regular' and 'Contractual' for other roles
-            const regularOption = new Option('Regular', 'Regular');
-            const contractualOption = new Option('Contractual', 'Contractual');
-            categoryDropdown.add(regularOption);
-            categoryDropdown.add(contractualOption);
-        }
+    const categoryDropdown = document.getElementById('ecategory');
+
+    // Clear existing options
+    categoryDropdown.innerHTML = '';
+
+    if (role === 'Student') {
+        const studentOption = new Option('Student', 'Student');
+        categoryDropdown.add(studentOption);
+    } else {
+        const regularOption = new Option('Regular', 'Regular');
+        const contractualOption = new Option('Contractual', 'Contractual');
+        categoryDropdown.add(regularOption);
+        categoryDropdown.add(contractualOption);
     }
+}
+
 </script>
 
    </div>
