@@ -10,7 +10,7 @@ $result = $db->query($query);
 // Display records
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "ID: " . $row['id'] . " - Name: " . $row['first_name'] . " " . $row['last_name'] . " - Date Added: " . $row['date_added'] . "<br>";
+        echo "ID: " . $row['id'] . " - Name: " . $row['first_name'] . " " . $row['last_name'] . " - Date Added: " . $row['date_added'] . " - Status: " . $row['status'] ."<br>";
     }
 } else {
     echo "No records found.";
