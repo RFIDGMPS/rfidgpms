@@ -363,6 +363,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
+    <?php
+    include 'admin/footer.php';
+    ?>
        <script type="text/javascript">
     // Disable right-click
     document.addEventListener('contextmenu', (e) => e.preventDefault());
