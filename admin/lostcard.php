@@ -144,7 +144,7 @@ include 'header.php';
                     xhr.onload = function () {
                         if (xhr.status === 200) {
                             Swal.fire('Blocked!', 'The user has been blocked.', 'success').then(() => {
-                                window.location.href = 'lostcard.php';
+                                window.location.href = 'lostcard';
                             });
                         } else {
                             Swal.fire('Error', 'There was an error blocking the user.', 'error');
@@ -173,7 +173,7 @@ include 'header.php';
                     xhr.onload = function () {
                         if (xhr.status === 200) {
                             Swal.fire('Deleted!', 'The request has been deleted.', 'success').then(() => {
-                                window.location.href = 'lostcard.php';
+                                window.location.href = 'lostcard';
                             });
                         } else {
                             Swal.fire('Error', 'There was an error deleting the request.', 'error');
