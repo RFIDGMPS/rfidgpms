@@ -296,8 +296,23 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
                         </div>
                        
                     </form>
-                    <a style="cursor:pointer;padding-left:55%; font-size:12px;color:gray;" href="#">Terms and Conditions</a>
-                </div>
+                    <a class="terms-link" href="#">Terms and Conditions</a>
+<style>
+.terms-link {
+    padding-left: 55%;
+    font-size: 12px;
+    color: gray;
+    text-decoration: none; /* Removes the default underline */
+    cursor: pointer;      /* Ensures pointer cursor */
+}
+
+.terms-link:hover {
+    text-decoration: underline; /* Adds underline on hover */
+    color: black;              /* Optional: Changes color on hover */
+}
+
+</style>
+</div>
                 
             </div>
 
