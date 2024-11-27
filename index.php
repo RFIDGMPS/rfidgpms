@@ -315,7 +315,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             <input style="border-color:#084298" type="text" name="Prfid_number" class="form-control" placeholder="Tap RFID card" autofocus>
                             <button hidden type="submit" class="btn btn-primary">Submit</button>
-                            <a class="terms-link" href="../terms.php">Terms and Conditions</a>
+                          
+                        </form>
+                        <a class="terms-link" href="../terms.php">Terms and Conditions</a>
 <style>
 .terms-link {
     padding-left: 55%;
@@ -331,7 +333,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 </style>
-                        </form>
                         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                         <script>
                             $(document).ready(function () {
