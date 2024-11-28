@@ -46,7 +46,7 @@
 session_start();
 session_regenerate_id(true); // Prevent session fixation attacks
 header("Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-<hash>'");
-
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
 // Generate CSRF token if not already set
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
