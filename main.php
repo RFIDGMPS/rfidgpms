@@ -1274,6 +1274,52 @@ Webcam.snap(function(data_uri){
       <span id="send-btn" class="material-symbols-rounded" hidden>send</span>
     </div>
 </div>
+<script>
+    function searchPersonell(query) {
+        if (query.length === 0) {
+            document.getElementById("searchResults").innerHTML = "";
+            return;
+        }
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById("searchResults").innerHTML = xhr.responseText;
+            }
+        };
+        xhr.open("GET", "search_personnel.php?q=" + query, true);
+        xhr.send();
+    }
+</script>
+
+
+
+<script>
+function showDetails(id, fullName, department, photo) {
+    document.getElementById('modalTitle').innerText = fullName;
+    document.getElementById('modalDepartment').innerText = department;
+    document.getElementById('modalPhoto').src = 'admin/uploads/' + photo;
+
+    // Set the hidden input field value
+    document.getElementById('hiddenId').value = id;
+
+    // Show the modal
+    document.getElementById('detailsModal').style.display = 'flex';
+    document.getElementById('search').style.display = 'none';
+    document.getElementById('searchResults').style.display = 'none';
+    document.getElementById('cam').style.display = 'block';
+    document.getElementById('adjust').style.height = '300px';
+}
+
+function closeModal() {
+    document.getElementById('detailsModal').style.display = 'none';
+    document.getElementById('search').style.display = 'block';
+    document.getElementById('searchResults').style.display = 'block';
+    document.getElementById('searchResults').style.paddingTop = '50px';
+    document.getElementById('cam').style.display = 'none';
+    document.getElementById('adjust').style.height = '0px';
+    document.getElementById('hiddenId').value = '';
+}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
@@ -1327,52 +1373,7 @@ var capturedImage =  document.getElementById('capturedImage').value;
 </script>
 
 <!-- Add JavaScript for Search Functionality -->
-<script>
-    function searchPersonell(query) {
-        if (query.length === 0) {
-            document.getElementById("searchResults").innerHTML = "";
-            return;
-        }
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                document.getElementById("searchResults").innerHTML = xhr.responseText;
-            }
-        };
-        xhr.open("GET", "search_personnel.php?q=" + query, true);
-        xhr.send();
-    }
-</script>
 
-
-
-<script>
-function showDetails(id, fullName, department, photo) {
-    document.getElementById('modalTitle').innerText = fullName;
-    document.getElementById('modalDepartment').innerText = department;
-    document.getElementById('modalPhoto').src = 'admin/uploads/' + photo;
-
-    // Set the hidden input field value
-    document.getElementById('hiddenId').value = id;
-
-    // Show the modal
-    document.getElementById('detailsModal').style.display = 'flex';
-    document.getElementById('search').style.display = 'none';
-    document.getElementById('searchResults').style.display = 'none';
-    document.getElementById('cam').style.display = 'block';
-    document.getElementById('adjust').style.height = '300px';
-}
-
-function closeModal() {
-    document.getElementById('detailsModal').style.display = 'none';
-    document.getElementById('search').style.display = 'block';
-    document.getElementById('searchResults').style.display = 'block';
-    document.getElementById('searchResults').style.paddingTop = '50px';
-    document.getElementById('cam').style.display = 'none';
-    document.getElementById('adjust').style.height = '0px';
-    document.getElementById('hiddenId').value = '';
-}
-</script>
 
 
 
