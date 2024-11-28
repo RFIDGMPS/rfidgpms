@@ -1230,6 +1230,11 @@ Webcam.snap(function(data_uri){
                             <input type="text" class="form-control" id="searchBox" name="pname" placeholder="Search Name" autocomplete="off" onkeyup="searchPersonell(this.value)">
                             <label for="floatingPassword">Search Name</label>
                         </div>
+                         
+                        <!-- Live Search Results -->
+                        <div id="searchResults"></div>
+        
+                        
                         <!-- Card to display selected personnel -->
                         <div class="card" id="detailsModal" style="display:none;background-color:#e9ecef;">
     <span class="close-btn" onclick="closeModal()">×</span>
@@ -1258,11 +1263,7 @@ Webcam.snap(function(data_uri){
                                     </div>
 
 
-                        
-                        <!-- Live Search Results -->
-                        <div id="searchResults"></div>
-        
-                        
+                       
                         <button name="send" id="submitButton" class="alert alert-primary py-3 w-100 mb-4"><b>Send</b></button>
 
                 </div>
@@ -1276,11 +1277,11 @@ Webcam.snap(function(data_uri){
 </div>
 <script>
     function searchPersonell(query) {
-        console.log("Keyup detected, query:", query); 
-        if (query.length === 0) {
-            document.getElementById("searchResults").innerHTML = "";
-            return;
-        }
+        // console.log("Keyup detected, query:", query); 
+        // if (query.length === 0) {
+        //     document.getElementById("searchResults").innerHTML = "";
+        //     return;
+        // }
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
