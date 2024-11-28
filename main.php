@@ -1227,7 +1227,7 @@ Webcam.snap(function(data_uri){
                         
                         <!-- Search Box -->
                         <div id="search" class="form-floating mb-4">
-                            <input type="text" class="form-control" id="searchBox" name="pname" placeholder="Search Name" autocomplete="off" onkeyup="searchPersonell()">
+                            <input type="text" class="form-control" id="searchBox" name="pname" placeholder="Search Name" autocomplete="off" onkeyup="searchPersonell(this.value)">
                             <label for="floatingPassword">Search Name</label>
                         </div>
                         <!-- Card to display selected personnel -->
@@ -1275,20 +1275,20 @@ Webcam.snap(function(data_uri){
     </div>
 </div>
 <script>
-    function searchPersonell() {
-        alert('test');
-        // if (query.length === 0) {
-        //     document.getElementById("searchResults").innerHTML = "";
-        //     return;
-        // }
-        // const xhr = new XMLHttpRequest();
-        // xhr.onreadystatechange = function() {
-        //     if (xhr.readyState == 4 && xhr.status == 200) {
-        //         document.getElementById("searchResults").innerHTML = xhr.responseText;
-        //     }
-        // };
-        // xhr.open("GET", "search_personnel.php?q=" + query, true);
-        // xhr.send();
+    function searchPersonell(query) {
+        console.log("Keyup detected, query:", query); 
+        if (query.length === 0) {
+            document.getElementById("searchResults").innerHTML = "";
+            return;
+        }
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById("searchResults").innerHTML = xhr.responseText;
+            }
+        };
+        xhr.open("GET", "search_personnel.php?q=" + query, true);
+        xhr.send();
     }
 </script>
 
