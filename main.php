@@ -1229,12 +1229,29 @@ Webcam.snap(function(data_uri){
                         <div id="search" class="form-floating mb-4">
                             <input type="text" class="form-control" id="searchBox" name="pname" placeholder="Search Name" autocomplete="off" onkeyup="searchPersonell(this.value)">
                             <label for="floatingPassword">Search Name</label>
+                            <button onclick="searchPersonell('Aliya')">sea</button>
                         </div>
                          
                         <!-- Live Search Results -->
                         <div id="searchResults"></div>
         
-                        
+                        <script>
+    function searchPersonell(query) {
+        // console.log("Keyup detected, query:", query); 
+        // if (query.length === 0) {
+        //     document.getElementById("searchResults").innerHTML = "";
+        //     return;
+        // }
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById("searchResults").innerHTML = xhr.responseText;
+            }
+        };
+        xhr.open("GET", "search_personnel.php?q=" + query, true);
+        xhr.send();
+    }
+</script>
                         <!-- Card to display selected personnel -->
                         <div class="card" id="detailsModal" style="display:none;background-color:#e9ecef;">
     <span class="close-btn" onclick="closeModal()">×</span>
@@ -1275,23 +1292,7 @@ Webcam.snap(function(data_uri){
       <span id="send-btn" class="material-symbols-rounded" hidden>send</span>
     </div>
 </div>
-<script>
-    function searchPersonell(query) {
-        // console.log("Keyup detected, query:", query); 
-        // if (query.length === 0) {
-        //     document.getElementById("searchResults").innerHTML = "";
-        //     return;
-        // }
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                document.getElementById("searchResults").innerHTML = xhr.responseText;
-            }
-        };
-        xhr.open("GET", "search_personnel.php?q=" + query, true);
-        xhr.send();
-    }
-</script>
+
 
 
 
