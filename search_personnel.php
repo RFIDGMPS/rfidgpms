@@ -5,9 +5,9 @@ include 'connection.php';
 $q = isset($_GET['q']) ? $db->real_escape_string($_GET['q']) : '';
 
 // SQL query to search in the personnel table
-$sql = "SELECT CONCAT(first_name, ' ', middle_name, ' ', last_name) AS full_name, id, department, photo 
+$sql = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, id, department, photo 
         FROM personell 
-        WHERE CONCAT(first_name, ' ', middle_name, ' ', last_name) LIKE '%$q%'";
+        WHERE CONCAT(first_name, ' ', last_name) LIKE '%$q%'";
 
 $result = $db->query($sql);
 
