@@ -1276,6 +1276,7 @@ Webcam.snap(function(data_uri){
 </div>
 <script>
     function searchPersonell(query) {
+        alert('test'+query);
         if (query.length === 0) {
             document.getElementById("searchResults").innerHTML = "";
             return;
