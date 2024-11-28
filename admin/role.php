@@ -114,7 +114,7 @@ $(document).on('click', '#d_role_id', function(){
                             text: "Role has been deleted.",
                             icon: "success"
                         }).then(() => {
-                            window.location.href = 'role.php'; // Redirect after success
+                            window.location.href = 'role'; // Redirect after success
                         });
                     } else {
                         Swal.fire({
@@ -207,7 +207,7 @@ if (!showError(inputField, 'role-error', 'This field is required.')) {
                           showConfirmButton: false,
                           timer: 1500
                       }).then(() => {
-                          window.location.href = 'role.php'; // Redirect after 1.5 seconds
+                          window.location.href = 'role'; // Redirect after 1.5 seconds
                       });
                               } else {
                                   Swal.fire({
@@ -343,7 +343,7 @@ if (!showError(inputField, 'erole-error', 'This field is required.')) {
                 showConfirmButton: false,
                 timer: 1500
             }).then(() => {
-                window.location.href = 'role.php'; // Redirect after 1.5 seconds
+                window.location.href = 'role'; // Redirect after 1.5 seconds
             });
                     } else {
                         Swal.fire({
