@@ -1227,12 +1227,12 @@ Webcam.snap(function(data_uri){
                         
                         <!-- Search Box -->
                         <div id="search" class="form-floating mb-4">
-                            <input type="text" class="form-control" id="searchBox" name="pname" placeholder="Search Name" autocomplete="off" onkeyup="testKeyup(this.value)">
-                            <input type="text" id="searchBox" onkeyup="testKeyup(this.value)" />
+                            <input type="text" class="form-control" id="searchBox" name="pname" placeholder="Search Name" autocomplete="off" onkeyup="searchPersonell(this.value)">
+                            <input type="text" id="searchBox" placeholder="Search Name" />
 <script>
-    function testKeyup(value) {
-        alert("Keyup event fired with value:", value);
-    }
+    document.getElementById("searchBox").addEventListener("keyup", function () {
+        alert("Keyup event fired with value:", this.value);
+    });
 </script>
                             <label for="floatingPassword">Search Name</label>
                         </div>
