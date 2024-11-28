@@ -3,7 +3,7 @@
 session_start();
 include 'connection.php';
 date_default_timezone_set('Asia/Manila');
-header("Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-<hash>'");
+// header("Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-<hash>'");
 // header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
 ?>
 
