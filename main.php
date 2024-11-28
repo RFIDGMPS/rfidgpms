@@ -1229,7 +1229,7 @@ Webcam.snap(function(data_uri){
                         <div id="search" class="form-floating mb-4">
                             <input type="text" class="form-control" id="searchBox" name="pname" placeholder="Search Name" autocomplete="off" oninput="searchPersonell(this.value)">
                             <label for="floatingPassword">Search Name</label>
-                            <button onclick="searchPersonell('Aliya')">sea</button>
+                         
                         </div>
                          
                         <!-- Live Search Results -->
