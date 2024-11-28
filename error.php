@@ -41,7 +41,7 @@
         <h1>Oops! Something went wrong.</h1>
         <p>We encountered an error processing your request. Please try again later.</p>
         <p>If the problem persists, feel free to <a href="contact.php">contact us</a> for assistance.</p>
-        <p><a href="index.php">Return to the homepage</a></p>
+        <p><a href="index">Return to the homepage</a></p>
     </div>
 </body>
 </html>

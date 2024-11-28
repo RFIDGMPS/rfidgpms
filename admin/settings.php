@@ -117,7 +117,7 @@ if ($result->num_rows > 0) {
                     confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location = 'settings.php'; // Redirect to settings page
+                        window.location = 'settings'; // Redirect to settings page
                     }
                 });
             },
@@ -174,7 +174,7 @@ if ($result->num_rows > 0) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Reset form or redirect
-                    window.location.href = 'settings.php'; // Redirect to settings or reset the form
+                    window.location.href = 'settings'; // Redirect to settings or reset the form
                 }
             });
         }

@@ -166,7 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         // Successful login
         $_SESSION['user'] = $department; // Save user data in session
-        header("Location: main.php");
+        header("Location: main");
         exit;
     } else {
         echo "Invalid credentials.";
@@ -257,7 +257,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-3">
-                                <a href="index.php" class="">
+                                <a href="index" class="">
                                     <h3 class="text-warning">GPMS</h3>
                                 </a>
                                 <h3>Sign In</h3>
@@ -315,7 +315,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             <input style="border-color:#084298; margin-bottom:30px;" type="text" name="Prfid_number" class="form-control" placeholder="Tap RFID card" autofocus>
                             <button hidden type="submit" class="btn btn-primary">Submit</button>
-                            <a class="terms-link" href="../terms.php">Terms and Conditions</a>
+                            <a class="terms-link" href="../terms">Terms and Conditions</a>
 <style>
 .terms-link {
     padding-left: 55%;
@@ -345,12 +345,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                     // Send form data via AJAX
                                     $.ajax({
-                                        url: 'login.php',
+                                        url: 'login',
                                         type: 'POST',
                                         data: formData,
                                         success: function (response) {
                                             if (response.trim() === 'success') {
-                                                window.location.href = "main.php";
+                                                window.location.href = "main";
                                             } else {
                                                 $('#alerttext').html(response);
                                                 document.getElementById("myalert3").style.display = "block";

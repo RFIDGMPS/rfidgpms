@@ -114,7 +114,7 @@ $(document).on('click', '.d_visitor_id', function(){
                             text: "Visitor card has been deleted.",
                             icon: "success"
                         }).then(() => {
-                            window.location.href = 'visitor.php'; // Redirect after success
+                            window.location.href = 'visitor'; // Redirect after success
                         });
                     } else {
                         Swal.fire({
@@ -220,7 +220,7 @@ if (!showError(inputField, 'visitor-error', 'This field is required.')) {
                           showConfirmButton: false,
                           timer: 1500
                       }).then(() => {
-                          window.location.href = 'visitor.php'; // Redirect after 1.5 seconds
+                          window.location.href = 'visitor'; // Redirect after 1.5 seconds
                       });
                               } else {
                                   Swal.fire({
@@ -368,7 +368,7 @@ if (!showError(inputField, 'evisitor-error', 'This field is required.')) {
                 showConfirmButton: false,
                 timer: 1500
             }).then(() => {
-                window.location.href = 'visitor.php'; // Redirect after 1.5 seconds
+                window.location.href = 'visitor'; // Redirect after 1.5 seconds
             });
                     } else {
                         Swal.fire({

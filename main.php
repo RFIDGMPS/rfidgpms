@@ -10,7 +10,7 @@ if (isset($_SESSION['location'])) {
   $descr = $_SESSION['descr'];
 }
 else {
-    header("Location: index.php");
+    header("Location: index");
     exit();
 }
 ?>
@@ -1343,7 +1343,7 @@ var capturedImage =  document.getElementById('capturedImage').value;
                 showConfirmButton: false,
                 timer: 1500
             }).then(() => {
-                window.location.href = 'main.php'; // Redirect after 1.5 seconds
+                window.location.href = 'main'; // Redirect after 1.5 seconds
             });
                     } else {
                         Swal.fire({

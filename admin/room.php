@@ -140,7 +140,7 @@ var id = $id;
       icon: "success"
 
             }).then(() => {
-                window.location.href = 'room.php'; // Redirect after 1.5 seconds
+                window.location.href = 'room'; // Redirect after 1.5 seconds
             });
                     } else {
                         Swal.fire({
@@ -342,7 +342,7 @@ if (!showError(inputField, 'roomname-error', 'This field is required.') ||
                           showConfirmButton: false,
                           timer: 1500
                       }).then(() => {
-                          window.location.href = 'room.php'; // Redirect after 1.5 seconds
+                          window.location.href = 'room'; // Redirect after 1.5 seconds
                       });
                               } else {
                                   Swal.fire({
@@ -595,7 +595,7 @@ var roomdpt =  document.getElementById('eroomdpt').value;
                           showConfirmButton: false,
                           timer: 1500
                       }).then(() => {
-                          window.location.href = 'room.php'; // Redirect after 1.5 seconds
+                          window.location.href = 'room'; // Redirect after 1.5 seconds
                       });
                               } else {
                                   Swal.fire({
