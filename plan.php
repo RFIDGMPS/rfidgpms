@@ -18,7 +18,7 @@
             margin-bottom: 20px;
         }
         .card-header {
-            background-color: #007bff;
+            background-color: #ffc107;
             color: white;
             font-size: 1.25rem;
             font-weight: bold;
@@ -38,7 +38,7 @@
         .section-title {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #007bff;
+            color: #ffc107;
         }
         .section-content {
             margin-top: 15px;
