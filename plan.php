@@ -74,7 +74,7 @@
 <body>
 
 <div class="container">
-    <h2 class="text-center mb-5 text-primary">Incident Response and Recovery Plan</h2>
+    <h2 class="text-center mb-5">Incident Response and Recovery Plan</h2>
     
     <!-- Preparation Section -->
     <div class="card">
