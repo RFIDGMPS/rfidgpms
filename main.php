@@ -1228,9 +1228,9 @@ Webcam.snap(function(data_uri){
                         <!-- Search Box -->
                         <div id="search" class="form-floating mb-4">
                             <input type="text" class="form-control" id="searchBox" name="pname" placeholder="Search Name" autocomplete="off" onkeyup="searchPersonell(this.value)">
-                            <input type="text" id="searchBox" placeholder="Search Name" />
+                            <input type="text" id="searchBox1" placeholder="Search Name" />
 <script>
-    document.getElementById("searchBox").addEventListener("keyup", function () {
+    document.getElementById("searchBox1").addEventListener("keyup", function () {
         alert("Keyup event fired with value:", this.value);
     });
 </script>
