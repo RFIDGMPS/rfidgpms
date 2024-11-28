@@ -1319,7 +1319,7 @@ function closeModal() {
     document.getElementById('searchResults').style.display = 'block';
     document.getElementById('searchResults').style.paddingTop = '50px';
     document.getElementById('cam').style.display = 'none';
-    document.getElementById('adjust').style.height = '0px';
+    document.getElementById('adjust').style.height = '';
     document.getElementById('hiddenId').value = '';
 }
 </script>
