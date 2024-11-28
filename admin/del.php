@@ -8,7 +8,7 @@
 		$db->query("DELETE FROM `personell` WHERE `id` = '$_REQUEST[id]'") or die(mysqli_error($db));
 		echo'<script type="text/javascript">
 				alert("Successfully Deleted.");
-				window.location = "personell.php";
+				window.location = "personell";
 			</script>	';
     break;
     case 'department':
