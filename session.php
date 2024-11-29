@@ -106,6 +106,7 @@ function fetchLocation($ip_address) {
 
 function sendVerificationEmail($email, $code) {
     //$mail = new PHPMailer\PHPMailer\PHPMailer();
+    $mail = new PHPMailer(true);
     $mail->isSMTP();
     $mail->Host = 'smtp.example.com'; // Replace with your SMTP server
     $mail->SMTPAuth = true;
@@ -134,6 +135,7 @@ function sendOTP($contact, $code) {
 
 function sendLoginNotification($email, $ip_address, $user_agent) {
     //$mail = new PHPMailer\PHPMailer\PHPMailer();
+    $mail = new PHPMailer(true);
     $mail->isSMTP();
     $mail->Host = 'smtp.example.com'; // Replace with your SMTP server
     $mail->SMTPAuth = true;
