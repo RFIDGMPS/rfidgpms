@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($verification_method === 'otp') {
                     sendOTPEmail($email, $verification_code);
                     echo "Verification code sent to your email.";
+                    $_SESSION['verification_code']=$verification_code;
                     
                 } 
                 elseif ($verification_method === 'link') {

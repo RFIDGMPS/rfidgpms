@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .form-group button {
             width: 100%;
             padding: 10px;
-            background-color: #4CAF50;
+            background-color: #ffc107;
             color: white;
             font-size: 16px;
             border: none;
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cursor: pointer;
         }
         .form-group button:hover {
-            background-color: #45a049;
+            background-color: #dda80a;
         }
         .form-group .back-link {
             display: block;
