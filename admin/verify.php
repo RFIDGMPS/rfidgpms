@@ -116,7 +116,7 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
         }).then((result) => {
             if (result.isConfirmed) {
                 // Redirect based on verification status
-                window.location.href = "<?php echo $verification_status === 'success' ? 'index' : 'login.php'; ?>";
+                window.location.href = "<?php echo $verification_status === 'success' ? 'index' : 'index'; ?>";
             }
         });
     </script>
