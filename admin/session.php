@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate CAPTCHA
     if ($captcha !== $_SESSION['captcha_code']) {
-        echo "Invalid CAPTCHA!";
+        $verification_message =  "Invalid CAPTCHA!";
         exit;
     }
 
