@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate CAPTCHA
     if ($captcha !== $_SESSION['captcha_code']) {
-        $verification_message =  "Invalid CAPTCHA!";
+        echo "Invalid CAPTCHA!";
         exit;
     }
 
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($verification_method === 'otp') {
                     sendOTPEmail($email, $verification_code);
-                   
+                    echo "Verification code sent to your email.";
                     $_SESSION['verification_code']=$verification_code;
                     $_SESSION['email'] = $email;
                     header("Location: verifyotp");
@@ -67,14 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $verification_message = 'Verification link sent to your email.';
                 } 
                 else {
-                    $verification_message =  "Invalid verification method.";
+                    echo "Invalid verification method.";
                 }
 
                
             
        
     } else {
-        $verification_message = "Invalid email.";
+        echo "Invalid email.";
     }
 
     $stmt->close();
