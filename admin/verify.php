@@ -8,9 +8,9 @@ $device_fingerprint = hash('sha256', $ip_address . $user_agent);
 $email = $_SESSION['email'];
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include 'admin/PHPMailer/src/Exception.php';
-include 'admin/PHPMailer/src/PHPMailer.php';
-include 'admin/PHPMailer/src/SMTP.php';
+include 'PHPMailer/src/Exception.php';
+include 'PHPMailer/src/PHPMailer.php';
+include 'PHPMailer/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -96,7 +96,7 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
             confirmButtonText: 'OK'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "admin/index"; // Redirect to admin page on successful OTP
+                window.location.href = "index"; // Redirect to admin page on successful OTP
             }
         });
     </script>

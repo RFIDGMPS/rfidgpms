@@ -26,7 +26,7 @@ for ($i = 0; $i < 5; $i++) {
 }
 
 // Font file path - Make sure this points to a valid .ttf font file on your server
-$font_path = __DIR__ . '/admin/fonts/CourierPrime-Bold.ttf';  // Change this to the actual path of your font file
+$font_path = __DIR__ . '/fonts/CourierPrime-Bold.ttf';  // Change this to the actual path of your font file
 
 // Check if the font exists
 if (!file_exists($font_path)) {

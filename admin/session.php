@@ -5,9 +5,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 //require 'vendor/autoload.php'; // PHP Mailer autoloader
 session_start();
-require 'admin/PHPMailer/src/Exception.php';
-require 'admin/PHPMailer/src/PHPMailer.php';
-require 'admin/PHPMailer/src/SMTP.php';
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 $ip_address = $_SERVER['REMOTE_ADDR'];
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 $device_fingerprint = hash('sha256', $ip_address . $user_agent);
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($device_result->num_rows > 0) {
           
-                header("Location: admin/dashboard");
+                header("Location: dashboard");
                 exit();
             } else {
                
@@ -181,7 +181,7 @@ function sendLinkEmail($email, $code) {
             confirmButtonText: 'OK'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "admin/index"; // Redirect to admin page on successful OTP
+                window.location.href = "index"; // Redirect to admin page on successful OTP
             }
         });
     </script>
