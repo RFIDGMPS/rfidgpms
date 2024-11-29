@@ -323,7 +323,7 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
                     <a class="terms-link" href="verification">Forgot Password</a>
 <style>
 .terms-link {
-    padding-left: 60%;
+    padding-left: 70%;
     font-size: 12px;
     color: gray;
     text-decoration: none; /* Removes the default underline */
