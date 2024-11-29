@@ -1,29 +1,16 @@
 <?php
 include 'connection.php';
 
-// Step 1: Drop the table if it exists
-$dropTableSQL = "DROP TABLE IF EXISTS admin_sessions";
-if ($db->query($dropTableSQL) === TRUE) {
-    echo "Table `admin_sessions` dropped successfully.<br>";
-} else {
-    echo "Error dropping table: " . $db->error . "<br>";
-}
+// SQL query to add columns
+$sql = "ALTER TABLE user 
+        ADD contact VARCHAR(15) NOT NULL AFTER id, 
+        ADD email VARCHAR(255) NOT NULL AFTER contact";
 
-// Step 2: Create the new table
-$createTableSQL = "
-    CREATE TABLE admin_sessions (
-        id INT AUTO_INCREMENT PRIMARY KEY,          -- Auto-incrementing unique identifier
-        location VARCHAR(255),                      -- Stores the location information
-        ip_address VARCHAR(255),                    -- Stores the IP address
-        device VARCHAR(255),                        -- Stores the device details
-        date_logged DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP  -- Automatically sets the current timestamp
-    )
-";
-
-if ($db->query($createTableSQL) === TRUE) {
-    echo "Table `admin_sessions` created successfully.<br>";
+// Execute the query
+if ($conn->query($sql) === TRUE) {
+    echo "Columns 'contact' and 'email' added successfully.";
 } else {
-    echo "Error creating table: " . $db->error . "<br>";
+    echo "Error updating table: " . $conn->error;
 }
 
 // Close the connection
