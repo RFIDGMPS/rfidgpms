@@ -70,6 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 elseif ($verification_method === 'link') {
                     sendLinkEmail($email, $verification_code);
                     echo "Verification link sent to your email.";
+                    header("Location: verifyotp");
+    exit();
                 } 
                 else {
                     echo "Invalid verification method.";
