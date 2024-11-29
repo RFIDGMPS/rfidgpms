@@ -4,7 +4,8 @@ session_start();
 $ip_address = $_SERVER['REMOTE_ADDR'];
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 $device_fingerprint = hash('sha256', $ip_address . $user_agent);
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 // Include necessary files
 include 'connection.php';
 include 'admin/PHPMailer/src/Exception.php';
