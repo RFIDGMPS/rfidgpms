@@ -11,52 +11,95 @@
 switch ($_GET['action'])
 {
     case 'add':
-        session_start(); // Start the session
 
+        
+        session_start(); // Start the session
+        include '../connection.php'; // Make sure to include the database connection
+        
         // Function to generate a random unique ID
         function generateRandomId($length = 8, $db) {
             $id = substr(md5(uniqid(rand(), true)), 0, $length);
-        
+            
             // Check if the ID exists in the database
             while (idExists($id, $db)) {
                 // If the ID exists, generate a new one
                 $id = substr(md5(uniqid(rand(), true)), 0, $length);
             }
-        
+            
             return $id;
         }
         
         // Function to check if the ID exists in the database
         function idExists($id, $db) {
-            $query = "SELECT COUNT(*) FROM personell WHERE id = '$id'";
-            $result = mysqli_query($db, $query);
-            return mysqli_fetch_row($result)[0] > 0;
+            $query = "SELECT COUNT(*) FROM personell WHERE id = ?";
+            $stmt = $db->prepare($query);
+            $stmt->bind_param("s", $id); // Bind the parameter to prevent SQL injection
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_row()[0] > 0;
         }
         
         // Example usage when inserting data:
         $id = generateRandomId(8, $db);  // Generate a unique ID
         
-        // Retrieve form data
-        $rfid_number = $_POST['rfid_number'];
-        $last_name = $_POST['last_name'];
-        $first_name = $_POST['first_name'];
-        $date_of_birth = $_POST['date_of_birth'];
-        $role = $_POST['role'];
-        $department = $_POST['department'];
-        $status = $_POST['status'];
-        $category = $_POST['category'];
-        $photo = $_FILES['photo']['name'];
+        // Retrieve form data and sanitize it
+        $rfid_number = mysqli_real_escape_string($db, $_POST['rfid_number']);
+        $last_name = mysqli_real_escape_string($db, $_POST['last_name']);
+        $first_name = mysqli_real_escape_string($db, $_POST['first_name']);
+        $date_of_birth = mysqli_real_escape_string($db, $_POST['date_of_birth']);
+        $role = mysqli_real_escape_string($db, $_POST['role']);
+        $department = mysqli_real_escape_string($db, $_POST['department']);
+        $status = mysqli_real_escape_string($db, $_POST['status']);
+        $category = mysqli_real_escape_string($db, $_POST['category']);
         
-        // File upload logic
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($_FILES["photo"]["name"]);
-        move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
+        // File upload logic (Validate and sanitize the uploaded file)
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+        $file_extension = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
         
-        // Insert query
-        $query = "INSERT INTO personell (id, category, rfid_number, last_name, first_name, date_of_birth, role, department, status, photo)
-                  VALUES ('$id', '$category', '$rfid_number', '$last_name', '$first_name', '$date_of_birth', '$role', '$department', '$status', '$photo')";
-        $result = mysqli_query($db, $query);
+        if (in_array($file_extension, $allowed_extensions) && $_FILES['photo']['size'] <= 2000000) { // 2MB limit
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($_FILES["photo"]["name"]);
+            
+            // Ensure the file is an actual image
+            if (getimagesize($_FILES["photo"]["tmp_name"])) {
+                if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
+                    $photo = basename($_FILES["photo"]["name"]);
+                } else {
+                    $response = [
+                        'title' => 'Error!',
+                        'text' => 'File upload failed.',
+                        'icon' => 'error'
+                    ];
+                    echo json_encode($response);
+                    exit;
+                }
+            } else {
+                $response = [
+                    'title' => 'Error!',
+                    'text' => 'Invalid file type. Only images are allowed.',
+                    'icon' => 'error'
+                ];
+                echo json_encode($response);
+                exit;
+            }
+        } else {
+            $response = [
+                'title' => 'Error!',
+                'text' => 'Invalid file type or file size exceeds the limit.',
+                'icon' => 'error'
+            ];
+            echo json_encode($response);
+            exit;
+        }
         
+        // Insert query with prepared statement to prevent SQL injection
+        $query = "INSERT INTO personell (id, category, rfid_number, last_name, first_name, date_of_birth, role, department, status, photo) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("ssssssssss", $id, $category, $rfid_number, $last_name, $first_name, $date_of_birth, $role, $department, $status, $photo);
+        $result = $stmt->execute();
+        
+        // Return success or failure response
         if ($result) {
             $response = [
                 'title' => 'Success!',
@@ -74,6 +117,77 @@ switch ($_GET['action'])
         // Return the JSON response
         echo json_encode($response);
         exit;
+                
+
+
+
+
+
+
+
+        // session_start(); // Start the session
+
+        // // Function to generate a random unique ID
+        // function generateRandomId($length = 8, $db) {
+        //     $id = substr(md5(uniqid(rand(), true)), 0, $length);
+        
+        //     // Check if the ID exists in the database
+        //     while (idExists($id, $db)) {
+        //         // If the ID exists, generate a new one
+        //         $id = substr(md5(uniqid(rand(), true)), 0, $length);
+        //     }
+        
+        //     return $id;
+        // }
+        
+        // // Function to check if the ID exists in the database
+        // function idExists($id, $db) {
+        //     $query = "SELECT COUNT(*) FROM personell WHERE id = '$id'";
+        //     $result = mysqli_query($db, $query);
+        //     return mysqli_fetch_row($result)[0] > 0;
+        // }
+        
+        // // Example usage when inserting data:
+        // $id = generateRandomId(8, $db);  // Generate a unique ID
+        
+        // // Retrieve form data
+        // $rfid_number = $_POST['rfid_number'];
+        // $last_name = $_POST['last_name'];
+        // $first_name = $_POST['first_name'];
+        // $date_of_birth = $_POST['date_of_birth'];
+        // $role = $_POST['role'];
+        // $department = $_POST['department'];
+        // $status = $_POST['status'];
+        // $category = $_POST['category'];
+        // $photo = $_FILES['photo']['name'];
+        
+        // // File upload logic
+        // $target_dir = "uploads/";
+        // $target_file = $target_dir . basename($_FILES["photo"]["name"]);
+        // move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
+        
+        // // Insert query
+        // $query = "INSERT INTO personell (id, category, rfid_number, last_name, first_name, date_of_birth, role, department, status, photo)
+        //           VALUES ('$id', '$category', '$rfid_number', '$last_name', '$first_name', '$date_of_birth', '$role', '$department', '$status', '$photo')";
+        // $result = mysqli_query($db, $query);
+        
+        // if ($result) {
+        //     $response = [
+        //         'title' => 'Success!',
+        //         'text' => 'Record added successfully.',
+        //         'icon' => 'success'
+        //     ];
+        // } else {
+        //     $response = [
+        //         'title' => 'Error!',
+        //         'text' => 'Failed to add the record. Please try again.',
+        //         'icon' => 'error'
+        //     ];
+        // }
+        
+        // // Return the JSON response
+        // echo json_encode($response);
+        // exit;
         
     break;
     case 'add_department':
