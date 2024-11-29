@@ -41,10 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (password_verify($password, $hashed_password)) {
             // Detect new device
-            $ip_address = $_SERVER['REMOTE_ADDR'];
-            $user_agent = $_SERVER['HTTP_USER_AGENT'];
-            $device_fingerprint = hash('sha256', $ip_address . $user_agent);
-
+           
             $check_device_query = "SELECT * FROM admin_sessions WHERE ip_address = ? AND device = ?";
             $check_stmt = $db->prepare($check_device_query);
             $check_stmt->bind_param('ss', $ip_address, $device_fingerprint);
@@ -53,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($device_result->num_rows > 0) {
                 // Known device: log session and notify
-                logSession($db, $user_id, $ip_address, $device_fingerprint);
-                sendLoginNotification($email, $ip_address, $user_agent);
+                // logSession($db, $user_id, $ip_address, $device_fingerprint);
+                // sendLoginNotification($email, $ip_address, $user_agent);
                 echo "Login successful!";
             } else {
                 // New device: send verification
@@ -78,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "Invalid verification method.";
                 }
 
-                logSession($db, $user_id, $ip_address, $device_fingerprint);
+               
             }
         } else {
             echo "Invalid email or password.";
@@ -92,14 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $db->close();
 
-function logSession($db, $user_id, $ip_address, $device_fingerprint) {
-    $location = fetchLocation($ip_address);
-    $query = "INSERT INTO admin_sessions (location, ip_address, device, date_logged) VALUES (?, ?, ?, NOW())";
-    $stmt = $db->prepare($query);
-    $stmt->bind_param('sss', $location, $ip_address, $device_fingerprint);
-    $stmt->execute();
-    $stmt->close();
-}
+
 
 function fetchLocation($ip_address) {
     $geoData = json_decode(file_get_contents("http://ip-api.com/json/$ip_address"), true);

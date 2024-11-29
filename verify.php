@@ -1,6 +1,9 @@
 <?php
-
+include 'connection.php';
 session_start();
+$ip_address = $_SERVER['REMOTE_ADDR'];
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$device_fingerprint = hash('sha256', $ip_address . $user_agent);
 
 // Get token and code from URL
 $token = $_GET['token'] ?? '';
@@ -16,12 +19,21 @@ if ($token === $_SESSION['verification_token']) {
     // You can now validate the code as needed, e.g., check if the code matches the one sent via email
     if ($code === $_SESSION['verification_code']) {
         $verification_message = "Verification successful!";
-        // Proceed with login or any other action
+        logSession($db, $ip_address, $device_fingerprint);
     } else {
         $verification_message = "Invalid verification code.";
     }
 } else {
     $verification_message =  "Invalid verification link.";
+}
+
+function logSession($db, $ip_address, $device_fingerprint) {
+    $location = fetchLocation($ip_address);
+    $query = "INSERT INTO admin_sessions (location, ip_address, device, date_logged) VALUES (?, ?, ?, NOW())";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('sss', $location, $ip_address, $device_fingerprint);
+    $stmt->execute();
+    $stmt->close();
 }
 ?>
 

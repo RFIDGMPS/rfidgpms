@@ -1,5 +1,9 @@
 <?php
+include 'connection.php';
 session_start();
+$ip_address = $_SERVER['REMOTE_ADDR'];
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$device_fingerprint = hash('sha256', $ip_address . $user_agent);
 
 // Include necessary files
 include 'connection.php';
@@ -20,11 +24,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($otp == $verification_code) {
         // Set the success message
         $verification_message = 'Verification successful!';
+        logSession($db, $ip_address, $device_fingerprint);
        
     } else {
         // Set the error message if OTP is invalid
         $verification_message = 'Invalid OTP. Please try again.';
     }
+}
+
+function logSession($db, $ip_address, $device_fingerprint) {
+    $location = fetchLocation($ip_address);
+    $query = "INSERT INTO admin_sessions (location, ip_address, device, date_logged) VALUES (?, ?, ?, NOW())";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('sss', $location, $ip_address, $device_fingerprint);
+    $stmt->execute();
+    $stmt->close();
 }
 ?>
 
