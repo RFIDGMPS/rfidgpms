@@ -14,7 +14,7 @@ $device_fingerprint = hash('sha256', $ip_address . $user_agent);
 // Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
+$verification_message='';
 $mail = new PHPMailer(true);
 
 // Process login
