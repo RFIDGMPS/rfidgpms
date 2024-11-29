@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Check user credentials
-    $query = "SELECT id, password, contact FROM users WHERE email = ?";
+    $query = "SELECT id, password, contact FROM user WHERE email = ?";
     $stmt = $db->prepare($query);
     $stmt->bind_param('s', $email);
     $stmt->execute();

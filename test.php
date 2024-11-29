@@ -1,12 +1,30 @@
-<form method="POST" action="session.php">
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
+<?php
+include 'connection.php';
 
-    <label>Choose verification method:</label><br>
-    <input type="radio" name="verification_method" value="email" required> Email<br>
-    <input type="radio" name="verification_method" value="contact" required> Contact Number<br>
+// Values to insert
+$contact = '09560379350';
+$email = 'kyebejeanu@gmail.com';
 
-    <img src="captcha.php" alt="CAPTCHA">
-    <input type="text" name="captcha" placeholder="Enter CAPTCHA" required>
-    <button type="submit">Login</button>
-</form>
+// SQL query to insert data
+$sql = "INSERT INTO user (contact, email) VALUES (?, ?)";
+
+// Prepare the statement
+$stmt = $db->prepare($sql);
+
+if ($stmt) {
+    // Bind parameters (s = string)
+    $stmt->bind_param('ss', $contact, $email);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "Record inserted successfully.";
+    } else {
+        echo "Error inserting record: " . $stmt->error;
+    }
+
+    // Close the statement
+    $stmt->close();
+} else {
+    echo "Error preparing statement: " . $db->error;
+}
+?>
