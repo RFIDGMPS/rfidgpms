@@ -56,28 +56,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 echo $ip_address;
                 echo $device_fingerprint;
-                exit();
-                // New device: send verification
-                $verification_code = rand(100000, 999999);
-                $_SESSION['verification_code'] = $verification_code;
+    //             exit();
+    //             // New device: send verification
+    //             $verification_code = rand(100000, 999999);
+    //             $_SESSION['verification_code'] = $verification_code;
 
-                if ($verification_method === 'otp') {
-                    sendOTPEmail($email, $verification_code);
-                    echo "Verification code sent to your email.";
-                    $_SESSION['verification_code']=$verification_code;
-                    $_SESSION['email'] = $email;
-                    header("Location: verifyotp");
-    exit();
+    //             if ($verification_method === 'otp') {
+    //                 sendOTPEmail($email, $verification_code);
+    //                 echo "Verification code sent to your email.";
+    //                 $_SESSION['verification_code']=$verification_code;
+    //                 $_SESSION['email'] = $email;
+    //                 header("Location: verifyotp");
+    // exit();
                     
-                } 
-                elseif ($verification_method === 'link') {
-                    sendLinkEmail($email, $verification_code);
-                    echo "Verification link sent to your email.";
+    //             } 
+    //             elseif ($verification_method === 'link') {
+    //                 sendLinkEmail($email, $verification_code);
+    //                 echo "Verification link sent to your email.";
                     
-                } 
-                else {
-                    echo "Invalid verification method.";
-                }
+    //             } 
+    //             else {
+    //                 echo "Invalid verification method.";
+    //             }
 
                
             }
