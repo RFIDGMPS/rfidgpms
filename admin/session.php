@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate CAPTCHA
     if ($captcha !== $_SESSION['captcha_code']) {
         $verification_message =  "Invalid CAPTCHA!";
-        exit;
+       
     }
 
     // Check user credentials
@@ -125,7 +125,7 @@ function sendLinkEmail($email, $code) {
  $_SESSION['verification_token'] = $token; // Store the token in the session for validation later
 
  // Create the verification link
- $verification_link = "https://rfidgpms.com/verify.php?token=$token&code=$code";
+ $verification_link = "https://rfidgpms.com/admin/verify.php?token=$token&code=$code";
 
     try {
         // SMTP Settings
