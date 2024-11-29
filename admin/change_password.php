@@ -1,3 +1,26 @@
+<?php
+session_start(); // Start the session
+
+if (!isset($_GET['token'])) {
+    die("Invalid request. No token provided.");
+}
+
+$token = $_GET['token'];
+
+// Check if the token matches and is not expired
+if (isset($_SESSION['password_reset_token']) &&
+    $token === $_SESSION['password_reset_token'] &&
+    time() <= $_SESSION['password_reset_token_expiry']) {
+
+        // Optionally, clear the token to prevent reuse
+    unset($_SESSION['password_reset_token']);
+    unset($_SESSION['password_reset_token_expiry']);
+} else {
+    // Token is invalid or expired
+    die("Invalid or expired token.");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
