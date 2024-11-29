@@ -37,6 +37,13 @@ exit();
     } else {
         // Set the error message if OTP is invalid
         $verification_message = 'Invalid OTP. Please try again.';
+        if(isset($_GET['change_password'])){
+            header('Location: verifyotp?change_password');
+            exit();
+                    }else {
+                        header('Location: verifyotp');
+            exit();
+                    }
     }
 }
 
@@ -199,7 +206,11 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
             confirmButtonText: 'OK'
         }).then((result) => {
             if (result.isConfirmed && '<?php echo ($otp == $verification_code) ? "success" : "error"; ?>' === "success") {
+                <?php if (isset($_GET['change_password'])): ?>
+                        window.location.href = "forgot_password";
+                        <?php else: ?>
                 window.location.href = "index"; // Redirect to admin page on successful OTP
+                <?php endif; ?>
             }
         });
     </script>
