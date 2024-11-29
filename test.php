@@ -25,9 +25,12 @@
     });
 </script> -->
 <?php
-include 'connection.php';
-// Assuming you have a valid database connection in $db
-$query = "DELETE FROM admin_sessions"; // SQL query to delete all rows
+include 'connection.php'; // Assuming connection.php initializes the $db variable with a database connection
+
+// SQL query to delete all rows from the admin_sessions table
+$query = "DELETE FROM admin_sessions"; 
+
+// Prepare the query using the $db object
 $stmt = $db->prepare($query);
 
 if ($stmt->execute()) {
@@ -36,10 +39,14 @@ if ($stmt->execute()) {
     echo "Error deleting records: " . $stmt->error;
 }
 
+// Close the prepared statement
 $stmt->close();
 ?>
 
+
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include 'connection.php';
 session_start();
 
