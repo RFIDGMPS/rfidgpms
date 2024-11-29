@@ -76,9 +76,10 @@ else {
     } else {
         $verification_message = "Invalid email.";
     }
+    
+    $stmt->close();
 }
 
-    $stmt->close();
 }
 
 $db->close();
