@@ -80,7 +80,7 @@
 
         button {
             padding: 12px;
-            background-color: #007bff;
+            background-color: #ffc107;
             color: white;
             font-size: 16px;
             border: none;
@@ -90,7 +90,7 @@
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #dda80a;
         }
 
         .back-link {
