@@ -87,7 +87,7 @@ $db->close();
 
 function logSession($db, $user_id, $ip_address, $device_fingerprint) {
     $location = fetchLocation($ip_address);
-    $query = "INSERT INTO admin_sessions (user_id, location, ip_address, device, date_logged) VALUES (?, ?, ?, ?, NOW())";
+    $query = "INSERT INTO admin_sessions (id, location, ip_address, device, date_logged) VALUES (?, ?, ?, ?, NOW())";
     $stmt = $db->prepare($query);
     $stmt->bind_param('isss', $user_id, $location, $ip_address, $device_fingerprint);
     $stmt->execute();
