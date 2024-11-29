@@ -41,6 +41,12 @@ function logSession($db, $ip_address, $device_fingerprint) {
     $stmt->execute();
     $stmt->close();
 }
+
+function fetchLocation($ip_address) {
+    $geoData = json_decode(file_get_contents("http://ip-api.com/json/$ip_address"), true);
+    return $geoData['city'] . ', ' . $geoData['country'];
+}
+
 ?>
 
 <!DOCTYPE html>
