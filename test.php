@@ -4,14 +4,26 @@
     <input type="password" name="password" placeholder="Password" required>
 
     <label>Choose verification method:</label><br>
-    <input type="radio" name="verification_method" value="link"> Verification Link<br>
-    <input type="radio" name="verification_method" value="otp"> Numeric OTP<br>
+    <input type="radio" name="verification_method" value="link" required> Verification Link<br>
+    <input type="radio" name="verification_method" value="otp" required> Numeric OTP<br>
 
     <img src="captcha.php" alt="CAPTCHA">
     <input type="text" name="captcha" placeholder="Enter CAPTCHA" required>
     <button type="submit">Login</button>
 </form>
-
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        // Check if the selected verification method is OTP
+        var verificationMethod = document.querySelector('input[name="verification_method"]:checked').value;
+        
+        if (verificationMethod === 'otp') {
+            // Prevent form submission
+            e.preventDefault();
+            // Redirect to verifyotp.php
+            window.location.href = 'verifyotp.php';
+        }
+    });
+</script>
 <?php
 include 'connection.php';
 session_start();

@@ -61,14 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $verification_code = rand(100000, 999999);
                 $_SESSION['verification_code'] = $verification_code;
 
-                if ($verification_method === 'email') {
-                    sendVerificationEmail($email, $verification_code);
+                if ($verification_method === 'otp') {
+                    sendOTPEmail($email, $verification_code);
                     echo "Verification code sent to your email.";
+                    
                 } 
-                // elseif ($verification_method === 'contact') {
-                //     sendOTP($contact, $verification_code);
-                //     echo "OTP sent to your contact number.";
-                // } 
+                elseif ($verification_method === 'link') {
+                    sendLinkEmail($email, $verification_code);
+                    echo "Verification link sent to your email.";
+                } 
                 else {
                     echo "Invalid verification method.";
                 }
@@ -101,7 +102,7 @@ function fetchLocation($ip_address) {
     return $geoData['city'] . ', ' . $geoData['country'];
 }
 
-function sendVerificationEmail($email, $code) {
+function sendOTPEmail($email, $code) {
     global $mail;  // Reusing the already instantiated PHPMailer object
 
     try {
@@ -129,12 +130,47 @@ function sendVerificationEmail($email, $code) {
     } catch (Exception $e) {
         echo "Mailer Error: " . $e->getMessage();
     }
+
+
+    
 }
 
-// function sendOTP($contact, $code) {
-//     // Replace this block with your SMS gateway API integration
-//     echo "Simulated sending OTP $code to contact $contact.";
-// }
+function sendLinkEmail($email, $code) {
+    global $mail;  // Reusing the already instantiated PHPMailer object
+ // Generate a random token (this can be used to identify the link)
+ $token = bin2hex(random_bytes(16)); // 16 bytes = 32 characters
+ $_SESSION['verification_token'] = $token; // Store the token in the session for validation later
+
+ // Create the verification link
+ $verification_link = "https://rfidgpms.com/verify.php?token=$token&code=$code";
+
+    try {
+        // SMTP Settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
+        $mail->SMTPAuth = true;
+        $mail->Username = 'kyebejeanu@gmail.com';
+        $mail->Password = 'krwr vqdj vzmq fiby'; // Use App Password if 2FA is enabled
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Sender and recipient settings
+        $mail->setFrom('kyebejeanu@gmail.com', 'RFID GPMS');
+        $mail->addAddress($email);
+
+        $mail->isHTML(true);
+        $mail->Subject = 'Verification Required';
+        $mail->Body = "Click the following link to verify your login: <a href='$verification_link'>Verify Login</a>";
+    
+
+        // Send email
+        if (!$mail->send()) {
+            echo "Error sending email: " . $mail->ErrorInfo;
+        }
+    } catch (Exception $e) {
+        echo "Mailer Error: " . $e->getMessage();
+    }
+}
 
 function sendLoginNotification($email, $ip_address, $user_agent) {
     global $mail;  // Reusing the already instantiated PHPMailer object
