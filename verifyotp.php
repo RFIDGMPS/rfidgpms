@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="form-group">
-            <a href="login.php" class="back-link">Back to Login</a>
+            <a href="admin/index" class="back-link">Back to Login</a>
         </div>
     </form>
 </div>
