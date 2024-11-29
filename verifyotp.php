@@ -10,19 +10,23 @@ include 'admin/PHPMailer/src/SMTP.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+$verification_message = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $otp = $_POST['otp'];
     $verification_code = $_SESSION['verification_code']; // Retrieve the OTP from the session
 
     // Check if OTP matches the code sent
     if ($otp == $verification_code) {
-        echo "<h3>Verification successful!</h3>";
-        // Proceed with the next step, like redirecting to a dashboard
+        // Set the success message
+        $verification_message = 'Verification successful!';
+        header("Location: admin/index"); // Redirect after success
+        exit();
     } else {
-        echo "<h3 style='color:red;'>Invalid OTP. Please try again.</h3>";
+        // Set the error message if OTP is invalid
+        $verification_message = 'Invalid OTP. Please try again.';
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify OTP</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- SweetAlert CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -113,6 +119,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </form>
 </div>
+
+<!-- Check if there's a message to display -->
+<?php if (!empty($verification_message)): ?>
+    <script>
+        // Display SweetAlert based on the message
+        Swal.fire({
+            title: '<?php echo $verification_message; ?>',
+            icon: '<?php echo ($otp == $verification_code) ? "success" : "error"; ?>',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed && '<?php echo ($otp == $verification_code) ? "success" : "error"; ?>' === "success") {
+                window.location.href = "admin/index"; // Redirect to admin page on successful OTP
+            }
+        });
+    </script>
+<?php endif; ?>
 
 </body>
 </html>
