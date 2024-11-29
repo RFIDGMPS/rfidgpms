@@ -13,22 +13,22 @@
 </form>
 
 <?php
-include 'connection.php'; // Assuming connection.php initializes the $db variable with a database connection
+// include 'connection.php'; // Assuming connection.php initializes the $db variable with a database connection
 
-// SQL query to delete all rows from the admin_sessions table
-$query = "DELETE FROM admin_sessions"; 
+// // SQL query to delete all rows from the admin_sessions table
+// $query = "DELETE FROM admin_sessions"; 
 
-// Prepare the query using the $db object
-$stmt = $db->prepare($query);
+// // Prepare the query using the $db object
+// $stmt = $db->prepare($query);
 
-if ($stmt->execute()) {
-    echo "All records from admin_sessions have been deleted.";
-} else {
-    echo "Error deleting records: " . $stmt->error;
-}
+// if ($stmt->execute()) {
+//     echo "All records from admin_sessions have been deleted.";
+// } else {
+//     echo "Error deleting records: " . $stmt->error;
+// }
 
-// Close the prepared statement
-$stmt->close();
+// // Close the prepared statement
+// $stmt->close();
 ?>
 
 
