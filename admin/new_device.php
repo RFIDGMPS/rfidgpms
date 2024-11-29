@@ -132,7 +132,7 @@
     </form>
 
     <div class="back-link">
-        <a href="index.php">Back to Home</a>
+        <a href="index">Back to Home</a>
     </div>
 </div>
 

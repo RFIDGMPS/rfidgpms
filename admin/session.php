@@ -42,20 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_result($user_id, $hashed_password, $contact);
         $stmt->fetch();
 
-        if (password_verify($password, $hashed_password)) {
-            // Detect new device
-           
-            $check_device_query = "SELECT * FROM admin_sessions WHERE ip_address = ? AND device = ?";
-            $check_stmt = $db->prepare($check_device_query);
-            $check_stmt->bind_param('ss', $ip_address, $device_fingerprint);
-            $check_stmt->execute();
-            $device_result = $check_stmt->get_result();
-
-            if ($device_result->num_rows > 0) {
-          
-                header("Location: dashboard");
-                exit();
-            } else {
+   
+       
                
     
                 // New device: send verification
@@ -83,10 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
                
-            }
-        } else {
-            echo "Invalid email or password.";
-        }
+            
+       
     } else {
         echo "Invalid email or password.";
     }

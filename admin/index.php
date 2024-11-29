@@ -210,10 +210,34 @@ if (isset($_POST['login'])) {
                 $row = $result->fetch_assoc();
                 if (password_verify($password1, $row['password'])) {
                     // Successful login
-                    $_SESSION['login_attempts'] = 0;
-                    $_SESSION['username'] = $username1;
-                    header("Location: dashboard");
-                    exit();
+                    $ip_address = $_SERVER['REMOTE_ADDR'];
+                    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+                    $device_fingerprint = hash('sha256', $ip_address . $user_agent);
+
+
+
+                    $check_device_query = "SELECT * FROM admin_sessions WHERE ip_address = ? AND device = ?";
+                    $check_stmt = $db->prepare($check_device_query);
+                    $check_stmt->bind_param('ss', $ip_address, $device_fingerprint);
+                    $check_stmt->execute();
+                    $device_result = $check_stmt->get_result();
+        
+                    if ($device_result->num_rows > 0) {
+                  
+                        $_SESSION['login_attempts'] = 0;
+                    
+                        $_SESSION['username'] = $username1;
+    
+                        header("Location: dashboard");
+                        exit();
+                    } else {
+                        header("Location: new_device");
+                        exit();
+                    }
+
+
+
+                    
                 } else {
                     // Invalid password
                     $_SESSION['login_attempts']++;
