@@ -29,7 +29,7 @@
         }
 
         h2 {
-            color: #4e54c8;
+            color: #ffc107;
             margin-bottom: 1rem;
         }
 
