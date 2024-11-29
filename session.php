@@ -7,7 +7,9 @@ session_start();
 require 'admin/PHPMailer/src/Exception.php';
 require 'admin/PHPMailer/src/PHPMailer.php';
 require 'admin/PHPMailer/src/SMTP.php';
-
+$ip_address = $_SERVER['REMOTE_ADDR'];
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$device_fingerprint = hash('sha256', $ip_address . $user_agent);
 // Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
