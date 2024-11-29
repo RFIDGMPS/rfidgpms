@@ -18,7 +18,7 @@ if (!$token || !$code) {
 if ($token === $_SESSION['verification_token']) {
     // You can now validate the code as needed, e.g., check if the code matches the one sent via email
     if ($code === $_SESSION['verification_code']) {
-        $verification_message = "Verification successful!";
+        $verification_message = "Verification successful! You can now log in.";
         logSession($db, $ip_address, $device_fingerprint);
     } else {
         $verification_message = "Invalid verification code.";

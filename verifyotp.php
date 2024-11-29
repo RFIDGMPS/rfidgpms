@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if OTP matches the code sent
     if ($otp == $verification_code) {
         // Set the success message
-        $verification_message = 'Verification successful!';
+        $verification_message = 'Verification successful! You can now log in.';
         logSession($db, $ip_address, $device_fingerprint);
        
     } else {
