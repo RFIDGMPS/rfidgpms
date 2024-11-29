@@ -1,4 +1,3 @@
-<!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
 <form method="POST" action="session.php">
     <input type="email" name="email" placeholder="Email" required>
@@ -11,37 +10,4 @@
     <img src="captcha.php" alt="CAPTCHA">
     <input type="text" name="captcha" placeholder="Enter CAPTCHA" required>
     <button type="submit">Login</button>
-</form> -->
-
-<?php 
-include 'connection.php';
-// Database connection
-
-
-// Assuming you have the user's ID (e.g., from session or GET/POST request)
-$user_id = 1; // or get from $_GET['user_id'] if passing through the URL
-$new_email = 'kyebejeanungon@gmail.com'; // New email to update
-
-// Prepare the update query
-$query = "UPDATE user SET email = ? WHERE id = ?";
-
-// Prepare the statement
-$stmt = $db->prepare($query);
-
-// Check if statement preparation was successful
-if ($stmt) {
-    // Bind parameters (s = string, i = integer)
-    $stmt->bind_param('si', $new_email, $user_id);
-
-    // Execute the statement
-    if ($stmt->execute()) {
-        echo "Email updated successfully!";
-    } else {
-        echo "Error updating email: " . $stmt->error;
-    }
-
-    // Close the statement
-    $stmt->close();
-} else {
-    echo "Error preparing the statement: " . $db->error;
-}?>
+</form>
