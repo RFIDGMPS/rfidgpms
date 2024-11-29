@@ -163,13 +163,17 @@ function sendLinkEmail($email, $code) {
         // Display SweetAlert based on the message
         Swal.fire({
             title: '<?php echo $verification_message; ?>',
-            icon: 'warning', // Use the 'warning' icon which is usually orange
+            icon: '<?php echo (strpos($verification_message, "sent") !== false || strpos($verification_message, "Verification code") !== false) ? "success" : "error"; ?>',
             confirmButtonText: 'OK'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "index"; // Redirect to admin page on successful OTP
+                // Only redirect to 'index' if the message is a success
+                <?php if (strpos($verification_message, "sent") !== false || strpos($verification_message, "Verification code") !== false): ?>
+                    window.location.href = "index"; // Redirect to admin page on success
+                <?php endif; ?>
             }
         });
     </script>
     </body>
 <?php endif; ?>
+
