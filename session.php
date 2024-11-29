@@ -1,4 +1,3 @@
-
 <?php
 include 'connection.php';
 error_reporting(E_ALL);
@@ -9,15 +8,11 @@ require 'admin/PHPMailer/src/Exception.php';
 require 'admin/PHPMailer/src/PHPMailer.php';
 require 'admin/PHPMailer/src/SMTP.php';
 
-//echo $_SERVER['REMOTE_ADDR'];
-//echo $_SERVER['HTTP_USER_AGENT'];
 // Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 $mail = new PHPMailer(true);
-// Database connection
-
 
 // Process login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -105,26 +100,32 @@ function fetchLocation($ip_address) {
 }
 
 function sendVerificationEmail($email, $code) {
-    //$mail = new PHPMailer\PHPMailer\PHPMailer();
-    $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host = 'smtp.example.com'; // Replace with your SMTP server
-    $mail->SMTPAuth = true;
-    $mail->Username = 'kyebejeanu@gmail.com';
-    $mail->Password = 'krwr vqdj vzmq fiby';
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+    global $mail;  // Reusing the already instantiated PHPMailer object
 
-    // Sender and recipient settings
-    $mail->setFrom('kyebejeanu@gmail.com', 'RFID GPMS');
-    $mail->addAddress($email);
+    try {
+        // SMTP Settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
+        $mail->SMTPAuth = true;
+        $mail->Username = 'kyebejeanu@gmail.com';
+        $mail->Password = 'krwr vqdj vzmq fiby'; // Use App Password if 2FA is enabled
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
-    $mail->isHTML(true);
-    $mail->Subject = 'Verification Required';
-    $mail->Body = "Your verification code is <strong>$code</strong>";
+        // Sender and recipient settings
+        $mail->setFrom('kyebejeanu@gmail.com', 'RFID GPMS');
+        $mail->addAddress($email);
 
-    if (!$mail->send()) {
-        echo "Error sending email: " . $mail->ErrorInfo;
+        $mail->isHTML(true);
+        $mail->Subject = 'Verification Required';
+        $mail->Body = "Your verification code is <strong>$code</strong>";
+
+        // Send email
+        if (!$mail->send()) {
+            echo "Error sending email: " . $mail->ErrorInfo;
+        }
+    } catch (Exception $e) {
+        echo "Mailer Error: " . $e->getMessage();
     }
 }
 
@@ -134,24 +135,32 @@ function sendOTP($contact, $code) {
 }
 
 function sendLoginNotification($email, $ip_address, $user_agent) {
-    //$mail = new PHPMailer\PHPMailer\PHPMailer();
-    $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host = 'smtp.example.com'; // Replace with your SMTP server
-    $mail->SMTPAuth = true;
-    $mail->Username = 'kyebejeanu@gmail.com';
-        $mail->Password = 'krwr vqdj vzmq fiby';
+    global $mail;  // Reusing the already instantiated PHPMailer object
+
+    try {
+        // SMTP Settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
+        $mail->SMTPAuth = true;
+        $mail->Username = 'kyebejeanu@gmail.com';
+        $mail->Password = 'krwr vqdj vzmq fiby'; // Use App Password if 2FA is enabled
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-    
+
         // Sender and recipient settings
         $mail->setFrom('kyebejeanu@gmail.com', 'RFID GPMS');
-    $mail->addAddress($email);
+        $mail->addAddress($email);
 
-    $mail->isHTML(true);
-    $mail->Subject = 'New Device Login Detected';
-    $mail->Body = "We detected a login from a new device. If this was not you, secure your account immediately.";
+        $mail->isHTML(true);
+        $mail->Subject = 'New Device Login Detected';
+        $mail->Body = "We detected a login from a new device. If this was not you, secure your account immediately.";
 
-    $mail->send();
+        // Send email
+        if (!$mail->send()) {
+            echo "Error sending email: " . $mail->ErrorInfo;
+        }
+    } catch (Exception $e) {
+        echo "Mailer Error: " . $e->getMessage();
+    }
 }
 ?>
