@@ -82,19 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-align: center;
             margin-top: 10px;
         }
-        .back-link {
-            text-align: center;
-            margin-top: 20px;
-            display: block;
-            padding: 10px;
-            background-color: #ffc107;
-            color: #fff;
-            border-radius: 5px;
+        a {
+            color: #3498db;
             text-decoration: none;
-            font-size: 14px;
-            width: 150px;
-            margin-left: auto;
-            margin-right: auto;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
