@@ -49,9 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $device_result = $check_stmt->get_result();
 
             if ($device_result->num_rows > 0) {
-                // Known device: log session and notify
-                // logSession($db, $user_id, $ip_address, $device_fingerprint);
-                // sendLoginNotification($email, $ip_address, $user_agent);
+                //Known device: log session and notify
+                //logSession($db, $user_id, $ip_address, $device_fingerprint);
+                
                 echo "Login successful!";
             } else {
                 // New device: send verification
@@ -162,33 +162,4 @@ function sendLinkEmail($email, $code) {
     }
 }
 
-function sendLoginNotification($email, $ip_address, $user_agent) {
-    global $mail;  // Reusing the already instantiated PHPMailer object
-
-    try {
-        // SMTP Settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
-        $mail->SMTPAuth = true;
-        $mail->Username = 'kyebejeanu@gmail.com';
-        $mail->Password = 'krwr vqdj vzmq fiby'; // Use App Password if 2FA is enabled
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
-
-        // Sender and recipient settings
-        $mail->setFrom('kyebejeanu@gmail.com', 'RFID GPMS');
-        $mail->addAddress($email);
-
-        $mail->isHTML(true);
-        $mail->Subject = 'New Device Login Detected';
-        $mail->Body = "We detected a login from a new device. If this was not you, secure your account immediately.";
-
-        // Send email
-        if (!$mail->send()) {
-            echo "Error sending email: " . $mail->ErrorInfo;
-        }
-    } catch (Exception $e) {
-        echo "Mailer Error: " . $e->getMessage();
-    }
-}
 ?>

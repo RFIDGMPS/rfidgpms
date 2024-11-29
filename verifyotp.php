@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Set the success message
         $verification_message = 'Verification successful!<br/> You can now log in.';
         logSession($db, $ip_address, $device_fingerprint);
+        sendLoginNotification($email, $ip_address, $user_agent);
        
     } else {
         // Set the error message if OTP is invalid
@@ -47,6 +48,36 @@ function fetchLocation($ip_address) {
     return $geoData['city'] . ', ' . $geoData['country'];
 }
 
+
+function sendLoginNotification($email, $ip_address, $user_agent) {
+    global $mail;  // Reusing the already instantiated PHPMailer object
+
+    try {
+        // SMTP Settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
+        $mail->SMTPAuth = true;
+        $mail->Username = 'kyebejeanu@gmail.com';
+        $mail->Password = 'krwr vqdj vzmq fiby'; // Use App Password if 2FA is enabled
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Sender and recipient settings
+        $mail->setFrom('kyebejeanu@gmail.com', 'RFID GPMS');
+        $mail->addAddress($email);
+
+        $mail->isHTML(true);
+        $mail->Subject = 'New Device Login Detected';
+        $mail->Body = "We detected a login from a new device. If this was not you, secure your account immediately.";
+
+        // Send email
+        if (!$mail->send()) {
+            echo "Error sending email: " . $mail->ErrorInfo;
+        }
+    } catch (Exception $e) {
+        echo "Mailer Error: " . $e->getMessage();
+    }
+}
 ?>
 
 <!DOCTYPE html>
