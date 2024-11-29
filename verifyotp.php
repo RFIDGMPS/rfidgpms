@@ -15,7 +15,7 @@ include 'admin/PHPMailer/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
+$mail = new PHPMailer(true);
 $verification_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -5,10 +5,16 @@ $ip_address = $_SERVER['REMOTE_ADDR'];
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 $device_fingerprint = hash('sha256', $ip_address . $user_agent);
 $email = $_SESSION['email'];
+include 'admin/PHPMailer/src/Exception.php';
+include 'admin/PHPMailer/src/PHPMailer.php';
+include 'admin/PHPMailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 // Get token and code from URL
 $token = $_GET['token'] ?? '';
 $code = $_GET['code'] ?? '';
-
+$mail = new PHPMailer(true);
 if (!$token || !$code) {
     $verification_message =  "Invalid verification link.";
     exit;
