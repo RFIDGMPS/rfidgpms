@@ -49,10 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $device_result = $check_stmt->get_result();
 
             if ($device_result->num_rows > 0) {
-                //Known device: log session and notify
-                //logSession($db, $user_id, $ip_address, $device_fingerprint);
-                
-                echo "Login successful!";
+                header("Location: verifyotp");
+                exit();
             } else {
                 // New device: send verification
                 $verification_code = rand(100000, 999999);
