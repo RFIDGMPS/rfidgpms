@@ -7,10 +7,10 @@ $sql = "ALTER TABLE user
         ADD email VARCHAR(255) NOT NULL AFTER contact";
 
 // Execute the query
-if ($conn->query($sql) === TRUE) {
+if ($db->query($sql) === TRUE) {
     echo "Columns 'contact' and 'email' added successfully.";
 } else {
-    echo "Error updating table: " . $conn->error;
+    echo "Error updating table: " . $db->error;
 }
 
 // Close the connection
