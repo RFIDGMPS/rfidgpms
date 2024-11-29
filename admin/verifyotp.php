@@ -8,7 +8,7 @@ $email = $_SESSION['email'];
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 // Include necessary files
-include 'connection.php';
+
 include 'PHPMailer/src/Exception.php';
 include 'PHPMailer/src/PHPMailer.php';
 include 'PHPMailer/src/SMTP.php';
