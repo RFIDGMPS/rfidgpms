@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <?php include 'header.php';?>
-<!-- <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Password</title>
@@ -60,7 +59,7 @@
         }
 
         button {
-            background: #4e54c8;
+            background: #ffc107;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -71,7 +70,7 @@
         }
 
         button:hover {
-            background: #3e41a8;
+            background: #dda80a;
         }
 
         .form-group .error {
@@ -100,7 +99,7 @@
             text-decoration: underline;
         }
     </style>
-</head> -->
+</head>
 <body>
     <div class="container">
         <h2>Change Password</h2>
