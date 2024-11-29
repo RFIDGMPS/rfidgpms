@@ -21,13 +21,13 @@ $mail = new PHPMailer(true);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Input values
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    //$password = $_POST['password'];
     $captcha = $_POST['captcha'];
     $verification_method = $_POST['verification_method']; // 'email' or 'contact'
 
     // Validate CAPTCHA
     if ($captcha !== $_SESSION['captcha_code']) {
-        echo "Invalid CAPTCHA!";
+        $verification_message =  "Invalid CAPTCHA!";
         exit;
     }
 
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($verification_method === 'otp') {
                     sendOTPEmail($email, $verification_code);
-                    echo "Verification code sent to your email.";
+                   
                     $_SESSION['verification_code']=$verification_code;
                     $_SESSION['email'] = $email;
                     header("Location: verifyotp");
@@ -67,14 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $verification_message = 'Verification link sent to your email.';
                 } 
                 else {
-                    echo "Invalid verification method.";
+                    $verification_message =  "Invalid verification method.";
                 }
 
                
             
        
     } else {
-        echo "Invalid email or password.";
+        $verification_message = "Invalid email.";
     }
 
     $stmt->close();
