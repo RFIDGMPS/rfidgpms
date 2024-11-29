@@ -67,14 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $verification_message = 'Verification link sent to your email.';
                 } 
                 else {
-                    echo "Invalid verification method.";
+                    $verification_message = "Invalid verification method.";
                 }
 
                
             
        
     } else {
-        echo "Invalid email.";
+        $verification_message = "Invalid email.";
     }
 
     $stmt->close();
