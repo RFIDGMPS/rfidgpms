@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Password</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        /* Inline CSS for a beautiful layout */
+        /* Same beautiful layout as before */
         body {
             font-family: 'Arial', sans-serif;
-         
+            background: #f4f4f9;
             color: #333;
             margin: 0;
             display: flex;
@@ -71,18 +72,6 @@
 
         button:hover {
             background: #dda80a;
-        }
-
-        .form-group .error {
-            color: #e74c3c;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .form-group .success {
-            color: #2ecc71;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
         }
 
         .link {
