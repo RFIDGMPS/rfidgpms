@@ -4,7 +4,7 @@ session_start();
 $ip_address = $_SERVER['REMOTE_ADDR'];
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 $device_fingerprint = hash('sha256', $ip_address . $user_agent);
-
+$email = $_SESSION['email'];
 // Get token and code from URL
 $token = $_GET['token'] ?? '';
 $code = $_GET['code'] ?? '';
@@ -19,8 +19,9 @@ if ($token === $_SESSION['verification_token']) {
     // You can now validate the code as needed, e.g., check if the code matches the one sent via email
     if ($code === $_SESSION['verification_code']) {
         $verification_message = "Verification successful! You can now log in.";
-        logSession($db, $ip_address, $device_fingerprint);
         sendLoginNotification($email, $ip_address, $user_agent);
+        logSession($db, $ip_address, $device_fingerprint);
+        
     } else {
         $verification_message = "Invalid verification code.";
     }
