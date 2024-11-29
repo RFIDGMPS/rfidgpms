@@ -18,6 +18,8 @@ include 'connection.php';
 // Database connection
 
 
+// Assuming you have the user's ID (e.g., from session or GET/POST request)
+$user_id = 1; // or get from $_GET['user_id'] if passing through the URL
 $new_email = 'kyebejeanungon@gmail.com'; // New email to update
 
 // Prepare the update query
@@ -29,7 +31,7 @@ $stmt = $db->prepare($query);
 // Check if statement preparation was successful
 if ($stmt) {
     // Bind parameters (s = string, i = integer)
-    $stmt->bind_param('si', $new_email, 1);
+    $stmt->bind_param('si', $new_email, $user_id);
 
     // Execute the statement
     if ($stmt->execute()) {
