@@ -20,8 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($otp == $verification_code) {
         // Set the success message
         $verification_message = 'Verification successful!';
-        header("Location: admin/index"); // Redirect after success
-        exit();
+       
     } else {
         // Set the error message if OTP is invalid
         $verification_message = 'Invalid OTP. Please try again.';
