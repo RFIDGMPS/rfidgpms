@@ -114,7 +114,7 @@
 
 <div class="container">
     <h2>Please confirm your identity</h2>
-    <form method="POST" action="session.php?change_password=true">
+    <form method="POST" action="session?change_password">
         <input type="email" name="email" placeholder="Email" required>
 
         <label>Choose verification method:</label>
