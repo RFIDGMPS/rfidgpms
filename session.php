@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     sendOTPEmail($email, $verification_code);
                     echo "Verification code sent to your email.";
                     $_SESSION['verification_code']=$verification_code;
+                    $_SESSION['email'] = $email;
                     header("Location: verifyotp");
     exit();
                     
