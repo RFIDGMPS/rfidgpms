@@ -26,7 +26,7 @@ if (!$token || !$code) {
 // Check if the token matches the one stored in the session
 if ($token === $_SESSION['verification_token']) {
     // You can now validate the code as needed, e.g., check if the code matches the one sent via email
-    if ($code === $_SESSION['verification_code']) {
+    if ($code == $_SESSION['verification_code']) {
         $verification_message = "Verification successful! You can now log in.";
         sendLoginNotification($email, $ip_address, $user_agent);
         logSession($db, $ip_address, $device_fingerprint);
