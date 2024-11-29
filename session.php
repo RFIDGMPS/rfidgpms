@@ -2,9 +2,9 @@
 include 'connection.php';
 //require 'vendor/autoload.php'; // PHP Mailer autoloader
 session_start();
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require 'admin/PHPMailer/src/Exception.php';
+require 'admin/PHPMailer/src/PHPMailer.php';
+require 'admin/PHPMailer/src/SMTP.php';
 
 //echo $_SERVER['REMOTE_ADDR'];
 //echo $_SERVER['HTTP_USER_AGENT'];
