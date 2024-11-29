@@ -87,6 +87,7 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
 
 <!-- Check if there's a message to display -->
 <?php if (!empty($verification_message)): ?>
+    <body>
     <script>
         // Display SweetAlert based on the message
         Swal.fire({
@@ -99,4 +100,5 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
             }
         });
     </script>
+    </body>
 <?php endif; ?>
