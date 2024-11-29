@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Password</title>
-    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        /* Same beautiful layout as before */
         body {
             font-family: 'Arial', sans-serif;
             background: #f4f4f9;
@@ -73,26 +71,12 @@
         button:hover {
             background: #dda80a;
         }
-
-        .link {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .link a {
-            color: #4e54c8;
-            text-decoration: none;
-        }
-
-        .link a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Change Password</h2>
-        <form action="process_change_password.php" method="POST">
+        <form id="changePasswordForm">
             <div class="form-group">
                 <label for="current_password">Current Password</label>
                 <input type="password" id="current_password" name="current_password" placeholder="Enter current password" required>
@@ -107,9 +91,45 @@
             </div>
             <button type="submit">Update Password</button>
         </form>
-        <div class="link">
-            <a href="index">Login</a>
-        </div>
     </div>
+
+    <script>
+        document.getElementById('changePasswordForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent form from submitting normally
+
+            const formData = new FormData(this);
+
+            try {
+                const response = await fetch('process_change_password.php', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: result.message,
+                    }).then(() => {
+                        window.location.href = 'index'; // Redirect on success
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: result.message,
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Unexpected Error',
+                    text: 'Something went wrong. Please try again.',
+                });
+            }
+        });
+    </script>
 </body>
 </html>

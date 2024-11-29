@@ -9,15 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = 1; // Adjust based on your session logic
 
     if ($new_password !== $confirm_password) {
-        echo "<script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'New passwords do not match!'
-                }).then(() => {
-                    window.location.href = 'change_password';
-                });
-              </script>";
+        echo json_encode(['status' => 'error', 'message' => 'New passwords do not match!']);
         exit;
     }
 
@@ -32,15 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->fetch();
 
         if (!password_verify($current_password, $hashed_password)) {
-            echo "<script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Incorrect Password',
-                        text: 'The current password you entered is incorrect.'
-                    }).then(() => {
-                        window.location.href = 'change_password';
-                    });
-                  </script>";
+            echo json_encode(['status' => 'error', 'message' => 'The current password you entered is incorrect.']);
             exit;
         }
 
@@ -50,42 +34,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $update_stmt->bind_param('si', $new_hashed_password, $user_id);
 
         if ($update_stmt->execute()) {
-            echo "<script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Password updated successfully!'
-                    }).then(() => {
-                        window.location.href = 'index';
-                    });
-                  </script>";
+            echo json_encode(['status' => 'success', 'message' => 'Password updated successfully!']);
         } else {
-            echo "<script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'An error occurred. Please try again.'
-                    }).then(() => {
-                        window.location.href = 'change_password';
-                    });
-                  </script>";
+            echo json_encode(['status' => 'error', 'message' => 'An error occurred. Please try again.']);
         }
     } else {
-        echo "<script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'User Not Found',
-                    text: 'Unable to find user details. Please try again.'
-                }).then(() => {
-                    window.location.href = 'change_password';
-                });
-              </script>";
+        echo json_encode(['status' => 'error', 'message' => 'User not found.']);
     }
 
     $stmt->close();
     $db->close();
 } else {
-    header('Location: change_password');
-    exit;
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request.']);
 }
 ?>
