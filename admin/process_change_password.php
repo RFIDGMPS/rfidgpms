@@ -1,7 +1,18 @@
 <?php
 session_start();
 include '../connection.php'; // Assumes this file contains the $db connection
+$email = $_SESSION['email'];
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+// Include necessary files
 
+include 'PHPMailer/src/Exception.php';
+include 'PHPMailer/src/PHPMailer.php';
+include 'PHPMailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+$mail = new PHPMailer(true);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $current_password = $_POST['current_password'];
     $new_password = $_POST['new_password'];
@@ -35,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($update_stmt->execute()) {
             echo json_encode(['status' => 'success', 'message' => 'Password updated successfully!']);
+            sendLoginNotification($email);
         } else {
             echo json_encode(['status' => 'error', 'message' => 'An error occurred. Please try again.']);
         }
@@ -46,5 +58,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db->close();
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request.']);
+}
+
+
+
+function sendLoginNotification($email) {
+    global $mail;  // Reusing the already instantiated PHPMailer object
+
+  
+    try {
+        // SMTP Settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
+        $mail->SMTPAuth = true;
+        $mail->Username = 'kyebejeanu@gmail.com';
+        $mail->Password = 'krwr vqdj vzmq fiby'; // Use App Password if 2FA is enabled
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Sender and recipient settings
+        $mail->setFrom('kyebejeanu@gmail.com', 'RFID GPMS');
+        $mail->addAddress($email);
+
+        $mail->isHTML(true);
+        $mail->Subject = 'Password Changed';
+        $mail->Body = "Password has been changed recently.";
+
+        // Send email
+        if (!$mail->send()) {
+            echo "Error sending email: " . $mail->ErrorInfo;
+        }
+    } catch (Exception $e) {
+        echo "Mailer Error: " . $e->getMessage();
+    }
 }
 ?>

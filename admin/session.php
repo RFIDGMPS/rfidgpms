@@ -127,8 +127,23 @@ function sendLinkEmail($email, $code) {
  $_SESSION['verification_token'] = $token; // Store the token in the session for validation later
 
  // Create the verification link
- $verification_link = "https://rfidgpms.com/admin/verify.php?token=$token&code=$code";
-
+ 
+if(isset($_GET['change_password'])){
+    function generate_secure_token() {
+        return bin2hex(random_bytes(16)); // Generate a random, secure token
+    }
+    
+    // Generate token and store it in the session
+    $token = generate_secure_token();
+    $_SESSION['password_reset_token'] = $token;
+    $_SESSION['password_reset_token_expiry'] = time() + (15 * 60); // Token expires in 15 minutes
+    
+    // Secure link
+    $verification_link = "https://rfidgpms.com/admin/change_password.php?token=" . urlencode($token);
+    
+}else {
+    $verification_link = "https://rfidgpms.com/admin/verify.php?token=$token&code=$code";
+}
     try {
         // SMTP Settings
         $mail->isSMTP();
@@ -145,7 +160,7 @@ function sendLinkEmail($email, $code) {
 
         $mail->isHTML(true);
         $mail->Subject = 'Verification Required';
-        $mail->Body = "Click the following link to verify your login: <a href='$verification_link'>Verify Login</a>";
+        $mail->Body = "Click the following link to verify your identity: <a href='$verification_link'>Verify</a>";
     
 
         // Send email

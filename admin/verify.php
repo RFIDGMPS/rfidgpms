@@ -91,6 +91,7 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
 
         $mail->isHTML(true);
         $mail->Subject = 'New Device Login Detected';
+       
         $mail->Body = "We detected a login from a new device. If this was not you, please <a href='$secure_link'>secure your account</a> immediately.";
 
         // Send email

@@ -25,10 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if OTP matches the code sent
     if ($otp == $verification_code) {
         // Set the success message
+        if(isset($_GET['change_password'])){
+header('Location: change_password');
+exit();
+        }else {
         $verification_message = 'Verification successful!<br/> You can now log in.';
         sendLoginNotification($email, $ip_address, $user_agent);
         logSession($db, $ip_address, $device_fingerprint);
-        
+        }
        
     } else {
         // Set the error message if OTP is invalid
