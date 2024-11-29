@@ -119,7 +119,7 @@
             <button type="submit">Update Password</button>
         </form>
         <div class="link">
-            <a href="dashboard.php">Back to Dashboard</a>
+            <a href="dashboard.php">Login</a>
         </div>
     </div>
 </body>
