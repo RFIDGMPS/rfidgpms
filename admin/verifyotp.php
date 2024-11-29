@@ -37,13 +37,7 @@ exit();
     } else {
         // Set the error message if OTP is invalid
         $verification_message = 'Invalid OTP. Please try again.';
-        if(isset($_GET['change_password'])){
-            header('Location: verifyotp?change_password');
-            exit();
-                    }else {
-                        header('Location: verifyotp');
-            exit();
-                    }
+       
     }
 }
 
