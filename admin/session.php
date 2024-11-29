@@ -28,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate CAPTCHA
     if ($captcha !== $_SESSION['captcha_code']) {
         $verification_message =  "Invalid CAPTCHA!";
-       
+        
     }
-
+else {
     // Check user credentials
     $query = "SELECT id, password, contact FROM user WHERE email = ?";
     $stmt = $db->prepare($query);
@@ -72,10 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                
             
-       
+            
     } else {
         $verification_message = "Invalid email.";
     }
+}
 
     $stmt->close();
 }
