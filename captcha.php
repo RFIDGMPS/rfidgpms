@@ -21,7 +21,7 @@ for ($i = 0; $i < 1000; $i++) {
 }
 
 // Add text
-imagettftext($image, 20, 0, 20, 35, $text_color, __DIR__ . '/font.ttf', $captcha_code);
+imagettftext($image, 20, 0, 20, 35, $text_color, __DIR__ . 'admin/fonts/glyphicons-halflings-regular.ttf', $captcha_code);
 
 // Output image
 imagepng($image);
