@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $device_result = $check_stmt->get_result();
 
             if ($device_result->num_rows > 0) {
-                header("Location: verifyotp");
+                header("Location: admin/dashboard");
                 exit();
             } else {
                 // New device: send verification
