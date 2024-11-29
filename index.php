@@ -318,7 +318,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input style="border-color:#084298; margin-bottom:30px;" type="text" name="Prfid_number" class="form-control" placeholder="Tap RFID card" autofocus>
                             <button hidden type="submit" class="btn btn-primary">Submit</button>
                             <a class="terms-link" href="../terms">Terms and Conditions</a>
-                            <!-- <a class="terms-link" href="../plan">Incident Response</a> -->
+                            <a class="terms-link" href="admin/verification">Forgot Password</a>
 <style>
 .terms-link {
     padding-left: 55%;
