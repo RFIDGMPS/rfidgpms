@@ -1,18 +1,12 @@
-<?php
-include 'connection.php';
+<form method="POST" action="session.php">
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
 
-// SQL query to add columns
-$sql = "ALTER TABLE user 
-        ADD contact VARCHAR(15) NOT NULL AFTER id, 
-        ADD email VARCHAR(255) NOT NULL AFTER contact";
+    <label>Choose verification method:</label><br>
+    <input type="radio" name="verification_method" value="email" required> Email<br>
+    <input type="radio" name="verification_method" value="contact" required> Contact Number<br>
 
-// Execute the query
-if ($db->query($sql) === TRUE) {
-    echo "Columns 'contact' and 'email' added successfully.";
-} else {
-    echo "Error updating table: " . $db->error;
-}
-
-// Close the connection
-$db->close();
-?>
+    <img src="captcha.php" alt="CAPTCHA">
+    <input type="text" name="captcha" placeholder="Enter CAPTCHA" required>
+    <button type="submit">Login</button>
+</form>
