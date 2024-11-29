@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <?php include 'header.php';?>
+<!-- <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Password</title>
@@ -99,7 +100,7 @@
             text-decoration: underline;
         }
     </style>
-</head>
+</head> -->
 <body>
     <div class="container">
         <h2>Change Password</h2>
