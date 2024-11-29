@@ -64,10 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($verification_method === 'email') {
                     sendVerificationEmail($email, $verification_code);
                     echo "Verification code sent to your email.";
-                } elseif ($verification_method === 'contact') {
-                    sendOTP($contact, $verification_code);
-                    echo "OTP sent to your contact number.";
-                } else {
+                } 
+                // elseif ($verification_method === 'contact') {
+                //     sendOTP($contact, $verification_code);
+                //     echo "OTP sent to your contact number.";
+                // } 
+                else {
                     echo "Invalid verification method.";
                 }
 
@@ -129,10 +131,10 @@ function sendVerificationEmail($email, $code) {
     }
 }
 
-function sendOTP($contact, $code) {
-    // Replace this block with your SMS gateway API integration
-    echo "Simulated sending OTP $code to contact $contact.";
-}
+// function sendOTP($contact, $code) {
+//     // Replace this block with your SMS gateway API integration
+//     echo "Simulated sending OTP $code to contact $contact.";
+// }
 
 function sendLoginNotification($email, $ip_address, $user_agent) {
     global $mail;  // Reusing the already instantiated PHPMailer object
