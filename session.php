@@ -180,7 +180,7 @@ function sendLinkEmail($email, $code) {
             icon: 'warning', // Use the 'warning' icon which is usually orange
             confirmButtonText: 'OK'
         }).then((result) => {
-            if (result.isConfirmed && '<?php echo ($otp == $verification_code) ? "success" : "error"; ?>' === "success") {
+            if (result.isConfirmed) {
                 window.location.href = "admin/index"; // Redirect to admin page on successful OTP
             }
         });
