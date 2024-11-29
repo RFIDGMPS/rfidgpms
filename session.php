@@ -172,6 +172,7 @@ function sendLinkEmail($email, $code) {
 ?>
 
 <?php if (!empty($verification_message)): ?>
+    <body>
     <script>
         // Display SweetAlert based on the message
         Swal.fire({
@@ -184,4 +185,5 @@ function sendLinkEmail($email, $code) {
             }
         });
     </script>
+    </body>
 <?php endif; ?>
