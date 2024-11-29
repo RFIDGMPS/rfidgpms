@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 echo $ip_address;
                 echo $device_fingerprint;
+                exit();
                 // New device: send verification
                 $verification_code = rand(100000, 999999);
                 $_SESSION['verification_code'] = $verification_code;
