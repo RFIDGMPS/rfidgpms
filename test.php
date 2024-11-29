@@ -1,4 +1,4 @@
-<!-- 
+
 <form method="POST" action="session.php">
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Password" required>
@@ -23,30 +23,12 @@
             window.location.href = 'verifyotp.php';
         }
     });
-</script> -->
-<?php
-include 'connection.php'; // Assuming connection.php initializes the $db variable with a database connection
+</script>
 
-// SQL query to delete all rows from the admin_sessions table
-$query = "DELETE FROM admin_sessions"; 
-
-// Prepare the query using the $db object
-$stmt = $db->prepare($query);
-
-if ($stmt->execute()) {
-    echo "All records from admin_sessions have been deleted.";
-} else {
-    echo "Error deleting records: " . $stmt->error;
-}
-
-// Close the prepared statement
-$stmt->close();
-?>
 
 
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 include 'connection.php';
 session_start();
 
