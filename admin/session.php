@@ -186,7 +186,9 @@ if(isset($_GET['change_password'])){
             if (result.isConfirmed) {
                 <?php if (strpos($verification_message, "sent") !== false || strpos($verification_message, "Verification code") !== false): ?>
                     window.location.href = "index"; // Redirect to admin page on success
-                <?php else: ?>
+                    <?php elseif (isset($_GET['change_password'])): ?>
+                        window.location.href = "forgot_password";
+                    <?php else: ?>
                     window.location.href = "verification"; // Redirect to new_device.php on error
                 <?php endif; ?>
             }
