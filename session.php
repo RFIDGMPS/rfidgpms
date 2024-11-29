@@ -1,6 +1,8 @@
 
 <?php
 include 'connection.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 //require 'vendor/autoload.php'; // PHP Mailer autoloader
 session_start();
 require 'admin/PHPMailer/src/Exception.php';
