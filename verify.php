@@ -32,7 +32,7 @@ if ($token === $_SESSION['verification_token']) {
         logSession($db, $ip_address, $device_fingerprint);
         
     } else {
-        $verification_message = "Invalid verification code.";
+        $verification_message = "Invalid verification code.". $_SESSION['verification_code'];
     }
 } else {
     $verification_message =  "Invalid verification link.";
