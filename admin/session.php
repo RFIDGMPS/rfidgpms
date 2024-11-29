@@ -1,6 +1,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
-include 'connection.php';
+include '../connection.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 //require 'vendor/autoload.php'; // PHP Mailer autoloader
