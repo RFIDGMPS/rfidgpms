@@ -14,30 +14,36 @@ include 'PHPMailer/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 // Get token and code from URL
 $token = $_GET['token'] ?? '';
 $code = $_GET['code'] ?? '';
 $mail = new PHPMailer(true);
+$verification_status = ''; // To track success or failure
+
 if (!$token || !$code) {
-    $verification_message =  "Invalid verification link.";
-    exit;
-}
-
-// Check if the token matches the one stored in the session
-if ($token === $_SESSION['verification_token']) {
-    // You can now validate the code as needed, e.g., check if the code matches the one sent via email
-    if ($code == $_SESSION['verification_code']) {
-        $verification_message = "Verification successful! <br/>You can now log in.";
-        sendLoginNotification($email, $ip_address, $user_agent);
-        logSession($db, $ip_address, $device_fingerprint);
-        
-    } else {
-        $verification_message = "Invalid verification code.";
-    }
+    $verification_message = "Invalid verification link.";
+    $verification_status = 'error';
 } else {
-    $verification_message =  "Invalid verification link.";
+    // Check if the token matches the one stored in the session
+    if ($token === $_SESSION['verification_token']) {
+        // Validate the code
+        if ($code == $_SESSION['verification_code']) {
+            $verification_message = "Verification successful! <br/>You can now log in.";
+            $verification_status = 'success';
+            sendLoginNotification($email, $ip_address, $user_agent);
+            logSession($db, $ip_address, $device_fingerprint);
+        } else {
+            $verification_message = "Invalid verification code.";
+            $verification_status = 'error';
+        }
+    } else {
+        $verification_message = "Invalid verification link.";
+        $verification_status = 'error';
+    }
 }
 
+// Function to log the session details
 function logSession($db, $ip_address, $device_fingerprint) {
     $location = fetchLocation($ip_address);
     $query = "INSERT INTO admin_sessions (location, ip_address, device, date_logged) VALUES (?, ?, ?, NOW())";
@@ -47,13 +53,13 @@ function logSession($db, $ip_address, $device_fingerprint) {
     $stmt->close();
 }
 
-
+// Function to fetch the user's location based on IP
 function fetchLocation($ip_address) {
     $geoData = json_decode(file_get_contents("http://ip-api.com/json/$ip_address"), true);
     return $geoData['city'] . ', ' . $geoData['country'];
 }
 
-
+// Function to send login notification email
 function sendLoginNotification($email, $ip_address, $user_agent) {
     global $mail;  // Reusing the already instantiated PHPMailer object
 
@@ -101,14 +107,16 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
 <?php if (!empty($verification_message)): ?>
     <body>
     <script>
-        // Display SweetAlert based on the message
+        // Display SweetAlert based on the verification status
         Swal.fire({
-            title: '<?php echo $verification_message; ?>',
-            icon: 'success',
+            title: '<?php echo $verification_status === "success" ? "Success!" : "Error!"; ?>',
+            html: '<?php echo $verification_message; ?>',
+            icon: '<?php echo $verification_status; ?>',
             confirmButtonText: 'OK'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "index"; // Redirect to admin page on successful OTP
+                // Redirect based on verification status
+                window.location.href = "<?php echo $verification_status === 'success' ? 'index' : 'login.php'; ?>";
             }
         });
     </script>
