@@ -54,6 +54,18 @@ function fetchLocation($ip_address) {
 function sendLoginNotification($email, $ip_address, $user_agent) {
     global $mail;  // Reusing the already instantiated PHPMailer object
 
+    function generate_secure_token() {
+        return bin2hex(random_bytes(16)); // Generate a random, secure token
+    }
+    
+    // Generate token and store it in the session
+    $token = generate_secure_token();
+    $_SESSION['password_reset_token'] = $token;
+    $_SESSION['password_reset_token_expiry'] = time() + (15 * 60); // Token expires in 15 minutes
+    
+    // Secure link
+    $secure_link = "https://rfidgpms.com/admin/change_password.php?token=" . urlencode($token);
+    
     try {
         // SMTP Settings
         $mail->isSMTP();
@@ -70,7 +82,7 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
 
         $mail->isHTML(true);
         $mail->Subject = 'New Device Login Detected';
-        $mail->Body = "We detected a login from a new device. If this was not you, <a href='change_password'>secure your account</a> immediately. ";
+        $mail->Body = "We detected a login from a new device. If this was not you, please <a href='$secure_link'>secure your account</a> immediately.";
 
         // Send email
         if (!$mail->send()) {
