@@ -164,7 +164,7 @@
 
 <?php
 
-include 'connection.php';
+include '../connection.php';
 session_start();
 
 // Query to fetch admin session data
