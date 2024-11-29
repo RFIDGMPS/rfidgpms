@@ -26,7 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($otp == $verification_code) {
         // Set the success message
         if(isset($_GET['change_password'])){
-header('Location: change_password');
+
+            function generate_secure_token() {
+                return bin2hex(random_bytes(16)); // Generate a random, secure token
+            }
+            
+            // Generate token and store it in the session
+            $token = generate_secure_token();
+            $_SESSION['password_reset_token'] = $token;
+            $_SESSION['password_reset_token_expiry'] = time() + (15 * 60); // Token expires in 15 minutes
+            
+           
+header('Location: change_password?token=' . urlencode($token));
+
+
 exit();
         }else {
         $verification_message = 'Verification successful!<br/> You can now log in.';
@@ -208,6 +221,7 @@ $action_link = 'verifyotp';
         }).then((result) => {
             if (result.isConfirmed && '<?php echo ($otp == $verification_code) ? "success" : "error"; ?>' === "success") {
                 <?php if (isset($_GET['change_password'])): ?>
+                    
                         window.location.href = "forgot_password";
                         <?php else: ?>
                 window.location.href = "index"; // Redirect to admin page on successful OTP
