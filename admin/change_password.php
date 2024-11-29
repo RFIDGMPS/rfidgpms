@@ -9,7 +9,7 @@
         /* Inline CSS for a beautiful layout */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+         
             color: #333;
             margin: 0;
             display: flex;
