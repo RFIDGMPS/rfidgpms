@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
 include 'connection.php';
 error_reporting(E_ALL);
@@ -72,8 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } 
                 elseif ($verification_method === 'link') {
                     sendLinkEmail($email, $verification_code);
-                    echo "Verification link sent to your email.";
-                    
+                 
+                    $_SESSION['verification_code']=$verification_code;
+                    $_SESSION['email'] = $email;
+                    $verification_message = 'Verification link sent to your email.';
                 } 
                 else {
                     echo "Invalid verification method.";
@@ -167,3 +170,18 @@ function sendLinkEmail($email, $code) {
 }
 
 ?>
+
+<?php if (!empty($verification_message)): ?>
+    <script>
+        // Display SweetAlert based on the message
+        Swal.fire({
+            title: '<?php echo $verification_message; ?>',
+            icon: 'warning', // Use the 'warning' icon which is usually orange
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed && '<?php echo ($otp == $verification_code) ? "success" : "error"; ?>' === "success") {
+                window.location.href = "admin/index"; // Redirect to admin page on successful OTP
+            }
+        });
+    </script>
+<?php endif; ?>
