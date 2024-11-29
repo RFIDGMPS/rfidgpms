@@ -173,8 +173,15 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
 
 <div class="container">
     <h2>Verify OTP</h2>
-
-    <form action="verifyotp.php" method="POST">
+<?php 
+if(isset($_GET['change_password'])){
+    $action_link = 'verifyotp?change_password';
+}
+else {
+$action_link = 'verifyotp';
+}
+?>
+    <form action="<?php echo $action_link; ?>" method="POST">
         <div class="form-group">
             <label for="otp">Enter the OTP sent to your email:</label>
             <input type="text" id="otp" name="otp" required>
