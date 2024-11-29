@@ -49,13 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $device_result = $check_stmt->get_result();
 
             if ($device_result->num_rows > 0) {
-                echo $ip_address;
-                echo $device_fingerprint;
+                echo 'IP:'.$ip_address;
+                echo 'Device:'.$device_fingerprint;
                 header("Location: admin/dashboard");
                 exit();
             } else {
-                echo $ip_address;
-                echo $device_fingerprint;
+                echo 'IP:'.$ip_address;
+                echo 'Device:'.$device_fingerprint;
     //             exit();
     //             // New device: send verification
     //             $verification_code = rand(100000, 999999);
