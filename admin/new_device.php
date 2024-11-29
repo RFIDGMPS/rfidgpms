@@ -4,83 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+            font-family: 'Poppins', sans-serif;
+            background-color: #f3f4f6;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
 
-        .login-container {
-            background-color: #fff;
-            border-radius: 10px;
+        .container {
             width: 100%;
-            max-width: 400px;
-            padding: 40px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .login-container h2 {
+        h2 {
             text-align: center;
             color: #333;
             margin-bottom: 20px;
         }
 
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
         input[type="email"],
-        input[type="text"],
-        input[type="password"],
-        button {
-            width: 100%;
-            padding: 15px;
+        input[type="text"] {
+            padding: 12px;
             margin: 10px 0;
             font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s;
         }
 
         input[type="email"]:focus,
-        input[type="text"]:focus,
-        input[type="password"]:focus {
-            border-color: #2575fc;
+        input[type="text"]:focus {
+            border-color: #007bff;
             outline: none;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 5px;
         }
 
         .radio-group {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
+            gap: 20px;
+            margin: 10px 0;
         }
 
-        .captcha-section {
-            text-align: center;
+        .radio-group input {
+            margin-top: 5px;
+        }
+
+        .captcha-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin: 15px 0;
         }
 
-        .captcha-section img {
-            width: 100%;
-            max-width: 150px;
+        .captcha-container img {
+            max-width: 100%;
             margin-bottom: 10px;
         }
 
         button {
-            background-color: #2575fc;
+            padding: 12px;
+            background-color: #007bff;
             color: white;
+            font-size: 16px;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
-            font-weight: 500;
             transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #6a11cb;
+            background-color: #0056b3;
         }
 
         .back-link {
@@ -89,9 +99,9 @@
         }
 
         .back-link a {
-            color: #2575fc;
+            color: #007bff;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: bold;
         }
 
         .back-link a:hover {
@@ -102,10 +112,10 @@
 </head>
 <body>
 
-<div class="login-container">
-    <h2>Login</h2>
+<div class="container">
+    <h2>Login to Your Account</h2>
     <form method="POST" action="session.php">
-        <input type="email" name="email" placeholder="Enter your email" required>
+        <input type="email" name="email" placeholder="Email" required>
 
         <label>Choose verification method:</label>
         <div class="radio-group">
@@ -113,7 +123,7 @@
             <label><input type="radio" name="verification_method" value="otp" required> Numeric OTP</label>
         </div>
 
-        <div class="captcha-section">
+        <div class="captcha-container">
             <img src="captcha.php" alt="CAPTCHA">
             <input type="text" name="captcha" placeholder="Enter CAPTCHA" required>
         </div>
@@ -128,7 +138,6 @@
 
 </body>
 </html>
-
 
 
 <?php
