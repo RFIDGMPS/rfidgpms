@@ -231,7 +231,7 @@ if (isset($_POST['login'])) {
                         header("Location: dashboard");
                         exit();
                     } else {
-                        header("Location: new_device");
+                        header("Location: verification");
                         exit();
                     }
 
