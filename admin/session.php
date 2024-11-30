@@ -55,7 +55,12 @@ else {
                     echo "Verification code sent to your email.";
                     $_SESSION['verification_code']=$verification_code;
                     $_SESSION['email'] = $email;
+                    if(isset($_GET['change_password'])){
                     header("Location: verifyotp?change_password");
+                    }
+                    else {
+                        header("Location: verifyotp");
+                    }
     exit();
                     
                 } 
