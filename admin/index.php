@@ -209,7 +209,35 @@ if (isset($_POST['login'])) {
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 if (password_verify($password1, $row['password'])) {
-                    // Successful login
+                    
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $secretKey = '6LefppQqAAAAAJRcMXLz4S0J5Ea4SEOTE65ScM21';
+                        $token = $_POST['g-recaptcha-response'];
+                        $remoteIp = $_SERVER['REMOTE_ADDR'];
+                    
+                        // Make the POST request to verify the token
+                        $url = 'https://www.google.com/recaptcha/api/siteverify';
+                        $data = [
+                            'secret' => $secretKey,
+                            'response' => $token,
+                            'remoteip' => $remoteIp,
+                        ];
+                    
+                        $options = [
+                            'http' => [
+                                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                                'method' => 'POST',
+                                'content' => http_build_query($data),
+                            ],
+                        ];
+                    
+                        $context = stream_context_create($options);
+                        $response = file_get_contents($url, false, $context);
+                        $result = json_decode($response, true);
+                    
+                        // Check if reCAPTCHA was successful
+                        if ($result['success'] && $result['score'] >= 0.5) {
+                            // Successful login
                     $ip_address = $_SERVER['REMOTE_ADDR'];
                     $user_agent = $_SERVER['HTTP_USER_AGENT'];
                     $device_fingerprint = hash('sha256', $ip_address . $user_agent);
@@ -234,6 +262,20 @@ if (isset($_POST['login'])) {
                         header("Location: verification");
                         exit();
                     }
+                        } else {
+                            echo 'reCAPTCHA verification failed. Please try again.';
+                        }
+                    }
+                    
+                    
+
+
+
+
+
+
+
+                    
 
 
 
@@ -278,10 +320,13 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
 
 <body> 
 <script>
-   function onSubmit(token) {
-     document.getElementById("captcha").submit();
-   }
- </script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LefppQqAAAAAKunsfzmruPzJe8KcazwN5CtLakp', { action: 'submit' }).then(function(token) {
+            document.getElementById('g-recaptcha-response').value = token;
+        });
+    });
+</script>
+
     
 <div class="container-fluid position-relative bg-white d-flex p-0">
     <div class="container-fluid">
@@ -318,10 +363,7 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
                                 <label class="form-check-label" for="remember">Show Password</label>
                             </div>
                         </div>
-                        <button class="g-recaptcha" id="captcha"
-        data-sitekey="6LefppQqAAAAAKunsfzmruPzJe8KcazwN5CtLakp" 
-        data-callback='onSubmit' 
-        data-action='submit'>Submit</button>
+                        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                         <button id="but" type="submit" name="login" class="btn btn-warning py-3 w-100 mb-4">Sign In</button>
 
                         <!-- Countdown Timer -->
