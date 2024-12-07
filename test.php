@@ -1,71 +1,28 @@
 
-<form method="POST" action="session.php">
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-
-    <label>Choose verification method:</label><br>
-    <input type="radio" name="verification_method" value="link" required> Verification Link<br>
-    <input type="radio" name="verification_method" value="otp" required> Numeric OTP<br>
-
-    <img src="captcha.php" alt="CAPTCHA">
-    <input type="text" name="captcha" placeholder="Enter CAPTCHA" required>
-    <button type="submit">Login</button>
-</form>
-
-<?php
-include 'connection.php'; // Assuming connection.php initializes the $db variable with a database connection
-
-// SQL query to delete all rows from the admin_sessions table
-$query = "DELETE FROM admin_sessions"; 
-
-// Prepare the query using the $db object
-$stmt = $db->prepare($query);
-
-if ($stmt->execute()) {
-    echo "All records from admin_sessions have been deleted.";
-} else {
-    echo "Error deleting records: " . $stmt->error;
-}
-
-// Close the prepared statement
-$stmt->close();
-?>
-
-
-
-
 <?php
 
 include 'connection.php';
-session_start();
 
-// Query to fetch admin session data
-$query = "SELECT * FROM admin_sessions ORDER BY date_logged DESC"; // You can modify the order as needed
-$result = $db->query($query);
+// Assuming you already have a database connection stored in $db
+$user_id = 20240331;  // The user ID to update
 
-if ($result->num_rows > 0) {
-    echo "<table border='1'>
-            <tr>
-                <th>User ID</th>
-                <th>Location</th>
-                <th>IP Address</th>
-                <th>Device</th>
-                <th>Date Logged</th>
-            </tr>";
+// New value for the column (e.g., password, email, etc.)
+$new_value = 'new_password_value';  // Replace this with the new value you want to set
 
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>
-                <td>" . htmlspecialchars($row['user_id']) . "</td>
-                <td>" . htmlspecialchars($row['location']) . "</td>
-                <td>" . htmlspecialchars($row['ip_address']) . "</td>
-                <td>" . htmlspecialchars($row['device']) . "</td>
-                <td>" . htmlspecialchars($row['date_logged']) . "</td>
-              </tr>";
-    }
-    echo "</table>";
+// Prepared statement to update the user table
+$query = "UPDATE user SET password = ? WHERE id = ?";
+$stmt = $db->prepare($query);
+$stmt->bind_param('si', $new_value, $user_id);  // 's' for string, 'i' for integer
+$stmt->execute();
+
+// Check if the update was successful
+if ($stmt->affected_rows > 0) {
+    echo "User updated successfully.";
 } else {
-    echo "No session data available.";
+    echo "No changes made or user not found.";
 }
 
-$db->close();
+// Close the statement
+$stmt->close();
 ?>
+
