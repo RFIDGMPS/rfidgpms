@@ -12,7 +12,7 @@ if (isset($_SESSION['password_reset_token']) &&
     $token === $_SESSION['password_reset_token'] &&
     time() <= $_SESSION['password_reset_token_expiry']) {
 
-    // Optionally, clear the token to prevent reuse
+        // Optionally, clear the token to prevent reuse
     unset($_SESSION['password_reset_token']);
     unset($_SESSION['password_reset_token_expiry']);
 } else {
@@ -94,19 +94,6 @@ if (isset($_SESSION['password_reset_token']) &&
         button:hover {
             background: #dda80a;
         }
-
-        .link {
-            margin-top: 1rem;
-        }
-
-        .link a {
-            color: #4e54c8;
-            text-decoration: none;
-        }
-
-        .link a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
@@ -133,42 +120,70 @@ if (isset($_SESSION['password_reset_token']) &&
     </div>
 
     <script>
-        document.getElementById('changePasswordForm').addEventListener('submit', async function (e) {
-            e.preventDefault(); // Prevent form from submitting normally
+       document.getElementById('changePasswordForm').addEventListener('submit', async function (e) {
+    e.preventDefault(); // Prevent form from submitting normally
 
-            const formData = new FormData(this);
+    // Get the new and confirm password values
+    const newPassword = document.getElementById('new_password').value;
+    const confirmPassword = document.getElementById('confirm_password').value;
 
-            try {
-                const response = await fetch('process_change_password.php', {
-                    method: 'POST',
-                    body: formData,
-                });
+    // Password strength validation regex: At least 8 characters, upper/lowercase, number, and special character
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-                const result = await response.json();
-
-                if (result.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: result.message,
-                    }).then(() => {
-                        window.location.href = 'index'; // Redirect on success
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: result.message,
-                    });
-                }
-            } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Unexpected Error',
-                    text: 'Something went wrong. Please try again.',
-                });
-            }
+    // Check if new password meets the strength criteria
+    if (!passwordRegex.test(newPassword)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Weak Password',
+            text: 'Your password must be at least 8 characters long, include both upper and lower case letters, at least one number, and one special character.',
         });
+        return; // Stop form submission
+    }
+
+    // Check if new password and confirm password match
+    if (newPassword !== confirmPassword) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Password Mismatch',
+            text: 'The new password and confirm password do not match.',
+        });
+        return; // Stop form submission
+    }
+
+    const formData = new FormData(this);
+
+    try {
+        const response = await fetch('process_change_password.php', {
+            method: 'POST',
+            body: formData,
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: result.message,
+            }).then(() => {
+                window.location.href = 'index'; // Redirect on success
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: result.message,
+            });
+        }
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Unexpected Error',
+            text: 'Something went wrong. Please try again.',
+        });
+    }
+});
+
     </script>
 </body>
 </html>
