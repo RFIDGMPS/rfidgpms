@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $current_password = $_POST['current_password'];
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
-    $user_id = 1; // Adjust based on your session logic
+    $user_id = $_SESSION['A_id']; // Adjust based on your session logic
 
     if ($new_password !== $confirm_password) {
         echo json_encode(['status' => 'error', 'message' => 'New passwords do not match!']);

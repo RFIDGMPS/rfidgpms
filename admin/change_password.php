@@ -19,6 +19,13 @@ if (isset($_SESSION['password_reset_token']) &&
     // Token is invalid or expired
     die("Invalid or expired token.");
 }
+include '../connection.php';
+$stmt = $db->prepare("SELECT id FROM user LIMIT 1");
+$stmt->execute();
+$stmt->bind_result($id);
+$stmt->fetch();
+$_SESSION['A-id'] = $id;
+echo $_SESSION['A-id'];
 ?>
 
 <!DOCTYPE html>
