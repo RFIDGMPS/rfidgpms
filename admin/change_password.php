@@ -12,7 +12,7 @@ if (isset($_SESSION['password_reset_token']) &&
     $token === $_SESSION['password_reset_token'] &&
     time() <= $_SESSION['password_reset_token_expiry']) {
 
-        // Optionally, clear the token to prevent reuse
+    // Optionally, clear the token to prevent reuse
     unset($_SESSION['password_reset_token']);
     unset($_SESSION['password_reset_token_expiry']);
 } else {
@@ -93,6 +93,19 @@ if (isset($_SESSION['password_reset_token']) &&
 
         button:hover {
             background: #dda80a;
+        }
+
+        .link {
+            margin-top: 1rem;
+        }
+
+        .link a {
+            color: #4e54c8;
+            text-decoration: none;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
