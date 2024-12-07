@@ -512,7 +512,7 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
         }
     }();
   </script>
-     <script type="text/javascript" src="../assets/custom/js/admin_login.js"> </script>
+     <!-- <script type="text/javascript" src="../assets/custom/js/admin_login.js"> </script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/chart/chart.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
