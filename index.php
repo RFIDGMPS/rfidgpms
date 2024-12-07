@@ -262,7 +262,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <a href="index" class="">
                                     <h3 class="text-warning">GPMS</h3>
                                 </a>
-                                <h3>Sign In</h3>
+                                <h3>Location</h3>
                             </div>
                             <div>
                                 <select class="form-control mb-4" name="roomdpt" id="roomdpt" autocomplete="off" onchange="fetchRooms()">
