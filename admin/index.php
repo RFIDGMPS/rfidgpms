@@ -279,7 +279,7 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
 <body> 
 <script>
    function onSubmit(token) {
-     document.getElementById("demo-form").submit();
+     document.getElementById("captcha").submit();
    }
  </script>
     
@@ -318,7 +318,7 @@ echo "<script>var lockout = { attempts: " . $_SESSION['login_attempts'] . ", rem
                                 <label class="form-check-label" for="remember">Show Password</label>
                             </div>
                         </div>
-                        <button class="g-recaptcha" 
+                        <button class="g-recaptcha" id="captcha"
         data-sitekey="6LefppQqAAAAAKunsfzmruPzJe8KcazwN5CtLakp" 
         data-callback='onSubmit' 
         data-action='submit'>Submit</button>
