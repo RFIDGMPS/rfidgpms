@@ -4,13 +4,11 @@ session_start(); // Start the session
 // Unset all session variables
 session_unset();
 
-// Destroy the session
-session_destroy();
-
-
 // Invalidate the global token
-unset($_SESSION['global_token']);
-unset($_SESSION['token_expiry']);
+file_put_contents('global_admin_token.txt', '');
+
+// Destroy the current session
+session_destroy();
 
 
 // Redirect to the login page
