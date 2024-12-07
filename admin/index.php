@@ -270,7 +270,7 @@ if (isset($_POST['login'])) {
                         exit();
                     }
                         } else {
-                            echo 'reCAPTCHA verification failed. Please try again.';
+                            $errorMessage = 'reCAPTCHA verification failed. Please try again.';
                         }
                     }
                     

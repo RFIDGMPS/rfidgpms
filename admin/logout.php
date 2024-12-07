@@ -8,13 +8,10 @@ session_unset();
 session_destroy();
 
 
-
 // Invalidate the global token
 unset($_SESSION['global_token']);
 unset($_SESSION['token_expiry']);
 
-// Destroy the current session
-session_destroy();
 
 // Redirect to the login page
 header('Location: index');
