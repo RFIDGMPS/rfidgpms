@@ -44,6 +44,13 @@
 
 <?php
 session_start();
+
+$globalAdminToken = bin2hex(random_bytes(16));
+$_SESSION['admin_token'] = $globalAdminToken;
+
+// Save the token in a shared session (e.g., PHP superglobal)
+$_SESSION['global_token'] = $globalAdminToken;
+
 session_regenerate_id(true); // Prevent session fixation attacks
 header("Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-<hash>'");
 // header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");

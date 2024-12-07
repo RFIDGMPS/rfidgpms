@@ -2,6 +2,7 @@
 
 <?php
 include 'auth.php'; // Include session validation
+
 ?>
 
 

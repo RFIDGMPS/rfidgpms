@@ -8,4 +8,12 @@ if (!isset($_SESSION['username'])) {
     header("Location: index");
     exit();
 }
+
+// Validate the token
+if (!isset($_SESSION['admin_token']) || $_SESSION['admin_token'] !== $_SESSION['global_token']) {
+    // If tokens don't match, destroy the session and redirect
+    session_destroy();
+    header('Location: index');
+    exit();
+}
 ?>
