@@ -996,7 +996,7 @@ while ($row = $result->fetch_assoc()) {
       <div class="modal-content">
          <div class="modal-header">
             <h5 class="modal-title">
-               <i class="bi bi-trash"></i> Delete User
+               <i class="bi bi-trash"></i> Delete Personnel
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
