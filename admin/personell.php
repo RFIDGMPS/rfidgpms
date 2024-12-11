@@ -67,7 +67,7 @@ include '../connection.php';
                               </thead>
                               <tbody>
                                  
-                                 <?php $results = mysqli_query($db, "SELECT * FROM personell ORDER BY date_added DESC WHERE deleted != 1"); ?>
+                                 <?php $results = mysqli_query($db, "SELECT * FROM personell WHERE deleted != 1 ORDER BY date_added DESC"); ?>
                                  <?php while ($row = mysqli_fetch_array($results)) { ?>
                                  <tr class="table-<?php echo $row['id'];?>">
 								 <input class="id_number" type="hidden" value="<?php echo $row['id_no']; ?>" />
