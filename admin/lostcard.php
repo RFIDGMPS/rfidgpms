@@ -26,7 +26,7 @@ include 'header.php';
                         <div class="bg-light rounded h-100 p-4">
                             <div class="row">
                                 <div class="col-9">
-                                    <h6 class="mb-4">Card Deactivation Request</h6>
+                                    <h6 class="mb-4">Block Lost Card</h6>
                                 </div>
                             </div>
                             <hr></hr>
