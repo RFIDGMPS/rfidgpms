@@ -324,7 +324,7 @@ if (mysqli_query($db, $insert_query)) {
         
         // Execute the insert query for room_logs
         if (mysqli_query($db, $insert_query1)) {
-            echo "New record created successfully in both personell_logs and room_logs.";
+            //echo "New record created successfully in both personell_logs and room_logs.";
         } else {
             echo "Error in room_logs insert: " . mysqli_error($db);
         }
