@@ -15,7 +15,7 @@
 
 // SQL query to update the personell record
 $query = "UPDATE personell SET 
-    deleted = '$deleted' WHERE id = '$id'";
+    deleted = '$deleted' WHERE id = '$_REQUEST[id]'";
 
 $result = mysqli_query($db, $query);
 
