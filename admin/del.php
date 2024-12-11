@@ -5,11 +5,28 @@
 {
     case 'personell':
        
-		$db->query("DELETE FROM `personell` WHERE `id` = '$_REQUEST[id]'") or die(mysqli_error($db));
-		echo'<script type="text/javascript">
-				alert("Successfully Deleted.");
-				window.location = "personell";
+		// $db->query("DELETE FROM `personell` WHERE `id` = '$_REQUEST[id]'") or die(mysqli_error($db));
+		// echo'<script type="text/javascript">
+		// 		alert("Successfully Deleted.");
+		// 		window.location = "personell";
+		// 	</script>	';
+
+        $deleted=1;
+
+// SQL query to update the personell record
+$query = "UPDATE personell SET 
+    deleted = '$deleted' WHERE id = '$id'";
+
+$result = mysqli_query($db, $query);
+
+// Prepare the response
+if ($result) {
+    echo'<script type="text/javascript">
+			alert("Successfully Deleted.");
+			window.location = "personell";
 			</script>	';
+} 
+
     break;
     case 'department':
 	
