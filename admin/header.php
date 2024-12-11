@@ -1,19 +1,19 @@
 <?php 
 
 // Strict-Transport-Security (HSTS)
-header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
+// header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
 
-// X-Frame-Options
-header("X-Frame-Options: DENY");
+// // X-Frame-Options
+// header("X-Frame-Options: DENY");
 
-// X-Content-Type-Options
-header("X-Content-Type-Options: nosniff");
+// // X-Content-Type-Options
+// header("X-Content-Type-Options: nosniff");
 
-// Referrer-Policy
-header("Referrer-Policy: no-referrer");
+// // Referrer-Policy
+// header("Referrer-Policy: no-referrer");
 
-// Permissions-Policy
-header("Permissions-Policy: geolocation=(), microphone=(), camera=()");
+// // Permissions-Policy
+// header("Permissions-Policy: geolocation=(), microphone=(), camera=()");
 ?>
 <head>
   
