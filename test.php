@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
     // Output data of each row
     echo "<table border='1'>
             <tr>
-                <th>Personnel ID</th>
+                <th>ID</th>
                 <th>Verification Photo</th>
                 <th>Status</th>
             </tr>";
