@@ -529,7 +529,7 @@ if (mysqli_num_rows($result) > 0) {
                      VALUES ('$rfid_number', '$date_logged', 1)";
     
     if (mysqli_query($db, $insert_query)) {
-        echo "New record inserted successfully for RFID: $rfid_number";
+        //echo "New record inserted successfully for RFID: $rfid_number";
     } else {
         echo "Error inserting record: " . mysqli_error($db);
     }
