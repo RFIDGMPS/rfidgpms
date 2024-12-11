@@ -1,7 +1,7 @@
 
 <?php
 
-// include 'connection.php';
+include 'connection.php';
 
 
 // SQL query to fetch data from personell_logs table
