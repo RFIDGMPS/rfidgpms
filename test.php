@@ -8,7 +8,7 @@ include 'connection.php';
 $sql = "ALTER TABLE personell ADD COLUMN deleted INTEGER DEFAULT 0";
 
 // Execute the query
-if ($conn->query($sql) === TRUE) {
+if ($db->query($sql) === TRUE) {
     echo "Column 'deleted' added successfully to the 'personell' table.";
 } else {
     echo "Error adding column: " . $db->error;
