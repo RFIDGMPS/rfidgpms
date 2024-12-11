@@ -3,23 +3,31 @@
 
 include 'connection.php';
 
-$current_id = 1;  // The current user ID to update
-$new_id = 20240331;      // The new user ID you want to assign
 
-// Prepared statement to update the user ID
-$query = "UPDATE user SET id = ? WHERE id = ?";
-$stmt = $db->prepare($query);
-$stmt->bind_param('ii', $new_id, $current_id);  // 'i' for integer
+// Prepare an SQL query using placeholders
+$stmt = $db->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+
+// Bind parameters to the placeholders
+$stmt->bind_param("ss", $username, $password); // "ss" means both are strings
+
+// Set values for the parameters
+$username = $_POST['username'];  // Assuming you're getting this data from a form
+$password = $_POST['password'];  // Assuming you're getting this data from a form
+
+// Execute the query
 $stmt->execute();
 
-// Check if the update was successful
-if ($stmt->affected_rows > 0) {
-    echo "User ID updated successfully.";
+// Get the result
+$result = $stmt->get_result();
+
+// Check if there are any matching records
+if ($result->num_rows > 0) {
+    echo "Login successful!";
 } else {
-    echo "No changes made or user not found.";
+    echo "Invalid credentials.";
 }
 
-// Close the statement
+// Close the statement and connection
 $stmt->close();
+$db->close();
 ?>
-
