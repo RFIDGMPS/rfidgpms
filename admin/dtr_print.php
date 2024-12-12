@@ -7,7 +7,7 @@ session_start();
 include 'auth.php'; // Include session validation
 ?>
 <?php
-include 'header.php';
+//include 'header.php';
 ?>
 
 <body style="text-align:center;" onload="window.print()">
@@ -161,7 +161,7 @@ $db->close();
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            /* margin-bottom: 20px; */
         }
 
         th, td {
@@ -329,7 +329,7 @@ $db->close();
                 <p>Approved by:</p>
                 <div class="in-charge">
                     <p>____________________</p>
-                    <strong>In-Charge</strong>
+                    <p><strong>In-Charge</strong></p>
                 </div>
             </div>
         </div>
@@ -424,7 +424,7 @@ $db->close();
                 <p>Approved by:</p>
                 <div class="in-charge">
                     <p>____________________</p>
-                    <strong>In-Charge</strong>
+                    <p><strong>In-Charge</strong></p>
                 </div>
             </div>
         </div>
