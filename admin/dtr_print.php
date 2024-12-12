@@ -329,7 +329,7 @@ $db->close();
                 <p>Approved by:</p>
                 <div class="in-charge">
                     <p>____________________</p>
-                    <p><strong>In-Charge</strong></p>
+                    <strong>In-Charge</strong>
                 </div>
             </div>
         </div>
@@ -424,7 +424,7 @@ $db->close();
                 <p>Approved by:</p>
                 <div class="in-charge">
                     <p>____________________</p>
-                    <p><strong>In-Charge</strong></p>
+                    <strong>In-Charge</strong>
                 </div>
             </div>
         </div>
