@@ -6,7 +6,7 @@ include 'auth.php'; // Include session validation
 ?>
 <?php
     
-//include 'header.php';
+include 'header.php';
 ?>
 
 <body style="text-align:center;" onload="window.print()">
