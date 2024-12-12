@@ -220,7 +220,7 @@ $db->close();
 
             /* Adjust the page size */
             @page {
-                size: 8.5in 13in;
+                size: 8.5in 11in;
                 margin: 0.25in;
             }
 
