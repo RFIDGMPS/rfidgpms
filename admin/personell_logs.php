@@ -252,8 +252,7 @@ mysqli_close($db);
     //     // Close database connection
     //     mysqli_close($db);
     // } 
-    if (
-        isset($_POST['date1']) || isset($_POST['date2']) && $_POST['date1'] =="" || $_POST['date2'] =="") {
+    if ( $_POST['date1'] !="" && $_POST['date2'] =="" ||  $_POST['date1'] =="" && $_POST['date2'] !="") {
 echo '<script>alert("Please enter both dates.");</script>';
         }
         else if (
