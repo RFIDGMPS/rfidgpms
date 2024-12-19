@@ -378,35 +378,69 @@ function hideEntrantsLogs() {
 
 
 <div style="padding:20px; margin:10px;width:47%;" class="bg-light rounded">
-<div id="myChart2" style="width:100%; height:300px;"></div>
+
+
+
+
+
+
+
+
+<div id="chartCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner" id="carouselInner"></div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#chartCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#chartCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
 <script>
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+google.charts.load('current', { packages: ['corechart'] });
+google.charts.setOnLoadCallback(loadDepartments);
 
-function drawChart() {
+function loadDepartments() {
+  // Fetch departments from the database using AJAX
+  fetch('fetch_departments.php')
+    .then(response => response.json())
+    .then(departments => {
+      const carouselInner = document.getElementById('carouselInner');
+      departments.forEach((dept, index) => {
+        // Create chart container
+        const chartDiv = document.createElement('div');
+        chartDiv.className = `carousel-item${index === 0 ? ' active' : ''}`;
+        chartDiv.innerHTML = `<div id="chart-${dept.id}" style="width:100%; height:300px;"></div>`;
+        carouselInner.appendChild(chartDiv);
 
-// Set Data
-const data = google.visualization.arrayToDataTable([
-  ['Contry', 'Mhl'],
-  ['Italy',55],
-  ['France',49],
-  ['Spain',44],
-  ['USA',24],
-  ['Argentina',15]
-]);
+        // Draw chart for the department
+        drawChart(`chart-${dept.id}`, dept.name);
+      });
+    });
+}
 
-// Set Options
-const options = {
-  title:'World Wide Wine Production'
-};
+function drawChart(chartId, departmentName) {
+  // Example data for the chart (replace with actual department data)
+  const data = google.visualization.arrayToDataTable([
+    ['Country', 'Mhl'],
+    ['Italy', Math.random() * 100],
+    ['France', Math.random() * 100],
+    ['Spain', Math.random() * 100],
+    ['USA', Math.random() * 100],
+    ['Argentina', Math.random() * 100]
+  ]);
 
-// Draw
-const chart = new google.visualization.BarChart(document.getElementById('myChart2'));
-chart.draw(data, options);
+  const options = {
+    title: `Rooms in ${departmentName}`
+  };
 
+  const chart = new google.visualization.BarChart(document.getElementById(chartId));
+  chart.draw(data, options);
 }
 </script>
+
 </div>
         
         
