@@ -199,22 +199,120 @@ mysqli_close($db);
     <?php
     include '../connection.php';
 
-    // Check if date1 and date2 are set (for initial load they might not be set)
-    if (isset($_POST['date1']) && isset($_POST['date2']) || isset($_POST['location']) || isset($_POST['role']) || isset($_POST['department'])) {
-        // Convert posted dates to yyyy-mm-dd format
-        $date1 = date('Y-m-d', strtotime($_POST['date1']));
-        $date2 = date('Y-m-d', strtotime($_POST['date2']));
-        $location = $_POST['location'];
-        $role = $_POST['role'];
-        $department= $_POST['department'];
+    // // Check if date1 and date2 are set (for initial load they might not be set)
+    // if (isset($_POST['date1']) && isset($_POST['date2']) || isset($_POST['location']) || isset($_POST['role']) || isset($_POST['department'])) {
+    //     // Convert posted dates to yyyy-mm-dd format
+    //     $date1 = date('Y-m-d', strtotime($_POST['date1']));
+    //     $date2 = date('Y-m-d', strtotime($_POST['date2']));
+    //     $location = $_POST['location'];
+    //     $role = $_POST['role'];
+    //     $department= $_POST['department'];
 
-        // SQL query to fetch filtered data
-        $sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
-        FROM personell AS p
-        JOIN room_logs AS rl ON p.id = rl.personnel_id
-        WHERE rl.date_logged BETWEEN '$date1' AND '$date2'  ORDER BY rl.date_logged DESC";
-        $result = mysqli_query($db, $sql);
+    //     // SQL query to fetch filtered data
+    //     $sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
+    //     FROM personell AS p
+    //     JOIN room_logs AS rl ON p.id = rl.personnel_id
+    //     WHERE rl.date_logged BETWEEN '$date1' AND '$date2' ORDER BY rl.date_logged DESC";
+    //     $result = mysqli_query($db, $sql);
 
+    //     // Check if query was successful
+    //     if ($result) {
+    //         // Start generating HTML output
+    //         $output = '';
+
+    //         // Fetch data row by row
+    //         while ($row = mysqli_fetch_array($result)) {
+    //             $output .= '<tr>';
+    //             $output .= '<td><center><img src="uploads/' . $row['photo'] . '" width="50px" height="50px"></center></td>';
+    //             $output .= '<td>' . $row['first_name'] . ' ' .  $row['last_name']. '</td>';
+    //             $output .= '<td>' . $row['department'] . '</td>';
+    //             $output .= '<td>' . $row['location'] . '</td>';
+    //             $output .= '<td>' . $row['role'] . '</td>';
+    //             $output .= '<td>' . date("h:i A", strtotime($row['time_in'])) . '</td>';
+
+    //             if ($row['time_out'] === '?' || $row['time_out'] === '' || is_null($row['time_out'])) {
+    //                 $output .= '<td>' . $row['time_out'] . '</td>'; // Display as is
+    //             } else {
+    //                 $output .= '<td>' . date("h:i A", strtotime($row['time_out'])) . '</td>';
+    //             }
+                
+                
+                
+    //             $output .= '<td>' . $row['date_logged'] . '</td>';
+    //             $output .= '</tr>';
+    //         }
+
+    //         // Output the generated HTML
+    //         echo $output;
+    //     } else {
+    //         // Error handling if query fails
+    //         echo '<tr><td colspan="9">No records found.</td></tr>';
+    //     }
+
+    //     // Close database connection
+    //     mysqli_close($db);
+    // } 
+    if (
+        isset($_POST['date1']) || isset($_POST['date2']) || 
+        isset($_POST['location']) || isset($_POST['role']) || isset($_POST['department'])
+    ) {
+        // Initialize query components
+        $filters = [];
+        $params = [];
+    
+        // Add date range filter if both dates are provided
+        if (!empty($_POST['date1']) && !empty($_POST['date2'])) {
+            $date1 = date('Y-m-d', strtotime($_POST['date1']));
+            $date2 = date('Y-m-d', strtotime($_POST['date2']));
+            $filters[] = "rl.date_logged BETWEEN ? AND ?";
+            $params[] = $date1;
+            $params[] = $date2;
+        }
+    
+        // Add location filter if provided
+        if (!empty($_POST['location'])) {
+            $location = $_POST['location'];
+            $filters[] = "rl.location = ?";
+            $params[] = $location;
+        }
+    
+        // Add role filter if provided
+        if (!empty($_POST['role'])) {
+            $role = $_POST['role'];
+            $filters[] = "p.role = ?";
+            $params[] = $role;
+        }
+    
+        // Add department filter if provided
+        if (!empty($_POST['department'])) {
+            $department = $_POST['department'];
+            $filters[] = "p.department = ?";
+            $params[] = $department;
+        }
+    
+        // Base query
+        $sql = "
+            SELECT p.first_name, p.last_name, p.department, p.role, p.photo, 
+                   rl.location, rl.time_in, rl.time_out, rl.date_logged 
+            FROM personell AS p
+            JOIN room_logs AS rl ON p.id = rl.personnel_id
+        ";
+    
+        // Add filters if there are any
+        if (!empty($filters)) {
+            $sql .= " WHERE " . implode(" AND ", $filters);
+        }
+    
+        // Add sorting
+        $sql .= " ORDER BY rl.date_logged DESC";
+    
+        // Prepare and execute the query
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(str_repeat('s', count($params)), ...$params);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+       
         // Check if query was successful
         if ($result) {
             // Start generating HTML output
@@ -248,10 +346,9 @@ mysqli_close($db);
             // Error handling if query fails
             echo '<tr><td colspan="9">No records found.</td></tr>';
         }
-
-        // Close database connection
-        mysqli_close($db);
-    } else {
+        $stmt->close();
+    }
+    else {
         // If date1 and date2 are not set, fetch all records
         $results = mysqli_query($db, "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
         FROM personell AS p
