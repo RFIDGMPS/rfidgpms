@@ -439,31 +439,10 @@ function drawChart() {
         title: 'Departments: Personnel and Rooms',
         chartArea: {width: '50%'},
         hAxis: {
-          title: 'Count',
-          minValue: 0,
-          textStyle: {
-            bold: true,
-            fontSize: 12,
-            color: '#4d4d4d'
-          },
-          titleTextStyle: {
-            bold: true,
-            fontSize: 18,
-            color: '#4d4d4d'
-          }
+          title: 'Count'
         },
         vAxis: {
-          title: 'Departments',
-          textStyle: {
-            fontSize: 14,
-            bold: true,
-            color: '#848484'
-          },
-          titleTextStyle: {
-            fontSize: 14,
-            bold: true,
-            color: '#848484'
-          }
+          title: 'Departments'
         }
       };
     // Draw Chart
