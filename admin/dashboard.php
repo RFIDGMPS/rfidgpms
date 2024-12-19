@@ -394,9 +394,9 @@ $sql = "
     FROM 
         department d
     LEFT JOIN 
-        personell p ON d.department_id = p.department
+        personell p ON d.department_name = p.department
     LEFT JOIN 
-        rooms r ON d.department_id = r.department
+        rooms r ON d.department_name = r.department
     GROUP BY 
         d.department_id, d.department_name
 ";
