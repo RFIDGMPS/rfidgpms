@@ -130,22 +130,21 @@ mysqli_close($db);
             <label>Location:</label>
             <select class="form-control mb-4" name="location" id="location" autocomplete="off">
                                     <option value="Gate" selected>Gate</option>
+                                    <?php
+                $sql = "SELECT * FROM rooms";
+                $result = $db->query($sql);
+
+                // Fetch and display role options
+                while ($row = $result->fetch_assoc()) {
+                    $room = $row['room'];
+                    
+                    
+                        echo "<option value='$room'>$room</option>";
+                    
+                }
+            ?>
                                 </select>
 
-                                <script>
-                                    function fetchRooms() {
-                                        
-                                            var xhr = new XMLHttpRequest();
-                                            xhr.onreadystatechange = function () {
-                                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                                    document.getElementById('location').innerHTML = xhr.responseText;
-                                                }
-                                            };
-                                            xhr.open('GET', '../get_rooms.php?department=' + encodeURIComponent(selectedDepartment), true);
-                                            xhr.send();
-                                       
-                                    }
-                                </script>
         </div>
         <div class="col-lg-3">
             <label>Role:</label>
