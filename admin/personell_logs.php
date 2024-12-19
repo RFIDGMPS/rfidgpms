@@ -134,10 +134,7 @@ mysqli_close($db);
 
                                 <script>
                                     function fetchRooms() {
-                                        var selectedDepartment = document.getElementById('roomdpt').value;
-                                        if (selectedDepartment === "Main") {
-                                            document.getElementById('location').innerHTML = "<option value='Gate' selected>Gate</option>";
-                                        } else if (selectedDepartment) {
+                                        
                                             var xhr = new XMLHttpRequest();
                                             xhr.onreadystatechange = function () {
                                                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -146,9 +143,7 @@ mysqli_close($db);
                                             };
                                             xhr.open('GET', '../get_rooms.php?department=' + encodeURIComponent(selectedDepartment), true);
                                             xhr.send();
-                                        } else {
-                                            document.getElementById('location').innerHTML = "<option value=''>Select Room</option>";
-                                        }
+                                       
                                     }
                                 </script>
         </div>
