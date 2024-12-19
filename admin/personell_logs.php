@@ -99,7 +99,8 @@ mysqli_close($db);
             <label>To:</label>
             <input type="text" class="form-control" name="date2" placeholder="End" id="date2" autocomplete="off" />
         </div>
-
+</div>
+        <div class="row">
         <div class="col-lg-2">
             <label>Department:</label>
             <select required class="form-control" name="department" id="department" autocomplete="off">
