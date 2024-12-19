@@ -100,7 +100,7 @@ mysqli_close($db);
             <input type="text" class="form-control" name="date2" placeholder="End" id="date2" autocomplete="off" />
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-2">
             <label>Department:</label>
             <select required class="form-control" name="department" id="department" autocomplete="off">
 										
@@ -126,7 +126,7 @@ mysqli_close($db);
                                         
                                                                                   </select>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-2">
             <label>Location:</label>
             <select class="form-control mb-4" name="location" id="location" autocomplete="off">
                                     <option value="Gate" selected>Gate</option>
@@ -146,7 +146,7 @@ mysqli_close($db);
                                 </select>
 
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-2">
             <label>Role:</label>
             <select required class="form-control dept_ID" name="role" id="role" autocomplete="off">
             <?php
