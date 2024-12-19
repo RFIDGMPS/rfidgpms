@@ -104,7 +104,7 @@ mysqli_close($db);
         <div class="col-lg-2">
             <label>Department:</label>
             <select required class="form-control" name="department" id="department" autocomplete="off">
-										
+            <option value="" >Select</option>
                                         <?php
                                                                                   $sql = "SELECT * FROM department";
                                         $result = $db->query($sql);
@@ -130,7 +130,8 @@ mysqli_close($db);
         <div class="col-lg-2">
             <label>Location:</label>
             <select class="form-control mb-4" name="location" id="location" autocomplete="off">
-                                    <option value="Gate" selected>Gate</option>
+            <option value="" >Select</option>
+                                    <option value="Gate" >Gate</option>
                                     <?php
                 $sql = "SELECT * FROM rooms";
                 $result = $db->query($sql);
@@ -150,6 +151,7 @@ mysqli_close($db);
         <div class="col-lg-2">
             <label>Role:</label>
             <select required class="form-control dept_ID" name="role" id="role" autocomplete="off">
+            <option value="" >Select</option>
             <?php
                 $sql = "SELECT * FROM role";
                 $result = $db->query($sql);
@@ -201,10 +203,13 @@ mysqli_close($db);
     include '../connection.php';
 
     // Check if date1 and date2 are set (for initial load they might not be set)
-    if (isset($_POST['date1']) && isset($_POST['date2'])) {
+    if (isset($_POST['date1']) && isset($_POST['date2']) || isset($_POST['location']) || isset($_POST['role']) || isset($_POST['department'])) {
         // Convert posted dates to yyyy-mm-dd format
         $date1 = date('Y-m-d', strtotime($_POST['date1']));
         $date2 = date('Y-m-d', strtotime($_POST['date2']));
+        $location = $_POST['location'];
+        $role = $_POST['role'];
+        $department= $_POST['department'];
 
         // SQL query to fetch filtered data
         $sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
@@ -295,31 +300,31 @@ mysqli_close($db);
         $('#date1').datepicker();
         $('#date2').datepicker();
         
-        $('#btn_search').on('click', function() {
-            if ($('#date1').val() == "" || $('#date2').val() == "") {
-                alert("Please enter Date 'From' and 'To' before submit");
-            } else {
-                $date1 = $('#date1').val();
-                $date2 = $('#date2').val();
-                $('#load_data').empty();
-                $loader = $('<tr ><td colspan = "6"><center>Searching....</center></td></tr>');
-                $loader.appendTo('#load_data');
-                setTimeout(function() {
-                    $loader.remove();
-                    $.ajax({
-                        url: '../config/init/report_attendance.php',
-                        type: 'POST',
-                        data: {
-                            date1: $date1,
-                            date2: $date2
-                        },
-                        success: function(res) {
-                            $('#load_data').html(res);
-                        }
-                    });
-                }, 1000);
-            }
-        });
+        // $('#btn_search').on('click', function() {
+        //     if ($('#date1').val() == "" || $('#date2').val() == "") {
+        //         alert("Please enter Date 'From' and 'To' before submit");
+        //     } else {
+        //         $date1 = $('#date1').val();
+        //         $date2 = $('#date2').val();
+        //         $('#load_data').empty();
+        //         $loader = $('<tr ><td colspan = "6"><center>Searching....</center></td></tr>');
+        //         $loader.appendTo('#load_data');
+        //         setTimeout(function() {
+        //             $loader.remove();
+        //             $.ajax({
+        //                 url: '../config/init/report_attendance.php',
+        //                 type: 'POST',
+        //                 data: {
+        //                     date1: $date1,
+        //                     date2: $date2
+        //                 },
+        //                 success: function(res) {
+        //                     $('#load_data').html(res);
+        //                 }
+        //             });
+        //         }, 1000);
+        //     }
+        // });
 
         $('#reset').on('click', function() {
             location.reload();
