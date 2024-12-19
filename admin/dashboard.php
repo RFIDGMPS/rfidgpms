@@ -388,12 +388,12 @@ function hideEntrantsLogs() {
 
 <div id="chartCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner" id="carouselInner"></div>
-  <button style="top: 80%;background: grey;" class="carousel-control-prev" type="button" data-bs-target="#chartCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <button style="top: 90%;background: grey;" class="carousel-control-prev" type="button" data-bs-target="#chartCarousel" data-bs-slide="prev">
+    <span style="height: 20px;" class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button  style="top: 80%;background: grey;" class="carousel-control-next" type="button" data-bs-target="#chartCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <button  style="top: 90%;background: grey;" class="carousel-control-next" type="button" data-bs-target="#chartCarousel" data-bs-slide="next">
+    <span style="height: 20px;" class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
 </div>
