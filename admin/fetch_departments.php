@@ -1,7 +1,7 @@
 <?php
-include '../connection.php';
+include '../connection.php'; 
 // Query to fetch departments
-$sql = "SELECT id, department_name FROM department";
+$sql = "SELECT department_id, department_name FROM department";
 $result = $db->query($sql);
 
 // Prepare response
