@@ -394,9 +394,15 @@ echo '<script>alert("Please enter both dates.");</script>';
     
         <script type="text/javascript">
     $(document).ready(function() {
+        
         $('#date1').datepicker();
         $('#date2').datepicker();
-        
+        $(function() {
+                $("#date1").datepicker();
+            });
+            $(function() {
+                $("#date2").datepicker();
+            });
         $('#btn_search').on('click', function() {
            
                 $date1 = $('#date1').val();
@@ -451,17 +457,6 @@ echo '<script>alert("Please enter both dates.");</script>';
     });
 </script>
 
-
-        <script>
-            $(function() {
-                $("#date1").datepicker();
-            });
-        </script>
-        <script>
-            $(function() {
-                $("#date2").datepicker();
-            });
-        </script>
 
 
         <a href="#" class="btn btn-lg btn-warning btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
