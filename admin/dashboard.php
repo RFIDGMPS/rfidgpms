@@ -413,7 +413,9 @@ if ($result->num_rows > 0) {
         ];
     }
 }
-
+foreach ($data as $row) {
+    echo "['" . $row['department'] . "', " . $row['personnel'] . ", " . $row['rooms'] . "],";
+}
 $db->close();
 ?>
 
