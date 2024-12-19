@@ -394,12 +394,13 @@ $sql = "
     FROM 
         department d
     LEFT JOIN 
-        personell p ON d.department_name = p.department
+        personell p ON d.department_name = p.department AND p.deleted != 1
     LEFT JOIN 
         rooms r ON d.department_name = r.department
     GROUP BY 
         d.department_id, d.department_name
 ";
+
 
 $result = $db->query($sql);
 $data = [];
