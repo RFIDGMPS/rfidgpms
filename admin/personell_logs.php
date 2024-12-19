@@ -103,7 +103,7 @@ mysqli_close($db);
         <div class="row">
         <div class="col-lg-2">
             <label>Department:</label>
-            <select required class="form-control" name="department" id="department" autocomplete="off">
+            <select class="form-control" name="department" id="department" autocomplete="off">
             <option value="" >Select</option>
                                         <?php
                                                                                   $sql = "SELECT * FROM department";
@@ -150,7 +150,7 @@ mysqli_close($db);
         </div>
         <div class="col-lg-2">
             <label>Role:</label>
-            <select required class="form-control dept_ID" name="role" id="role" autocomplete="off">
+            <select class="form-control dept_ID" name="role" id="role" autocomplete="off">
             <option value="" >Select</option>
             <?php
                 $sql = "SELECT * FROM role";
