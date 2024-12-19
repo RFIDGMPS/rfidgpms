@@ -414,7 +414,7 @@ chart.draw(data, options);
                                  </div>
                                  <div class="row">
                                  <div style="padding:20px; margin:10px; width:100%;" class="bg-light rounded">
-    <div id="myChart1" style="width:100%; height:500px;"></div>
+    <div id="myChart1" style="width:100%; height:300px;"></div>
     </div>
 </div>
 
