@@ -96,8 +96,82 @@ mysqli_close($db);
             <input type="text" class="form-control" name="date1" placeholder="Start" id="date1" autocomplete="off" />
         </div>
         <div class="col-lg-3">
-            <label>To</label>
+            <label>To:</label>
             <input type="text" class="form-control" name="date2" placeholder="End" id="date2" autocomplete="off" />
+        </div>
+
+        <div class="col-lg-3">
+            <label>Department:</label>
+            <select required class="form-control" name="department" id="department" autocomplete="off">
+										
+                                        <?php
+                                                                                  $sql = "SELECT * FROM department";
+                                        $result = $db->query($sql);
+                                        
+                                        // Initialize an array to store department options
+                                        $department_options = [];
+                                        
+                                        // Fetch and store department options
+                                        while ($row = $result->fetch_assoc()) {
+                                            $department_id = $row['department_id'];
+                                            $department_name = $row['department_name'];
+                                            $department_options[] = "<option value='$department_name'>$department_name</option>";
+                                        }?>
+                                                                  <?php
+                                            // Output department options
+                                            foreach ($department_options as $option) {
+                                                echo $option;
+                                            }
+                                            ?>            
+                                        
+                                                                                  </select>
+        </div>
+        <div class="col-lg-3">
+            <label>Location:</label>
+            <select class="form-control mb-4" name="location" id="location" autocomplete="off">
+                                    <option value="Gate" selected>Gate</option>
+                                </select>
+
+                                <script>
+                                    function fetchRooms() {
+                                        var selectedDepartment = document.getElementById('roomdpt').value;
+                                        if (selectedDepartment === "Main") {
+                                            document.getElementById('location').innerHTML = "<option value='Gate' selected>Gate</option>";
+                                        } else if (selectedDepartment) {
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.onreadystatechange = function () {
+                                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                                    document.getElementById('location').innerHTML = xhr.responseText;
+                                                }
+                                            };
+                                            xhr.open('GET', '../get_rooms.php?department=' + encodeURIComponent(selectedDepartment), true);
+                                            xhr.send();
+                                        } else {
+                                            document.getElementById('location').innerHTML = "<option value=''>Select Room</option>";
+                                        }
+                                    }
+                                </script>
+        </div>
+        <div class="col-lg-3">
+            <label>Role:</label>
+            <select required class="form-control dept_ID" name="role" id="role" autocomplete="off">
+            <?php
+                $sql = "SELECT * FROM role";
+                $result = $db->query($sql);
+
+                // Fetch and display role options
+                while ($row = $result->fetch_assoc()) {
+                    $role = $row['role'];
+                    
+                    // Set 'Student' as the default selected option
+                    if ($role === 'Student') {
+                        echo "<option value='$role' selected>$role</option>";
+                    } else {
+                        echo "<option value='$role'>$role</option>";
+                    }
+                }
+            ?>
+        </select>
         </div>
         <div class="col-lg-3 mt-4">
             <label></label>
