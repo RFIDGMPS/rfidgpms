@@ -412,11 +412,11 @@ function loadDepartments() {
         // Create chart container
         const chartDiv = document.createElement('div');
         chartDiv.className = `carousel-item${index === 0 ? ' active' : ''}`;
-        chartDiv.innerHTML = `<div id="chart-${dept.id}" style="width:100%; height:300px;"></div>`;
+        chartDiv.innerHTML = `<div id="chart-${dept.department_id}" style="width:100%; height:300px;"></div>`;
         carouselInner.appendChild(chartDiv);
 
         // Draw chart for the department
-        drawChart(`chart-${dept.id}`, dept.name);
+        drawChart(`chart-${dept.department_id}`, dept.department_name);
       });
     });
 }
