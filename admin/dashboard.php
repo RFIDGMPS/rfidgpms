@@ -382,64 +382,82 @@ function hideEntrantsLogs() {
 
 
 
+<?php
 
 
+// Fetch department data with counts
+$sql = "
+    SELECT 
+        d.department_name, 
+        COUNT(DISTINCT p.id) AS personnel_count, 
+        COUNT(DISTINCT r.id) AS room_count
+    FROM 
+        department d
+    LEFT JOIN 
+        personell p ON d.department_id = p.department
+    LEFT JOIN 
+        rooms r ON d.department_id = r.department
+    GROUP BY 
+        d.department_id, d.department_name
+";
 
+$result = $db->query($sql);
+$data = [];
 
-<div id="chartCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner" id="carouselInner"></div>
-  <button style="top: 90%;background: grey;" class="carousel-control-prev" type="button" data-bs-target="#chartCarousel" data-bs-slide="prev">
-    <span style="height: 20px;" class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button  style="top: 90%;background: grey;" class="carousel-control-next" type="button" data-bs-target="#chartCarousel" data-bs-slide="next">
-    <span style="height: 20px;" class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $data[] = [
+            'department' => $row['department_name'],
+            'personnel' => (int)$row['personnel_count'],
+            'rooms' => (int)$row['room_count']
+        ];
+    }
+}
+
+$db->close();
+?>
+
+<div id="myChart2" style="width:100%; height:300px;"></div>
 
 <script>
-google.charts.load('current', { packages: ['corechart'] });
-google.charts.setOnLoadCallback(loadDepartments);
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
-function loadDepartments() {
-  // Fetch departments from the database using AJAX
-  fetch('fetch_departments.php')
-    .then(response => response.json())
-    .then(departments => {
-      const carouselInner = document.getElementById('carouselInner');
-      departments.forEach((dept, index) => {
-        // Create chart container
-        const chartDiv = document.createElement('div');
-        chartDiv.className = `carousel-item${index === 0 ? ' active' : ''}`;
-        chartDiv.innerHTML = `<div id="chart-${dept.department_id}" style="width:100%; height:300px;"></div>`;
-        carouselInner.appendChild(chartDiv);
+function drawChart() {
+    // Set Data dynamically from PHP
+    const data = google.visualization.arrayToDataTable([
+        ['Department', 'Personnel', 'Rooms'],
+        <?php
+        foreach ($data as $row) {
+            echo "['" . $row['department'] . "', " . $row['personnel'] . ", " . $row['rooms'] . "],";
+        }
+        ?>
+    ]);
 
-        // Draw chart for the department
-        drawChart(`chart-${dept.department_id}`, dept.department_name);
-      });
-    });
-}
+    // Set Options
+    const options = {
+        title: 'Departments: Personnel and Rooms',
+        hAxis: { title: 'Count' },
+        vAxis: { title: 'Departments' },
+        isStacked: true
+    };
 
-function drawChart(chartId, departmentName) {
-  // Example data for the chart (replace with actual department data)
-  const data = google.visualization.arrayToDataTable([
-    ['Country', 'Mhl'],
-    ['Italy', Math.random() * 100],
-    ['France', Math.random() * 100],
-    ['Spain', Math.random() * 100],
-    ['USA', Math.random() * 100],
-    ['Argentina', Math.random() * 100]
-  ]);
-
-  const options = {
-    title: `Rooms in ${departmentName}`
-  };
-
-  const chart = new google.visualization.BarChart(document.getElementById(chartId));
-  chart.draw(data, options);
+    // Draw Chart
+    const chart = new google.visualization.BarChart(document.getElementById('myChart2'));
+    chart.draw(data, options);
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
 
 </div>
         
