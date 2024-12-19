@@ -434,14 +434,38 @@ function drawChart() {
         ?>
     ]);
 
-    // Set Options
+
     const options = {
         title: 'Departments: Personnel and Rooms',
-        hAxis: { title: 'Count' },
-        vAxis: { title: 'Departments' },
-        isStacked: true
-    };
-
+        chartArea: {width: '50%'},
+        hAxis: {
+          title: 'Count',
+          minValue: 0,
+          textStyle: {
+            bold: true,
+            fontSize: 12,
+            color: '#4d4d4d'
+          },
+          titleTextStyle: {
+            bold: true,
+            fontSize: 18,
+            color: '#4d4d4d'
+          }
+        },
+        vAxis: {
+          title: 'Departments',
+          textStyle: {
+            fontSize: 14,
+            bold: true,
+            color: '#848484'
+          },
+          titleTextStyle: {
+            fontSize: 14,
+            bold: true,
+            color: '#848484'
+          }
+        }
+      };
     // Draw Chart
     const chart = new google.visualization.BarChart(document.getElementById('myChart2'));
     chart.draw(data, options);
