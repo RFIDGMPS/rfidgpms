@@ -389,8 +389,8 @@ function hideEntrantsLogs() {
 $sql = "
     SELECT 
         d.department_name, 
-        COUNT(DISTINCT p.id) AS personnel_count, 
-        COUNT(DISTINCT r.id) AS room_count
+        COUNT(p.id) AS personnel_count, 
+        COUNT(r.id) AS room_count
     FROM 
         department d
     LEFT JOIN 
@@ -413,9 +413,7 @@ if ($result->num_rows > 0) {
         ];
     }
 }
-foreach ($data as $row) {
-    echo "['" . $row['department'] . "', " . $row['personnel'] . ", " . $row['rooms'] . "],";
-}
+
 $db->close();
 ?>
 
