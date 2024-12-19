@@ -253,7 +253,11 @@ mysqli_close($db);
     //     mysqli_close($db);
     // } 
     if (
-        isset($_POST['date1']) || isset($_POST['date2']) || 
+        isset($_POST['date1']) || isset($_POST['date2']) && $_POST['date1'] =="" || $_POST['date2'] ="") {
+echo '<script>alert("Please enter both dates.");</script>';
+        }
+        else if (
+        isset($_POST['date1']) && isset($_POST['date2']) ||
         isset($_POST['location']) || isset($_POST['role']) || isset($_POST['department'])
     ) {
         // Initialize query components
@@ -395,9 +399,7 @@ mysqli_close($db);
         $('#date2').datepicker();
         
         $('#btn_search').on('click', function() {
-            if ($('#date1').val() == "" || $('#date2').val() == "") {
-                alert("Please enter Date 'From' and 'To' before submit");
-            } else {
+           
                 $date1 = $('#date1').val();
                 $date2 = $('#date2').val();
                 $('#load_data').empty();
@@ -417,7 +419,7 @@ mysqli_close($db);
                         }
                     });
                 }, 1000);
-            }
+            
         });
 
         $('#reset').on('click', function() {
