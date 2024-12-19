@@ -380,7 +380,7 @@ function hideEntrantsLogs() {
 
 
 <div style="padding:20px; margin:10px;width:30%;" class="bg-light rounded">
-<div id="myChart2" style="width:100%; max-width:600px; height:500px;"></div>
+<div id="myChart2" style="width:100%; height:300px;"></div>
 
 <script>
 google.charts.load('current', {'packages':['corechart']});
