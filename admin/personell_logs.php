@@ -160,12 +160,9 @@ mysqli_close($db);
                 while ($row = $result->fetch_assoc()) {
                     $role = $row['role'];
                     
-                    // Set 'Student' as the default selected option
-                    if ($role === 'Student') {
-                        echo "<option value='$role' selected>$role</option>";
-                    } else {
+                  
                         echo "<option value='$role'>$role</option>";
-                    }
+                    
                 }
             ?>
         </select>
