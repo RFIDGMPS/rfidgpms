@@ -12,16 +12,62 @@ include '../connection.php';
 
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Convert posted dates to yyyy-mm-dd format
-    $date1 = date('Y-m-d', strtotime($_POST['date1']));
-    $date2 = date('Y-m-d', strtotime($_POST['date2']));
+  // Initialize query components
+  $filters = [];
+  $params = [];
 
-    // SQL query to fetch filtered data
-    $sql = "SELECT p.first_name, p.last_name, p.department, p.role, p.photo, rl.location, rl.time_in, rl.time_out, rl.date_logged 
-        FROM personell AS p
-        JOIN room_logs AS rl ON p.id = rl.personnel_id
-        WHERE rl.date_logged BETWEEN '$date1' AND '$date2'  ORDER BY rl.date_logged DESC";
-    $result = mysqli_query($db, $sql);
+  // Add date range filter if both dates are provided
+  if (!empty($_POST['date1']) && !empty($_POST['date2'])) {
+      $date1 = date('Y-m-d', strtotime($_POST['date1']));
+      $date2 = date('Y-m-d', strtotime($_POST['date2']));
+      $filters[] = "rl.date_logged BETWEEN ? AND ?";
+      $params[] = $date1;
+      $params[] = $date2;
+  }
+
+  // Add location filter if provided
+  if (!empty($_POST['location'])) {
+      $location = $_POST['location'];
+      $filters[] = "rl.location = ?";
+      $params[] = $location;
+  }
+
+  // Add role filter if provided
+  if (!empty($_POST['role'])) {
+      $role = $_POST['role'];
+      $filters[] = "p.role = ?";
+      $params[] = $role;
+  }
+
+  // Add department filter if provided
+  if (!empty($_POST['department'])) {
+      $department = $_POST['department'];
+      $filters[] = "p.department = ?";
+      $params[] = $department;
+  }
+
+  // Base query
+  $sql = "
+      SELECT p.first_name, p.last_name, p.department, p.role, p.photo, 
+             rl.location, rl.time_in, rl.time_out, rl.date_logged 
+      FROM personell AS p
+      JOIN room_logs AS rl ON p.id = rl.personnel_id
+  ";
+
+  // Add filters if there are any
+  if (!empty($filters)) {
+      $sql .= " WHERE " . implode(" AND ", $filters);
+  }
+
+  // Add sorting
+  $sql .= " ORDER BY rl.date_logged DESC";
+
+  // Prepare and execute the query
+  $stmt = $db->prepare($sql);
+  $stmt->bind_param(str_repeat('s', count($params)), ...$params);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
 
     // Check if query was successful
     if ($result) {
