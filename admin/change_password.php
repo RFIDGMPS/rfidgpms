@@ -33,24 +33,20 @@ $_SESSION['A_id'] = 20240331;
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background: #f4f4f9;
-            color: #333;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f3f4f6;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            padding: 0;
         }
 
         .container {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 100%;
+            width: 80%;
             max-width: 400px;
-            padding: 2rem;
-            text-align: center;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
@@ -97,6 +93,21 @@ $_SESSION['A_id'] = 20240331;
         button:hover {
             background: #dda80a;
         }
+        .back-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
@@ -117,9 +128,10 @@ $_SESSION['A_id'] = 20240331;
             </div>
             <button type="submit">Update Password</button>
         </form>
-        <div class="link">
-            <a href="index">Login</a>
-        </div>
+       
+    <div class="back-link">
+        <a href="index">Back to Home</a>
+    </div>
     </div>
 
     <script>
