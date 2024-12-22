@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include 'admin/header.php'; ?>
-<!-- <head>
+<head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -100,7 +100,7 @@
             background-color: #dda80a;
         }
     </style>
-</head> -->
+</head>
 <body>
 <div class="container-fluid position-relative bg-white d-flex p-0">
        
