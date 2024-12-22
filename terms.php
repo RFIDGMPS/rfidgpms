@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms and Conditions</title>
-    <style>
+    <!-- <style>
         /* General Styles */
         body {
             font-family: 'Arial', sans-serif;
@@ -99,7 +99,7 @@
         .back-link:hover {
             background-color: #dda80a;
         }
-    </style>
+    </style> -->
 </head>
 <body>
 <div class="container-fluid position-relative bg-white d-flex p-0">
