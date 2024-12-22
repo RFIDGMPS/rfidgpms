@@ -101,7 +101,11 @@
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container-fluid position-relative bg-white d-flex p-0">
+       
+        <div class="content">
+     
+            <div class="container-fluid pt-4 px-4">
         <div class="header">
             <h1>Terms and Conditions</h1>
             <p>Please read these terms carefully before using the RFID-Based Gate Pass Management System.</p>
@@ -173,5 +177,8 @@
             backLink.href = '/'; // Default to the home page if no referrer
         }
     </script>
+    </div>
+    </div>
+</div>
 </body>
 </html>
