@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms and Conditions</title>
@@ -102,7 +101,7 @@
     </style>
 </head>
 <body>
-
+    <div class="container">
         <div class="header">
             <h1>Terms and Conditions</h1>
             <p>Please read these terms carefully before using the RFID-Based Gate Pass Management System.</p>
@@ -174,6 +173,5 @@
             backLink.href = '/'; // Default to the home page if no referrer
         }
     </script>
-   
 </body>
 </html>
