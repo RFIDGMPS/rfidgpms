@@ -130,7 +130,7 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
             padding: 0;
         }
         .container {
-            width: 100%;
+            width: 80%;
             max-width: 400px;
             margin: 100px auto;
             padding: 30px;
