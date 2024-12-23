@@ -10,7 +10,7 @@ include 'header.php';
 ?>
 
 <body style="text-align:center;" onload="window.print()">
-    <img src="uploads/header.png"/>
+    <img src="uploads/header1.png"/>
     <br><br>
     <h1>Campus Entrance Log Monitoring Report</h1>
     <br>
