@@ -25,7 +25,7 @@ if (!isset($_SESSION['username']) || !isset($_SESSION['admin_token']) || $_SESSI
             Swal.fire({
                 icon: 'warning',
                 title: 'Session Terminated',
-                text: 'Your account has been logged out because it was accessed from another device. Please protect your account.'
+                text: 'Your account has been logged out.'
             }).then(() => {
                 window.location.href = 'index'; // Redirect to the login page
             });
