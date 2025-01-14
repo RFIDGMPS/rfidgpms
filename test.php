@@ -10,7 +10,7 @@ for ($i = 0; $i < 96; $i++) {
     $sql = "INSERT INTO visitor (rfid_number) VALUES ('$rfid_number')";
 
     // Execute the query
-    if ($conn->query($sql) === TRUE) {
+    if ($db->query($sql) === TRUE) {
         echo "Record $i inserted successfully with RFID: $rfid_number<br>";
     } else {
         echo "Error on record $i: " . $sql . "<br>" . $db->error . "<br>";
