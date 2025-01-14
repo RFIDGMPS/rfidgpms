@@ -1,24 +1,23 @@
 <?php
 include 'connection.php';
 
-// Loop to insert 96 random 10-digit numbers
-for ($i = 0; $i < 96; $i++) {
-    // Generate a random 10-digit number
-    $rfid_number = str_pad(mt_rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
 
-    // SQL query to insert data
-    $sql = "INSERT INTO visitor (rfid_number) VALUES ('$rfid_number')";
+// SQL query to delete data
+$date_to_delete = '2024-10-18'; // Date to match
+$sql = "DELETE FROM visitor_logs WHERE date_logged = ?";
 
-    // Execute the query
-    if ($db->query($sql) === TRUE) {
-        echo "Record $i inserted successfully with RFID: $rfid_number<br>";
-    } else {
-        echo "Error on record $i: " . $sql . "<br>" . $db->error . "<br>";
-    }
+// Prepare and bind statement to prevent SQL injection
+$stmt = $db->prepare($sql);
+$stmt->bind_param("s", $date_to_delete);
+
+// Execute the statement
+if ($stmt->execute()) {
+    echo "Records deleted successfully where date_logged = $date_to_delete";
+} else {
+    echo "Error deleting records: " . $stmt->error;
 }
 
-// Close the connection
+// Close the statement and connection
+$stmt->close();
 $db->close();
 ?>
-
-
