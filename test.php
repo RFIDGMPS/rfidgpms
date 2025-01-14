@@ -5,7 +5,7 @@ include 'connection.php';
 $personnel_ids = [37, 1172, 6, 5, 4, 3];
 
 // Array of possible room names
-$rooms = ['Gate', 'Lab1', 'ComLab1', 'ClassroomA', 'Room102', 'Lab2', 'ComLab2', 'MeetingRoom1', 'Hall1', 'Room201'];
+$rooms = ['Lab1', 'ComLab1', 'ClassroomA', 'Room102', 'Lab2', 'ComLab2', 'MeetingRoom1', 'Hall1', 'Room201'];
 
 // Loop to insert 30 records
 for ($i = 0; $i < 30; $i++) {
