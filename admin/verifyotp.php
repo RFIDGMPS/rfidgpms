@@ -119,6 +119,7 @@ function sendLoginNotification($email, $ip_address, $user_agent) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify OTP</title>
+    <link rel="icon" href="uploads/logo.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
     <!-- SweetAlert CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
