@@ -17,6 +17,7 @@ if (!isset($_SESSION['username']) || !isset($_SESSION['admin_token']) || $_SESSI
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Session Terminated</title>
+        <link rel="icon" href="uploads/logo.png" type="image/png">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body>
