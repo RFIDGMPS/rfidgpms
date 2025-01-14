@@ -65,7 +65,8 @@ mysqli_close($db);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="lostfound.css">
     <script src="lostfound.js" defer></script>
-    <title>RFID GPMS</title>
+    <title>RFIDGPMS</title>
+    <link rel="icon" href="admin/uploads/logo.png" type="image/png">
     <style>
         .preview-1 {
             width: 140px!important;
