@@ -13,12 +13,12 @@ for ($i = 0; $i < 96; $i++) {
     if ($conn->query($sql) === TRUE) {
         echo "Record $i inserted successfully with RFID: $rfid_number<br>";
     } else {
-        echo "Error on record $i: " . $sql . "<br>" . $conn->error . "<br>";
+        echo "Error on record $i: " . $sql . "<br>" . $db->error . "<br>";
     }
 }
 
 // Close the connection
-$conn->close();
+$db->close();
 ?>
 
 
