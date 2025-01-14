@@ -3,7 +3,7 @@ include 'connection.php';
 
 // SQL query to fetch all records
 $sql = "SELECT * FROM personell_logs";
-$result = $conn->query($sql);
+$result = $db->query($sql);
 
 // Check if records exist
 if ($result->num_rows > 0) {
@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>" . $row['id'] . "</td>
-                <td>" . $row['personell_id'] . "</td>
+                <td>" . $row['personnel_id'] . "</td>
                 <td>" . $row['time_in_am'] . "</td>
                 <td>" . $row['time_out_am'] . "</td>
                 <td>" . $row['time_in_pm'] . "</td>
