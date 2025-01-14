@@ -1,50 +1,32 @@
 <?php
 include 'connection.php';
 
-// Array of random names
-$names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown", "Eve Davis", "Charlie Wilson", "Grace Taylor", "Oscar Martinez", "Ivy Clark", "Leo Rodriguez"];
+// List of random room names
+$rooms = ['Gate', 'Lab1', 'ComLab1', 'Library', 'Auditorium', 'AdminOffice'];
 
-// Array of departments
-$departments = ["HR", "IT", "Finance", "Operations", "Sales"];
+// Generate and insert 60 records
+for ($i = 0; $i < 60; $i++) {
+    // Generate random data
+    $personnel_id = rand(1, 100); // Assuming personnel IDs range from 1 to 100
+    $date_logged = date('Y-m-d', strtotime("-" . rand(0, 30) . " days")); // Random date within the last 30 days
+    $time_in_am = date('H:i:s', strtotime(rand(7, 8) . ":" . rand(0, 59))); // Random time between 7:00 and 8:59
+    $time_out_am = date('H:i:s', strtotime(rand(11, 12) . ":" . rand(0, 59))); // Random time between 11:00 and 12:59
+    $time_in_pm = date('H:i:s', strtotime(rand(13, 14) . ":" . rand(0, 59))); // Random time between 13:00 and 14:59
+    $time_out_pm = date('H:i:s', strtotime(rand(16, 17) . ":" . rand(0, 59))); // Random time between 16:00 and 17:59
+    $location = $rooms[array_rand($rooms)]; // Random room from the list
 
-// Loop to insert 40 records
-for ($i = 0; $i < 40; $i++) {
-    // Fetch a random RFID number from the visitor table
-    $result = $db->query("SELECT rfid_number FROM visitor ORDER BY RAND() LIMIT 1");
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $rfid_number = $row['rfid_number'];
+    // SQL query to insert data
+    $sql = "INSERT INTO personell_logs (personnel_id, time_in_am, time_out_am, time_in_pm, time_out_pm, date_logged, location)
+            VALUES ('$personnel_id', '$time_in_am', '$time_out_am', '$time_in_pm', '$time_out_pm', '$date_logged', '$location')";
+
+    // Execute the query
+    if ($db->query($sql) === TRUE) {
+        echo "Record $i inserted successfully with Personnel ID: $personnel_id, Location: $location<br>";
     } else {
-        die("No RFID numbers found in the visitor table.");
-    }
-
-    // Generate random data for the other fields
-    $name = $names[array_rand($names)];
-    $department = $departments[array_rand($departments)];
-    $photo = "photo_" . rand(1, 100) . ".jpg";
-    $date_logged = date("Y-m-d", strtotime("-" . rand(0, 30) . " days"));
-    $contact_number = rand(1000000000, 9999999999); // Optional
-    $address = "Street " . rand(1, 100) . ", City " . rand(1, 10);
-    $purpose = "Visit purpose " . rand(1, 5);
-    $time_in = date("H:i:s", rand(28800, 64800)); // Random time between 8:00 AM and 6:00 PM
-    $time_out = date("H:i:s", rand(64801, 86399)); // Random time after time_in
-    $role = "Visitor";
-    $location = "Gate";
-
-    // Insert data into visitor_logs table
-    $sql = "INSERT INTO visitor_logs (rfid_number, department, photo, date_logged, contact_number, address, purpose, time_in, time_out, role, location, name) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
-    $stmt = $db->prepare($sql);
-    $stmt->bind_param("ssssssssssss", $rfid_number, $department, $photo, $date_logged, $contact_number, $address, $purpose, $time_in, $time_out, $role, $location, $name);
-
-    if ($stmt->execute()) {
-        echo "Record $i inserted successfully with RFID: $rfid_number<br>";
-    } else {
-        echo "Error inserting record $i: " . $stmt->error . "<br>";
+        echo "Error on record $i: " . $sql . "<br>" . $db->error . "<br>";
     }
 }
 
-// Close connection
+// Close the connection
 $db->close();
 ?>
