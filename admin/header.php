@@ -22,6 +22,8 @@
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
       <meta content="" name="keywords">
       <meta content="" name="description">
+      <link rel="icon" href="uploads/logo.png" type="image/png">
+
       <!-- Favicon -->
       <!--     <link href="img/favicon.ico" rel="icon"> -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
