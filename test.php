@@ -31,10 +31,10 @@ for ($i = 0; $i < 60; $i++) {
             VALUES ('$personnel_id', '$time_in_am', '$time_out_am', '$time_in_pm', '$time_out_pm', '$date_logged', '$location')";
 
     // Execute the query
-    if ($conn->query($sql) === TRUE) {
+    if ($db->query($sql) === TRUE) {
         echo "Record $i inserted successfully.<br>";
     } else {
-        echo "Error on record $i: " . $sql . "<br>" . $conn->error . "<br>";
+        echo "Error on record $i: " . $sql . "<br>" . $db->error . "<br>";
     }
 }
 
