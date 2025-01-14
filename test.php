@@ -4,27 +4,26 @@ include 'connection.php';
 // Array of personnel IDs to choose from
 $personnel_ids = [37, 1172, 6, 5, 4, 3];
 
-// Array of possible room names
-$rooms = ['Lab1', 'ComLab1', 'ClassroomA', 'Room102', 'Lab2', 'ComLab2', 'MeetingRoom1', 'Hall1', 'Room201'];
+// Array of possible verification photos (placeholder images for demo purposes)
+$verification_photos = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg'];
 
-// Loop to insert 30 records
-for ($i = 0; $i < 30; $i++) {
+// Loop to insert 50 records
+for ($i = 0; $i < 50; $i++) {
     // Randomly select a personnel ID
     $personnel_id = $personnel_ids[array_rand($personnel_ids)];
 
-    // Randomly select a time_in and time_out (just as examples, you can modify this logic)
-    $time_in = date('Y-m-d H:i:s', strtotime("-" . rand(1, 10) . " hours"));
-    $time_out = date('Y-m-d H:i:s', strtotime($time_in . " +" . rand(1, 5) . " hours"));
+    // Generate a random date_requested (between 1 to 30 days ago)
+    $date_requested = date('Y-m-d', strtotime("-" . rand(1, 30) . " days"));
 
-    // Randomly select a room
-    $location = $rooms[array_rand($rooms)];
+    // Randomly select a status (0 or 1)
+    $status = rand(0, 1);
 
-    // Get the current date for date_logged
-    $date_logged = date('Y-m-d');
+    // Randomly select a verification photo
+    $verification_photo = $verification_photos[array_rand($verification_photos)];
 
     // SQL query to insert data
-    $sql = "INSERT INTO room_logs (personnel_id, time_in, time_out, date_logged, location) 
-            VALUES ('$personnel_id', '$time_in', '$time_out', '$date_logged', '$location')";
+    $sql = "INSERT INTO lostcard (personnel_id, date_requested, status, verification_photo) 
+            VALUES ('$personnel_id', '$date_requested', '$status', '$verification_photo')";
 
     // Execute the query
     if ($db->query($sql) === TRUE) {
