@@ -27,7 +27,7 @@ for ($i = 0; $i < 60; $i++) {
     $date_logged = date("Y-m-d", strtotime("-" . rand(0, 30) . " days"));
 
     // SQL query to insert data
-    $sql = "INSERT INTO personell_logs (personell_id, time_in_am, time_out_am, time_in_pm, time_out_pm, date_logged, location)
+    $sql = "INSERT INTO personell_logs (personnel_id, time_in_am, time_out_am, time_in_pm, time_out_pm, date_logged, location)
             VALUES ('$personnel_id', '$time_in_am', '$time_out_am', '$time_in_pm', '$time_out_pm', '$date_logged', '$location')";
 
     // Execute the query
